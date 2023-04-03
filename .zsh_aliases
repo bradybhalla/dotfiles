@@ -1,1 +1,2 @@
 alias droplet="ssh root@161.35.107.252"
+alias cs3="ssh bbhalla@labradoodle.caltech.edu"
