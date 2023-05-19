@@ -1,7 +1,4 @@
 alias droplet="ssh root@161.35.107.252"
 
 # Remove after cs3 vvv
-alias cs3="subl ~/Desktop/School/cs3 && osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"15D0F50F-2860-41FC-A2E3-E0E5FD5F6D93\"' && ssh -t bbhalla@labradoodle.caltech.edu \"cd ~/cs3; bash --login\""
-
-# Temporary vvv
-alias music="node ~/Desktop/spotify-controller/dist/index.js"
+alias cs3="ssh -R 52698:localhost:52698 -t bbhalla@labradoodle.caltech.edu \"cd ~/cs3; bash --login\""

@@ -14,10 +14,13 @@ export PATH=$PATH:/opt/homebrew/bin:\
 # Define aliases
 source $HOME/.zsh_aliases
 
+# fzf key bindings and completions
+source /opt/homebrew/Cellar/fzf/0.40.0/shell/key-bindings.zsh
+source /opt/homebrew/Cellar/fzf/0.40.0/shell/completion.zsh
+
 # Run and customize prompt (run `p10k configure` or edit ~/.p10k.zsh to change)
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # iTerm shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
