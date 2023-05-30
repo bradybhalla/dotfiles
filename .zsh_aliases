@@ -1,4 +1,6 @@
 alias droplet="ssh root@161.35.107.252"
 
+alias chrome="open -a \"Google Chrome\""
+
 # Remove after cs3 vvv
 alias cs3="ssh -R 52698:localhost:52698 -t bbhalla@labradoodle.caltech.edu \"cd ~/cs3; bash --login\""
