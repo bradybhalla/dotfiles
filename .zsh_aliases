@@ -2,5 +2,14 @@ alias droplet="ssh root@161.35.107.252"
 
 alias chrome="open -a \"Google Chrome\""
 
-# Remove after cs3 vvv
-alias cs3="ssh -R 52698:localhost:52698 -t bbhalla@labradoodle.caltech.edu \"cd ~/cs3; bash --login\""
+
+# cd to any directory starting at $HOME
+# does not include ~/Library/
+sd(){
+  
+  dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | xargs -0 dirname 2>/dev/null | awk '!x[$0]++' | fzf --height 10 --query "/$1")
+  
+  if [ ! -z "$dir" ]; then
+    cd $dir
+  fi
+}
