@@ -6,10 +6,20 @@ alias chrome="open -a \"Google Chrome\""
 # cd to any directory starting at $HOME
 # does not include ~/Library/
 sd(){
-  
-  dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | xargs -0 dirname 2>/dev/null | awk '!x[$0]++' | fzf --height 10 --query "/$1")
+  query="/"
+  query+="$@"
+  dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | xargs -0 dirname 2>/dev/null | awk '!x[$0]++' | fzf --height 10 --query "$query")
   
   if [ ! -z "$dir" ]; then
     cd $dir
   fi
 }
+
+### REMOVE AFTER SURF
+### vvvvvvvv
+
+alias aa="conda activate PySDM"
+alias da="conda deactivate"
+alias nb="jupyter-notebook"
+
+### ^^^^^^^^
