@@ -14,6 +14,7 @@ export PATH=$PATH:/opt/homebrew/bin:\
 source $HOME/.zsh_aliases
 
 # fzf key bindings and completions
+# these lines need to be updated with the current version
 source /opt/homebrew/Cellar/fzf/0.42.0/shell/key-bindings.zsh
 source /opt/homebrew/Cellar/fzf/0.42.0/shell/completion.zsh
 
