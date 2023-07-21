@@ -33,6 +33,7 @@ function M.config()
         filters = {
             git_ignored = false,
         },
+        sync_root_with_cwd = true
     }
 end
 

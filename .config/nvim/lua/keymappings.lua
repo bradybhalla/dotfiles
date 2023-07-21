@@ -8,7 +8,7 @@ local default_opts = { noremap = true, silent = true }
 -- jk in insert mode for escape
 keymap("i", "jk", "<ESC>", default_opts)
 
--- jk in insert mode for escape
+-- quickly save and exit
 keymap("n", "<leader>q", ":q<CR>", default_opts)
 keymap("n", "<leader>Q", ":qall<CR>", default_opts)
 keymap("n", "<leader>w", ":w<CR>", default_opts)
@@ -16,10 +16,11 @@ keymap("n", "<leader>w", ":w<CR>", default_opts)
 -- unhighlight search and clear command bar
 keymap("n", "<ESC>", ":nohlsearch<CR>:echo<CR>", default_opts)
 
--- Center search results
-keymap("n", "n", "nzz", default_opts)
-keymap("n", "N", "Nzz", default_opts)
-
+-- j/k move within a wrapped line
+keymap("n", "j", "gj", default_opts)
+keymap("n", "k", "gk", default_opts)
+keymap("n", "gj", "j", default_opts)
+keymap("n", "gk", "k", default_opts)
 
 
 --------------
