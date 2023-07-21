@@ -13,7 +13,7 @@ fi
 mkdir backup
 
 # config files
-FILES=(.gitconfig .p10k.zsh .tmux.conf .zsh_aliases .zshrc .zprofile .vimrc)
+FILES=(.gitconfig .p10k.zsh .tmux.conf .zsh_aliases .zshrc .zprofile)
 for file in "${FILES[@]}"; do
 	if [[ -f "$HOME/$file" ]]; then
 		# file exists
