@@ -8,18 +8,7 @@ local M = {
 function M.config()
     local api = require "nvim-tree.api"
 
-    local function on_attach(bufnr)
-        local function opts()
-            return {noremap = true, silent = true, nowait = true }
-        end
-
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- custom mappings for inside the tree buffer
-        vim.keymap.set("n", "?", api.tree.toggle_help)
-    end
-
-    -- general custom mappings
+    -- custom mappings
 
     vim.keymap.set("n", "<leader>ef", function ()
         api.tree.open{find_file=true}
@@ -35,7 +24,6 @@ function M.config()
     end)
 
     require("nvim-tree").setup {
-        on_attach = on_attach,
         tab = {
             sync = {
               open = true,

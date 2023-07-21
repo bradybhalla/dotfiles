@@ -1,9 +1,9 @@
-local M = {
+local treesitter = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
 }
 
-function M.config()
+function treesitter.config()
     require("nvim-treesitter.configs").setup({
         highlight = {
             enable = true
@@ -12,4 +12,12 @@ function M.config()
     })
 end
 
-return M
+
+local treesitter_context = {
+    "nvim-treesitter/nvim-treesitter-context"
+}
+
+return {
+    treesitter,
+    treesitter_context
+}
