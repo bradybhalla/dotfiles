@@ -3,6 +3,7 @@ alias droplet="ssh root@161.35.107.252"
 alias chrome="open -a \"Google Chrome\""
 
 alias lg="lazygit"
+alias nv="nvim"
 
 # cd to any directory starting at $HOME
 # does not include ~/Library/

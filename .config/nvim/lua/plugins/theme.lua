@@ -14,7 +14,8 @@ function M.config()
             treesitter = true,
             -- notify = false,
             -- mini = false,
-            treesitter_context = true
+            treesitter_context = true,
+            mason = true
        }
     })
     vim.cmd.colorscheme "catppuccin-frappe"
