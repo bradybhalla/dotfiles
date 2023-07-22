@@ -1,4 +1,4 @@
-local M = { 
+local M = {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000
@@ -6,7 +6,7 @@ local M = {
 
 function M.config()
     require("catppuccin").setup({
-        transparent_background=true,
+        transparent_background = false,
         integrations = {
             -- cmp = true,
             gitsigns = true,
@@ -16,7 +16,7 @@ function M.config()
             -- mini = false,
             treesitter_context = true,
             mason = true
-       }
+        }
     })
     vim.cmd.colorscheme "catppuccin-frappe"
 end
