@@ -39,3 +39,5 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 ### ripgrep
 <!-- TODO: add notes -->
+
+### lazygit
