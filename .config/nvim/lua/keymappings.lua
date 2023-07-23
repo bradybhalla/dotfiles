@@ -22,8 +22,22 @@ keymap("n", "k", "gk", default_opts)
 keymap("n", "gj", "j", default_opts)
 keymap("n", "gk", "k", default_opts)
 
-
+-- jump to previous cursor position (tab to jump to next)
 keymap("n", "<leader>-", "<C-o>", default_opts)
+
+-- system clipboard
+keymap("v", "<leader>cy", "\"*y", default_opts)
+keymap("v", "<leader>cd", "\"*d", default_opts)
+keymap("n", "<leader>cp", "\"*p", default_opts)
+
+-- natural text editing in insert mode
+-- with "Natural Text Editing" presets in iTerm2
+-- (disabled)
+--
+-- keymap("i", "<C-a>", "<C-o>^", default_opts)       -- command-arrow
+-- keymap("i", "<C-e>", "<C-o>$", default_opts)
+-- keymap("i", "<ESC>b", "<C-o>B", default_opts)      -- option-arrow
+-- keymap("i", "<ESC>f", "<C-o>E<C-o>l", default_opts)
 
 --------
 -- LSP -
