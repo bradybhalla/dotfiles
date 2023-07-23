@@ -1,14 +1,12 @@
-local M = {
-    "nvim-lualine/lualine.nvim"
-}
-
-function M.config()
-    require("lualine").setup {
-        options = {
-            theme = "catppuccin",
-            disabled_filetypes={"NvimTree"}
+return {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+        require("lualine").setup {
+            options = {
+                theme = "catppuccin",
+                disabled_filetypes={"NvimTree"}
+            }
         }
-    }
-end
+    end
 
-return M
+}

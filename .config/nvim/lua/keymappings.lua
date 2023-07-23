@@ -23,6 +23,8 @@ keymap("n", "gj", "j", default_opts)
 keymap("n", "gk", "k", default_opts)
 
 
+keymap("n", "<leader>-", "<C-o>", default_opts)
+
 --------
 -- LSP -
 --------  defined in plugin file
