@@ -5,17 +5,26 @@ alias chrome="open -a \"Google Chrome\""
 alias lg="lazygit"
 alias nv="nvim"
 
-# cd to any directory starting at $HOME
+
+# utility function for fuzzy find on all directories from $HOME
 # does not include ~/Library/
-sd(){
+_gen_sd(){
   query="/"
-  query+="$@"
+  query+="${@:2}"
   dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | xargs -0 dirname 2>/dev/null | awk '!x[$0]++' | fzf --height 10 --query "$query")
   
   if [ ! -z "$dir" ]; then
-    cd $dir
+    $1 $dir
   fi
 }
+
+# cd to any directory starting at $HOME
+alias sd="_gen_sd cd"
+
+# nvim to any directory starting at $HOME
+alias nd="_gen_sd nvim"
+
+
 
 ### REMOVE AFTER SURF
 ### vvvvvvvv
