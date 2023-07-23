@@ -36,3 +36,6 @@ if [[ -d "$HOME/$NVIM_ROOT" ]]; then
 fi
 
 cp -r "$NVIM_ROOT" "$HOME/$NVIM_ROOT"
+
+
+echo "Done!"

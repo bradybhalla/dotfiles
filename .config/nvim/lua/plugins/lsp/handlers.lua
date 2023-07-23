@@ -1,5 +1,4 @@
 local default_on_attach = function(client, bufnr)
-
     -- custom mappings
 
     -- format
@@ -12,16 +11,13 @@ local default_on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover)
 
 
-
-    -- disable highlighting from lsp
+    -- disable highlighting from lsp (copied from Eric)
     client.server_capabilities.semanticTokensProvider = nil
 end
 
 
-
--- setup and config
 return {
-    -- default handler (no keybinds)
+    -- default handler
     function(server_name)
         require("lspconfig")[server_name].setup {
             on_attach = default_on_attach
@@ -41,9 +37,5 @@ return {
             on_attach = default_on_attach
         }
     end,
-
-    ["pyright"] = function()
-
-    end
 
 }
