@@ -26,9 +26,8 @@ keymap("n", "gk", "k", default_opts)
 keymap("n", "<leader>-", "<C-o>", default_opts)
 
 -- system clipboard
-keymap("v", "<leader>cy", "\"*y", default_opts)
-keymap("v", "<leader>cd", "\"*d", default_opts)
-keymap("n", "<leader>cp", "\"*p", default_opts)
+keymap("n", "<leader>c", "\"*", default_opts)
+keymap("v", "<leader>c", "\"*", default_opts)
 
 -- natural text editing in insert mode
 -- with "Natural Text Editing" presets in iTerm2

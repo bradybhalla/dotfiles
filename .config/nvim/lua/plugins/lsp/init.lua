@@ -8,6 +8,10 @@ return {
     },
     build = ":MasonUpdate",
     config = function()
+        vim.diagnostic.config({
+            virtual_text = false,
+        })
+
         local handlers = require("plugins.lsp.handlers")
 
         require("mason").setup()

@@ -1,15 +1,17 @@
 local default_on_attach = function(client, bufnr)
     -- custom mappings
 
-    -- format
-    vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+    vim.keymap.set("n", "<leader>lF", vim.lsp.buf.format)
 
-    -- go to definition
     vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition)
 
-    -- hover
     vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover)
 
+    -- open float with diagnostics
+    vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float)
+
+    vim.keymap.set("n", "<leader>l,", vim.diagnostic.goto_prev)
+    vim.keymap.set("n", "<leader>l;", vim.diagnostic.goto_next)
 
     -- disable highlighting from lsp (copied from Eric)
     client.server_capabilities.semanticTokensProvider = nil
