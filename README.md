@@ -17,27 +17,45 @@ In iTerm2 preferences, check "Load preferences from a custom folder or URL" and 
 In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
 
 
-## Components
+## Main Components
 ### iTerm2
+- Powerlevel10k
+- `⌃⌥⌘ T` for hotkey window
+- Catppuccin theme
+- MesloLGS Nerd Font
 
 ### Keyboard Maestro
+- `⌥ <space>` for window control
+- `⌃⌥⌘ <space>` to quickly open an app
+- Various other shortcuts
 
+### Neovim
+- Catppuccin theme
+- LSP, completion, telescope, and more
+- `:Lazy` to install packages, `:TSInstall <language>` to install a new syntax, `:Mason` to install a new LSP server
+
+### Zsh things
+- `Ctrl-T` to pick a file using fzf
+- `Ctrl-R` to pick a previous command using fzf
+- `<command> <directory>/**` + `tab` to pick file in other directory with fzf
+- `sd` to jump to any directory under the home directory
+- `nd` to open any directory under the home directory in Neovim
+
+
+## Tools to install
 ### Powerlevel10k
-<!-- TODO: add notes -->
+- Very nice prompt
+
+### fzf
+- Fuzzy finder
+
+### ripgrep
+- `grep` but more powerful
+- Easily search recursively for text
+
+### lazygit
+- Git UI in the terminal
 
 ### tmux
 - Prefix is \` (backtick)
 
-### Neovim
-- `:Lazy` to install packages
-- `:TSInstall <language>` to install a new syntax, `:Mason` to install a new LSP server
-- Catppuccin theme
-
-## Other tools to install
-### fzf
-<!-- TODO: add notes -->
-
-### ripgrep
-<!-- TODO: add notes -->
-
-### lazygit
