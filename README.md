@@ -34,10 +34,10 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 - LSP, completion, telescope, and more
 - `:Lazy` to install packages, `:TSInstall <language>` to install a new syntax, `:Mason` to install a new LSP server
 
-### Zsh things
+### Helpful zsh things
 - `Ctrl-T` to pick a file using fzf
 - `Ctrl-R` to pick a previous command using fzf
-- `<command> <directory>/**` + `tab` to pick file in other directory with fzf
+- `<command> <directory>/**` + `tab` to pick a file in another directory with fzf
 - `sd` to jump to any directory under the home directory
 - `nd` to open any directory under the home directory in Neovim
 
