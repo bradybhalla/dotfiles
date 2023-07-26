@@ -10,6 +10,13 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions)
     vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
 
+    vim.keymap.set("n", "<leader>lR", function()
+        -- start with initial query so we don't get everything
+        vim.ui.input({ prompt = "Workspace symbols: " }, function(query)
+                builtin.lsp_workspace_symbols({ query = query })
+        end)
+    end)
+
     vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover)
     vim.keymap.set("n", "<leader>lk", vim.lsp.buf.signature_help)
 
