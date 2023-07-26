@@ -5,7 +5,15 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lua",
-        "SirVer/ultisnips",
+        {
+            "SirVer/ultisnips",
+            config = function()
+                vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/UltiSnips" }
+                vim.g.UltiSnipsExpandTrigger = "<tab>"
+                vim.g.UltiSnipsJumpForwardTrigger = "<right>"
+                vim.g.UltiSnipsJumpBackwardTrigger = "<left>"
+            end
+        },
         "quangnguyen30192/cmp-nvim-ultisnips"
     },
     config = function()
