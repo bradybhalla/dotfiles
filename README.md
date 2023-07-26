@@ -57,5 +57,6 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 - Git UI in the terminal
 
 ### tmux
+- Terminal multiplexer
 - Prefix is \` (backtick)
-
+- I usually use iTerm to handle tmux instead of running it directly.  `tmux -CC` starts a session with iTerm.
