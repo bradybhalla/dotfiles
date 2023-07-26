@@ -10,7 +10,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions)
     vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
 
-    vim.keymap.set("n", "<leader>lR", function()
+    vim.keymap.set("n", "<leader>lS", function()
         -- some LSPs need inital query
         vim.ui.input({ prompt = "Initial query: " }, function(query)
             builtin.lsp_workspace_symbols({ query = query })
@@ -18,6 +18,10 @@ local on_attach = function(client, bufnr)
     end)
 
     vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover)
+
+    vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename)
+
+    -- help with function args
     vim.keymap.set("n", "<leader>lk", vim.lsp.buf.signature_help)
 
     -- open float with diagnostics
@@ -25,6 +29,7 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set("n", "<leader>l,", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "<leader>l;", vim.diagnostic.goto_next)
+
 
     -- disable highlighting from lsp (copied from Eric)
     client.server_capabilities.semanticTokensProvider = nil
