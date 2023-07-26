@@ -11,9 +11,9 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
 
     vim.keymap.set("n", "<leader>lR", function()
-        -- start with initial query so we don't get everything
-        vim.ui.input({ prompt = "Workspace symbols: " }, function(query)
-                builtin.lsp_workspace_symbols({ query = query })
+        -- some LSPs need inital query
+        vim.ui.input({ prompt = "Initial query: " }, function(query)
+            builtin.lsp_workspace_symbols({ query = query })
         end)
     end)
 

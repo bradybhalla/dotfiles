@@ -43,6 +43,9 @@ return {
             sources = default_sources,
             experimental = {
                 ghost_text = false -- makes phantom text
+            },
+            performance = {
+                max_view_entries = 10
             }
         }
 
