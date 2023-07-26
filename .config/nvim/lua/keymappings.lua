@@ -47,7 +47,7 @@ vim.keymap.set("n", "q<leader>", "<CMD>q<CR>")
 
 --------
 -- LSP -
---------  defined in plugin file
+--------  defined in plugin files
 
 --------
 -- cmp -
