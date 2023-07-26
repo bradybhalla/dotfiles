@@ -29,6 +29,9 @@ keymap("n", "<leader>-", "<C-o>", default_opts)
 keymap("n", "<leader>c", "\"*", default_opts)
 keymap("v", "<leader>c", "\"*", default_opts)
 
+-- I accidentally type "q:" instead of ":q"
+keymap("n", "q:", ":q", vim.tbl_deep_extend("keep", {silent=false}, default_opts))
+
 -- natural text editing in insert mode
 -- with "Natural Text Editing" presets in iTerm2
 -- (disabled)
@@ -38,17 +41,20 @@ keymap("v", "<leader>c", "\"*", default_opts)
 -- keymap("i", "<ESC>b", "<C-o>B", default_opts)      -- option-arrow
 -- keymap("i", "<ESC>f", "<C-o>E<C-o>l", default_opts)
 
+
+
+
 --------
 -- LSP -
 --------  defined in plugin file
 
-
+--------
+-- cmp -
+--------  defined in plugin file
 
 --------------
 -- telescope -
 --------------  defined in plugin file
-
-
 
 --------------
 -- nvim-tree -
