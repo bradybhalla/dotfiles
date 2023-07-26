@@ -8,27 +8,22 @@ return {
 
         -- custom mappings
 
-        vim.keymap.set("n", "<leader>ef", function ()
-            api.tree.open{find_file=true}
+        vim.keymap.set("n", "<leader>ef", function()
+            api.tree.open { find_file = true }
         end)
 
-        vim.keymap.set("n", "<leader>eo", function ()
-            api.tree.open()
-        end)
+        vim.keymap.set("n", "<leader>eo", api.tree.open)
 
-
-        vim.keymap.set("n", "<leader>ec", function ()
-            api.tree.close()
-        end)
+        vim.keymap.set("n", "<leader>ec", api.tree.close)
 
 
         -- options
-        
+
         require("nvim-tree").setup {
             tab = {
                 sync = {
-                  open = true,
-                  close = true
+                    open = true,
+                    close = true
                 },
             },
             filters = {
