@@ -25,8 +25,6 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 # iTerm shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# use 256 color
-export TERM=xterm-256color
 
 ### REMOVE AFTER SURF
 ### vvvvvvvv
