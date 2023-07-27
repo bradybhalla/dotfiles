@@ -20,6 +20,8 @@
 	<true/>
 	<key>ClosingTmuxTabKillsTmuxWindows_selection</key>
 	<integer>1</integer>
+	<key>ConvertDosNewlines</key>
+	<true/>
 	<key>Coprocess MRU</key>
 	<array>
 		<string>python3 -c "import time; time.sleep(20)"</string>
