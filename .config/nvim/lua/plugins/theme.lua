@@ -6,14 +6,20 @@ return {
         require("catppuccin").setup({
             transparent_background = false,
             integrations = {
-                cmp = true,
-                gitsigns = true,
-                nvimtree = true,
-                treesitter = true,
-                -- notify = false,
-                -- mini = false,
                 treesitter_context = true,
-                mason = true
+                mason = true,
+                -- lualine integration in status.lua
+
+                -- set to default:
+                --      cmp
+                --      gitsigns
+                --      nvimtree
+                --      indent_blankline
+                --      telescope
+                --      treesitter
+                --      lspconfig
+
+                -- add all valid integration plugins here
             }
         })
         vim.cmd.colorscheme "catppuccin-frappe"
