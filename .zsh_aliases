@@ -1,17 +1,29 @@
-alias droplet="ssh root@161.35.107.252"
+###########
+# General #
+###########
 
-alias chrome="open -a \"Google Chrome\""
+alias ls="ls --color=auto"
 
 alias lg="lazygit"
 alias nv="nvim"
 
+alias chrome="open -a \"Google Chrome\""
+alias droplet="ssh root@161.35.107.252"
+
+
+###################
+# Quick directory #
+###################
 
 # utility function for fuzzy find on all directories from $HOME
 # does not include ~/Library/
 _gen_sd(){
   query="/"
   query+="${@:2}"
-  dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | xargs -0 dirname 2>/dev/null | awk '!x[$0]++' | fzf --height 10 --query "$query")
+  dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | \
+      xargs -0 dirname 2>/dev/null | \
+      awk '!x[$0]++' | \
+      fzf --height 10 --query "$query")
   
   if [ ! -z "$dir" ]; then
     $1 $dir
@@ -25,6 +37,9 @@ alias sd="_gen_sd cd"
 alias nd="_gen_sd nvim"
 
 
+#############
+# Temporary #
+#############
 
 ### REMOVE AFTER SURF
 ### vvvvvvvv
