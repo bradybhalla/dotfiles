@@ -45,7 +45,7 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 
 ## Tools to install
-### Homebrew
+### [Homebrew](https://brew.sh)
 - Used to install almost everything else
 
 ### [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
