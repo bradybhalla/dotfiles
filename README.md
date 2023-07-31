@@ -16,6 +16,8 @@ In iTerm2 preferences, check "Load preferences from a custom folder or URL" and 
 ### 3. Keyboard Maestro
 In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
 
+### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section.
+
 
 ## Main Components
 ### iTerm2
@@ -45,18 +47,27 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 ## Tools to install
 ### Powerlevel10k
 - Very nice prompt
+- Install with homebrew
 
 ### fzf
 - Fuzzy finder
+- Install with homebrew
 
 ### ripgrep
 - `grep` but more powerful
 - Easily search recursively for text
+- Install with homebrew
 
 ### lazygit
 - Git UI in the terminal
+- Install with homebrew
 
 ### tmux
 - Terminal multiplexer
 - Prefix is \` (backtick)
 - I usually use iTerm to handle tmux instead of running it directly.  `tmux -CC` starts a session with iTerm.
+- Install with homebrew
+
+### zsh-syntax-highlighting
+- Syntax highlighting while typing in zsh
+- Install by cloning [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)into `~/bin`

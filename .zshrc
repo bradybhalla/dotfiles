@@ -14,9 +14,8 @@ export PATH=$PATH:/opt/homebrew/bin:\
 source $HOME/.zsh_aliases
 
 # fzf key bindings and completions
-# these lines need to be updated with the current version
-source /opt/homebrew/Cellar/fzf/0.42.0/shell/key-bindings.zsh
-source /opt/homebrew/Cellar/fzf/0.42.0/shell/completion.zsh
+source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+source /opt/homebrew/opt/fzf/shell/completion.zsh
 
 # Run and customize prompt (run `p10k configure` or edit ~/.p10k.zsh to change)
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
@@ -24,6 +23,12 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # iTerm shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# zsh-syntax-highlighting
+source "${HOME}/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+
+
 
 
 ### REMOVE AFTER SURF
