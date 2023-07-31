@@ -1,6 +1,6 @@
 # dotfiles
 
-A few of my more important dotfiles. Meant for use with zsh. If not using homebrew to install command line tools, some paths in .zshrc may need to be changed.
+A few of my more important dotfiles. Meant for use with zsh on MacOS. If not using homebrew to install command line tools, some paths in .zshrc will need to be changed.
 
 ## Setup
 ### 1. dotfiles
@@ -20,21 +20,21 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 
 ## Main Components
-### iTerm2
+### [iTerm2](https://iterm2.com)
 - Powerlevel10k
 - `⌃⌥⌘ T` for hotkey window
 - Catppuccin theme
-- MesloLGS Nerd Font
+- MesloLGS Nerd Font (install if needed)
 
-### Keyboard Maestro
+### [Keyboard Maestro](https://www.keyboardmaestro.com)
 - `⌥ <space>` for window control
 - `⌃⌥⌘ <space>` to quickly open an app
 - Various other shortcuts
 
-### Neovim
+### [Neovim](https://neovim.io)
 - Catppuccin theme
 - LSP, completion, telescope, and more
-- `:Lazy` to install packages, `:TSInstall <language>` to install a new syntax, `:Mason` to install a new LSP server
+- `:TSInstall <language>` to install a new syntax, `:Mason` to install a new LSP server
 
 ### Helpful zsh things
 - `Ctrl-T` to pick a file using fzf
@@ -45,29 +45,32 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 
 ## Tools to install
-### Powerlevel10k
+### Homebrew
+- Used to install almost everything else
+
+### [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - Very nice prompt
 - Install with homebrew
 
-### fzf
+### [fzf](https://github.com/junegunn/fzf)
 - Fuzzy finder
 - Install with homebrew
 
-### ripgrep
+### [ripgrep](https://github.com/BurntSushi/ripgrep)
 - `grep` but more powerful
 - Easily search recursively for text
 - Install with homebrew
 
-### lazygit
+### [lazygit](https://github.com/jesseduffield/lazygit)
 - Git UI in the terminal
 - Install with homebrew
 
-### tmux
+### [tmux](https://github.com/tmux/tmux)
 - Terminal multiplexer
 - Prefix is \` (backtick)
-- I usually use iTerm to handle tmux instead of running it directly.  `tmux -CC` starts a session with iTerm.
+- I usually use iTerm to handle tmux instead of running it directly. `tmux -CC` starts a session with iTerm.
 - Install with homebrew
 
-### zsh-syntax-highlighting
+### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - Syntax highlighting while typing in zsh
 - Install by cloning [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) into `~/bin`
