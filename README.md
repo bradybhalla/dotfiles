@@ -70,4 +70,4 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 ### zsh-syntax-highlighting
 - Syntax highlighting while typing in zsh
-- Install by cloning [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)into `~/bin`
+- Install by cloning [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) into `~/bin`
