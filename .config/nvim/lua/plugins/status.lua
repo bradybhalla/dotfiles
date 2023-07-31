@@ -11,11 +11,11 @@ return {
             },
             sections = {
                 lualine_a = { "mode" },
-                lualine_b = { "diff", "diagnostics" },
+                lualine_b = {},
                 lualine_c = { "filename" },
-                lualine_x = {"location"},
-                lualine_y = { "filetype" },
-                lualine_z = {}
+                lualine_x = {},
+                lualine_y = { "diagnostics" },
+                lualine_z = { {"filetype", colored=false} }
             },
             inactive_sections = {
                 lualine_a = {},
@@ -29,13 +29,15 @@ return {
             tabline = {
                 lualine_a = { {
                     "tabs",
-                    mode = 1
+                    max_length = 3 * vim.o.columns / 4,
+                    mode = 1,
+                    use_mode_colors = true
                 } },
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = { "branch" },
-                lualine_z = {}
+                lualine_y = { "diff" },
+                lualine_z = { "branch" }
 
             }
         }

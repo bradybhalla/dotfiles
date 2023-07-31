@@ -13,6 +13,9 @@ vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR>:echo<CR>")
 -- system clipboard
 vim.keymap.set({"n", "v"}, "<leader>c", "\"*")
 
+-- reselect after indenting
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
 
 -------------
 -- Movement -
