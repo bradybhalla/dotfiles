@@ -10,8 +10,8 @@ export PATH=$PATH:/opt/homebrew/bin:\
 /Applications/Julia-1.8.app/Contents/Resources/julia/bin:\
 /Applications/Docker.app/Contents/Resources/bin
 
-# Define aliases
-source $HOME/.zsh_aliases
+# Define aliases and functions
+source "$HOME/.zsh_aliases"
 
 # fzf key bindings and completions
 source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
@@ -21,7 +21,7 @@ source /opt/homebrew/opt/fzf/shell/completion.zsh
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# iTerm shell integration
+# iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # zsh-syntax-highlighting
