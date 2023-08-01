@@ -22,6 +22,7 @@ return {
     config = function()
         vim.diagnostic.config({
             virtual_text = false,
+            severity_sort = true
         })
 
         local handlers = require("plugins.lsp.handlers")
