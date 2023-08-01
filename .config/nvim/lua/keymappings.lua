@@ -5,7 +5,7 @@
 -- quickly save and exit
 vim.keymap.set("n", "<leader>q", "<CMD>q<CR>")
 vim.keymap.set("n", "<leader>Q", "<CMD>qall<CR>")
-vim.keymap.set("n", "<leader>w", "<CMD>w<CR>")
+vim.keymap.set("n", "<leader>w", "<CMD>w<CR><CMD>e<CR>")
 
 -- unhighlight search and clear command bar
 vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR>:echo<CR>")
