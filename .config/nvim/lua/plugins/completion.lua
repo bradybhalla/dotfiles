@@ -9,9 +9,9 @@ return {
             "SirVer/ultisnips",
             config = function()
                 vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/UltiSnips" }
-                vim.g.UltiSnipsExpandTrigger = "<tab>"
-                vim.g.UltiSnipsJumpForwardTrigger = "<right>"
-                vim.g.UltiSnipsJumpBackwardTrigger = "<left>"
+                vim.g.UltiSnipsExpandTrigger = "<S-TAB>" -- shift tab to override other completions
+                vim.g.UltiSnipsJumpForwardTrigger = "<RIGHT>" -- arrows to jump to fields
+                vim.g.UltiSnipsJumpBackwardTrigger = "<LEFT>"
             end
         },
         "quangnguyen30192/cmp-nvim-ultisnips"
@@ -19,19 +19,24 @@ return {
     config = function()
         local cmp = require("cmp")
 
-
         local mapping = cmp.mapping.preset.insert({
-            ["<C-e>"] = cmp.mapping.confirm({ select = true }),
+            ["<TAB>"] = cmp.mapping.confirm({ select = true }),
+            ["<CR>"] = cmp.mapping.confirm({ select = false }), -- enter only when explicitly selected
             ["<C-a>"] = cmp.mapping.abort()
+            -- up/down arrows to choose other completions
         })
 
         -- sources of completions
-        local default_sources = {
+        local default_sources = cmp.config.sources({
             { name = "nvim_lua" },
             { name = "nvim_lsp" }, -- lsp completions set up in lsp files
             { name = "ultisnips" },
-            { name = "buffer" },
-        }
+
+        }, {
+            { name = 'buffer' },
+        })
+
+
 
         cmp.setup {
             snippet = {
