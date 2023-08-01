@@ -3,6 +3,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Run and customize prompt (run `p10k configure` or edit ~/.p10k.zsh to change)
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # Set path
 export PATH=$PATH:/opt/homebrew/bin:\
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin:\
@@ -17,17 +21,14 @@ source "$HOME/.zsh_aliases"
 source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 source /opt/homebrew/opt/fzf/shell/completion.zsh
 
-# Run and customize prompt (run `p10k configure` or edit ~/.p10k.zsh to change)
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# zsh-syntax-highlighting
+# zsh-autosuggestions
+source "${HOME}/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# zsh-syntax-highlighting (keep at bottom of .zshrc)
 source "${HOME}/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-
 
 
 

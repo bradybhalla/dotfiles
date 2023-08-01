@@ -74,3 +74,8 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 ### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - Syntax highlighting while typing in zsh
 - Install by cloning [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) into `~/bin`
+
+
+### [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- Autocomplete while typing in zsh (right arrow to accept)
+- Install by cloning [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) into `~/bin`
