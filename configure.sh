@@ -3,12 +3,12 @@
 # create backup folder
 if [ -d backup ]; then
 	# backup already exists
-  read -p "Backup already exists and may be overwritten, continue? (y/n): " confirm
-  if ! [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] ; then
-		echo "Exiting..."
-		exit 1
-	fi
-  rm -rf backup
+    read -p "Backup already exists and may be overwritten, continue? (y/n): " confirm
+    if ! [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] ; then
+        echo "Exiting..."
+        exit 1
+    fi
+    rm -rf backup
 fi
 mkdir backup
 
@@ -30,9 +30,9 @@ NVIM_ROOT=.config/nvim
 
 if [[ -d "$HOME/$NVIM_ROOT" ]]; then
 	# neovim config root exists
-  echo "nvim config exists, saving copy."
-  mkdir -p $(dirname "backup/$NVIM_ROOT")
-  mv "$HOME/$NVIM_ROOT" "backup/$NVIM_ROOT"
+    echo "nvim config exists, saving copy."
+    mkdir -p $(dirname "backup/$NVIM_ROOT")
+    mv "$HOME/$NVIM_ROOT" "backup/$NVIM_ROOT"
 fi
 
 cp -r "$NVIM_ROOT" "$HOME/$NVIM_ROOT"
