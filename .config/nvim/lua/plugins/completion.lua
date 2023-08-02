@@ -28,12 +28,12 @@ return {
 
         -- sources of completions
         local default_sources = cmp.config.sources({
-            { name = "nvim_lua" },
-            { name = "nvim_lsp" }, -- lsp completions set up in lsp files
-            { name = "ultisnips" },
+            { name = "nvim_lua", keyword_length = 2 },
+            { name = "nvim_lsp", keyword_length = 2 }, -- lsp completions set up in lsp files
+            { name = "ultisnips", keyword_length = 2 },
 
         }, {
-            { name = 'buffer' },
+            { name = "buffer", keyword_length = 3 },
         })
 
 
