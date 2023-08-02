@@ -4,5 +4,7 @@ return {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         opts = {}
-    }
+    },
+    { "tpope/vim-commentary" },
+    { "tpope/vim-surround" }
 }
