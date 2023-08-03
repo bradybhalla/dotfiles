@@ -1,25 +1,10 @@
-------------
--- General -
-------------
-
--- quickly save and exit
-vim.keymap.set("n", "<leader>q", "<CMD>q<CR>")
-vim.keymap.set("n", "<leader>Q", "<CMD>qall<CR>")
-vim.keymap.set("n", "<leader>w", "<CMD>w<CR><CMD>e<CR>")
-
--- unhighlight search and clear command bar
-vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR>:echo<CR>")
-
--- system clipboard
-vim.keymap.set({"n", "v"}, "<leader>c", "\"*")
+-------------
+-- Behavior -
+-------------
 
 -- reselect after indenting
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
-
--------------
--- Movement -
--------------
 
 -- j/k move within a wrapped line
 vim.keymap.set("n", "j", "gj")
@@ -27,28 +12,28 @@ vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "gj", "j")
 vim.keymap.set("n", "gk", "k")
 
--- jump to previous cursor position (tab to jump to next)
-vim.keymap.set("n", "<leader>-", "<C-o>")
+-- unhighlight search and clear command bar
+vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR><CMD>echo<CR>")
 
 
--- natural text editing in insert mode
--- with "Natural Text Editing" presets in iTerm2
--- (disabled)
---
--- vim.keymap.set("i", "<C-a>", "<C-o>^")       -- command-arrow
--- vim.keymap.set("i", "<C-e>", "<C-o>$")
--- vim.keymap.set("i", "<ESC>b", "<C-o>B")      -- option-arrow
--- vim.keymap.set("i", "<ESC>f", "<C-o>E<C-o>l")
+--------------
+-- Shortcuts -
+--------------
 
+-- save and exit
+vim.keymap.set("n", "<leader>q", "<CMD>q<CR>")
+vim.keymap.set("n", "<leader>Q", "<CMD>qall<CR>")
+vim.keymap.set("n", "<leader>w", "<CMD>w<CR><CMD>e<CR>")
 
-----------------
--- Corrections -
-----------------
+-- use system clipboard register
+vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
 
--- I accidentally type "q:" instead of ":q"
-vim.keymap.set("n", "q:", ":q")
-vim.keymap.set("n", "q<leader>", "<CMD>q<CR>")
+-- change instances of the same text (n. to repeat)
+vim.keymap.set("n", "<leader>d", "\"dyiw/\\<<C-r>d\\><CR>Nzzgnc")
+vim.keymap.set("v", "<leader>d", "\"dy/<C-r>d<CR>Nzzgnc")
 
+-- open directory in finder
+vim.keymap.set("n", "<leader>O", "<CMD>silent !open $(dirname %)<CR>")
 
 
 --------
@@ -66,6 +51,3 @@ vim.keymap.set("n", "q<leader>", "<CMD>q<CR>")
 --------------
 -- nvim-tree -
 --------------  defined in filetree.lua
-
-
-

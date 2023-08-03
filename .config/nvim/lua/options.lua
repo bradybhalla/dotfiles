@@ -3,8 +3,6 @@ vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber=true
 
-vim.opt.ignorecase = true
-
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
