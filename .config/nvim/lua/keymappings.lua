@@ -21,19 +21,19 @@ vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR><CMD>echo<CR>")
 --------------
 
 -- save and exit
-vim.keymap.set("n", "<leader>q", "<CMD>q<CR>")
-vim.keymap.set("n", "<leader>Q", "<CMD>qall<CR>")
-vim.keymap.set("n", "<leader>w", "<CMD>w<CR><CMD>e<CR>")
+vim.keymap.set("n", "<leader>q", "<CMD>q<CR>", { desc = "quit" })
+vim.keymap.set("n", "<leader>Q", "<CMD>qall<CR>", { desc = "quit all" })
+vim.keymap.set("n", "<leader>w", "<CMD>w<CR><CMD>e<CR>", { desc = "save and reload" })
 
 -- use system clipboard register
-vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
+vim.keymap.set({ "n", "v" }, "<leader>c", "\"+", { desc = "use system clipboard" })
 
 -- change instances of the same text (n. to repeat)
-vim.keymap.set("n", "<leader>d", "\"dyiw/\\<<C-r>d\\><CR>Nzzgnc")
-vim.keymap.set("v", "<leader>d", "\"dy/<C-r>d<CR>Nzzgnc")
+vim.keymap.set("n", "<leader>d", "\"dyiw/\\<<C-r>d\\><CR>Nzzgnc", { desc = "change word" })
+vim.keymap.set("v", "<leader>d", "\"dy/<C-r>d<CR>Nzzgnc", { desc = "change selection" })
 
 -- open directory in finder
-vim.keymap.set("n", "<leader>O", "<CMD>silent !open $(dirname %)<CR>")
+vim.keymap.set("n", "<leader>O", "<CMD>silent !open $(dirname %)<CR>", { desc = "open directory" })
 
 
 --------

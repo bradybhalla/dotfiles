@@ -5,11 +5,12 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-omni",
         {
             "SirVer/ultisnips",
             config = function()
                 vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/UltiSnips" }
-                vim.g.UltiSnipsExpandTrigger = "<S-TAB>" -- shift tab to override other completions
+                vim.g.UltiSnipsExpandTrigger = "<S-TAB>"      -- shift tab to override other completions
                 vim.g.UltiSnipsJumpForwardTrigger = "<RIGHT>" -- arrows to jump to fields
                 vim.g.UltiSnipsJumpBackwardTrigger = "<LEFT>"
             end
@@ -28,10 +29,9 @@ return {
 
         -- sources of completions
         local default_sources = cmp.config.sources({
-            { name = "nvim_lua", keyword_length = 2 },
-            { name = "nvim_lsp", keyword_length = 2 }, -- lsp completions set up in lsp files
-            { name = "ultisnips", keyword_length = 2 },
-
+            { name = "nvim_lua",  keyword_length = 2 },
+            { name = "nvim_lsp",  keyword_length = 2 }, -- lsp completions set up in lsp files
+            { name = "ultisnips", keyword_length = 2 }
         }, {
             { name = "buffer", keyword_length = 3 },
         })
