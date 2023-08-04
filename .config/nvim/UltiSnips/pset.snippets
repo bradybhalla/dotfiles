@@ -1,0 +1,66 @@
+snippet newset "Problem set template" b
+\documentclass[a4paper, 12pt]{article}
+
+% use packages
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\pagenumbering{gobble}
+
+% fix spacing around left and right
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+% set of real numbers
+\newcommand{\R}{\mathbb{R}}
+
+% RedNote
+\newcommand{\RedNote}[1]{\begin{center}\textcolor{red}{=======#1=======}\end{center}}
+
+% dark mode
+% \pagecolor[rgb]{0,0,0}
+% \color[rgb]{0.7,0.7,0.7}
+
+\title{$1}
+\author{${2:Brady Bhalla}}
+\date{$3}
+
+\begin{document}
+
+\maketitle
+
+$0
+
+\end{document}
+endsnippet
+
+
+
+global !p
+def create_parts(parts):
+	if parts is "":
+		return "\\RedNote{TODO}\n\n"
+	use_nums = ord("2") <= ord(parts) <= ord("9")
+	num = ord(parts) + 2 - (ord("2") if use_nums else ord("b"))
+	start = ord("1") if use_nums else ord("a")
+	res = ""
+	for i in range(num):
+		symbol = chr(start + i)
+		res += f"\\subsection*{{{symbol}}}\n"
+		res += "\\RedNote{TODO}\n\n"
+	return res
+endglobal
+
+snippet "prob(\d)([b-z2-9]?)" "Problem with parts" br
+\section*{Problem `!p snip.rv=match.group(1)`}
+`!p snip.rv=create_parts(match.group(2))`
+\pagebreak
+
+endsnippet
