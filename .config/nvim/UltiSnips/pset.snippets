@@ -45,7 +45,7 @@ endsnippet
 
 global !p
 def create_parts(parts):
-	if parts is "":
+	if parts == "":
 		return "\\RedNote{TODO}\n\n"
 	use_nums = ord("2") <= ord(parts) <= ord("9")
 	num = ord(parts) + 2 - (ord("2") if use_nums else ord("b"))

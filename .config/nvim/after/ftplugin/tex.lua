@@ -1,9 +1,15 @@
--- completions with math symbols
+-- special completions
 require("cmp").setup.buffer {
     formatting = {
         format = function(entry, vim_item)
-            -- extract symbol and source from vimtex completions
             if entry.source.name == "omni" then
+                -- only display citation name
+                for _ in (vim_item.menu):gmatch("%[a%] ?(.*)") do
+                    vim_item.kind = "Citation"
+                    vim_item.menu = ""
+                end
+
+                -- display math symbol and source
                 for menu, kind in (vim_item.menu):gmatch("%[cmd: (.+)%] ?(.*)") do
                     vim_item.kind = kind
                     vim_item.menu = menu
