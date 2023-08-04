@@ -19,7 +19,14 @@ require("cmp").setup.buffer {
     },
 }
 
+-- autopair rules
+local Rule = require("nvim-autopairs.rule")
+local npairs = require("nvim-autopairs")
 
+npairs.add_rule(Rule("$", "$", { "tex" }))
+
+
+-- conceal math
 vim.cmd([[
 set conceallevel=2
 let g:vimtex_syntax_conceal["math_bounds"]=0
