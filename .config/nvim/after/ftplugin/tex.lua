@@ -1,3 +1,5 @@
+-- Latex config file
+
 -- special completions
 require("cmp").setup.buffer {
     formatting = {
@@ -40,3 +42,12 @@ let g:vimtex_syntax_conceal["math_bounds"]=0
 
 highlight Conceal guifg=#f4b8e4 guibg=NONE
 ]])
+
+
+-- quickly build
+vim.keymap.set(
+    "n",
+    "<leader>b",
+    "<CMD>w<CR><CMD>!latexmk -pdf \"%:r\" && open \"%:r.pdf\"<CR>",
+    { desc = "quick build latex" }
+)
