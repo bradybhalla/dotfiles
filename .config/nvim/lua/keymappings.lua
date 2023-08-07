@@ -35,6 +35,10 @@ vim.keymap.set("v", "<leader>d", "\"dy/<C-r>d<CR>Nzzgnc", { desc = "change selec
 -- open directory in finder
 vim.keymap.set("n", "<leader>O", "<CMD>silent !open $(dirname %)<CR>", { desc = "open directory" })
 
+-- spellcheck
+vim.keymap.set("n", "<leader>S", function()
+    vim.opt_local.spell = not vim.opt_local.spell._value
+end, { desc = "toggle spellcheck" })
 
 --------
 -- LSP -

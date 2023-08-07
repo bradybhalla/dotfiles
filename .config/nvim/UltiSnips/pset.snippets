@@ -1,16 +1,34 @@
 snippet newset "Problem set template" b
-\documentclass[a4paper, 12pt]{article}
+%%%%%%%%%%%%%%%%%%
+% Setup/Packages %
+%%%%%%%%%%%%%%%%%%
 
-% use packages
+\documentclass[a4paper, 11pt]{article}
+
 \usepackage{fullpage}
-\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{xcolor}
 
+% hide page numbers
 \pagenumbering{gobble}
+
+
+%%%%%%%%%%%%
+% Commands %
+%%%%%%%%%%%%
+
+% dark mode
+\newcommand{\dark}{
+	\pagecolor[rgb]{0.19,0.20,0.27}
+	\color[rgb]{0.78,0.82,0.96}
+	\definecolor{red}{HTML}{E78284}
+}
+
+% RedNote
+\newcommand{\RedNote}[1]{\begin{center}\textcolor{red}{=======#1=======}\end{center}}
 
 % fix spacing around left and right
 \let\originalleft\left
@@ -21,12 +39,10 @@ snippet newset "Problem set template" b
 % set of real numbers
 \newcommand{\R}{\mathbb{R}}
 
-% RedNote
-\newcommand{\RedNote}[1]{\begin{center}\textcolor{red}{=======#1=======}\end{center}}
 
-% dark mode
-% \pagecolor[rgb]{0,0,0}
-% \color[rgb]{0.7,0.7,0.7}
+%%%%%%%%%%%%
+% Document %
+%%%%%%%%%%%%
 
 \title{$1}
 \author{${2:Brady Bhalla}}
@@ -63,4 +79,9 @@ snippet "prob(\d)([b-z2-9]?)" "Problem with parts" br
 `!p snip.rv=create_parts(match.group(2))`
 \pagebreak
 
+endsnippet
+
+
+snippet rn "Red note"
+\RedNote{${0:TODO}}
 endsnippet

@@ -1,1 +1,21 @@
 extends pset
+
+snippet no "No indent"
+\noindent 
+endsnippet
+
+snippet beg "Begin environment"
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+snippet ali "Align environment"
+\begin{align*}
+	$0
+\end{align*}
+endsnippet
+
+snippet bb
+\mathbb{$0}
+endsnippet

@@ -20,7 +20,14 @@ return {
                 --      lspconfig
 
                 -- add all valid integration plugins here
-            }
+            },
+            custom_highlights = function(colors)
+                return {
+                    SpellBad = { fg = colors.red }, -- spelling errors
+                    Conceal = { fg = colors.pink }  -- VimTeX conceal
+                }
+            end
+
         })
         vim.cmd.colorscheme "catppuccin-frappe"
     end
