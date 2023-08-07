@@ -49,5 +49,8 @@ vim.keymap.set(
     "n",
     "<leader>b",
     "<CMD>w<CR><CMD>!latexmk -pdf \"%:r\" && open \"%:r.pdf\"<CR>",
-    { desc = "quick build latex" }
+    {
+        desc = "quick build latex",
+        buffer = true
+    }
 )

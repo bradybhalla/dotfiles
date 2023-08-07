@@ -23,7 +23,7 @@ vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR><CMD>echo<CR>")
 -- save and exit
 vim.keymap.set("n", "<leader>q", "<CMD>q<CR>", { desc = "quit" })
 vim.keymap.set("n", "<leader>Q", "<CMD>qall<CR>", { desc = "quit all" })
-vim.keymap.set("n", "<leader>w", "<CMD>w<CR><CMD>e<CR>", { desc = "save and reload" })
+vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "save" })
 
 -- use system clipboard register
 vim.keymap.set({ "n", "v" }, "<leader>c", "\"+", { desc = "use system clipboard" })
