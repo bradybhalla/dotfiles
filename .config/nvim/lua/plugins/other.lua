@@ -15,5 +15,6 @@ return {
             vim.o.timeoutlen = 500
         end,
         opts = {}
-    }
+    },
+    {"akinsho/toggleterm.nvim", config = true}
 }

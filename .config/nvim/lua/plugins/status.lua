@@ -7,7 +7,7 @@ return {
         require("lualine").setup {
             options = {
                 theme = "catppuccin",
-                disabled_filetypes = { "NvimTree" }
+                disabled_filetypes = { "NvimTree", "toggleterm" }
             },
             sections = {
                 lualine_a = { "mode" },

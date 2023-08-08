@@ -40,6 +40,14 @@ vim.keymap.set("n", "<leader>S", function()
     vim.opt_local.spell = not vim.opt_local.spell._value
 end, { desc = "toggle spellcheck" })
 
+-- lazygit popup
+local Terminal = require("toggleterm.terminal").Terminal
+local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction="float" })
+
+vim.keymap.set("n", "<leader>G", function()
+    lazygit:toggle()
+end)
+
 --------
 -- LSP -
 --------  defined in lsp/init.lua, lsp/handlers.lua
