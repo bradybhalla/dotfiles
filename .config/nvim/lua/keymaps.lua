@@ -55,3 +55,7 @@ end, { desc = "toggle spellcheck" })
 --------------
 -- nvim-tree -
 --------------  defined in filetree.lua
+
+-- text objects from treesitter (incremental selection), vim surround, etc.
+
+-- latex configuration has additional keymaps

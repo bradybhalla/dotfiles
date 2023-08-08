@@ -5,4 +5,4 @@ require("./options")
 require("./lazy")
 
 -- Load keymappings
-require("./keymappings")
+require("./keymaps")
