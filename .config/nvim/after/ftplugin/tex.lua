@@ -9,10 +9,10 @@ require("cmp").setup.buffer {
 
                 if cmp_info == nil then
                     -- other
-                    vim_item.kind = "LaTeX"
+                    vim_item.kind = "latex"
                 elseif #cmp_info == 1 then
                     -- citation
-                    vim_item.kind = "Citation"
+                    vim_item.kind = "citation"
                     vim_item.menu = cmp_info
                 else
                     local cmp_type, cmp_source = cmp_info:match("(.+): (.+)")
@@ -23,7 +23,7 @@ require("cmp").setup.buffer {
                         vim_item.menu = ""
                     elseif cmp_type == "cmd" then
                         -- math symbols / commands
-                        vim_item.kind = cmp_symbol
+                        vim_item.kind = cmp_symbol == "" and "cmd" or cmp_symbol
                         vim_item.menu = cmp_source
                     else
                         -- other with source
