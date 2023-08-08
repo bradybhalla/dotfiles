@@ -11,27 +11,23 @@ require("cmp").setup.buffer {
                     -- other
                     vim_item.kind = "LaTeX"
                 elseif #cmp_info == 1 then
-                    -- citations
+                    -- citation
                     vim_item.kind = "Citation"
-                    vim_item.menu = ""
-                elseif cmp_info == "package" then
-                    -- packages
-                    vim_item.kind = "Package"
-                    vim_item.menu = ""
-                elseif cmp_info == "graphics" then
-                    -- graphics files
-                    vim_item.kind = "Graphics"
-                    vim_item.menu = ""
+                    vim_item.menu = cmp_info
                 else
                     local cmp_type, cmp_source = cmp_info:match("(.+): (.+)")
 
-                    if cmp_type == "cmd" then
+                    if cmp_type == nil then
+                        -- other without source
+                        vim_item.kind = cmp_info
+                        vim_item.menu = ""
+                    elseif cmp_type == "cmd" then
                         -- math symbols / commands
                         vim_item.kind = cmp_symbol
                         vim_item.menu = cmp_source
-                    elseif cmp_type == "env" then
-                        -- environments
-                        vim_item.kind = "Env"
+                    else
+                        -- other with source
+                        vim_item.kind = cmp_type
                         vim_item.menu = cmp_source
                     end
                 end
