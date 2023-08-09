@@ -43,8 +43,6 @@ lsp_setup.handlers = {
             }
         }))
     end,
-
-    ["pyright"] = function () end
 }
 
 

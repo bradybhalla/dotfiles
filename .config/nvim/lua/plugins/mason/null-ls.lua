@@ -4,13 +4,12 @@ local null_ls = require("null-ls")
 local null_ls_setup = {}
 
 null_ls_setup.ensure_installed = {
-    "black", "markdownlint"
+    "black"
 }
 
 null_ls_setup.config = {
     sources = {
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.markdownlint
+        null_ls.builtins.formatting.black
     },
     on_attach = function(client, bufnr)
         -- null-ls always says it can do everything (lies)
