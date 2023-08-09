@@ -48,9 +48,9 @@ vim.keymap.set("n", "<leader>G", function()
     lazygit:toggle()
 end, { desc = "lazygit" })
 
---------
--- LSP -
---------  defined in lsp/init.lua, lsp/handlers.lua
+----------------
+-- LSP/linting -
+----------------  defined in mason/
 
 --------
 -- cmp -

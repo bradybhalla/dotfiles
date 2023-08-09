@@ -1,6 +1,6 @@
-return function(client, bufnr)
-    -- custom mappings
+local maps = {}
 
+maps.general = function(client, buffnr)
     local builtin = require("telescope.builtin")
 
     vim.keymap.set("n", "<leader>l", "<leader>l", { desc = "LSP prefix", buffer = true })
@@ -35,3 +35,15 @@ return function(client, bufnr)
         vim.keymap.set("n", "<leader>lk", vim.lsp.buf.signature_help, { desc = "signature help", buffer = true })
     end
 end
+
+maps.lsp = function(client, buffnr)
+    -- open float with diagnostics
+    vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "show diagnostic", buffer = true })
+
+    vim.keymap.set("n", "<leader>l,", vim.diagnostic.goto_prev, { desc = "go to previous diagnostic", buffer = true })
+    vim.keymap.set("n", "<leader>l;", vim.diagnostic.goto_next, { desc = "go to next diagnostic", buffer = true })
+end
+
+maps.null_ls = function(client, buffnr) end
+
+return maps
