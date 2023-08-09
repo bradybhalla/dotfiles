@@ -17,9 +17,7 @@ return {
         end, { desc = "find file (no ignore)" })
 
         -- search text
-        vim.keymap.set("n", "<leader>fg", function()
-            builtin.live_grep { hidden = true }
-        end, { desc = "search text" })
+        vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "search text" })
 
         -- search buffers
         vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "find buffer" })
