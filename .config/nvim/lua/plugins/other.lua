@@ -12,9 +12,9 @@ return {
         event = "VeryLazy",
         init = function()
             vim.o.timeout = true
-            vim.o.timeoutlen = 500
+            vim.o.timeoutlen = 300
         end,
         opts = {}
     },
-    {"akinsho/toggleterm.nvim", config = true}
+    { "akinsho/toggleterm.nvim", config = true }
 }

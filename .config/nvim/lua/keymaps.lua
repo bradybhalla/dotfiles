@@ -41,10 +41,15 @@ vim.keymap.set("n", "<leader>S", function()
 end, { desc = "toggle spellcheck" })
 
 -- lazygit popup
-local Terminal = require("toggleterm.terminal").Terminal
-local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-
 vim.keymap.set("n", "<leader>G", function()
+    local Terminal = require("toggleterm.terminal").Terminal
+
+    local dir = vim.fn.expand("%:h")
+    if dir == "" then
+        dir = "."
+    end
+
+    local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", dir = dir, count = 99 })
     lazygit:toggle()
 end, { desc = "lazygit" })
 
