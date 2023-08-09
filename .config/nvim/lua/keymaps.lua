@@ -45,7 +45,7 @@ vim.keymap.set("n", "<leader>G", function()
     local Terminal = require("toggleterm.terminal").Terminal
 
     local dir = vim.fn.expand("%:h")
-    if dir == "" then
+    if vim.fn.isdirectory(dir) == 0 then
         dir = "."
     end
 
@@ -69,6 +69,4 @@ end, { desc = "lazygit" })
 -- nvim-tree -
 --------------  defined in filetree.lua
 
--- text objects from treesitter (incremental selection), vim surround, etc.
-
--- latex configuration has additional keymaps
+-- more from treesitter (incremental selection), vim surround, latex, etc.
