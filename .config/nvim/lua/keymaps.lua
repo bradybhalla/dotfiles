@@ -33,7 +33,7 @@ vim.keymap.set("n", "<leader>d", "\"dyiw/\\<<C-r>d\\><CR>Nzzgnc", { desc = "chan
 vim.keymap.set("v", "<leader>d", "\"dy/<C-r>d<CR>Nzzgnc", { desc = "change selection" })
 
 -- open directory in finder
-vim.keymap.set("n", "<leader>O", "<CMD>silent !open $(dirname %)<CR>", { desc = "open directory" })
+vim.keymap.set("n", "<leader>O", "<CMD>silent !open \"%:h\"<CR>", { desc = "open directory" })
 
 -- spellcheck
 vim.keymap.set("n", "<leader>S", function()
