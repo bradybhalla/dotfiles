@@ -4,8 +4,6 @@ return {
     config = function()
         local builtin = require("telescope.builtin")
 
-        vim.keymap.set("n", "<leader>f", "<leader>f", { desc = "telescope prefix" })
-
         -- find files
         vim.keymap.set("n", "<leader>ff", function()
             builtin.find_files { hidden = true }

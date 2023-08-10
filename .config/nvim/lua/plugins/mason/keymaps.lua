@@ -3,8 +3,6 @@ local maps = {}
 maps.general = function(client, buffnr)
     local builtin = require("telescope.builtin")
 
-    vim.keymap.set("n", "<leader>l", "<leader>l", { desc = "LSP prefix", buffer = true })
-
     if client.server_capabilities.documentFormattingProvider then
         vim.keymap.set("n", "<leader>lF", vim.lsp.buf.format, { desc = "format file", buffer = true })
     end

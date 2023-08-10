@@ -55,18 +55,21 @@ end, { desc = "lazygit" })
 
 ----------------
 -- LSP/linting -
-----------------  defined in mason/
+----------------  defined in plugins/mason/keymaps.lua
+require("which-key").register({l = {name="LSP"}}, {prefix="<leader>"})
 
 --------
 -- cmp -
---------  defined in completion.lua
+--------  defined in plugins/completion.lua
 
 --------------
 -- telescope -
---------------  defined in telescope.lua
+--------------  defined in plugins/telescope.lua
+require("which-key").register({f = {name="telescope"}}, {prefix="<leader>"})
 
 --------------
 -- nvim-tree -
---------------  defined in filetree.lua
+--------------  defined in plugins/filetree.lua
+require("which-key").register({e = {name="filetree"}}, {prefix="<leader>"})
 
 -- more from treesitter (incremental selection), vim surround, latex, etc.

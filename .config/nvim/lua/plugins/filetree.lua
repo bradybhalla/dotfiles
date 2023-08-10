@@ -8,8 +8,6 @@ return {
 
         -- custom mappings
 
-        vim.keymap.set("n", "<leader>e", "<leader>e", { desc = "filetree prefix" })
-
         vim.keymap.set("n", "<leader>ef", function()
             api.tree.open { find_file = true }
         end, { desc = "jump to file in tree" })
