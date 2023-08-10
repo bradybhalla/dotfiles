@@ -29,10 +29,9 @@ return {
 
         require("mason").setup()
 
-        local lsp_setup = require("plugins.mason.lsp")
         require("mason-lspconfig").setup {
-            ensure_installed = lsp_setup.ensure_installed,
-            handlers = lsp_setup.handlers
+            ensure_installed = require("plugins.mason.lsp").ensure_installed,
+            handlers = require("plugins.mason.lsp").handlers
         }
 
         local null_ls_setup = require("plugins.mason.null-ls")

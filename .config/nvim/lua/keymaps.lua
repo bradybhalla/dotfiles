@@ -42,21 +42,24 @@ end, { desc = "toggle spellcheck" })
 
 -- lazygit popup
 vim.keymap.set("n", "<leader>G", function()
-    local Terminal = require("toggleterm.terminal").Terminal
-
     local dir = vim.fn.expand("%:h")
     if vim.fn.isdirectory(dir) == 0 then
         dir = "."
     end
 
-    local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", dir = dir, count = 99 })
-    lazygit:toggle()
+    require("toggleterm.terminal").Terminal:new({
+        cmd = "lazygit",
+        hidden = true,
+        direction = "float",
+        dir = dir,
+        count = 99
+    }):toggle()
 end, { desc = "lazygit" })
 
 ----------------
 -- LSP/linting -
 ----------------  defined in plugins/mason/keymaps.lua
-require("which-key").register({l = {name="LSP"}}, {prefix="<leader>"})
+require("which-key").register({ l = { name = "LSP" } }, { prefix = "<leader>" })
 
 --------
 -- cmp -
@@ -65,11 +68,11 @@ require("which-key").register({l = {name="LSP"}}, {prefix="<leader>"})
 --------------
 -- telescope -
 --------------  defined in plugins/telescope.lua
-require("which-key").register({f = {name="telescope"}}, {prefix="<leader>"})
+require("which-key").register({ f = { name = "telescope" } }, { prefix = "<leader>" })
 
 --------------
 -- nvim-tree -
 --------------  defined in plugins/filetree.lua
-require("which-key").register({e = {name="filetree"}}, {prefix="<leader>"})
+require("which-key").register({ e = { name = "filetree" } }, { prefix = "<leader>" })
 
 -- more from treesitter (incremental selection), vim surround, latex, etc.

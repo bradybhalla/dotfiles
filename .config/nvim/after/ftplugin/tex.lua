@@ -46,9 +46,9 @@ require("cmp").setup.buffer {
 
 -- autopair rules
 local Rule = require("nvim-autopairs.rule")
-local npairs = require("nvim-autopairs")
+local autopairs = require("nvim-autopairs")
 
-npairs.add_rule(Rule("$", "$", { "tex" }))
+autopairs.add_rule(Rule("$", "$", { "tex" }))
 
 
 -- conceal math

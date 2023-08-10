@@ -4,7 +4,7 @@ return {
         "nvim-tree/nvim-web-devicons"
     },
     config = function()
-        local api = require "nvim-tree.api"
+        local api = require("nvim-tree.api")
 
         -- custom mappings
 

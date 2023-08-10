@@ -1,22 +1,22 @@
 local maps = {}
 
 maps.general = function(client, buffnr)
-    local builtin = require("telescope.builtin")
+    local telescope_builtin = require("telescope.builtin")
 
     if client.server_capabilities.documentFormattingProvider then
         vim.keymap.set("n", "<leader>lF", vim.lsp.buf.format, { desc = "format file", buffer = true })
     end
 
     if client.server_capabilities.definitionProvider then
-        vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "go to definition", buffer = true })
+        vim.keymap.set("n", "<leader>ld", telescope_builtin.lsp_definitions, { desc = "go to definition", buffer = true })
     end
 
     if client.server_capabilities.referencesProvider then
-        vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "find references", buffer = true })
+        vim.keymap.set("n", "<leader>lr", telescope_builtin.lsp_references, { desc = "find references", buffer = true })
     end
 
     if client.server_capabilities.workspaceSymbolProvider then
-        vim.keymap.set("n", "<leader>lS", builtin.lsp_dynamic_workspace_symbols,
+        vim.keymap.set("n", "<leader>lS", telescope_builtin.lsp_dynamic_workspace_symbols,
             { desc = "search symbols", buffer = true })
     end
 

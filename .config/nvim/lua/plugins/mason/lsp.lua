@@ -1,9 +1,4 @@
-local lspconfig = require("lspconfig")
-local setup_keymaps = require("plugins.mason.keymaps")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 local lsp_setup = {}
-
 
 lsp_setup.ensure_installed = {
     "lua_ls", "pyright", "tsserver", "texlab"
@@ -11,10 +6,10 @@ lsp_setup.ensure_installed = {
 
 local default_config = {
     on_attach = function(client, bufnr)
-        setup_keymaps.general(client, bufnr)
-        setup_keymaps.lsp()
+        require("plugins.mason.keymaps").general(client, bufnr)
+        require("plugins.mason.keymaps").lsp()
     end,
-    capabilities = capabilities
+    capabilities = require("cmp_nvim_lsp").default_capabilities()
 }
 
 -- pass in custom options
@@ -25,12 +20,12 @@ end
 lsp_setup.handlers = {
     -- default handler
     function(server_name)
-        lspconfig[server_name].setup(configure({}))
+        require("lspconfig")[server_name].setup(configure({}))
     end,
 
     -- specific handlers
     ["lua_ls"] = function()
-        lspconfig.lua_ls.setup(configure({
+        require("lspconfig").lua_ls.setup(configure({
             settings = {
                 Lua = {
                     diagnostics = {
