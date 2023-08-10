@@ -13,7 +13,7 @@ null_ls_setup.config = {
         client.server_capabilities.hoverProvider = false
 
         require("plugins.mason.keymaps").general(client, bufnr)
-        require("plugins.mason.keymaps").null_ls()
+        require("plugins.mason.keymaps").null_ls(client, bufnr)
     end
 }
 
