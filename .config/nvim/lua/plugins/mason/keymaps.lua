@@ -8,16 +8,22 @@ maps.general = function(client, bufnr)
     end
 
     if client.server_capabilities.definitionProvider then
-        vim.keymap.set("n", "<leader>ld", telescope_builtin.lsp_definitions, { desc = "go to definition", buffer = bufnr })
+        vim.keymap.set("n", "<leader>ld", telescope_builtin.lsp_definitions,
+            { desc = "go to definition", buffer = bufnr })
     end
 
     if client.server_capabilities.referencesProvider then
         vim.keymap.set("n", "<leader>lr", telescope_builtin.lsp_references, { desc = "find references", buffer = bufnr })
     end
 
+    if client.server_capabilities.documentSymbolProvider then
+        vim.keymap.set("n", "<leader>ls", telescope_builtin.lsp_document_symbols,
+            { desc = "search document symbols", buffer = bufnr })
+    end
+
     if client.server_capabilities.workspaceSymbolProvider then
         vim.keymap.set("n", "<leader>lS", telescope_builtin.lsp_dynamic_workspace_symbols,
-            { desc = "search symbols", buffer = bufnr })
+            { desc = "search workspace symbols", buffer = bufnr })
     end
 
     if client.server_capabilities.hoverProvider then
