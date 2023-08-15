@@ -6,7 +6,8 @@ null_ls_setup.ensure_installed = {
 
 null_ls_setup.config = {
     sources = {
-        require("null-ls").builtins.formatting.black
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.beautysh
     },
     on_attach = function(client, bufnr)
         -- null-ls always says it can do everything (lies)

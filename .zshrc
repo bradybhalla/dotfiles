@@ -1,6 +1,6 @@
 # Enable Powerlevel10k prompt (keep at top of .zshrc)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Run and customize prompt (run `p10k configure` or edit ~/.p10k.zsh to change)
@@ -9,10 +9,10 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # Set path
 export PATH=$PATH:/opt/homebrew/bin:\
-/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:\
-/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin:\
-/Applications/Julia-1.8.app/Contents/Resources/julia/bin:\
-/Applications/Docker.app/Contents/Resources/bin
+    /Applications/Sublime\ Text.app/Contents/SharedSupport/bin:\
+    /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin:\
+    /Applications/Julia-1.8.app/Contents/Resources/julia/bin:\
+    /Applications/Docker.app/Contents/Resources/bin
 
 # Define aliases and functions
 source "$HOME/.zsh_aliases"
