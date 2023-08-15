@@ -18,16 +18,16 @@ alias droplet="ssh root@161.35.107.252"
 # utility function for fuzzy find on all directories from $HOME
 # does not include ~/Library/
 _gen_sd(){
-  query="/"
-  query+="${@:2}"
-  dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | \
-      xargs -0 dirname 2>/dev/null | \
-      awk '!x[$0]++' | \
-      fzf --height 10 --query "$query")
-  
-  if [ ! -z "$dir" ]; then
-    $1 $dir
-  fi
+    query="/"
+    query+="${@:2}"
+    dir=$(rg --hidden --files --null -g '!Library/' ${HOME} 2>/dev/null | \
+            xargs -0 dirname 2>/dev/null | \
+            awk '!x[$0]++' | \
+        fzf --height 10 --query "$query")
+
+    if [ ! -z "$dir" ]; then
+        $1 $dir
+    fi
 }
 
 # cd to any directory starting at $HOME
@@ -49,4 +49,3 @@ alias da="conda deactivate"
 alias nb="jupyter-notebook"
 
 ### ^^^^^^^^
-
