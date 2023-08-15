@@ -9,10 +9,10 @@ source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # Set path
 export PATH=$PATH:/opt/homebrew/bin:\
-    /Applications/Sublime\ Text.app/Contents/SharedSupport/bin:\
-    /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin:\
-    /Applications/Julia-1.8.app/Contents/Resources/julia/bin:\
-    /Applications/Docker.app/Contents/Resources/bin
+/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:\
+/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin:\
+/Applications/Julia-1.8.app/Contents/Resources/julia/bin:\
+/Applications/Docker.app/Contents/Resources/bin
 
 # Define aliases and functions
 source "$HOME/.zsh_aliases"
