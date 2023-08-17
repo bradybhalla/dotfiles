@@ -42,7 +42,9 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 - Catppuccin theme
 - LSP, completion, telescope, and more
-- `:TSInstall <language>` to install a new syntax, `:Mason` to install a new LSP server
+- `:Lazy` to manage plugins, `:Mason` to manange LSPs
+- `:TSInstall <language>` to install a new syntax
+- `:checkhealth` to make sure everything is working correctly
 
 ### Helpful zsh things
 
@@ -84,6 +86,11 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 - Terminal multiplexer
 - Prefix is \` (backtick)
 - I usually use iTerm to handle tmux instead of running it directly. `tmux -CC` starts a session with iTerm.
+- Install with homebrew
+
+### [htop](https://htop.dev)
+
+- Interactive process viewer
 - Install with homebrew
 
 ### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)

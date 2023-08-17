@@ -1,5 +1,7 @@
 # !/bin/zsh
 
+ITEMS=(.p10k.zsh .tmux.conf .zsh_aliases .zshrc .zprofile .config/nvim .config/htop)
+
 # create backup folder
 if [ -d backup ]; then
     # backup already exists
@@ -12,30 +14,16 @@ if [ -d backup ]; then
 fi
 mkdir backup
 
-# config files
-FILES=(.p10k.zsh .tmux.conf .zsh_aliases .zshrc .zprofile)
-for file in "${FILES[@]}"; do
-    if [[ -f "$HOME/$file" ]]; then
-        # file exists
-        echo "$file exists, saving copy."
-        mv "$HOME/$file" "backup/$file"
+for item in "${ITEMS[@]}"; do
+    if [[ -e "$HOME/$item" ]]; then
+        # item already exists
+        echo "$item exists, saving copy."
+        mkdir -p $(dirname "backup/$item")
+        mv "$HOME/$item" "backup/$item"
     fi
 
-    cp "$file" "$HOME/$file"
+    mkdir -p $(dirname "$HOME/$item")
+    cp -r "$item" "$HOME/$item"
 done
-
-
-# neovim config files
-NVIM_ROOT=.config/nvim
-
-if [[ -d "$HOME/$NVIM_ROOT" ]]; then
-    # neovim config root exists
-    echo "nvim config exists, saving copy."
-    mkdir -p $(dirname "backup/$NVIM_ROOT")
-    mv "$HOME/$NVIM_ROOT" "backup/$NVIM_ROOT"
-fi
-
-cp -r "$NVIM_ROOT" "$HOME/$NVIM_ROOT"
-
 
 echo "Done!"
