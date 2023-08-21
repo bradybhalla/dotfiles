@@ -1,7 +1,8 @@
 local null_ls_setup = {}
 
 null_ls_setup.ensure_installed = {
-    "black"
+    "black",
+    "beautysh"
 }
 
 null_ls_setup.config = {

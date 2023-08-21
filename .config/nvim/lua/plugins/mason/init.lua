@@ -47,11 +47,10 @@ return {
             handlers = require("plugins.mason.lsp").handlers
         }
 
-        local null_ls_setup = require("plugins.mason.null-ls")
         require("mason-null-ls").setup {
-            ensure_installed = null_ls_setup.ensure_installed,
+            ensure_installed = require("plugins.mason.null-ls").ensure_installed,
         }
-        require("null-ls").setup(null_ls_setup.config)
+        require("null-ls").setup(require("plugins.mason.null-ls").config)
 
         -- signature help
         require("lsp_signature").setup {
