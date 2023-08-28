@@ -35,7 +35,7 @@ vim.keymap.set("v", "<leader>d", "\"dy/\\V<C-r>d<CR>Nzzgnc", { desc = "change se
 -- open directory in finder
 vim.keymap.set("n", "<leader>O", "<CMD>silent !open \"%:h\"<CR>", { desc = "open directory" })
 
--- spellcheck
+-- toggle spellcheck
 vim.keymap.set("n", "<leader>S", function()
     vim.opt_local.spell = not vim.opt_local.spell._value
 end, { desc = "toggle spellcheck" })
@@ -59,7 +59,6 @@ end, { desc = "lazygit" })
 ----------------
 -- LSP/linting -
 ----------------  defined in plugins/mason/keymaps.lua
-require("which-key").register({ l = { name = "LSP" } }, { prefix = "<leader>" })
 
 --------
 -- cmp -
@@ -68,11 +67,17 @@ require("which-key").register({ l = { name = "LSP" } }, { prefix = "<leader>" })
 --------------
 -- telescope -
 --------------  defined in plugins/telescope.lua
-require("which-key").register({ f = { name = "telescope" } }, { prefix = "<leader>" })
 
 --------------
 -- nvim-tree -
 --------------  defined in plugins/filetree.lua
-require("which-key").register({ e = { name = "filetree" } }, { prefix = "<leader>" })
 
 -- more from treesitter (incremental selection), vim surround, latex, etc.
+
+-- set which-key prefixes
+require("which-key").register({
+        l = { name = "LSP" },
+        f = { name = "telescope" },
+        e = { name = "filetree" }
+    },
+    { prefix = "<leader>" })

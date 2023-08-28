@@ -41,7 +41,7 @@ maps.general = function(client, bufnr)
 end
 
 maps.lsp = function(client, bufnr)
-    -- open float with diagnostics
+    -- show diagnostics
     vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "show diagnostic", buffer = bufnr })
 
     vim.keymap.set("n", "<leader>l,", vim.diagnostic.goto_prev, { desc = "go to previous diagnostic", buffer = bufnr })

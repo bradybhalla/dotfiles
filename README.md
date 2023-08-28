@@ -23,6 +23,16 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 ### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
 
+### 5. Install Neovim LSPs and syntaxes
+Open Neovim and wait for plugins to install. Install LSPs and formatters by typing
+```
+:MasonInstall pyright lua-language-server typescript-language-server texlab black beautysh
+```
+Then, install syntaxes with
+```
+:TSInstall <language>
+```
+
 ## Main Components
 
 ### [iTerm2](https://iterm2.com)
@@ -42,8 +52,7 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 - Catppuccin theme
 - LSP, completion, telescope, and more
-- `:Lazy` to manage plugins, `:Mason` to manange LSPs
-- `:TSInstall <language>` to install a new syntax
+- `:Lazy` to manage plugins, `:Mason` to manage LSPs
 - `:checkhealth` to make sure everything is working correctly
 
 ### Helpful zsh things
@@ -52,7 +61,6 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 - `Ctrl-R` to pick a previous command using fzf
 - `<command> <directory>/**` + `tab` to pick a file in another directory with fzf
 - `sd` to jump to any directory under the home directory
-- `nd` to open any directory under the home directory in Neovim
 
 ## Tools to install
 
@@ -72,8 +80,14 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 ### [ripgrep](https://github.com/BurntSushi/ripgrep)
 
-- `grep` but more powerful
+- better `grep`
 - Easily search recursively for text
+- Install with homebrew
+
+### [fd](https://github.com/sharkdp/fd)
+
+- better `find`
+- Easily search for files
 - Install with homebrew
 
 ### [lazygit](https://github.com/jesseduffield/lazygit)

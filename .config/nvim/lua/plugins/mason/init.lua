@@ -6,13 +6,10 @@ return {
     "williamboman/mason.nvim",
     dependencies = {
         -- lsp
-        "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
-        "ray-x/lsp_signature.nvim",
 
         -- null-ls
-        "jay-babu/mason-null-ls.nvim",
         {
             "jose-elias-alvarez/null-ls.nvim",
             dependencies = { "nvim-lua/plenary.nvim" }
@@ -42,19 +39,8 @@ return {
 
         require("mason").setup()
 
-        require("mason-lspconfig").setup {
-            ensure_installed = require("plugins.mason.lsp").ensure_installed,
-            handlers = require("plugins.mason.lsp").handlers
-        }
+        require("plugins.mason.lsp-setup")()
+        require("plugins.mason.null-ls-setup")()
 
-        require("mason-null-ls").setup {
-            ensure_installed = require("plugins.mason.null-ls").ensure_installed,
-        }
-        require("null-ls").setup(require("plugins.mason.null-ls").config)
-
-        -- signature help
-        require("lsp_signature").setup {
-            hint_enable = false
-        }
     end
 }

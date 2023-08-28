@@ -13,8 +13,8 @@ return {
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-        end,
-        opts = {}
+        end
     },
-    { "akinsho/toggleterm.nvim", config = true }
+    { "akinsho/toggleterm.nvim", opts = {} },
+    { "lewis6991/gitsigns.nvim", opts = {} }
 }

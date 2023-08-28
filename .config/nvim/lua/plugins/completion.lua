@@ -4,7 +4,6 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
-        "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-omni",
         {
             "SirVer/ultisnips",
@@ -29,13 +28,11 @@ return {
 
         -- sources of completions
         local default_sources = cmp.config.sources({
-            { name = "nvim_lua" },
             { name = "nvim_lsp" },
             { name = "ultisnips" }
         }, {
             { name = "buffer" },
         })
-
 
 
         cmp.setup {
@@ -46,9 +43,6 @@ return {
             },
             mapping = mapping,
             sources = default_sources,
-            experimental = {
-                ghost_text = false -- makes phantom text
-            },
             performance = {
                 max_view_entries = 10
             },
