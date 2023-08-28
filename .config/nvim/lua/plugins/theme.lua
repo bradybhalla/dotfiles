@@ -10,7 +10,7 @@ return {
                 mason = true,
                 -- lualine integration in status.lua
 
-                -- set to default:
+                -- default settings:
                 --      cmp
                 --      gitsigns
                 --      nvimtree
