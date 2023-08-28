@@ -52,7 +52,7 @@ Then, install syntaxes with
 
 - Catppuccin theme
 - LSP, completion, telescope, and more
-- `:Lazy` to manage plugins, `:Mason` to manange LSPs
+- `:Lazy` to manage plugins, `:Mason` to manage LSPs
 - `:checkhealth` to make sure everything is working correctly
 
 ### Helpful zsh things
@@ -61,7 +61,6 @@ Then, install syntaxes with
 - `Ctrl-R` to pick a previous command using fzf
 - `<command> <directory>/**` + `tab` to pick a file in another directory with fzf
 - `sd` to jump to any directory under the home directory
-- `nd` to open any directory under the home directory in Neovim
 
 ## Tools to install
 
