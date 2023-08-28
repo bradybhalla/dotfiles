@@ -23,7 +23,7 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 ### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
 
-### 5. Install Neovim LSPs and syntaxes
+### 5. Configure Neovim
 Open Neovim and wait for plugins to install. Install LSPs and formatters by typing
 ```
 :MasonInstall pyright lua-language-server typescript-language-server texlab black beautysh
