@@ -2,8 +2,7 @@ return {
     { "lukas-reineke/indent-blankline.nvim" },
     {
         "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        opts = {}
+        event = "InsertEnter"
     },
     { "tpope/vim-commentary" },
     { "tpope/vim-surround" },
@@ -13,8 +12,8 @@ return {
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-        end,
-        opts = {}
+        end
     },
-    { "akinsho/toggleterm.nvim", config = true }
+    { "akinsho/toggleterm.nvim" },
+    { "lewis6991/gitsigns.nvim" }
 }
