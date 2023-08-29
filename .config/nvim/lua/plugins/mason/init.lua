@@ -7,7 +7,7 @@ return {
     dependencies = {
         -- lsp
         "neovim/nvim-lspconfig",
-        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lsp", -- also dependency for cmp
 
         -- null-ls
         {

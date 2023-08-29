@@ -33,11 +33,6 @@ maps.general = function(client, bufnr)
     if client.server_capabilities.renameProvider then
         vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { desc = "rename", buffer = bufnr })
     end
-
-    -- help with function args
-    if client.server_capabilities.signatureHelpProvider then
-        vim.keymap.set("n", "<leader>lk", vim.lsp.buf.signature_help, { desc = "signature help", buffer = bufnr })
-    end
 end
 
 maps.lsp = function(client, bufnr)

@@ -80,4 +80,5 @@ require("which-key").register({
         f = { name = "telescope" },
         e = { name = "filetree" }
     },
-    { prefix = "<leader>" })
+    { prefix = "<leader>" }
+)
