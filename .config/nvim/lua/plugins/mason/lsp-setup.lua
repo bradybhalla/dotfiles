@@ -36,5 +36,13 @@ return function()
         }
     }))
 
-    lspconfig.texlab.setup(configure({}))
+    lspconfig.texlab.setup(configure({
+        settings = {
+            texlab = {
+                build = {
+                    onSave = true
+                }
+            }
+        }
+    }))
 end

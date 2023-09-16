@@ -31,16 +31,3 @@ _gen_sd(){
 # cd to any directory starting at $HOME
 alias sd="_gen_sd cd"
 
-
-#############
-# Temporary #
-#############
-
-### REMOVE AFTER SURF
-### vvvvvvvv
-
-alias aa="conda activate PySDM"
-alias da="conda deactivate"
-alias nb="jupyter-notebook"
-
-### ^^^^^^^^

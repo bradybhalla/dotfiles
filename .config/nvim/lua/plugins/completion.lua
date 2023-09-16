@@ -23,8 +23,9 @@ return {
 
         local mapping = cmp.mapping.preset.insert({
             ["<TAB>"] = cmp.mapping.confirm({ select = true }),
-            ["<C-a>"] = cmp.mapping.abort()
-            -- up/down arrows to choose other completions
+            -- <C-e> to abort
+            -- <C-n>/<C-p> to choose other completions
+            -- down/up arrows also work
         })
 
         -- sources of completions
