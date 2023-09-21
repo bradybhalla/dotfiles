@@ -38,7 +38,6 @@ Then, install syntaxes with
 ### [iTerm2](https://iterm2.com)
 
 - Powerlevel10k
-- `⌃⌥⌘ T` for hotkey window
 - Catppuccin theme
 - MesloLGS Nerd Font (install if needed)
 
@@ -105,6 +104,11 @@ Then, install syntaxes with
 ### [htop](https://htop.dev)
 
 - Interactive process viewer
+- Install with homebrew
+
+### [miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
+
+- Python package and version manager
 - Install with homebrew
 
 ### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
