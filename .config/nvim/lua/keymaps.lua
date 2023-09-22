@@ -55,6 +55,10 @@ vim.keymap.set("n", "<leader>G", function()
     }):toggle()
 end, { desc = "lazygit" })
 
+
+-- share file with 0x0 (copy link)
+vim.keymap.set("n", "<leader>0", "<CMD>!curl --silent -F'file=@%' https://0x0.st | tee >(pbcopy)<CR>")
+
 ----------------
 -- LSP/linting -
 ----------------  defined in plugins/mason/keymaps.lua
