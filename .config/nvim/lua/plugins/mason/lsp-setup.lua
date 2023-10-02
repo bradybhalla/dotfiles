@@ -17,7 +17,12 @@ return function()
 
     lspconfig.pyright.setup(configure({}))
 
-    lspconfig.tsserver.setup(configure({}))
+    lspconfig.tsserver.setup(configure({
+        settings = {
+            typescript = { format = { semicolons = "insert" } },
+            javascript = { format = { semicolons = "insert" } }
+        }
+    }))
 
     lspconfig.lua_ls.setup(configure({
         settings = {
