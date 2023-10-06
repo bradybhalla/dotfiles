@@ -15,7 +15,7 @@ return {
                 lualine_c = { "filename" },
                 lualine_x = {},
                 lualine_y = { "diagnostics" },
-                lualine_z = { {"filetype", colored=false} }
+                lualine_z = { { "filetype", colored = false } }
             },
             inactive_sections = {
                 lualine_a = {},
@@ -24,7 +24,6 @@ return {
                 lualine_x = {},
                 lualine_y = {},
                 lualine_z = {}
-
             },
             tabline = {
                 lualine_a = { {
@@ -38,7 +37,6 @@ return {
                 lualine_x = {},
                 lualine_y = { "diff" },
                 lualine_z = { "branch" }
-
             }
         }
     end

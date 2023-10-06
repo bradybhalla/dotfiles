@@ -22,7 +22,7 @@ return {
         vim.diagnostic.config({
             virtual_text = false,
             severity_sort = true,
-            update_in_insert = true,
+            update_in_insert = true
         })
 
         -- diagnostic icons
@@ -41,6 +41,5 @@ return {
 
         require("plugins.mason.lsp-setup")()
         require("plugins.mason.null-ls-setup")()
-
     end
 }

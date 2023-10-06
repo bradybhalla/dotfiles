@@ -20,12 +20,8 @@ return function()
     lspconfig.lua_ls.setup(configure({
         settings = {
             Lua = {
-                runtime = {
-                    version = "LuaJIT",
-                },
-                diagnostics = {
-                    globals = { "vim" },
-                },
+                runtime = { version = "LuaJIT" },
+                diagnostics = { globals = { "vim" } },
                 workspace = {
                     checkThirdParty = false,
                     library = vim.api.nvim_get_runtime_file("", true)
@@ -44,9 +40,7 @@ return function()
     lspconfig.texlab.setup(configure({
         settings = {
             texlab = {
-                build = {
-                    onSave = true
-                }
+                build = { onSave = true }
             }
         }
     }))
