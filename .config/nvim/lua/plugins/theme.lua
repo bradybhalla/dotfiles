@@ -13,7 +13,6 @@ return {
                 --      cmp
                 --      gitsigns
                 --      nvimtree
-                --      indent_blankline
                 --      telescope
                 --      treesitter
                 --      lspconfig
