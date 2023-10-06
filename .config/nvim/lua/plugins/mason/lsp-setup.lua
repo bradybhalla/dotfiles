@@ -17,13 +17,6 @@ return function()
 
     lspconfig.pyright.setup(configure({}))
 
-    lspconfig.tsserver.setup(configure({
-        settings = {
-            typescript = { format = { semicolons = "insert" } },
-            javascript = { format = { semicolons = "insert" } }
-        }
-    }))
-
     lspconfig.lua_ls.setup(configure({
         settings = {
             Lua = {
@@ -38,6 +31,13 @@ return function()
                     library = vim.api.nvim_get_runtime_file("", true)
                 }
             }
+        }
+    }))
+
+    lspconfig.tsserver.setup(configure({
+        settings = {
+            typescript = { format = { semicolons = "insert" } },
+            javascript = { format = { semicolons = "insert" } }
         }
     }))
 
