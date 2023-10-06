@@ -39,21 +39,24 @@ vim.keymap.set("n", "<leader>S", function()
     vim.opt_local.spell = not vim.opt_local.spell._value
 end, { desc = "toggle spellcheck" })
 
--- lazygit popup
-vim.keymap.set("n", "<leader>G", function()
-    local dir = vim.fn.expand("%:h")
-    if vim.fn.isdirectory(dir) == 0 then
-        dir = "."
-    end
+-- toggleterm popups
+local function toggleterm_popup(cmd)
+    return function()
+        local dir = vim.fn.expand("%:h")
+        if vim.fn.isdirectory(dir) == 0 then
+            dir = "."
+        end
 
-    require("toggleterm.terminal").Terminal:new({
-        cmd = "lazygit",
-        hidden = true,
-        direction = "float",
-        dir = dir,
-        count = 99
-    }):toggle()
-end, { desc = "lazygit" })
+        require("toggleterm.terminal").Terminal:new({
+            cmd = cmd,
+            hidden = true,
+            direction = "float",
+            dir = dir,
+            count = 99
+        }):toggle()
+    end
+end
+vim.keymap.set("n", "<leader>G", toggleterm_popup("lazygit"), { desc = "lazygit" })
 
 -- share file with 0x0 (copy link)
 vim.keymap.set("n", "<leader>0", "<CMD>!curl --silent -F'file=@%' https://0x0.st | tee >(pbcopy)<CR>", { desc = "0x0" })
