@@ -19,7 +19,7 @@ alias droplet="ssh root@161.35.107.252"
 _gen_sd(){
     query="/"
     query+="${@:2}"
-    dir=$(fd --type d --follow --exclude 'Library' --hidden --no-ignore . "$HOME" | \
+    dir=$(fd --type d --follow --exclude "Library" --hidden --no-ignore . "$HOME" | \
         fzf --height 10 --query "$query")
 
     if [ ! -z "$dir" ]; then
