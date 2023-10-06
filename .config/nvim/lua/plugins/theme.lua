@@ -6,7 +6,6 @@ return {
         require("catppuccin").setup({
             transparent_background = false,
             integrations = {
-                treesitter_context = true,
                 mason = true,
                 -- lualine integration in status.lua
 
