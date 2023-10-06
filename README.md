@@ -24,7 +24,9 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 ### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
 
 ### 5. Configure Neovim
-Open Neovim and wait for plugins to install. Install LSPs, formatters, and syntaxes by typing `:Setup`. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
+1. Open Neovim and wait for plugins to install.
+2. Install LSPs, formatters, and syntaxes by typing `:Setup`.
+3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
 
 ## Main Components
 
