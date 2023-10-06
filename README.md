@@ -22,6 +22,8 @@ In iTerm2 preferences, check "Load preferences from a custom folder or URL" and 
 In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
 
 ### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
+1. Once homebrew is installed, run `source brew-install.sh`
+2. zsh-syntax-highlighting and zsh-autosuggestions still need to be cloned
 
 ### 5. Configure Neovim
 1. Open Neovim and wait for plugins to install.
