@@ -4,7 +4,10 @@ return function()
     null_ls.setup({
         sources = {
             null_ls.builtins.formatting.black,
-            null_ls.builtins.formatting.beautysh
+            null_ls.builtins.formatting.beautysh,
+            null_ls.builtins.formatting.prettier.with({
+                filetypes = { "css", "html" }
+            })
         },
         on_attach = function(client, bufnr)
             -- null-ls always says it can do everything (lies)

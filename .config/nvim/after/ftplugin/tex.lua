@@ -47,24 +47,25 @@ require("cmp").setup.buffer {
 -- autopair rules
 local Rule = require("nvim-autopairs.rule")
 local autopairs = require("nvim-autopairs")
-
 autopairs.add_rule(Rule("$", "$", { "tex" }))
-
 
 -- conceal math
 vim.cmd([[
-set conceallevel=2
 let g:vimtex_syntax_conceal["math_bounds"]=0
 ]])
 
-
 -- quickly build
 vim.keymap.set(
-    "n",
-    "<leader>b",
+    "n", "<leader>b",
     "<CMD>w<CR><CMD>!cd \"%:h\" && latexmk -pdf \"%:t:r\" && open \"%:t:r.pdf\"<CR>",
     {
         desc = "quick build latex",
         buffer = true
     }
 )
+
+-- VimTeX conceal
+vim.keymap.set("n", "<leader>C", function()
+    -- toggle between 0 and 2
+    vim.o.conceallevel = math.abs(vim.o.conceallevel - 2)
+end, { desc = "toggle VimTeX conceal", buffer = true })
