@@ -27,10 +27,6 @@ vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "save" })
 -- use system clipboard register
 vim.keymap.set({ "n", "v" }, "<leader>c", "\"+", { desc = "use system clipboard" })
 
--- change instances of the same text (n. to repeat)
-vim.keymap.set("n", "<leader>d", "\"dyiw/\\V\\<<C-r>d\\><CR>Nzzgnc", { desc = "change word" })
-vim.keymap.set("v", "<leader>d", "\"dy/\\V<C-r>d<CR>Nzzgnc", { desc = "change selection" })
-
 -- open directory in finder
 vim.keymap.set("n", "<leader>O", "<CMD>silent !open \"%:h\"<CR>", { desc = "open directory" })
 
