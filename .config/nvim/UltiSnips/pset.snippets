@@ -8,7 +8,6 @@ snippet newset "Problem set template" b
 \usepackage{fullpage}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{xcolor}
 
@@ -21,14 +20,10 @@ snippet newset "Problem set template" b
 %%%%%%%%%%%%
 
 % dark mode
-\newcommand{\dark}{
-	\pagecolor[rgb]{0.19,0.20,0.27}
-	\color[rgb]{0.78,0.82,0.96}
-	\definecolor{red}{HTML}{E78284}
-}
+\newcommand{\dark}{\pagecolor[rgb]{0.19,0.20,0.27}\color[rgb]{0.78,0.82,0.96}\definecolor{red}{HTML}{E78284}}
 
 % RedNote
-\newcommand{\RedNote}[1]{\begin{center}\textcolor{red}{=======#1=======}\end{center}}
+\newcommand{\RedNote}[1]{\begin{center}\textcolor{red}{\rule{0.2\textwidth}{2pt}\quad#1\quad\rule{0.2\textwidth}{2pt}}\end{center}}
 
 % fix spacing around left and right
 \let\originalleft\left
@@ -46,7 +41,7 @@ snippet newset "Problem set template" b
 
 \title{$1}
 \author{${2:Brady Bhalla}}
-\date{$3}
+\date{}
 
 \begin{document}
 
@@ -56,7 +51,6 @@ $0
 
 \end{document}
 endsnippet
-
 
 
 global !p
@@ -77,7 +71,7 @@ endglobal
 snippet "prob(\d)([b-z2-9]?)" "Problem with parts" br
 \section*{Problem `!p snip.rv=match.group(1)`}
 `!p snip.rv=create_parts(match.group(2))`
-\pagebreak
+\newpage
 
 endsnippet
 
