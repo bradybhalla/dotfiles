@@ -21,8 +21,3 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors    = true
 ----------------------------
 
--- custom commands
-vim.api.nvim_create_user_command("Setup", function()
-    vim.cmd(":TSInstall c lua python json typescript javascript latex")
-    vim.cmd(":MasonInstall pyright lua-language-server typescript-language-server texlab black beautysh prettier")
-end, { desc = "Mason and Treesitter setup" })

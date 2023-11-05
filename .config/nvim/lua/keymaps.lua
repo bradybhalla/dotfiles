@@ -20,7 +20,7 @@ vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR><CMD>echo<CR>")
 -- Shortcuts -
 --------------
 
--- save and exit
+-- save and quit
 vim.keymap.set("n", "<leader>q", "<CMD>q<CR>", { desc = "quit" })
 vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "save" })
 
@@ -36,23 +36,19 @@ vim.keymap.set("n", "<leader>S", function()
 end, { desc = "toggle spellcheck" })
 
 -- toggleterm popups
-local function toggleterm_popup(cmd)
-    return function()
-        local dir = vim.fn.expand("%:h")
-        if vim.fn.isdirectory(dir) == 0 then
-            dir = "."
-        end
-
-        require("toggleterm.terminal").Terminal:new({
-            cmd = cmd,
-            hidden = true,
-            direction = "float",
-            dir = dir,
-            count = 99
-        }):toggle()
+vim.keymap.set("n", "<leader>G", function()
+    local dir = vim.fn.expand("%:h")
+    if vim.fn.isdirectory(dir) == 0 then
+        dir = "."
     end
-end
-vim.keymap.set("n", "<leader>G", toggleterm_popup("lazygit"), { desc = "lazygit" })
+    require("toggleterm.terminal").Terminal:new({
+        cmd = "lazygit",
+        hidden = true,
+        direction = "float",
+        dir = dir,
+        count = 99
+    }):toggle()
+end, { desc = "lazygit" })
 
 ----------------
 -- LSP/linting -

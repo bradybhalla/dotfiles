@@ -37,6 +37,8 @@ return function()
         }
     }))
 
+    lspconfig.clangd.setup(configure({}))
+
     lspconfig.texlab.setup(configure({
         settings = {
             texlab = {
