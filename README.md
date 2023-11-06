@@ -2,34 +2,6 @@
 
 A few of my more important dotfiles. Meant for use with zsh on MacOS. If not using homebrew to install command line tools, some paths in .zshrc will need to be changed.
 
-## Setup
-
-### 1. dotfiles
-
-```bash
-chmod +x configure.sh
-./configure.sh
-```
-
-This script will back up existing files and copy everything in this repository to the correct location in the home directory.
-
-### 2. iTerm2
-
-In iTerm2 preferences, check "Load preferences from a custom folder or URL" and choose the directory with `com.googlecode.iterm2.plist`.
-
-### 3. Keyboard Maestro
-
-In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
-
-### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
-1. Once homebrew is installed, run `source brew-install.sh`
-2. zsh-syntax-highlighting and zsh-autosuggestions still need to be cloned
-
-### 5. Configure Neovim
-1. Open Neovim and wait for plugins to install.
-2. Install LSPs, formatters, and syntaxes by typing `:Setup`.
-3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
-
 ## Main Components
 
 ### [iTerm2](https://iterm2.com)
@@ -58,7 +30,7 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 - `<command> <directory>/**` + `tab` to pick a file in another directory with fzf
 - `sd` to jump to any directory under the home directory
 
-## Tools to install
+## Other Tools to Install
 
 ### [Homebrew](https://brew.sh)
 
@@ -117,3 +89,35 @@ In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestr
 
 - Autocomplete from command history while typing in zsh (right arrow to accept)
 - Install by cloning [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) into `~/bin`
+
+## Setup
+
+### 1. dotfiles
+
+```bash
+chmod +x configure.sh
+./configure.sh
+```
+
+This script will back up existing files and copy everything in this repository to the correct location in the home directory.
+
+### 2. iTerm2
+
+In iTerm2 preferences, check "Load preferences from a custom folder or URL" and choose the directory with `com.googlecode.iterm2.plist`.
+
+### 3. Keyboard Maestro
+
+In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
+
+### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
+1. Once homebrew is installed, run
+```bash
+brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda
+```
+2. zsh-syntax-highlighting and zsh-autosuggestions still need to be cloned
+
+### 5. Configure Neovim
+1. Open Neovim and wait for plugins to install.
+2. Install LSPs, formatters, and syntaxes by typing `:Setup`.
+3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
+
