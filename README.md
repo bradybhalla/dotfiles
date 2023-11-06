@@ -109,7 +109,7 @@ In iTerm2 preferences, check "Load preferences from a custom folder or URL" and 
 
 In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
 
-### 4. Install everything listed in the ["Tools to install"](#tools-to-install) section
+### 4. Install everything listed in the ["Other Tools to Install"](#other-tools-to-install) section
 1. Once homebrew is installed, run
 ```bash
 brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda
