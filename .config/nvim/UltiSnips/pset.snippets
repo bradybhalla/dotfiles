@@ -69,8 +69,8 @@ def create_parts(parts):
 	return res
 endglobal
 
-snippet "prob(\d)([b-z2-9]?)" "Problem with parts" br
-\section*{Problem `!p snip.rv=match.group(1)`}
+snippet "prob(\d)([b-z2-9]?)" "Exercise with parts" br
+\section*{Exercise `!p snip.rv=match.group(1)`}
 `!p snip.rv=create_parts(match.group(2))`
 \newpage
 
