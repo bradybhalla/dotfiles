@@ -1,6 +1,8 @@
 # !/bin/zsh
 
-ITEMS=(.p10k.zsh .tmux.conf .zsh_aliases .zshrc .zprofile .config/nvim .config/htop)
+# choose which set of configuration files to use
+ITEMS=(.config/nvim .zshrc .zsh_aliases .p10k.zsh .tmux.conf .config/htop)
+# ITEMS=(.config/nvim)
 
 # create backup folder
 if [ -d backup ]; then
