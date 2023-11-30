@@ -71,7 +71,7 @@ vim.keymap.set(
     "<CMD>w<CR><CMD>!cd \"%:h\" && latexmk -pdf \"%:t:r\" && open \"%:t:r.pdf\"<CR>",
     {
         desc = "quick build latex",
-        buffer = true
+        buffer = 0
     }
 )
 
@@ -79,4 +79,4 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>C", function()
     -- toggle between 0 and 2
     vim.o.conceallevel = 2 - vim.o.conceallevel
-end, { desc = "toggle VimTeX conceal", buffer = true })
+end, { desc = "toggle VimTeX conceal", buffer = 0 })
