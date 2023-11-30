@@ -9,6 +9,9 @@ vim.opt.softtabstop      = 4
 vim.opt.shiftwidth       = 4
 vim.opt.expandtab        = true
 
+vim.opt.splitright       = true
+vim.opt.splitbelow       = true
+
 -- fix filetype settings
 vim.g.filetype_pl        = "prolog"
 
