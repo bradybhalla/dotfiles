@@ -48,6 +48,18 @@ local Rule = require("nvim-autopairs.rule")
 local autopairs = require("nvim-autopairs")
 autopairs.add_rule(Rule("$", "$", { "tex" }))
 
+-- run treesitter parser on InsertLeave
+local ts_parser = require("nvim-treesitter.parsers")
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+    buffer = vim.api.nvim_get_current_buf(),
+    callback = function()
+        local parser = ts_parser.get_parser()
+        if parser then
+            parser:parse()
+        end
+    end
+})
+
 -- settings
 vim.cmd([[
 let g:vimtex_syntax_conceal["math_bounds"]=0

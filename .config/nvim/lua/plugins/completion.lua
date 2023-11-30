@@ -11,9 +11,9 @@ return {
             "SirVer/ultisnips",
             config = function()
                 vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/UltiSnips" }
-                vim.g.UltiSnipsExpandTrigger = "<S-TAB>"      -- shift tab to override other completions
-                vim.g.UltiSnipsJumpForwardTrigger = "<RIGHT>" -- arrows to jump to fields
-                vim.g.UltiSnipsJumpBackwardTrigger = "<LEFT>"
+                vim.g.UltiSnipsExpandTrigger = "<S-TAB>" -- shift tab to override other completions
+                -- <C-j> jump forward
+                -- <C-k> jump backward
             end
         },
         "quangnguyen30192/cmp-nvim-ultisnips"
