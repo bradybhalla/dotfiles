@@ -51,7 +51,7 @@ autopairs.add_rule(Rule("$", "$", { "tex" }))
 -- run treesitter parser on InsertLeave
 local ts_parser = require("nvim-treesitter.parsers")
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-    buffer = vim.api.nvim_get_current_buf(),
+    buffer = 0,
     callback = function()
         local parser = ts_parser.get_parser()
         if parser then
