@@ -30,19 +30,20 @@ export PATH=$PATH:/opt/homebrew/bin:\
 /Applications/Docker.app/Contents/Resources/bin
 
 # Define aliases and functions
-source "$HOME/.zsh_aliases"
+[[ ! -r "$HOME/.zsh_aliases" ]] || source "$HOME/.zsh_aliases"
 
 # fzf key bindings and completions
-source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-source /opt/homebrew/opt/fzf/shell/completion.zsh
+[[ ! -r /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]] || source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+[[ ! -r /opt/homebrew/opt/fzf/shell/completion.zsh ]] || source /opt/homebrew/opt/fzf/shell/completion.zsh
 
 # iTerm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
 # zsh-autosuggestions
-source "${HOME}/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[[ ! -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # zsh-syntax-highlighting (keep at bottom of .zshrc)
-source "${HOME}/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ ! -r "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || source "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-
+# opam configuration
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
