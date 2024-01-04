@@ -37,6 +37,8 @@ return function()
         }
     }))
 
+    lspconfig.ocamllsp.setup(configure({}))
+
     lspconfig.clangd.setup(configure({}))
 
     lspconfig.texlab.setup(configure({

@@ -7,7 +7,8 @@ return function()
             null_ls.builtins.formatting.beautysh,
             null_ls.builtins.formatting.prettier.with({
                 filetypes = { "css", "html" }
-            })
+            }),
+            null_ls.builtins.formatting.ocamlformat
         },
         on_attach = function(client, bufnr)
             -- null-ls always says it can do everything (lies)
