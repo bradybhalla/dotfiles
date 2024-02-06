@@ -9,6 +9,7 @@ return {
             },
             incremental_selection = {
                 enable = true,
+                disable = {"vim"},
                 keymaps = {
                     init_selection = "<CR>",
                     node_incremental = "<CR>",
