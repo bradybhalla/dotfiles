@@ -5,7 +5,7 @@ local ts_parsers = {
     "c", "lua", "vimdoc", "python", "json", "typescript", "javascript", "latex", "ocaml"
 }
 local mason_install = {
-    "pyright", "lua-language-server", "typescript-language-server", "clangd", "texlab", "ocaml-lsp",
+    "pyright", "lua-language-server", "typescript-language-server", "clangd", "ocaml-lsp",
     "ocamlformat", "black", "beautysh", "prettier"
 }
 

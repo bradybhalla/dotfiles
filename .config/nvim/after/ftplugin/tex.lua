@@ -43,11 +43,6 @@ require("cmp").setup.buffer {
     },
 }
 
--- autopair rules
-local Rule = require("nvim-autopairs.rule")
-local autopairs = require("nvim-autopairs")
-autopairs.add_rule(Rule("$", "$", { "tex" }))
-
 -- run treesitter parser (it doesn't run by default with highlight off)
 local ts_parser = require("nvim-treesitter.parsers")
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
@@ -63,12 +58,13 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 -- settings
 vim.cmd([[
 let g:vimtex_syntax_conceal["math_bounds"]=0
+let g:vimtex_quickfix_open_on_warning=0
 ]])
 
 -- quickly build
 vim.keymap.set(
     "n", "<leader>b",
-    "<CMD>w<CR><CMD>!cd \"%:h\" && latexmk -pdf \"%:t:r\" && open \"%:t:r.pdf\"<CR>",
+    "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>",
     {
         desc = "quick build latex",
         buffer = 0

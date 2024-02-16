@@ -2,7 +2,13 @@ return {
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
-        opts = {}
+        config = function()
+            require("nvim-autopairs").setup()
+
+            local Rule = require("nvim-autopairs.rule")
+            local autopairs = require("nvim-autopairs")
+            autopairs.add_rule(Rule("$", "$", { "tex" }))
+        end
     },
     { "tpope/vim-commentary" },
     { "tpope/vim-surround" },
