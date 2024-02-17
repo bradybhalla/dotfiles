@@ -21,5 +21,6 @@ return {
         end
     },
     { "akinsho/toggleterm.nvim", opts = {} },
-    { "lewis6991/gitsigns.nvim", opts = {} }
+    { "lewis6991/gitsigns.nvim", opts = {} },
+    { "lervag/vimtex" } -- more settings in after/ftplugin/tex.lua
 }
