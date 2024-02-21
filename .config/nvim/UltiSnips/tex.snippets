@@ -15,3 +15,7 @@ snippet ali "Align environment"
 	$0
 \end{align*}
 endsnippet
+
+snippet "(\S+)/(\S+)" "Expand fraction" r
+\frac{`!p snip.rv=match.group(1)`}{`!p snip.rv=match.group(2)`} 
+endsnippet
