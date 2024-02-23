@@ -2,11 +2,11 @@
 -- Setup -
 ----------
 local ts_parsers = {
-    "c", "lua", "vimdoc", "python", "json", "typescript", "javascript", "latex", "ocaml"
+    "c", "lua", "vimdoc", "python", "json", "typescript", "javascript", "latex", "ocaml", "haskell"
 }
 local mason_install = {
     "pyright", "lua-language-server", "typescript-language-server", "clangd", "ocaml-lsp",
-    "ocamlformat", "black", "beautysh", "prettier"
+    "haskell-language-server", "ocamlformat", "black", "beautysh", "prettier"
 }
 
 vim.api.nvim_create_user_command("SetupTreesitter", function()

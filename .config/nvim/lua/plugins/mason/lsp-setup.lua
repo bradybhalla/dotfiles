@@ -40,4 +40,6 @@ return function()
     lspconfig.ocamllsp.setup(configure({}))
 
     lspconfig.clangd.setup(configure({}))
+
+    lspconfig.hls.setup(configure({}))
 end

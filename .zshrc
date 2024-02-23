@@ -12,7 +12,8 @@ export PATH=$PATH:/opt/homebrew/bin:\
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin:\
 /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin:\
 /Applications/Julia-1.8.app/Contents/Resources/julia/bin:\
-/Applications/Docker.app/Contents/Resources/bin
+/Applications/Docker.app/Contents/Resources/bin:\
+$HOME/.ghcup/bin
 
 # Define aliases and functions
 [[ ! -r "$HOME/.zsh_aliases" ]] || source "$HOME/.zsh_aliases"
