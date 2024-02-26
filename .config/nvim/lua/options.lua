@@ -12,6 +12,10 @@ vim.opt.softtabstop      = 4
 vim.opt.shiftwidth       = 4
 vim.opt.expandtab        = true
 
+-- case sensitivity
+vim.opt.ignorecase       = true
+vim.opt.smartcase        = true
+
 -- wrapping
 vim.opt.breakindent      = true
 vim.opt.linebreak        = true
