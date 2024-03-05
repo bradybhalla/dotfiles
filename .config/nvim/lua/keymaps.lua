@@ -49,12 +49,3 @@ vim.keymap.set("n", "<leader>G", "<CMD>Lazygit<CR>", { desc = "open lazygit" })
 --------------  defined in plugins/filetree.lua
 
 -- more from treesitter (incremental selection), vim surround, latex, etc.
-
--- set which-key prefixes
-require("which-key").register({
-        l = { name = "LSP" },
-        f = { name = "telescope" },
-        e = { name = "filetree" }
-    },
-    { prefix = "<leader>" }
-)

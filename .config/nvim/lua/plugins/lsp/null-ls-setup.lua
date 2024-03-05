@@ -14,8 +14,8 @@ return function()
             -- null-ls always says it can do everything (lies)
             client.server_capabilities.hoverProvider = false
 
-            require("plugins.mason.keymaps").general(client, bufnr)
-            require("plugins.mason.keymaps").null_ls(client, bufnr)
+            require("plugins.lsp.keymaps").general(client, bufnr)
+            require("plugins.lsp.keymaps").null_ls(client, bufnr)
         end
     })
 end

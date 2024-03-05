@@ -2,6 +2,10 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+        require("which-key").register({
+            ["<leader>f"] = {name = "telescope"}
+        })
+
         local builtin = require("telescope.builtin")
 
         -- find files

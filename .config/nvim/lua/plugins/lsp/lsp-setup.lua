@@ -1,8 +1,8 @@
 return function()
     local default_config = {
         on_attach = function(client, bufnr)
-            require("plugins.mason.keymaps").general(client, bufnr)
-            require("plugins.mason.keymaps").lsp(client, bufnr)
+            require("plugins.lsp.keymaps").general(client, bufnr)
+            require("plugins.lsp.keymaps").lsp(client, bufnr)
         end,
         capabilities = require("cmp_nvim_lsp").default_capabilities()
     }

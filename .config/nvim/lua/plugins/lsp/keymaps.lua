@@ -1,6 +1,10 @@
 local maps = {}
 
 maps.general = function(client, bufnr)
+    require("which-key").register({
+        ["<leader>l"] = { name = "lsp" }
+    }, { buffer = bufnr })
+
     local telescope_builtin = require("telescope.builtin")
 
     if client.server_capabilities.documentFormattingProvider then
