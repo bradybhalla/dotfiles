@@ -39,7 +39,7 @@ return {
 
         require("mason").setup()
 
-        require("plugins.mason.lsp-setup")()
-        require("plugins.mason.null-ls-setup")()
+        require("plugins.lsp.lsp-setup")()
+        require("plugins.lsp.null-ls-setup")()
     end
 }
