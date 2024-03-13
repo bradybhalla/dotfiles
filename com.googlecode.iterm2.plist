@@ -1393,7 +1393,7 @@
 				<key>action</key>
 				<string>best editor</string>
 				<key>editor</key>
-				<string>com.github.atom</string>
+				<string>com.sublimetext.4</string>
 				<key>text</key>
 				<string></string>
 			</dict>
