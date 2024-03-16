@@ -17,18 +17,8 @@ return function()
 
     lspconfig.pyright.setup(configure({}))
 
-    lspconfig.lua_ls.setup(configure({
-        settings = {
-            Lua = {
-                runtime = { version = "LuaJIT" },
-                diagnostics = { globals = { "vim" } },
-                workspace = {
-                    checkThirdParty = false,
-                    library = vim.api.nvim_get_runtime_file("", true)
-                }
-            }
-        }
-    }))
+    require("neodev").setup()
+    lspconfig.lua_ls.setup(configure({}))
 
     lspconfig.tsserver.setup(configure({
         settings = {

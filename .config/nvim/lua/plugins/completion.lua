@@ -21,31 +21,25 @@ return {
     config = function()
         local cmp = require("cmp")
 
-        local mapping = cmp.mapping.preset.insert({
-            ["<TAB>"] = cmp.mapping.confirm({ select = true }),
-            -- <C-e> to abort
-            -- <C-n>/<C-p> to choose other completions
-            -- down/up arrows also work
-        })
-
-        -- sources of completions
-        local default_sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "nvim_lsp_signature_help" },
-            { name = "ultisnips" }
-        }, {
-            { name = "buffer" },
-        })
-
-
         cmp.setup {
             snippet = {
                 expand = function(args)
                     vim.fn["UltiSnips#Anon"](args.body)
                 end,
             },
-            mapping = mapping,
-            sources = default_sources,
+            mapping = cmp.mapping.preset.insert({
+                ["<TAB>"] = cmp.mapping.confirm({ select = true }),
+                -- <C-e> to abort
+                -- <C-n>/<C-p> to choose other completions
+                -- down/up arrows also work
+            }),
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" },
+                { name = "nvim_lsp_signature_help" },
+                { name = "ultisnips" }
+            }, {
+                { name = "buffer" },
+            }),
             performance = {
                 max_view_entries = 10
             },

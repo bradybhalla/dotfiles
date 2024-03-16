@@ -8,6 +8,7 @@ return {
         -- lsp
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp", -- also dependency for cmp
+        "folke/neodev.nvim", -- configure lua_ls for nvim
 
         -- null-ls
         {
