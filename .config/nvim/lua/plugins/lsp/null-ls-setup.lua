@@ -6,7 +6,7 @@ return function()
             null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.beautysh,
             null_ls.builtins.formatting.prettier.with({
-                filetypes = { "css", "html" }
+                filetypes = { "css", "html", "json", "markdown" }
             }),
             null_ls.builtins.formatting.ocamlformat
         },
