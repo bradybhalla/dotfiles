@@ -45,7 +45,7 @@ test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_int
 # Programming #
 ###############
 
-# python configuration
+# Python configuration
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -61,9 +61,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# opam configuration
+# OCaml configuration
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
 
-# ruby configuration
+# Ruby configuration
 [[ ! -r "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ]] || source "/opt/homebrew/opt/chruby/share/chruby/chruby.sh"
 [[ ! -r "/opt/homebrew/opt/chruby/share/chruby/auto.sh" ]] || source "/opt/homebrew/opt/chruby/share/chruby/auto.sh"
