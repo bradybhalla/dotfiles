@@ -18,7 +18,8 @@ return {
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-        end
+        end,
+        opts = {}
     },
     { "akinsho/toggleterm.nvim", opts = {} },
     { "lewis6991/gitsigns.nvim", opts = {} },
