@@ -1,5 +1,6 @@
 return {
     "hrsh7th/nvim-cmp",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -7,16 +8,25 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-omni",
+        "saadparwaiz1/cmp_luasnip",
         {
-            "SirVer/ultisnips",
+            "L3MON4D3/LuaSnip",
+            dependencies = { "rafamadriz/friendly-snippets" },
             config = function()
-                vim.g.UltiSnipsSnippetDirectories = { "~/.config/nvim/UltiSnips" }
-                vim.g.UltiSnipsExpandTrigger = "<S-TAB>" -- shift tab to override other completions
-                -- <C-j> jump forward
-                -- <C-k> jump backward
+                local ls = require("luasnip")
+                vim.keymap.set({ "i" }, "<S-TAB>", function() ls.expand() end)
+                vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end)
+                vim.keymap.set({ "i", "s" }, "<C-k>", function() ls.jump(-1) end)
+                vim.keymap.set({ "i", "s" }, "<C-l>", function()
+                    if ls.choice_active() then
+                        ls.change_choice(1)
+                    end
+                end)
+
+                require("luasnip.loaders.from_vscode").lazy_load() -- from friendly-snippets
+                require("luasnip.loaders.from_lua").lazy_load()    -- from luasnippets/
             end
-        },
-        "quangnguyen30192/cmp-nvim-ultisnips"
+        }
     },
     config = function()
         local cmp = require("cmp")
@@ -24,7 +34,7 @@ return {
         cmp.setup {
             snippet = {
                 expand = function(args)
-                    vim.fn["UltiSnips#Anon"](args.body)
+                    require('luasnip').lsp_expand(args.body)
                 end,
             },
             mapping = cmp.mapping.preset.insert({
@@ -36,7 +46,7 @@ return {
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "nvim_lsp_signature_help" },
-                { name = "ultisnips" }
+                { name = "luasnip" }
             }, {
                 { name = "buffer" },
             }),
