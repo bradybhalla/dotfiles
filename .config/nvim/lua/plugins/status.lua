@@ -13,7 +13,7 @@ return {
                 lualine_a = { "mode" },
                 lualine_b = {},
                 lualine_c = { "filename" },
-                lualine_x = {},
+                lualine_x = { "location" },
                 lualine_y = { "diagnostics" },
                 lualine_z = { { "filetype", colored = false } }
             },
@@ -21,13 +21,17 @@ return {
                 lualine_a = {},
                 lualine_b = {},
                 lualine_c = { "filename" },
-                lualine_x = {},
+                lualine_x = { "location" },
                 lualine_y = {},
                 lualine_z = {}
             },
             tabline = {
-                lualine_a = { "filename" },
-                lualine_b = { "location" },
+                lualine_a = { {
+                    "tabs",
+                    mode = 1,
+                    use_mode_colors = true
+                } },
+                lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = { "diff" },
