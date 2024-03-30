@@ -21,7 +21,7 @@ return {
     ]], { todo = i(0) }, { delimiters = "<>" })),
 
     -- expand fraction
-    s({ trig = "\\(\\S\\+\\)\\/\\(\\S\\+\\)", trigEngine = "vim", hidden = true }, f(
+    s({ trig = [[\(\S\+\)\/\(\S\+\)]], trigEngine = "vim", hidden = true }, f(
         function(args, parent, user_args)
             return string.format("\\frac{%s}{%s}", parent.captures[1], parent.captures[2])
         end, {}, {})),
@@ -37,7 +37,7 @@ return {
     ]], { todo = i(1, "TODO") }, { delimiters = "<>" })),
 
     -- problem with parts
-    s({ trig = "prob\\(\\d\\)\\([a-z1-9]\\)\\?", trigEngine = "vim", hidden = true }, f(
+    s({ trig = [[prob\(\d\)\([a-z1-9]\)\?]], trigEngine = "vim", hidden = true }, f(
         function(args, parent, user_args)
             vim.print(parent.captures)
             local parts = ""

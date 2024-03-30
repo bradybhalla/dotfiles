@@ -42,10 +42,30 @@ vim.keymap.set("n", "<leader>G", "<CMD>Lazygit<CR>", { desc = "open lazygit" })
 
 --------------
 -- telescope -
---------------  defined in plugins/telescope.lua
+--------------
+
+require("which-key").register({
+    ["<leader>f"] = {
+        name = "telescope",
+        f = {"<CMD>Telescope find_files hidden=true<CR>", "find file"},
+        a = {"<CMD>Telescope find_files hidden=true no_ignore=true<CR>", "find file (no ignore)"},
+        g = {"<CMD>Telescope live_grep<CR>", "find text"},
+        b = {"<CMD>Telescope buffers<CR>", "find buffer"},
+        h = {"<CMD>Telescope help_tags<CR>", "search help"}
+    }
+})
 
 --------------
 -- nvim-tree -
---------------  defined in plugins/filetree.lua
+--------------
+
+require("which-key").register({
+  ["<leader>e"] = {
+    name = "tree",
+    f = { "<CMD>NvimTreeFindFile<CR>", "find file in tree" },
+    o = { "<CMD>NvimTreeOpen<CR>", "open tree" },
+    c = { "<CMD>NvimTreeClose<CR>", "close tree" },
+  },
+})
 
 -- more from treesitter (incremental selection), vim surround, latex, etc.
