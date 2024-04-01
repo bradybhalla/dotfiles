@@ -113,8 +113,6 @@ return {
 
             lspconfig.hls.setup(configure({}))
 
-            lspconfig.tailwindcss.setup(configure({}))
-
             -------------------
             -- null-ls Setup --
             -------------------
