@@ -10,8 +10,8 @@ return {
         cmd = { "LspInfo", "LspStart", "LspRestart" },
         dependencies = {
             -- lsp
-            "hrsh7th/cmp-nvim-lsp", -- also dependency for cmp
-            "folke/neodev.nvim",    -- configure lua_ls for nvim
+            "hrsh7th/cmp-nvim-lsp",             -- also dependency for cmp
+            { "folke/neodev.nvim", opts = {} }, -- configure lua_ls for nvim
 
             -- null-ls
             {
@@ -98,7 +98,6 @@ return {
 
             lspconfig.pyright.setup(configure({}))
 
-            require("neodev").setup()
             lspconfig.lua_ls.setup(configure({}))
 
             lspconfig.tsserver.setup(configure({
