@@ -14,6 +14,7 @@ return {
             dependencies = { "rafamadriz/friendly-snippets" },
             config = function()
                 local ls = require("luasnip")
+
                 vim.keymap.set({ "i" }, "<S-TAB>", function() ls.expand() end)
                 vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end)
                 vim.keymap.set({ "i", "s" }, "<C-k>", function() ls.jump(-1) end)
@@ -22,6 +23,8 @@ return {
                         ls.change_choice(1)
                     end
                 end)
+
+                ls.config.setup({store_selection_keys="<S-TAB>"}) -- snippets using visual selection
 
                 require("luasnip.loaders.from_vscode").lazy_load() -- from friendly-snippets
                 require("luasnip.loaders.from_lua").lazy_load()    -- from luasnippets/
