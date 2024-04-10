@@ -2104,7 +2104,7 @@
 	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>PasteSpecialChunkDelay</key>
 	<real>0.01</real>
 	<key>PasteSpecialChunkSize</key>

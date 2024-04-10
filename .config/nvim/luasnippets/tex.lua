@@ -33,7 +33,6 @@ return {
     -- RedNote
     s("rn", fmt([[
     \RedNote{<todo>}
-
     ]], { todo = i(1, "TODO") }, { delimiters = "<>" })),
 
     -- problem with parts
@@ -57,7 +56,7 @@ return {
             end
 
             return vim.split(string.format([[
-\section*{%s}
+\section*{Exercise %s}
 %s\newpage
 ]], parent.captures[1], parts), "\n")
         end, {}, {})),
