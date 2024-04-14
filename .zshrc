@@ -28,8 +28,7 @@ $HOME/.ghcup/bin
 [[ ! -r "$HOME/.zsh_aliases" ]] || source "$HOME/.zsh_aliases"
 
 # fzf key bindings and completions
-[[ ! -r /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]] || source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-[[ ! -r /opt/homebrew/opt/fzf/shell/completion.zsh ]] || source /opt/homebrew/opt/fzf/shell/completion.zsh
+eval "$(fzf --zsh)"
 
 # iTerm2 shell integration
 test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
