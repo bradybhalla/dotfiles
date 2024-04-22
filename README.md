@@ -6,7 +6,7 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 
 ### [Alacritty](https://alacritty.org/)
 
-- Powerlevel10k
+- Powerlevel10k prompt
 - Catppuccin theme
 - MesloLGS Nerd Font (install if needed)
 - Keybindings for use with tmux
@@ -24,9 +24,6 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 
 ### Helpful zsh things
 
-- `Ctrl-T` to pick a file using fzf
-- `Ctrl-R` to pick a previous command using fzf
-- `<command> <directory>/**` + `tab` to pick a file in another directory with fzf
 - `sd` to jump to any directory under the home directory
 
 ## Other Tools to Install
@@ -43,12 +40,14 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 ### [fzf](https://github.com/junegunn/fzf)
 
 - Fuzzy finder
+- Keybindings `Ctrl-T` to find a file and `Ctrl-R` to find a previous command
+- `<command> <directory>/**` + `tab` to pick a file in another directory
 - Install with homebrew
 
 ### [ripgrep](https://github.com/BurntSushi/ripgrep)
 
 - better `grep`
-- Easily search recursively for text
+- Easily search for text in files recursively through a directory
 - Install with homebrew
 
 ### [fd](https://github.com/sharkdp/fd)
@@ -65,7 +64,7 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 ### [tmux](https://github.com/tmux/tmux)
 
 - Terminal multiplexer
-- Prefix is CTRL-S
+- Prefix is `Ctrl-S`
 - Install with homebrew
 
 ### [htop](https://htop.dev)
