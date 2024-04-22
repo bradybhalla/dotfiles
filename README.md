@@ -4,11 +4,12 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 
 ## Main Components
 
-### [iTerm2](https://iterm2.com)
+### [Alacritty](https://alacritty.org/)
 
 - Powerlevel10k
 - Catppuccin theme
 - MesloLGS Nerd Font (install if needed)
+- Keybindings for use with tmux
 
 ### [Keyboard Maestro](https://www.keyboardmaestro.com)
 
@@ -20,8 +21,6 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 
 - Catppuccin theme
 - LSP, completion, telescope, and more
-- `:Lazy` to manage plugins, `:Mason` to manage LSPs
-- `:checkhealth` to make sure everything is working correctly
 
 ### Helpful zsh things
 
@@ -66,8 +65,7 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 ### [tmux](https://github.com/tmux/tmux)
 
 - Terminal multiplexer
-- Prefix is \` (backtick)
-- I usually use iTerm to handle tmux instead of running it directly. `tmux -CC` starts a session with iTerm.
+- Prefix is CTRL-S
 - Install with homebrew
 
 ### [htop](https://htop.dev)
@@ -92,7 +90,7 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 
 ## Setup
 
-### 1. dotfiles
+### dotfiles
 
 ```bash
 chmod +x configure.sh
@@ -101,23 +99,18 @@ chmod +x configure.sh
 
 This script will back up existing files and copy everything in this repository to the correct location in the home directory.
 
-### 2. iTerm2
-
-In iTerm2 preferences, check "Load preferences from a custom folder or URL" and choose the directory with `com.googlecode.iterm2.plist`.
-
-### 3. Keyboard Maestro
-
-In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
-
-### 4. Install everything listed in the ["Other Tools to Install"](#other-tools-to-install) section
+### Install everything listed in the ["Other Tools to Install"](#other-tools-to-install) section
 1. Once homebrew is installed, run
 ```bash
 brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda
 ```
 2. zsh-syntax-highlighting and zsh-autosuggestions still need to be cloned
 
-### 5. Configure Neovim
+### Configure Neovim
 1. Open Neovim and wait for plugins to install.
 2. Install LSPs, formatters, and syntaxes by typing `:Setup`.
 3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
 
+### Keyboard Maestro
+
+In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.

@@ -1,0 +1,31 @@
+import = [
+  "~/.config/alacritty/catppuccin-frappe.toml"
+]
+
+[window]
+decorations = "Buttonless"
+padding = { x = 5, y = 5}
+dynamic_padding = true
+option_as_alt = "Both"
+
+[font]
+normal = { family = "MesloLGS Nerd Font", style = "Regular" }
+size = 18
+offset = { x = 1, y = 2 }
+
+[keyboard]
+bindings = [
+    # natural text editing
+    { key = "ArrowLeft", mods = "Command", chars = "\u0001" },
+    { key = "ArrowRight", mods = "Command", chars = "\u0005" },
+    { key = "Backspace", mods = "Command", chars = "\u0015" },
+    { key = "ArrowLeft", mods = "Option", chars = "\u001bb" },
+    { key = "ArrowRight", mods = "Option", chars = "\u001bf" },
+    { key = "Backspace", mods = "Option", chars = "\u001b\u007f" },
+
+    # tmux commands (Ctrl-s prefix)
+    { key = "t", mods = "Command", chars = "\u0013\u0063" },
+    { key = "w", mods = "Command", chars = "\u0013\u0078" },
+    { key = "d", mods = "Command", chars = "\u0013\u0025" },
+    { key = "d", mods = "Command|Shift", chars = "\u0013\u0022" },
+]
