@@ -25,7 +25,7 @@ export PATH=$PATH:/opt/homebrew/bin:\
 $HOME/.ghcup/bin
 
 # Define aliases and functions
-[[ ! -r "$HOME/.zsh_aliases" ]] || source "$HOME/.zsh_aliases"
+[[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
 
 # fzf key bindings and completions
 eval "$(fzf --zsh)"
@@ -34,10 +34,10 @@ eval "$(fzf --zsh)"
 test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
 # zsh-autosuggestions
-[[ ! -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[[ -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # zsh-syntax-highlighting (keep at bottom of .zshrc)
-[[ ! -r "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || source "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -r "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 
 ###############
@@ -61,8 +61,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # OCaml configuration
-[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
+[[ -r "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
 
 # Ruby configuration
-[[ ! -r "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ]] || source "/opt/homebrew/opt/chruby/share/chruby/chruby.sh"
-[[ ! -r "/opt/homebrew/opt/chruby/share/chruby/auto.sh" ]] || source "/opt/homebrew/opt/chruby/share/chruby/auto.sh"
+[[ -r "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ]] && source "/opt/homebrew/opt/chruby/share/chruby/chruby.sh"
+[[ -r "/opt/homebrew/opt/chruby/share/chruby/auto.sh" ]] && source "/opt/homebrew/opt/chruby/share/chruby/auto.sh"
