@@ -8,6 +8,12 @@ alias lg="lazygit"
 
 alias chrome="open -a \"Google Chrome\""
 
+# app-related aliases for MacOS
+if [ -d /Applications ]; then
+    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+    alias smerge="/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge"
+    alias alacritty="/Applications/Alacritty.app/Contents/MacOS/alacritty"
+fi
 
 ###################
 # Quick directory #
