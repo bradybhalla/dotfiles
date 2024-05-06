@@ -3,17 +3,20 @@
 ###########
 
 alias ls="ls --color=auto"
-
 alias lg="lazygit"
 
-alias chrome="open -a \"Google Chrome\""
+notify(){
+    osascript -e "display notification \"$2\" with title \"$1\" sound name \"Funk\""
+}
 
-# app-related aliases for MacOS
-if [ -d /Applications ]; then
-    alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-    alias smerge="/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge"
-    alias alacritty="/Applications/Alacritty.app/Contents/MacOS/alacritty"
-fi
+################
+# Applications #
+################
+
+alias chrome="open -a \"Google Chrome\""
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias smerge="/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge"
+alias alacritty="/Applications/Alacritty.app/Contents/MacOS/alacritty"
 
 ###################
 # Quick directory #
