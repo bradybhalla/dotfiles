@@ -10,7 +10,6 @@ return {
             autopairs.add_rule(Rule("$", "$", { "tex" }))
         end
     },
-    { "tpope/vim-commentary" },
     { "tpope/vim-surround" },
     {
         "folke/which-key.nvim",

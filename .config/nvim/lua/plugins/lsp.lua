@@ -45,35 +45,38 @@ return {
             -------------
             local telescope_builtin = require("telescope.builtin")
 
-            -- keymaps are in the format { key, description, function, capability }
+            -- keymaps are in the format key = { function, capability, description }
             -- they will only be defined if the client has the given capability or if capability is set to true
             local general_keymaps = {
-                { "F", "format file",              vim.lsp.buf.format,                              "documentFormattingProvider" },
-                { "d", "go to definition",         telescope_builtin.lsp_definitions,               "definitionProvider" },
-                { "r", "find references",          telescope_builtin.lsp_references,                "referencesProvider" },
-                { "s", "search document symbols",  telescope_builtin.lsp_document_symbols,          "documentSymbolProvider" },
-                { "S", "search workspace symbols", telescope_builtin.lsp_dynamic_workspace_symbols, "workspaceSymbolProvider" },
-                { "h", "hover",                    vim.lsp.buf.hover,                               "hoverProvider" },
-                { "n", "rename",                   vim.lsp.buf.rename,                              "renameProvider" },
+                F = { vim.lsp.buf.format, "documentFormattingProvider", "format file" },
+                d = { telescope_builtin.lsp_definitions, "definitionProvider", "go to definition" },
+                r = { telescope_builtin.lsp_references, "referencesProvider", "find references" },
+                s = { telescope_builtin.lsp_document_symbols, "documentSymbolProvider", "search document symbols" },
+                S = { telescope_builtin.lsp_dynamic_workspace_symbols, "workspaceSymbolProvider", "search workspace symbols" },
+                h = { vim.lsp.buf.hover, "hoverProvider", "hover" },
+                n = { vim.lsp.buf.rename, "renameProvider", "rename" },
             }
 
-            local lsp_specific_keymaps = {
-                { "e", "show diagnostic",     vim.diagnostic.open_float, true },
-                { ",", "previous diagnostic", vim.diagnostic.goto_prev,  true },
-                { ";", "next diagnostic",     vim.diagnostic.goto_next,  true },
-                unpack(general_keymaps)
-            }
+            -- keymaps used only for actual LSPs (not formatters)
+            local lsp_specific_keymaps = vim.deepcopy(general_keymaps)
+            lsp_specific_keymaps["e"] = { vim.diagnostic.open_float, true, "show diagnostic" }
+            lsp_specific_keymaps[","] = { vim.diagnostic.goto_prev, true, "previous diagnostic" }
+            lsp_specific_keymaps[";"] = { vim.diagnostic.goto_next, true, "next diagnostic" }
 
-            local function define_lsp_keymaps(maps, client, bufnr)
-                require("which-key").register({
-                    ["<leader>l"] = { name = "lsp" }
-                }, { buffer = bufnr })
 
-                for _, v in pairs(maps) do
-                    if client.server_capabilities[v[4]] or v[4] == true then
-                        vim.keymap.set("n", "<leader>l" .. v[1], v[3], { desc = v[2], buffer = bufnr })
+            local function define_lsp_keymaps(potential_maps, client, bufnr)
+                local maps = { name = "lsp" }
+
+                for key, info in pairs(potential_maps) do
+                    local func, capability, desc = unpack(info)
+                    if client.server_capabilities[capability] or capability == true then
+                        maps[key] = { func, desc }
                     end
                 end
+
+                require("which-key").register({
+                    ["<leader>l"] = maps
+                }, { buffer = bufnr })
             end
 
 
