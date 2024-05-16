@@ -2,7 +2,7 @@
 -- Setup -
 ----------
 local ts_parsers = {
-    "c", "lua", "vimdoc", "python", "json", "typescript", "javascript", "latex", "ocaml", "haskell"
+    "json", "typescript", "javascript", "latex", "ocaml", "haskell"
 }
 local mason_install = {
     "pyright", "lua-language-server", "typescript-language-server", "clangd", "ocaml-lsp",

@@ -22,10 +22,6 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 - Catppuccin theme
 - LSP, completion, telescope, and more
 
-### Helpful zsh things
-
-- `sd` to jump to any directory under the home directory
-
 ## Other Tools to Install
 
 ### [Homebrew](https://brew.sh)
