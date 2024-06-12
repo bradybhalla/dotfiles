@@ -7,17 +7,6 @@ return {
             transparent_background = false,
             integrations = {
                 mason = true,
-                -- lualine integration in status.lua
-
-                -- default settings:
-                --      cmp
-                --      gitsigns
-                --      nvimtree
-                --      telescope
-                --      treesitter
-                --      lspconfig
-
-                -- add all valid integration plugins here
             },
             custom_highlights = function(colors)
                 return {

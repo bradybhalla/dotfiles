@@ -11,7 +11,6 @@ return {
         "saadparwaiz1/cmp_luasnip",
         {
             "L3MON4D3/LuaSnip",
-            -- dependencies = { "rafamadriz/friendly-snippets" },
             config = function()
                 local ls = require("luasnip")
 
@@ -30,7 +29,6 @@ return {
                     update_events = "TextChanged,TextChangedI"
                 })
 
-                require("luasnip.loaders.from_vscode").lazy_load() -- from friendly-snippets
                 require("luasnip.loaders.from_lua").lazy_load()    -- from luasnippets/
             end
         }
