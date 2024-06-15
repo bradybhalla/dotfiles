@@ -1,4 +1,4 @@
-# !/bin/zsh
+#!/bin/zsh
 
 # choose which set of configuration files to use
 ITEMS=(.config/nvim .config/alacritty .zshrc .zsh_aliases .p10k.zsh .tmux.conf)
