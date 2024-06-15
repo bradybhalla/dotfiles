@@ -31,10 +31,14 @@ end, { desc = "setup" })
 
 vim.api.nvim_create_user_command("OpenFinder", function()
     local file_path = vim.fn.expand("%")
+    local success
     if file_path ~= "" then
-        vim.system({"open", "-R", file_path}, {})
+        success, _ = pcall(vim.system, {"open", "-R", file_path}, {})
     else
-        vim.system({"open", vim.fn.expand("%:p:h")}, {})
+        success, _ = pcall(vim.system, {"open", vim.fn.expand("%:p:h")}, {})
+    end
+    if not success then
+        print("`open` failed to execute")
     end
 end, { desc = "reveal in Finder" })
 
