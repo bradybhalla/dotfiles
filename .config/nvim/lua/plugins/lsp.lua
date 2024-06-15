@@ -11,7 +11,7 @@ return {
         dependencies = {
             -- lsp
             "hrsh7th/cmp-nvim-lsp",             -- also dependency for cmp
-            { "folke/neodev.nvim", opts = {} }, -- configure lua_ls for nvim
+            { "folke/lazydev.nvim", opts = {} }, -- configure lua_ls for nvim
 
             -- null-ls
             {

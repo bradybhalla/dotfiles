@@ -22,7 +22,7 @@ return {
 
     -- expand fraction
     s({ trig = [[\(\S\+\)\/\(\S\+\)]], trigEngine = "vim", hidden = true }, f(
-        function(args, parent, user_args)
+        function(_, parent, _)
             return string.format("\\frac{%s}{%s}", parent.captures[1], parent.captures[2])
         end, {}, {})),
 
@@ -37,7 +37,7 @@ return {
 
     -- problem with parts
     s({ trig = [[prob\(\d\)\([a-z1-9]\)\?]], trigEngine = "vim", hidden = true }, f(
-        function(args, parent, user_args)
+        function(_, parent, _)
             vim.print(parent.captures)
             local parts = ""
             if parent.captures[2] == nil then
@@ -56,9 +56,9 @@ return {
             end
 
             return vim.split(string.format([[
-\section*{Exercise %s}
-%s\newpage
-]], parent.captures[1], parts), "\n")
+            \section*{Exercise %s}
+            %s\newpage
+            ]], parent.captures[1], parts), "\n")
         end, {}, {})),
 
     -- set template
