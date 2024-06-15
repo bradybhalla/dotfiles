@@ -38,7 +38,6 @@ return {
     -- problem with parts
     s({ trig = [[prob\(\d\)\([a-z1-9]\)\?]], trigEngine = "vim", hidden = true }, f(
         function(_, parent, _)
-            vim.print(parent.captures)
             local parts = ""
             if parent.captures[2] == nil then
                 -- single part

@@ -38,7 +38,7 @@ vim.api.nvim_create_user_command("OpenFinder", function()
         success, _ = pcall(vim.system, {"open", vim.fn.expand("%:p:h")}, {})
     end
     if not success then
-        print("`open` failed to execute")
+        vim.print("`open` failed to execute")
     end
 end, { desc = "reveal in Finder" })
 
