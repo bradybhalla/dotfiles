@@ -10,7 +10,7 @@ return {
         cmd = { "LspInfo", "LspStart", "LspRestart" },
         dependencies = {
             -- lsp
-            "hrsh7th/cmp-nvim-lsp",             -- also dependency for cmp
+            "hrsh7th/cmp-nvim-lsp",              -- also dependency for cmp
             { "folke/lazydev.nvim", opts = {} }, -- configure lua_ls for nvim
 
             -- null-ls

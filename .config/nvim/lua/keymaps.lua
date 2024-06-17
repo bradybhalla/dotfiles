@@ -32,14 +32,6 @@ vim.keymap.set("n", "<leader>O", "<CMD>OpenFinder<CR>", { desc = "reveal in Find
 vim.keymap.set("n", "<leader>S", "<CMD>ToggleSpell<CR>", { desc = "toggle spellcheck" })
 vim.keymap.set("n", "<leader>G", "<CMD>Lazygit<CR>", { desc = "open lazygit" })
 
-----------------
--- LSP/linting -
-----------------  defined in plugins/mason/keymaps.lua
-
---------
--- cmp -
---------  defined in plugins/completion.lua
-
 --------------
 -- telescope -
 --------------
@@ -68,4 +60,26 @@ require("which-key").register({
   },
 })
 
--- more from treesitter (incremental selection), vim surround, latex, etc.
+-------------
+-- nvim-dap -
+-------------
+
+require("which-key").register({
+    ["<leader>d"] = {
+        name = "debugger",
+        t = { "<CMD>lua require'dapui'.toggle()<CR>", "toggle ui" },
+        x = { "<CMD>lua require'dap'.disconnect()<CR>", "stop" },
+        r = { "<CMD>lua require'dap'.restart()<CR>", "restart" },
+
+        b = { "<CMD>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" },
+        B = { "<CMD>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" },
+
+        c = { "<CMD>lua require'dap'.continue()<CR>", "continue" },
+        o = { "<CMD>lua require'dap'.step_over()<CR>", "step over" },
+        i = { "<CMD>lua require'dap'.step_into()<CR>", "step into" },
+        O = { "<CMD>lua require'dap'.step_out()<CR>", "step out" },
+        C = { "<CMD>lua require'dap'.run_to_cursor()<CR>", "run to cursor" },
+    }
+})
+
+-- more from treesitter, cmp, lsp, latex, etc.

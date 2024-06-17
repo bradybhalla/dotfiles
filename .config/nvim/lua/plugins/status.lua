@@ -6,7 +6,11 @@ return {
     config = function()
         require("lualine").setup {
             options = {
-                disabled_filetypes = { "NvimTree", "toggleterm" }
+                disabled_filetypes = { "NvimTree", "toggleterm" },
+                ignore_focus = {
+                    "dapui_scopes", "dapui_watches", "dap-repl",
+                    "dapui_console", "dapui_breakpoints", "dapui_stacks"
+                }
             },
             sections = {
                 lualine_a = { "mode" },
