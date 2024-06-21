@@ -20,13 +20,13 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 ### [Neovim](https://neovim.io)
 
 - Catppuccin theme
-- LSP, completion, telescope, and more
+- LSP, autocomplete, telescope, and more
 
-## Other Tools to Install
+## Tools to Install
 
 ### [Homebrew](https://brew.sh)
 
-- Used to install almost everything else
+- Used to install almost everything else (on MacOS)
 
 ### [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
@@ -88,13 +88,12 @@ A few of my more important dotfiles. Meant for use with zsh on MacOS. If not usi
 ### dotfiles
 
 ```bash
-chmod +x configure.sh
 ./configure.sh
 ```
 
 This script will back up existing files and copy everything in this repository to the correct location in the home directory.
 
-### Install everything listed in the ["Other Tools to Install"](#other-tools-to-install) section
+### Install everything listed in the ["Tools to Install"](#tools-to-install) section
 1. Once homebrew is installed, run
 ```bash
 brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda
@@ -103,7 +102,8 @@ brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda
 
 ### Configure Neovim
 1. Open Neovim and wait for plugins to install.
-2. Install LSPs, formatters, and syntaxes by typing `:Setup`.
+2. Install language servers, formatters, debuggers. If you don't have them already, use `:Mason`.
+3. Install common additional treesitter parsers with `:SetupTreesitter`. Other parsers can be installed with `:TSInstall <parser name>`.
 3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
 
 ### Keyboard Maestro

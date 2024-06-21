@@ -1,24 +1,12 @@
 return {
-    {
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate",
-        opts = {}
-    },
+    { "williamboman/mason.nvim", build = ":MasonUpdate", opts = {} },
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         cmd = { "LspInfo", "LspStart", "LspRestart" },
         dependencies = {
-            -- lsp
             "hrsh7th/cmp-nvim-lsp",              -- also dependency for cmp
             { "folke/lazydev.nvim", opts = {} }, -- configure lua_ls for nvim
-
-            -- null-ls
-            {
-                "jose-elias-alvarez/null-ls.nvim",
-                dependencies = { "nvim-lua/plenary.nvim" }
-            },
-
         },
         config = function()
             -- diagnostic settings
@@ -40,60 +28,12 @@ return {
             end
 
 
-            -------------
-            -- Keymaps --
-            -------------
-            local telescope_builtin = require("telescope.builtin")
-
-            -- keymaps are in the format key = { function, capability, description }
-            -- they will only be defined if the client has the given capability or if capability is set to true
-            local general_keymaps = {
-                F = { vim.lsp.buf.format, "documentFormattingProvider", "format file" },
-                d = { telescope_builtin.lsp_definitions, "definitionProvider", "go to definition" },
-                r = { telescope_builtin.lsp_references, "referencesProvider", "find references" },
-                s = { telescope_builtin.lsp_document_symbols, "documentSymbolProvider", "search document symbols" },
-                S = { telescope_builtin.lsp_dynamic_workspace_symbols, "workspaceSymbolProvider", "search workspace symbols" },
-                h = { vim.lsp.buf.hover, "hoverProvider", "hover" },
-                n = { vim.lsp.buf.rename, "renameProvider", "rename" },
-            }
-
-            -- keymaps used only for actual LSPs (not formatters)
-            local lsp_specific_keymaps = vim.deepcopy(general_keymaps)
-            lsp_specific_keymaps["e"] = { vim.diagnostic.open_float, true, "show diagnostic" }
-            lsp_specific_keymaps[","] = { vim.diagnostic.goto_prev, true, "previous diagnostic" }
-            lsp_specific_keymaps[";"] = { vim.diagnostic.goto_next, true, "next diagnostic" }
-
-
-            local function define_lsp_keymaps(potential_maps, client, bufnr)
-                local maps = { name = "lsp" }
-
-                for key, info in pairs(potential_maps) do
-                    local func, capability, desc = unpack(info)
-                    if client.server_capabilities[capability] or capability == true then
-                        maps[key] = { func, desc }
-                    end
-                end
-
-                require("which-key").register({
-                    ["<leader>l"] = maps
-                }, { buffer = bufnr })
-            end
-
-
-            ---------------
-            -- LSP Setup --
-            ---------------
-
-            local default_config = {
-                on_attach = function(client, bufnr)
-                    define_lsp_keymaps(lsp_specific_keymaps, client, bufnr)
-                end,
-                capabilities = require("cmp_nvim_lsp").default_capabilities()
-            }
-
             -- pass in custom options
             local function configure(changes)
-                return vim.tbl_deep_extend("force", default_config, changes)
+                return vim.tbl_deep_extend("force", {
+                    -- default options
+                    capabilities = require("cmp_nvim_lsp").default_capabilities()
+                }, changes)
             end
 
 
@@ -116,27 +56,5 @@ return {
 
             lspconfig.hls.setup(configure({}))
 
-            -------------------
-            -- null-ls Setup --
-            -------------------
-
-            local null_ls = require("null-ls")
-
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.beautysh,
-                    null_ls.builtins.formatting.prettier.with({
-                        filetypes = { "css", "html", "json", "markdown" }
-                    }),
-                    null_ls.builtins.formatting.ocamlformat
-                },
-                on_attach = function(client, bufnr)
-                    -- null-ls always says it can do everything (lies)
-                    client.server_capabilities.hoverProvider = false
-
-                    define_lsp_keymaps(general_keymaps, client, bufnr)
-                end
-            })
         end
     } }

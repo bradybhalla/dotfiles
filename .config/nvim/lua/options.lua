@@ -24,6 +24,9 @@ vim.opt.linebreak        = true
 vim.opt.splitright       = true
 vim.opt.splitbelow       = true
 
+-- don't show insert in command line
+vim.opt.showmode         = false
+
 -- fix filetype settings
 vim.g.filetype_pl        = "prolog"
 

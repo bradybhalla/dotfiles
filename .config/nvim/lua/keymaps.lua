@@ -15,71 +15,83 @@ vim.keymap.set({ "n", "v" }, "gk", "k")
 -- unhighlight search and clear command bar
 vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR><CMD>echo<CR>")
 
+-------------
+-- Snippets -
+-------------
+
+vim.keymap.set({ "i" }, "<S-TAB>", "<CMD>lua require'luasnip'.expand()<CR>")
+vim.keymap.set({ "i", "s" }, "<C-j>", "<CMD>lua require'luasnip'.jump(1)<CR>")
+vim.keymap.set({ "i", "s" }, "<C-k>", "<CMD>lua require'luasnip'.jump(-1)<CR>")
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+    if require("luasnip").choice_active() then
+        require("luasnip").change_choice(1)
+    end
+end)
 
 --------------
 -- Shortcuts -
 --------------
 
--- save and quit
-vim.keymap.set("n", "<leader>q", "<CMD>q<CR>", { desc = "quit" })
-vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "save" })
-
--- use system clipboard register
-vim.keymap.set({ "n", "v" }, "<leader>c", "\"+", { desc = "use system clipboard" })
-
--- custom command shortcuts
-vim.keymap.set("n", "<leader>O", "<CMD>OpenFinder<CR>", { desc = "reveal in Finder" })
-vim.keymap.set("n", "<leader>S", "<CMD>ToggleSpell<CR>", { desc = "toggle spellcheck" })
-vim.keymap.set("n", "<leader>G", "<CMD>Lazygit<CR>", { desc = "open lazygit" })
-
---------------
--- telescope -
---------------
-
 require("which-key").register({
+    ["<leader>"] = {
+        q = { "<CMD>q<CR>", "quit" },
+        w = { "<CMD>w<CR>", "save" },
+        c = { "\"+", "system clipboard", mode = { "n", "v" } },
+        O = { "<CMD>OpenFinder<CR>", "open finder" },
+        S = { "<CMD>ToggleSpell<CR>", "toggle spellcheck" },
+        G = { "<CMD>Lazygit<CR>", "lazygit" },
+        F = { "<CMD>FormatBuffer<CR>", "format buffer" }
+    },
+
     ["<leader>f"] = {
         name = "telescope",
-        f = {"<CMD>Telescope find_files hidden=true<CR>", "find file"},
-        a = {"<CMD>Telescope find_files hidden=true no_ignore=true<CR>", "find file (no ignore)"},
-        g = {"<CMD>Telescope live_grep<CR>", "find text"},
-        b = {"<CMD>Telescope buffers<CR>", "find buffer"},
-        h = {"<CMD>Telescope help_tags<CR>", "search help"}
-    }
-})
 
---------------
--- nvim-tree -
---------------
+        f = { "<CMD>Telescope find_files hidden=true<CR>", "find file" },
+        a = { "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", "find file (no ignore)" },
+        g = { "<CMD>Telescope live_grep<CR>", "find text" },
+        b = { "<CMD>Telescope buffers<CR>", "find buffer" },
+        h = { "<CMD>Telescope help_tags<CR>", "search help" },
 
-require("which-key").register({
-  ["<leader>e"] = {
-    name = "tree",
-    f = { "<CMD>NvimTreeFindFile<CR>", "find file in tree" },
-    o = { "<CMD>NvimTreeOpen<CR>", "open tree" },
-    c = { "<CMD>NvimTreeClose<CR>", "close tree" },
-  },
-})
+        d = { "<CMD>Telescope lsp_definitions<CR>", "lsp definitions" },
+        r = { "<CMD>Telescope lsp_references<CR>", "lsp references" },
+        s = { "<CMD>Telescope lsp_document_symbols<CR>", "lsp document symbols" },
+        S = { "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", "lsp workspace symbols" },
 
--------------
--- nvim-dap -
--------------
+        t = { "<CMD>Telescope builtin<CR>", "telescope builtin" }
+    },
 
-require("which-key").register({
+    ["<leader>e"] = {
+        name = "filetree",
+
+        f = { "<CMD>NvimTreeFindFile<CR>", "show file" },
+        o = { "<CMD>NvimTreeOpen<CR>", "open" },
+        c = { "<CMD>NvimTreeClose<CR>", "close" }
+    },
+
     ["<leader>d"] = {
         name = "debugger",
+
         t = { "<CMD>lua require'dapui'.toggle()<CR>", "toggle ui" },
         x = { "<CMD>lua require'dap'.disconnect()<CR>", "stop" },
         r = { "<CMD>lua require'dap'.restart()<CR>", "restart" },
 
-        b = { "<CMD>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" },
+        b = { "<CMD>DapToggleBreakpoint<CR>", "toggle breakpoint" },
         B = { "<CMD>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" },
 
-        c = { "<CMD>lua require'dap'.continue()<CR>", "continue" },
-        o = { "<CMD>lua require'dap'.step_over()<CR>", "step over" },
-        i = { "<CMD>lua require'dap'.step_into()<CR>", "step into" },
-        O = { "<CMD>lua require'dap'.step_out()<CR>", "step out" },
+        c = { "<CMD>DapContinue<CR>", "continue" },
+        o = { "<CMD>DapStepOver<CR>", "step over" },
+        i = { "<CMD>DapStepInto<CR>", "step into" },
+        O = { "<CMD>DapStepOut<CR>", "step out" },
         C = { "<CMD>lua require'dap'.run_to_cursor()<CR>", "run to cursor" },
+        s = { "<CMD>lua require'dap'.goto_()<CR>", "skip to cursor" },
+
+        f = { "<CMD>lua require'dap'.focus_frame()<CR>", "find current line" }
     }
+
 })
 
--- more from treesitter, cmp, lsp, latex, etc.
+-- TODO these will supposedly be default keymaps later
+vim.keymap.set("n", "grn", vim.lsp.buf.rename)
+vim.keymap.set("n", "gra", vim.lsp.buf.code_action)
+vim.keymap.set("n", "grr", vim.lsp.buf.references)
+vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)

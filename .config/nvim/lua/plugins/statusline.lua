@@ -16,9 +16,9 @@ return {
                 lualine_a = { "mode" },
                 lualine_b = {},
                 lualine_c = { "filename" },
-                lualine_x = { "location" },
+                lualine_x = { "filetype" },
                 lualine_y = { "diagnostics" },
-                lualine_z = { { "filetype", colored = false } }
+                lualine_z = { "location" }
             },
             inactive_sections = {
                 lualine_a = {},

@@ -54,10 +54,7 @@ return {
                 end
             end
 
-            return vim.split(string.format([[
-            \section*{Exercise %s}
-            %s\newpage
-            ]], parent.captures[1], parts), "\n")
+            return vim.split(string.format("\\section*{Exercise %s}\n%s\\newpage\n", parent.captures[1], parts), "\n")
         end, {}, {})),
 
     -- set template
