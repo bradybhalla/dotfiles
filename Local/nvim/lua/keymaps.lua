@@ -46,8 +46,8 @@ require("which-key").register({
     ["<leader>f"] = {
         name = "telescope",
 
-        f = { "<CMD>Telescope find_files hidden=true<CR>", "find file" },
-        a = { "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", "find file (no ignore)" },
+        f = { "<CMD>Telescope find_files<CR>", "find file" },
+        a = { "<CMD>Telescope find_files no_ignore=true<CR>", "find file (no ignore)" },
         g = { "<CMD>Telescope live_grep<CR>", "find text" },
         b = { "<CMD>Telescope buffers<CR>", "find buffer" },
         h = { "<CMD>Telescope help_tags<CR>", "search help" },

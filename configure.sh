@@ -1,8 +1,9 @@
 #!/bin/bash
 
+ROOT="C:\\Users\\brady\\AppData"
+
 # choose which set of configuration files to use
-ITEMS=(.config/nvim .config/alacritty .zshrc .zsh_aliases .p10k.zsh .tmux.conf)
-# ITEMS=(.config/nvim .tmux.conf)
+ITEMS=("Local\\nvim" "Roaming\\alacritty")
 
 # create backup folder
 if [ -d backup ]; then
@@ -17,15 +18,15 @@ fi
 mkdir backup
 
 for item in "${ITEMS[@]}"; do
-    if [[ -e "$HOME/$item" ]]; then
+    if [[ -e "$ROOT\\$item" ]]; then
         # item already exists
         echo "$item exists, saving copy."
-        mkdir -p $(dirname "backup/$item")
-        mv "$HOME/$item" "backup/$item"
+        mkdir -p $(dirname "backup\\$item")
+        mv "$ROOT\\$item" "backup\\$item"
     fi
 
-    mkdir -p $(dirname "$HOME/$item")
-    cp -r "$item" "$HOME/$item"
+    mkdir -p $(dirname "$ROOT\\$item")
+    cp -r "$item" "$ROOT\\$item"
 done
 
 echo "Done!"
