@@ -17,13 +17,7 @@ local commands = {
 
 
     OpenFinder = function()
-        local file_path = vim.fn.expand("%")
-        local success
-        if file_path ~= "" then
-            success, _ = pcall(vim.system, { "open", "-R", file_path }, {})
-        else
-            success, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
-        end
+        local success, _ = pcall(os.execute, "explorer.exe " .. vim.fn.expand("%:p:h"))
         if not success then
             vim.print("`open` failed to execute")
         end

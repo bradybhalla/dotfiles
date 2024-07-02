@@ -1,6 +1,11 @@
 import = [
-  "C:\\Users\\brady\\AppData\\Roaming\\alacritty\\catppuccin-frappe.toml"
+  "C:\\Users\\brady\\Desktop\\dotfiles\\Roaming\\alacritty\\catppuccin-frappe.toml"
 ]
+
+working_directory = "C:\\Users\\brady\\Desktop"
+
+[shell]
+program = "cmd"
 
 [window]
 decorations = "Buttonless"
@@ -10,7 +15,7 @@ option_as_alt = "Both"
 
 [font]
 normal = { family = "MesloLGS Nerd Font", style = "Regular" }
-size = 18
+size = 17
 offset = { x = 1, y = 2 }
 
 [keyboard]
