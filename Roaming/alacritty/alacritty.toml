@@ -33,4 +33,7 @@ bindings = [
     { key = "w", mods = "Alt", chars = "\u0013\u0078" },
     { key = "d", mods = "Alt", chars = "\u0013\u0025" },
     { key = "d", mods = "Alt|Shift", chars = "\u0013\u0022" },
+
+    # go to camera calibration
+    { key = "c", mods = "Alt", chars = "cd Camera_Calibration\rconda activate multimodalDemo\r" },
 ]
