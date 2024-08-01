@@ -1,6 +1,6 @@
 # dotfiles
 
-My configurations for 90% of everything I do on a computer.
+My setup for 90% of everything I do on a computer.
 
 ## Components
 
@@ -9,8 +9,9 @@ My configurations for 90% of everything I do on a computer.
 - [Alacritty](https://alacritty.org/): A (blazingly?!) fast terminal emulator. Keybindings for use with tmux. Install MesloLGS Nerd Font if needed.
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k): Very nice zsh prompt.
 - [lazygit](https://github.com/jesseduffield/lazygit): Git UI for the terminal. This saves me so much time.
+- [Catppuccin](https://catppuccin.com/): The color scheme I use for everything I can (frappé is the best flavor).
 - Keyboard shortcuts (using [skhd](https://github.com/koekeishiya/skhd) and [yabai](https://github.com/koekeishiya/yabai)): Quickly organize windows and open apps.
-- Various shell utils: [fzf](https://github.com/junegunn/fzf) (fuzzy finder, `Ctrl-T` to find a file, `Ctrl-R` to find previous command), [ripgrep](https://github.com/BurntSushi/ripgrep) (better `grep`), [fd](https://github.com/sharkdp/fd) (better `find`), [htop](https://htop.dev) (interactive process viewer), [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) (Python package and version manager), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (highlight valid/invalid commands and files), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (show command completion)
+- Various shell utils: [fzf](https://github.com/junegunn/fzf) (fuzzy finder), [ripgrep](https://github.com/BurntSushi/ripgrep) (better grep), [fd](https://github.com/sharkdp/fd) (better find), [htop](https://htop.dev) (interactive process viewer), [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) (Python package and version manager), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (highlight valid/invalid commands and files), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (show command completion)
 
 ## Setup
 ### Setup for MacOS
@@ -24,11 +25,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/bin/zsh-autosuggest
 
 ### (Partial) Setup for Other Operating Systems
 
-Homebrew cannot be used, so the tools will have to be installed manually. This can be done by either finding binary releases at the links above or using a different package manager. Modify `ITEMS` in "configure.sh" to only contain the installed tools. Then run `./configure.sh`.
+Homebrew cannot be used, so the tools will have to be installed using other methods. This can be done by either finding binary releases at the links above or using a different package manager. Modify `ITEMS` in "configure.sh" to only contain the installed tools, then run `./configure.sh`.
 
 ### Neovim Setup
 After installing the tools above and running "configure.sh",
 1. Open Neovim and wait for plugins to install.
 2. Install language servers, formatters, debuggers. If you don't have them already, use `:Mason`.
-3. Install common additional treesitter parsers with `:SetupTreesitter`. Other parsers can be installed with `:TSInstall <parser name>`.
+3. Install common treesitter parsers I use with `:SetupTreesitter`. Other parsers can be installed with `:TSInstall <parser name>`.
 3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
