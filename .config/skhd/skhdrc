@@ -1,9 +1,9 @@
+# define modes
 :: default
 :: window @
 
-window < escape ; default
-
-cmd + ctrl - space ; window
+cmd + ctrl - space ; window     # prefix to enter window moving mode
+window < escape ; default       # exit back to the default mode
 
 window < k : yabai -m window --grid 1:1:0:0:1:1; skhd --key escape          # large window
 window < j : yabai -m window --grid 10:10:1:1:8:8; skhd --key escape        # small window
