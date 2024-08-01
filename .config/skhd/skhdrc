@@ -1,0 +1,24 @@
+:: default
+:: window @
+
+window < escape ; default
+
+cmd + ctrl - space ; window
+
+window < k : yabai -m window --grid 1:1:0:0:1:1; skhd --key escape          # large window
+window < j : yabai -m window --grid 10:10:1:1:8:8; skhd --key escape        # small window
+
+window < h : yabai -m window --grid 1:2:0:0:1:1; skhd --key escape          # left half
+window < l : yabai -m window --grid 1:2:1:0:1:1; skhd --key escape          # right half
+window < ctrl - k : yabai -m window --grid 2:1:0:0:1:1; skhd --key escape   # upper half
+window < ctrl - j : yabai -m window --grid 2:1:0:1:1:1; skhd --key escape   # bottom half
+
+
+window < ctrl - h : yabai -m window --grid 1:3:0:0:2:1; skhd --key escape          # left 2/3
+window < ctrl - l : yabai -m window --grid 1:3:2:0:1:1; skhd --key escape          # right 1/3
+
+window < 1 : yabai -m window --space 1 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape  # first screen
+window < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape  # second screen
+
+# organize windows in bsp
+window < b : yabai -m space --layout bsp; yabai -m space --balance; yabai -m space --layout float; skhd --key escape

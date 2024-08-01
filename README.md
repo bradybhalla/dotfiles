@@ -1,111 +1,34 @@
 # dotfiles
 
-A few of my more important dotfiles. Meant for use with zsh on MacOS. If not using homebrew to install command line tools, some paths in .zshrc will need to be changed.
+My configurations for 90% of everything I do on a computer.
 
-## Main Components
+## Components
 
-### [Alacritty](https://alacritty.org/)
-
-- Powerlevel10k prompt
-- Catppuccin theme
-- MesloLGS Nerd Font (install if needed)
-- Keybindings for use with tmux
-
-### [Keyboard Maestro](https://www.keyboardmaestro.com)
-
-- `⌥ <space>` for window control
-- `⌃⌥⌘ <space>` to quickly open an app
-- Various other shortcuts
-
-### [Neovim](https://neovim.io)
-
-- Catppuccin theme
-- LSP, autocomplete, telescope, and more
-
-## Tools to Install
-
-### [Homebrew](https://brew.sh)
-
-- Used to install almost everything else (on MacOS)
-
-### [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
-
-- Very nice prompt
-- Install with homebrew
-
-### [fzf](https://github.com/junegunn/fzf)
-
-- Fuzzy finder
-- Keybindings `Ctrl-T` to find a file and `Ctrl-R` to find a previous command
-- `<command> <directory>/**` + `tab` to pick a file in another directory
-- Install with homebrew
-
-### [ripgrep](https://github.com/BurntSushi/ripgrep)
-
-- better `grep`
-- Easily search for text in files recursively through a directory
-- Install with homebrew
-
-### [fd](https://github.com/sharkdp/fd)
-
-- better `find`
-- Easily search for files
-- Install with homebrew
-
-### [lazygit](https://github.com/jesseduffield/lazygit)
-
-- Git UI in the terminal
-- Install with homebrew
-
-### [tmux](https://github.com/tmux/tmux)
-
-- Terminal multiplexer
-- Prefix is `Ctrl-S`
-- Install with homebrew
-
-### [htop](https://htop.dev)
-
-- Interactive process viewer
-- Install with homebrew
-
-### [miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
-
-- Python package and version manager
-- Install with homebrew
-
-### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-
-- Syntax highlighting while typing in zsh
-- Install by cloning [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) into `~/bin`
-
-### [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-
-- Autocomplete from command history while typing in zsh (right arrow to accept)
-- Install by cloning [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) into `~/bin`
+- [Neovim](https://neovim.io): The best text editor. This configuration has LSP, autocomplete, telescope, a LaTeX setup, and more.
+- [tmux](https://github.com/tmux/tmux): Terminal multiplexer. Prefix `Ctrl-S`.
+- [Alacritty](https://alacritty.org/): A (blazingly?!) fast terminal emulator. Keybindings for use with tmux. Install MesloLGS Nerd Font if needed.
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k): Very nice zsh prompt.
+- [lazygit](https://github.com/jesseduffield/lazygit): Git UI for the terminal. This saves me so much time.
+- Keyboard shortcuts (using [skhd](https://github.com/koekeishiya/skhd) and [yabai](https://github.com/koekeishiya/yabai)): Quickly organize windows and open apps.
+- Various shell utils: [fzf](https://github.com/junegunn/fzf) (fuzzy finder, `Ctrl-T` to find a file, `Ctrl-R` to find previous command), [ripgrep](https://github.com/BurntSushi/ripgrep) (better `grep`), [fd](https://github.com/sharkdp/fd) (better `find`), [htop](https://htop.dev) (interactive process viewer), [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) (Python package and version manager), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (highlight valid/invalid commands and files), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (show command completion)
 
 ## Setup
-
-### dotfiles
-
-```bash
+### Setup for MacOS
+Clone this repository. Install [Alacritty](https://alacritty.org/) and [Homebrew](https://brew.sh) using instructions on their websites. Run
+```
+brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda koekeishiya/formulae/yabai koekeishiya/formulae/skhd
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/bin/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/bin/zsh-autosuggestions
 ./configure.sh
 ```
 
-This script will back up existing files and copy everything in this repository to the correct location in the home directory.
+### (Partial) Setup for Other Operating Systems
 
-### Install everything listed in the ["Tools to Install"](#tools-to-install) section
-1. Once homebrew is installed, run
-```bash
-brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda
-```
-2. zsh-syntax-highlighting and zsh-autosuggestions still need to be cloned
+Homebrew cannot be used, so the tools will have to be installed manually. This can be done by either finding binary releases at the links above or using a different package manager. Modify `ITEMS` in "configure.sh" to only contain the installed tools. Then run `./configure.sh`.
 
-### Configure Neovim
+### Neovim Setup
+After installing the tools above and running "configure.sh",
 1. Open Neovim and wait for plugins to install.
 2. Install language servers, formatters, debuggers. If you don't have them already, use `:Mason`.
 3. Install common additional treesitter parsers with `:SetupTreesitter`. Other parsers can be installed with `:TSInstall <parser name>`.
 3. Restart Neovim and type `:checkhealth` to make sure everything is working correctly.
-
-### Keyboard Maestro
-
-In Keyboard Maestro preferences, check "Sync Macros" and choose `Keyboard Maestro Macros.kmsync`.
