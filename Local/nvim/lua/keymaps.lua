@@ -32,61 +32,59 @@ end)
 -- Shortcuts -
 --------------
 
-require("which-key").register({
-    ["<leader>"] = {
-        q = { "<CMD>q<CR>", "quit" },
-        w = { "<CMD>w<CR>", "save" },
-        c = { "\"+", "system clipboard", mode = { "n", "v" } },
-        O = { "<CMD>OpenFinder<CR>", "open finder" },
-        S = { "<CMD>ToggleSpell<CR>", "toggle spellcheck" },
-        G = { "<CMD>Lazygit<CR>", "lazygit" },
-        F = { "<CMD>FormatBuffer<CR>", "format buffer" }
-    },
+require("which-key").add({
+    { "<leader>q",  "<CMD>q<CR>",                                               desc = "quit" },
+    { "<leader>w",  "<CMD>w<CR>",                                               desc = "save" },
+    { "<leader>c",  "\"+",                                                      desc = "system clipboard",     mode = { "n", "v" } },
+    { "<leader>O",  "<CMD>OpenFinder<CR>",                                      desc = "open finder" },
+    { "<leader>S",  "<CMD>ToggleSpell<CR>",                                     desc = "toggle spellcheck" },
+    { "<leader>G",  "<CMD>Lazygit<CR>",                                         desc = "lazygit" },
+    { "<leader>F",  "<CMD>FormatBuffer<CR>",                                    desc = "format buffer" },
 
-    ["<leader>f"] = {
-        name = "telescope",
+    ----------------------------------------
 
-        f = { "<CMD>Telescope find_files hidden=true<CR>", "find file" },
-        a = { "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", "find file (no ignore)" },
-        g = { "<CMD>Telescope live_grep<CR>", "find text" },
-        b = { "<CMD>Telescope buffers<CR>", "find buffer" },
-        h = { "<CMD>Telescope help_tags<CR>", "search help" },
+    { "<leader>f",  group = "telescope" },
 
-        d = { "<CMD>Telescope lsp_definitions<CR>", "lsp definitions" },
-        r = { "<CMD>Telescope lsp_references<CR>", "lsp references" },
-        s = { "<CMD>Telescope lsp_document_symbols<CR>", "lsp document symbols" },
-        S = { "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", "lsp workspace symbols" },
+    { "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>",                desc = "find file" },
+    { "<leader>fa", "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", desc = "find file (no ignore)" },
+    { "<leader>fg", "<CMD>Telescope live_grep<CR>",                             desc = "find text" },
+    { "<leader>fb", "<CMD>Telescope buffers<CR>",                               desc = "find buffer" },
+    { "<leader>fh", "<CMD>Telescope help_tags<CR>",                             desc = "search help" },
 
-        t = { "<CMD>Telescope builtin<CR>", "telescope builtin" }
-    },
+    { "<leader>fd", "<CMD>Telescope lsp_definitions<CR>",                       desc = "lsp definitions" },
+    { "<leader>fr", "<CMD>Telescope lsp_references<CR>",                        desc = "lsp references" },
+    { "<leader>fs", "<CMD>Telescope lsp_document_symbols<CR>",                  desc = "lsp document symbols" },
+    { "<leader>fS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",         desc = "lsp workspace symbols" },
 
-    ["<leader>e"] = {
-        name = "filetree",
+    { "<leader>ft", "<CMD>Telescope builtin<CR>",                               desc = "telescope builtin" },
 
-        f = { "<CMD>NvimTreeFindFile<CR>", "show file" },
-        o = { "<CMD>NvimTreeOpen<CR>", "open" },
-        c = { "<CMD>NvimTreeClose<CR>", "close" }
-    },
+    ----------------------------------------
 
-    ["<leader>d"] = {
-        name = "debugger",
+    { "<leader>e",  group = "filetree" },
 
-        t = { "<CMD>lua require'dapui'.toggle()<CR>", "toggle ui" },
-        x = { "<CMD>lua require'dap'.disconnect()<CR>", "stop" },
-        r = { "<CMD>lua require'dap'.restart()<CR>", "restart" },
+    { "<leader>ef", "<CMD>NvimTreeFindFile<CR>",                                desc = "show file" },
+    { "<leader>eo", "<CMD>NvimTreeOpen<CR>",                                    desc = "open" },
+    { "<leader>ec", "<CMD>NvimTreeClose<CR>",                                   desc = "close" },
 
-        b = { "<CMD>DapToggleBreakpoint<CR>", "toggle breakpoint" },
-        B = { "<CMD>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" },
+    ----------------------------------------
 
-        c = { "<CMD>DapContinue<CR>", "continue" },
-        o = { "<CMD>DapStepOver<CR>", "step over" },
-        i = { "<CMD>DapStepInto<CR>", "step into" },
-        O = { "<CMD>DapStepOut<CR>", "step out" },
-        C = { "<CMD>lua require'dap'.run_to_cursor()<CR>", "run to cursor" },
-        s = { "<CMD>lua require'dap'.goto_()<CR>", "skip to cursor" },
+    { "<leader>d",  group = "debugger" },
 
-        f = { "<CMD>lua require'dap'.focus_frame()<CR>", "find current line" }
-    }
+    { "<leader>dt", "<CMD>lua require'dapui'.toggle()<CR>",                     desc = "toggle ui" },
+    { "<leader>dx", "<CMD>lua require'dap'.disconnect()<CR>",                   desc = "stop" },
+    { "<leader>dr", "<CMD>lua require'dap'.restart()<CR>",                      desc = "restart" },
+
+    { "<leader>db", "<CMD>DapToggleBreakpoint<CR>",                             desc = "toggle breakpoint" },
+    { "<leader>dB", "<CMD>lua require'dap'.clear_breakpoints()<CR>",            desc = "clear breakpoints" },
+
+    { "<leader>dc", "<CMD>DapContinue<CR>",                                     desc = "continue" },
+    { "<leader>do", "<CMD>DapStepOver<CR>",                                     desc = "step over" },
+    { "<leader>di", "<CMD>DapStepInto<CR>",                                     desc = "step into" },
+    { "<leader>dO", "<CMD>DapStepOut<CR>",                                      desc = "step out" },
+    { "<leader>dC", "<CMD>lua require'dap'.run_to_cursor()<CR>",                desc = "run to cursor" },
+    { "<leader>ds", "<CMD>lua require'dap'.goto_()<CR>",                        desc = "skip to cursor" },
+
+    { "<leader>df", "<CMD>lua require'dap'.focus_frame()<CR>",                  desc = "find current line" },
 
 })
 
