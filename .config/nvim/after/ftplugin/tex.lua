@@ -1,6 +1,4 @@
--- Latex config file
-
--- vimtex completions (uses omni instead of lsp)
+-- VimTeX completions (uses omni instead of lsp)
 local cmp = require("cmp")
 cmp.setup.buffer {
     sources = cmp.config.sources({
@@ -23,7 +21,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
     end
 })
 
--- settings
+-- VimTeX settings
 vim.cmd([[
 let g:vimtex_syntax_conceal["math_bounds"]=0
 let g:vimtex_quickfix_open_on_warning=0

@@ -24,8 +24,8 @@ bindings = [
     { key = "Backspace", mods = "Option", chars = "\u001b\u007f" },
 
     # tmux commands (Ctrl-s prefix)
-    { key = "t", mods = "Command", chars = "\u0013\u0063" },
-    { key = "w", mods = "Command", chars = "\u0013\u0078" },
-    { key = "d", mods = "Command", chars = "\u0013\u0025" },
-    { key = "d", mods = "Command|Shift", chars = "\u0013\u0022" },
+    { key = "t", mods = "Command", chars = "\u0013c" },
+    { key = "w", mods = "Command", chars = "\u0013x" },
+    { key = "d", mods = "Command", chars = "\u0013%" },
+    { key = "d", mods = "Command|Shift", chars = "\u0013\"" },
 ]
