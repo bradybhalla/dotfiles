@@ -1,8 +1,5 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    cmd = {
-        "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeClose"
-    },
     dependencies = {
         "nvim-tree/nvim-web-devicons"
     },

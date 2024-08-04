@@ -2,8 +2,6 @@ return {
     { "williamboman/mason.nvim", build = ":MasonUpdate", opts = {} },
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPre", "BufNewFile" },
-        cmd = { "LspInfo", "LspStart", "LspRestart" },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",              -- also dependency for cmp
             { "folke/lazydev.nvim", opts = {} }, -- configure lua_ls for nvim
@@ -55,6 +53,5 @@ return {
             lspconfig.clangd.setup(configure({}))
 
             lspconfig.hls.setup(configure({}))
-
         end
     } }

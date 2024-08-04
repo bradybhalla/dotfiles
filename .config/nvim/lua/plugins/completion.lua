@@ -1,6 +1,5 @@
 return {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -29,12 +28,11 @@ return {
                     require("luasnip").lsp_expand(args.body)
                 end,
             },
-            mapping = cmp.mapping.preset.insert({
+            mapping = {
                 ["<TAB>"] = cmp.mapping.confirm({ select = true }),
-                -- <C-e> to abort
-                -- <C-n>/<C-p> to choose other completions
-                -- down/up arrows also work
-            }),
+                ["<C-j>"] = cmp.mapping.select_next_item(),
+                ["<C-k>"] = cmp.mapping.select_prev_item(),
+            },
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "luasnip" }

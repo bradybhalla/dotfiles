@@ -14,7 +14,6 @@ return {
                     SpellCap = { fg = colors.red }, -- capitalization errors
                     Conceal = { fg = colors.pink },  -- VimTeX conceal
 
-                    -- dap
                     DapBreakpoint = { fg = colors.blue },
                     DapStopped = { fg = colors.blue },
                 }
