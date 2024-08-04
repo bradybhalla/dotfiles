@@ -7,14 +7,14 @@
 alt - space     ; window
 window < escape ; default
                                                                                           # FLOAT / BSP
-window < k        : yabai -m window --grid 1:1:0:0:1:1 --swap north  ; skhd --key escape  # large window / move up
-window < j        : yabai -m window --grid 8:8:1:1:6:6 --swap south  ; skhd --key escape  # small window / move down
-window < h        : yabai -m window --grid 1:2:0:0:1:1 --swap west   ; skhd --key escape  # left half / move left
-window < l        : yabai -m window --grid 1:2:1:0:1:1 --swap east   ; skhd --key escape  # right laft / move right
-window < ctrl - k : yabai -m window --grid 2:1:0:0:1:1 --focus north ; skhd --key escape  # upper half / focus up
-window < ctrl - j : yabai -m window --grid 2:1:0:1:1:1 --focus south ; skhd --key escape  # lower half / focus down
-window < ctrl - h : yabai -m window --grid 1:3:0:0:2:1 --focus west  ; skhd --key escape  # left two-thirds / focus left
-window < ctrl - l : yabai -m window --grid 1:3:2:0:1:1 --focus east  ; skhd --key escape  # right third / focus right
+window < k        : yabai -m window --grid 1:1:0:0:1:1 --focus north ; skhd --key escape  # large window / focus up
+window < j        : yabai -m window --grid 8:8:1:1:6:6 --focus south ; skhd --key escape  # small window / focus down
+window < h        : yabai -m window --grid 1:2:0:0:1:1 --focus west  ; skhd --key escape  # left half / focus left
+window < l        : yabai -m window --grid 1:2:1:0:1:1 --focus east  ; skhd --key escape  # right half / focus right
+window < ctrl - k : yabai -m window --grid 2:1:0:0:1:1 --swap north  ; skhd --key escape  # upper half / move up
+window < ctrl - j : yabai -m window --grid 2:1:0:1:1:1 --swap south  ; skhd --key escape  # lower half / move down
+window < ctrl - h : yabai -m window --grid 1:3:0:0:2:1 --swap west   ; skhd --key escape  # left two-thirds / move left
+window < ctrl - l : yabai -m window --grid 1:3:2:0:1:1 --swap east   ; skhd --key escape  # right third / move right
 
 window < 1 : yabai -m window --space 1 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 1
 window < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 2
@@ -22,9 +22,10 @@ window < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1
 window < b : yabai -m space --layout bsp; skhd --key escape     # set layout mode to bsp
 window < f : yabai -m space --layout float; skhd --key escape   # set layout mode to float
 
-window < r : yabai -m space --rotate 90      # rotate bsp
-window < y : yabai -m space --mirror y-axis  # mirror bsp over y-axis
-window < x : yabai -m space --mirror x-axis  # mirror bsp over x-axis
+window < r : yabai -m space --rotate 90; skhd --key escape      # rotate bsp
+window < y : yabai -m space --mirror y-axis; skhd --key escape  # mirror bsp over y-axis
+window < x : yabai -m space --mirror x-axis; skhd --key escape  # mirror bsp over x-axis
+
 
 # quick window management
 alt - k : skhd -k alt-space; skhd --k k
