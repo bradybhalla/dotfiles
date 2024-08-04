@@ -47,8 +47,8 @@ require("which-key").add({
     {
         -- lsp
         { "<leader>l",  group = "lsp" },
-        { "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>",          desc = "lsp document symbols" },
-        { "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", desc = "lsp workspace symbols" },
+        { "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>",          desc = "document symbols" },
+        { "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", desc = "workspace symbols" },
 
         { "<C-]>",      "<CMD>Telescope lsp_definitions<CR>" },
         { "grr",        "<CMD>Telescope lsp_references<CR>" },

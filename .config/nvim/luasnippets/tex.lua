@@ -1,24 +1,114 @@
+-- environments with possible options
+local function autoenv(trigger, name, has_option)
+    if name == nil then
+        name = "<>"
+    end
+
+    local pos = { nil, nil, nil }
+    local i_count = 1
+
+    if name == "<>" then
+        pos[1] = i(i_count)
+        i_count = i_count + 1
+    else
+        pos[1] = t(name)
+    end
+
+    if has_option then
+        pos[2] = c(i_count, { sn(nil, { t("["), i(1), t("]") }), i(nil) })
+        i_count = i_count + 1
+    else
+        pos[2] = t("")
+    end
+
+    pos[3] = i(i_count)
+
+    local nodes = fmta([[
+    \begin{<1>}<2>
+        <3>
+    \end{<1>}
+    ]], pos, { repeat_duplicates = true })
+
+    return s({ trig = trigger, snippetType = "autosnippet" }, nodes)
+end
+
+-- simple snippets
+local function autosnip(trigger, value)
+    return s({ trig = trigger, snippetType = "autosnippet" }, value)
+end
+
+-- simple command
+local function autocmd(trigger, name)
+    return autosnip(trigger, { t("\\" .. name .. "{"), i(1), t("}") })
+end
+
+-- list environemnts which recursively add new items
+local function autolist(trigger, env)
+    local function create_item()
+        return sn(nil, c(1, {
+            sn(nil, {
+                t({ "", "" }), i(1), t({ "\\end{" .. env .. "}" })
+            }),
+            sn(nil, {
+                t({ "", "\t\\item " }), i(1), t(""), d(2, create_item)
+            }),
+        }))
+    end
+
+    return s({ trig = trigger, snippetType = "autosnippet" }, {
+        t({ "\\begin{" .. env .. "}", "\t\\item " }),
+        i(1),
+        d(2, create_item)
+    })
+end
+
 return {
 
     ------------
     -- General -
     ------------
 
-    s("no", t("\\noindent")),
+    autocmd("snn", "section"),
+    autocmd("ssnn", "subsection"),
 
-    -- begin / end environment
-    s("beg", fmt([[
-    \begin{<env>}
-        <todo>
-    \end{<env>}
-    ]], { env = i(1), todo = i(0) }, { delimiters = "<>", repeat_duplicates = true })),
+    autosnip("nd", { t("\\noindent") }),
 
-    -- align environment
-    s("ali", fmt([[
-    \begin{align*}
-        <todo>
-    \end{align*}
-    ]], { todo = i(0) }, { delimiters = "<>" })),
+    autocmd("txt", "text"),
+    autocmd("tbf", "textbf"),
+    autocmd("bb", "mathbb"),
+
+    -- figures
+    autosnip("incg", { t("\\includegraphics[width="), i(1, "0.7"), t("\\textwidth]{"), i(2), t("}") }),
+    autosnip("cpt", { t("\\captionof{"), i(1, "figure"), t("}{"), i(2), t("}") }),
+
+    -- environments
+    autoenv("bgn", nil, false),
+    autoenv("dfn", "definition", true),
+    autoenv("thm", "theorem", true),
+    autoenv("lmm", "lemma", true),
+    autoenv("prp", "proposition", true),
+    autoenv("prf", "proof", false),
+    autoenv("aln", "align*", false),
+    autolist("izz", "itemize"),
+    autolist("ett", "enumerate"),
+
+    ---------
+    -- Math -
+    ---------
+    autosnip("sseq", t("\\subseteq")),
+    autosnip("...", t("\\ldots")),
+    autosnip("css", {
+        t({ "\\begin{cases}", "\t" }),
+        i(1), t(" & \\text{if } "), i(2), t({ " \\\\", "\t" }),
+        i(3), t({ " & \\text{otherwise}", "" }),
+        t("\\end{cases}")
+    }),
+    autosnip("pdx", {
+        t("\\frac{\\partial "), i(1), t("}{\\partial "), i(2, "x"), t("}")
+    }),
+    autosnip("ddx", {
+        t("\\frac{d "), i(1), t("}{d "), i(2, "x"), t("}")
+    }),
 
     -- expand fraction
     s({ trig = [[\(\S\+\)\/\(\S\+\)]], trigEngine = "vim", hidden = true }, f(
@@ -26,14 +116,13 @@ return {
             return string.format("\\frac{%s}{%s}", parent.captures[1], parent.captures[2])
         end, {}, {})),
 
+
     -----------------
     -- Problem Sets -
     -----------------
 
     -- RedNote
-    s("rn", fmt([[
-    \RedNote{<todo>}
-    ]], { todo = i(1, "TODO") }, { delimiters = "<>" })),
+    autosnip("rn", { t("\\RedNote{"), i(1), t("}") }),
 
     -- problem with parts
     s({ trig = [[prob\(\d\)\([a-z1-9]\)\?]], trigEngine = "vim", hidden = true }, f(
@@ -58,7 +147,7 @@ return {
         end, {}, {})),
 
     -- set template
-    s("newset", fmt([[
+    s("newset", fmta([[
     %%%%%%%%%%%%%%%%%%
     % Setup/Packages %
     %%%%%%%%%%%%%%%%%%
@@ -71,6 +160,7 @@ return {
     \usepackage{amsthm}
     \usepackage{graphicx}
     \usepackage{xcolor}
+    \usepackage{caption}
 
     % hide page numbers
     \pagenumbering{gobble}
@@ -94,6 +184,16 @@ return {
 
     % set of real numbers
     \newcommand{\R}{\mathbb{R}}
+
+    % theorem setup
+    \theoremstyle{plain}
+    \newtheorem{theorem}{Theorem}[section]
+    \newtheorem{lemma}{Lemma}[section]
+    \newtheorem{corollary}{Corollary}[section]
+    \newtheorem{proposition}{Proposition}[section]
+    \theoremstyle{definition}
+    \newtheorem{definition}{Definition}[section]
+    \numberwithin{figure}{section}
 
 
     %%%%%%%%%%%%
@@ -119,5 +219,5 @@ return {
         }),
         author = i(2, "Brady Bhalla"),
         content = i(0),
-    }, { delimiters = "<>" }))
+    }))
 }
