@@ -22,9 +22,10 @@ window < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1
 window < b : yabai -m space --layout bsp; skhd --key escape     # set layout mode to bsp
 window < f : yabai -m space --layout float; skhd --key escape   # set layout mode to float
 
-window < r : yabai -m space --rotate 90; skhd --key escape      # rotate bsp
-window < y : yabai -m space --mirror y-axis; skhd --key escape  # mirror bsp over y-axis
-window < x : yabai -m space --mirror x-axis; skhd --key escape  # mirror bsp over x-axis
+window < r : yabai -m space --rotate 90; skhd --key escape                # rotate bsp
+window < y : yabai -m space --mirror y-axis; skhd --key escape            # mirror bsp over y-axis
+window < x : yabai -m space --mirror x-axis; skhd --key escape            # mirror bsp over x-axis
+window < z : yabai -m window --toggle zoom-fullscreen; skhd --key escape  # zoom fullscreen
 
 
 # quick window management
