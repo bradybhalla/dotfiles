@@ -31,7 +31,7 @@ local commands = {
 
 
     ToggleSpell = function()
-        vim.opt_local.spell = not vim.opt_local.spell._value
+        vim.opt_local.spell = not vim.opt_local.spell:get()
     end,
 
 

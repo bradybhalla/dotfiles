@@ -1,3 +1,32 @@
+-- VimTeX settings
+vim.cmd([[
+let g:vimtex_syntax_conceal["math_bounds"]=0
+let g:vimtex_quickfix_open_on_warning=0
+]])
+
+-- keymaps
+require("which-key").add({
+    -- only for current buffer
+    buffer = 0,
+
+    -- up/down inside a line
+    {
+        { "j",  "gj" },
+        { "k",  "gk" },
+        { "gj", "j" },
+        { "gk", "k" },
+    },
+
+    { "<leader>b", "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>", desc = "quick build" },
+
+    {
+        "<leader>C",
+        function() vim.opt.conceallevel = 2 - vim.opt.conceallevel:get() end,
+        desc = "toggle VimTex conceal"
+    }
+})
+
+
 -- VimTeX completions (uses omni instead of lsp)
 local cmp = require("cmp")
 cmp.setup.buffer {
@@ -20,25 +49,3 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
         end
     end
 })
-
--- VimTeX settings
-vim.cmd([[
-let g:vimtex_syntax_conceal["math_bounds"]=0
-let g:vimtex_quickfix_open_on_warning=0
-]])
-
--- quickly build
-vim.keymap.set(
-    "n", "<leader>b",
-    "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>",
-    {
-        desc = "quick build latex",
-        buffer = 0
-    }
-)
-
--- VimTeX conceal
-vim.keymap.set("n", "<leader>C", function()
-    -- toggle between 0 and 2
-    vim.o.conceallevel = 2 - vim.o.conceallevel
-end, { desc = "toggle VimTeX conceal", buffer = 0 })
