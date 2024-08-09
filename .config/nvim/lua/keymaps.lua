@@ -6,6 +6,14 @@ require("which-key").add({
     },
 
     {
+        -- moving between items
+        { "]q", "<CMD>cnext<CR>", desc = "next quickfix" },
+        { "[q", "<CMD>cprev<CR>", desc = "previous quickfix" },
+        { "]b", "<CMD>bnext<CR>", desc = "next buffer" },
+        { "[b", "<CMD>bprev<CR>", desc = "previous buffer" },
+    },
+
+    {
         -- general shortcuts
         { "<leader>q", "<CMD>q<CR>",            desc = "quit" },
         { "<leader>w", "<CMD>w<CR>",            desc = "save" },
