@@ -71,7 +71,7 @@ return {
     autocmd("snn", "section"),
     autocmd("ssnn", "subsection"),
 
-    autosnip("nd", { t("\\noindent") }),
+    autosnip("nd", { t("\\noindent ") }),
 
     autocmd("txt", "text"),
     autocmd("tbf", "textbf"),

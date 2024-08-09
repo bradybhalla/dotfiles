@@ -1,3 +1,6 @@
+-- text based file
+vim.cmd("runtime! ftplugin/text.lua")
+
 -- VimTeX settings
 vim.cmd([[
 let g:vimtex_syntax_conceal["math_bounds"]=0
@@ -6,16 +9,7 @@ let g:vimtex_quickfix_open_on_warning=0
 
 -- keymaps
 require("which-key").add({
-    -- only for current buffer
     buffer = 0,
-
-    -- up/down inside a line
-    {
-        { "j",  "gj" },
-        { "k",  "gk" },
-        { "gj", "j" },
-        { "gk", "k" },
-    },
 
     { "<leader>b", "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>", desc = "quick build" },
 
