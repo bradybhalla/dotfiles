@@ -25,9 +25,6 @@ export PATH=$PATH:/opt/homebrew/bin:$HOME/.ghcup/bin
 # fzf key bindings and completions
 eval "$(fzf --zsh)"
 
-# iTerm2 shell integration
-test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
-
 # zsh-autosuggestions
 [[ -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
