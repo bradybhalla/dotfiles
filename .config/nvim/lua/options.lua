@@ -20,6 +20,9 @@ vim.opt.smartcase        = true
 vim.opt.breakindent      = true
 vim.opt.linebreak        = true
 
+-- scrolling
+vim.opt.smoothscroll     = true
+
 -- split pane location
 vim.opt.splitright       = true
 vim.opt.splitbelow       = true
