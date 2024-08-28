@@ -1,51 +1,36 @@
-:: default
+# leader key to access shortcuts
+:: leader @
+rcmd - space    ; leader
+leader < escape ; default
 
 # window management
 #   yabai layout is "float" by default, but can be switched to and from "bsp"
 #   many keymaps have different behaviours depending on the layout
-:: window @
-alt - space     ; window
-window < escape ; default
                                                                                           # FLOAT / BSP
-window < k        : yabai -m window --grid 1:1:0:0:1:1 --focus north ; skhd --key escape  # large window / focus up
-window < j        : yabai -m window --grid 8:8:1:1:6:6 --focus south ; skhd --key escape  # small window / focus down
-window < h        : yabai -m window --grid 1:2:0:0:1:1 --focus west  ; skhd --key escape  # left half / focus left
-window < l        : yabai -m window --grid 1:2:1:0:1:1 --focus east  ; skhd --key escape  # right half / focus right
-window < ctrl - k : yabai -m window --grid 2:1:0:0:1:1 --swap north  ; skhd --key escape  # upper half / move up
-window < ctrl - j : yabai -m window --grid 2:1:0:1:1:1 --swap south  ; skhd --key escape  # lower half / move down
-window < ctrl - h : yabai -m window --grid 1:3:0:0:2:1 --swap west   ; skhd --key escape  # left two-thirds / move left
-window < ctrl - l : yabai -m window --grid 1:3:2:0:1:1 --swap east   ; skhd --key escape  # right third / move right
+leader < k        : yabai -m window --grid 1:1:0:0:1:1 --focus north ; skhd --key escape  # large window / focus up
+leader < j        : yabai -m window --grid 8:8:1:1:6:6 --focus south ; skhd --key escape  # small window / focus down
+leader < h        : yabai -m window --grid 1:2:0:0:1:1 --focus west  ; skhd --key escape  # left half / focus left
+leader < l        : yabai -m window --grid 1:2:1:0:1:1 --focus east  ; skhd --key escape  # right half / focus right
+leader < ctrl - k : yabai -m window --grid 2:1:0:0:1:1 --swap north  ; skhd --key escape  # upper half / move up
+leader < ctrl - j : yabai -m window --grid 2:1:0:1:1:1 --swap south  ; skhd --key escape  # lower half / move down
+leader < ctrl - h : yabai -m window --grid 1:3:0:0:2:1 --swap west   ; skhd --key escape  # left two-thirds / move left
+leader < ctrl - l : yabai -m window --grid 1:3:2:0:1:1 --swap east   ; skhd --key escape  # right third / move right
 
-window < 1 : yabai -m window --space 1 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 1
-window < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 2
+leader < 1 : yabai -m window --space 1 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 1
+leader < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 2
 
-window < b : yabai -m space --layout bsp; skhd --key escape     # set layout mode to bsp
-window < f : yabai -m space --layout float; skhd --key escape   # set layout mode to float
+leader < b : yabai -m space --layout bsp; skhd --key escape     # set layout mode to bsp
+leader < f : yabai -m space --layout float; skhd --key escape   # set layout mode to float
 
-window < r : yabai -m space --rotate 90; skhd --key escape                # rotate bsp
-window < y : yabai -m space --mirror y-axis; skhd --key escape            # mirror bsp over y-axis
-window < x : yabai -m space --mirror x-axis; skhd --key escape            # mirror bsp over x-axis
-window < z : yabai -m window --toggle zoom-fullscreen; skhd --key escape  # zoom fullscreen
-
-
-# quick window management
-alt - k : skhd -k alt-space; skhd --k k
-alt - j : skhd -k alt-space; skhd --k j
-alt - h : skhd -k alt-space; skhd --k h
-alt - l : skhd -k alt-space; skhd --k l
-ctrl + alt - k : skhd -k alt-space; skhd --k ctrl-k
-ctrl + alt - j : skhd -k alt-space; skhd --k ctrl-j
-ctrl + alt - h : skhd -k alt-space; skhd --k ctrl-h
-ctrl + alt - l : skhd -k alt-space; skhd --k ctrl-l
+leader < r : yabai -m space --rotate 90; skhd --key escape                # rotate bsp
+leader < y : yabai -m space --mirror y-axis; skhd --key escape            # mirror bsp over y-axis
+leader < x : yabai -m space --mirror x-axis; skhd --key escape            # mirror bsp over x-axis
+leader < z : yabai -m window --toggle zoom-fullscreen; skhd --key escape  # zoom fullscreen
 
 
 # open apps
-:: open @
-ctrl + alt - space ; open
-open < escape ; default
-
-open < t : open /Applications/Alacritty.app;       skhd --key escape
-open < b : open /Applications/Google\ Chrome.app;  skhd --key escape
-open < k : open /Applications/Things3.app;         skhd --key escape
-open < s : open /Applications/Spotify.app;         skhd --key escape
-open < c : open /System/Applications/Calendar.app; skhd --key escape
+leader < shift - t : open /Applications/Alacritty.app;       skhd --key escape
+leader < shift - b : open /Applications/Google\ Chrome.app;  skhd --key escape
+leader < shift - k : open /Applications/Things3.app;         skhd --key escape
+leader < shift - s : open /Applications/Spotify.app;         skhd --key escape
+leader < shift - c : open /System/Applications/Calendar.app; skhd --key escape
