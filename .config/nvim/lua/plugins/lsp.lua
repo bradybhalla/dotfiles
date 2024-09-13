@@ -41,7 +41,7 @@ return {
 
             lspconfig.lua_ls.setup(configure({}))
 
-            lspconfig.tsserver.setup(configure({
+            lspconfig.ts_ls.setup(configure({
                 settings = {
                     typescript = { format = { semicolons = "insert" } },
                     javascript = { format = { semicolons = "insert" } }
