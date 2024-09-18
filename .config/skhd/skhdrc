@@ -29,8 +29,8 @@ leader < z : yabai -m window --toggle zoom-fullscreen; skhd --key escape  # zoom
 
 
 # open apps
-leader < shift - t : open /Applications/Alacritty.app;       skhd --key escape
-leader < shift - b : open /Applications/Google\ Chrome.app;  skhd --key escape
-leader < shift - k : open /Applications/Things3.app;         skhd --key escape
-leader < shift - s : open /Applications/Spotify.app;         skhd --key escape
-leader < shift - c : open /System/Applications/Calendar.app; skhd --key escape
+leader < shift - t : open -a Alacritty; skhd --key escape
+leader < shift - b : open -a Firefox;   skhd --key escape
+leader < shift - k : open -a Things3;   skhd --key escape
+leader < shift - s : open -a Spotify;   skhd --key escape
+leader < shift - c : open -a Calendar;  skhd --key escape

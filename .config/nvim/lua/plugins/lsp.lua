@@ -53,5 +53,7 @@ return {
             lspconfig.clangd.setup(configure({}))
 
             lspconfig.hls.setup(configure({}))
+
+            lspconfig.rust_analyzer.setup(configure({}))
         end
     } }
