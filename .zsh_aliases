@@ -13,7 +13,7 @@ notify(){
 # Applications #
 ################
 
-alias firefox="open -a Firefox.app"
+alias firefox="open -a Firefox\ Developer\ Edition"
 
 ###################
 # Quick directory #
