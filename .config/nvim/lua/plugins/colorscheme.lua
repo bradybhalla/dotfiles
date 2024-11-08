@@ -12,7 +12,7 @@ return {
                 return {
                     SpellBad = { fg = colors.red }, -- spelling errors
                     SpellCap = { fg = colors.red }, -- capitalization errors
-                    Conceal = { fg = colors.pink },  -- VimTeX conceal
+                    Conceal = { fg = colors.pink }, -- VimTeX conceal
 
                     DapBreakpoint = { fg = colors.blue },
                     DapStopped = { fg = colors.blue },

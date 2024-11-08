@@ -47,10 +47,10 @@ local function autolist(trigger, env)
     local function create_item()
         return sn(nil, c(1, {
             sn(nil, {
-                t({ "", "" }), i(1), t({ "\\end{" .. env .. "}" })
+                i(1), t("\\end{" .. env .. "}")
             }),
             sn(nil, {
-                t({ "", "\t\\item " }), i(1), t(""), d(2, create_item)
+                t("\t\\item "), i(1), t({"", ""}), d(2, create_item)
             }),
         }))
     end
@@ -58,6 +58,7 @@ local function autolist(trigger, env)
     return s({ trig = trigger, snippetType = "autosnippet" }, {
         t({ "\\begin{" .. env .. "}", "\t\\item " }),
         i(1),
+        t({"", ""}),
         d(2, create_item)
     })
 end
@@ -75,7 +76,6 @@ return {
 
     autocmd("txt", "text"),
     autocmd("tbf", "textbf"),
-    autocmd("bb", "mathbb"),
 
     -- figures
     autosnip("incg", { t("\\includegraphics[width="), i(1, "0.7"), t("\\textwidth]{"), i(2), t("}") }),
@@ -95,6 +95,9 @@ return {
     ---------
     -- Math -
     ---------
+    autocmd("bb", "mathbb"),
+    autocmd("vv", "vec"),
+
     autosnip("sseq", t("\\subseteq")),
     autosnip("...", t("\\ldots")),
     autosnip("css", {
