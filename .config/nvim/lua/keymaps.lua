@@ -29,7 +29,6 @@ require("which-key").add({
         { "<S-TAB>", "<CMD>lua require'luasnip'.expand()<CR>",         mode = "i" },
         { "<C-n>",   "<CMD>lua require'luasnip'.jump(1)<CR>",          mode = { "i", "s" } },
         { "<C-p>",   "<CMD>lua require'luasnip'.jump(-1)<CR>",         mode = { "i", "s" } },
-        { "<C-e>",   "<CMD>lua require'luasnip'.change_choice(1)<CR>", mode = { "i", "s" } },
         {
             "<C-e>",
             function()
