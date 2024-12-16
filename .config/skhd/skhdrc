@@ -4,29 +4,17 @@ rcmd - space    ; leader
 leader < escape ; default
 
 # window management
-#   yabai layout is "float" by default, but can be switched to and from "bsp"
-#   many keymaps have different behaviours depending on the layout
-                                                                                          # FLOAT / BSP
-leader < k        : yabai -m window --grid 1:1:0:0:1:1 --focus north ; skhd --key escape  # large window / focus up
-leader < j        : yabai -m window --grid 8:8:1:1:6:6 --focus south ; skhd --key escape  # small window / focus down
-leader < h        : yabai -m window --grid 1:2:0:0:1:1 --focus west  ; skhd --key escape  # left half / focus left
-leader < l        : yabai -m window --grid 1:2:1:0:1:1 --focus east  ; skhd --key escape  # right half / focus right
-leader < ctrl - k : yabai -m window --grid 2:1:0:0:1:1 --swap north  ; skhd --key escape  # upper half / move up
-leader < ctrl - j : yabai -m window --grid 2:1:0:1:1:1 --swap south  ; skhd --key escape  # lower half / move down
-leader < ctrl - h : yabai -m window --grid 1:3:0:0:2:1 --swap west   ; skhd --key escape  # left two-thirds / move left
-leader < ctrl - l : yabai -m window --grid 1:3:2:0:1:1 --swap east   ; skhd --key escape  # right third / move right
+leader < k        : yabai -m window --grid 1:1:0:0:1:1; skhd --key escape  # large window
+leader < j        : yabai -m window --grid 8:8:1:1:6:6; skhd --key escape  # small window
+leader < h        : yabai -m window --grid 1:2:0:0:1:1; skhd --key escape  # left half
+leader < l        : yabai -m window --grid 1:2:1:0:1:1; skhd --key escape  # right half
+leader < ctrl - k : yabai -m window --grid 2:1:0:0:1:1; skhd --key escape  # upper half
+leader < ctrl - j : yabai -m window --grid 2:1:0:1:1:1; skhd --key escape  # lower half
+leader < ctrl - h : yabai -m window --grid 1:3:0:0:2:1; skhd --key escape  # left two-thirds
+leader < ctrl - l : yabai -m window --grid 1:3:2:0:1:1; skhd --key escape  # right third
 
 leader < 1 : yabai -m window --space 1 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 1
 leader < 2 : yabai -m window --space 2 --focus; yabai -m window --grid 1:1:0:0:1:1; skhd --key escape # move to space 2
-
-leader < b : yabai -m space --layout bsp; skhd --key escape     # set layout mode to bsp
-leader < f : yabai -m space --layout float; skhd --key escape   # set layout mode to float
-
-leader < r : yabai -m space --rotate 90; skhd --key escape                # rotate bsp
-leader < y : yabai -m space --mirror y-axis; skhd --key escape            # mirror bsp over y-axis
-leader < x : yabai -m space --mirror x-axis; skhd --key escape            # mirror bsp over x-axis
-leader < z : yabai -m window --toggle zoom-fullscreen; skhd --key escape  # zoom fullscreen
-
 
 # open apps
 leader < shift - t : open -a Alacritty;                   skhd --key escape
@@ -34,3 +22,4 @@ leader < shift - b : open -a Firefox\ Developer\ Edition; skhd --key escape
 leader < shift - k : open -a Things3;                     skhd --key escape
 leader < shift - s : open -a Spotify;                     skhd --key escape
 leader < shift - c : open -a Calendar;                    skhd --key escape
+leader < shift - m : open -a Messages;                    skhd --key escape

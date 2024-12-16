@@ -9,7 +9,6 @@ return {
         config = function()
             -- diagnostic settings
             vim.diagnostic.config({
-                virtual_text = false,
                 severity_sort = true,
                 update_in_insert = true
             })
