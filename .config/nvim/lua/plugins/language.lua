@@ -1,9 +1,12 @@
 return {
+    -- lsp / formatter / debugger installer
     { "williamboman/mason.nvim", build = ":MasonUpdate", opts = {} },
+
+    -- language servers
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",              -- also dependency for cmp
+            "hrsh7th/cmp-nvim-lsp",
             { "folke/lazydev.nvim", opts = {} }, -- configure lua_ls for nvim
         },
         config = function()
@@ -36,16 +39,16 @@ return {
 
             local lspconfig = require("lspconfig")
 
-            lspconfig.pyright.setup(configure({}))
+            lspconfig.pyright.setup(configure {})
 
-            lspconfig.lua_ls.setup(configure({}))
+            lspconfig.lua_ls.setup(configure {})
 
-            lspconfig.ts_ls.setup(configure({
+            lspconfig.ts_ls.setup(configure {
                 settings = {
                     typescript = { format = { semicolons = "insert" } },
                     javascript = { format = { semicolons = "insert" } }
                 }
-            }))
+            })
 
             lspconfig.ocamllsp.setup(configure {})
             lspconfig.clangd.setup(configure {})
@@ -53,4 +56,47 @@ return {
             lspconfig.rust_analyzer.setup(configure {})
             lspconfig.coq_lsp.setup(configure {})
         end
-    } }
+    },
+
+    -- formatters
+    {
+        "stevearc/conform.nvim",
+        config = function()
+            local formatters = {
+                { ft = { "python" },            fmt = { "black" } },
+                { ft = { "html", "css" },       fmt = { "prettier" } },
+                { ft = { "bash", "zsh", "sh" }, fmt = { "beautysh" } },
+                { ft = { "ocaml" },             fmt = { "ocamlformat" } },
+            }
+
+            local formatters_expanded = {}
+            for i = 1, #formatters do
+                for _, ft in ipairs(formatters[i].ft) do
+                    formatters_expanded[ft] = formatters[i].fmt
+                end
+            end
+
+            require("conform").setup({
+                formatters_by_ft = formatters_expanded,
+            })
+        end
+    },
+
+    -- debuggers
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            "nvim-neotest/nvim-nio",
+            "mfussenegger/nvim-dap-python"
+        },
+        config = function()
+            require("dap-python").setup("python")
+
+            require("dapui").setup()
+
+            vim.fn.sign_define("DapBreakpoint", { texthl = "DapBreakpoint", text = "●", numhl = "" })
+            vim.fn.sign_define("DapStopped", { texthl = "DapStopped", text = "→", numhl = "" })
+        end
+    }
+}
