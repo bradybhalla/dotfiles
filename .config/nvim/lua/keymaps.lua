@@ -26,9 +26,9 @@ require("which-key").add({
 
     {
         -- luasnip
-        { "<S-TAB>", "<CMD>lua require'luasnip'.expand()<CR>",         mode = "i" },
-        { "<C-n>",   "<CMD>lua require'luasnip'.jump(1)<CR>",          mode = { "i", "s" } },
-        { "<C-p>",   "<CMD>lua require'luasnip'.jump(-1)<CR>",         mode = { "i", "s" } },
+        { "<S-TAB>", function() require("luasnip").expand() end, mode = "i" },
+        { "<C-n>",   function() require("luasnip").jump(1) end,  mode = { "i", "s" } },
+        { "<C-p>",   function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
         {
             "<C-e>",
             function()
@@ -81,21 +81,21 @@ require("which-key").add({
         -- debugger
         { "<leader>d",  group = "debugger" },
 
-        { "<leader>dt", "<CMD>lua require'dapui'.toggle()<CR>",          desc = "toggle ui" },
-        { "<leader>dx", "<CMD>lua require'dap'.disconnect()<CR>",        desc = "stop" },
-        { "<leader>dr", "<CMD>lua require'dap'.restart()<CR>",           desc = "restart" },
+        { "<leader>dt", function() require("dapui").toggle() end,          desc = "toggle ui" },
+        { "<leader>dx", function() require("dap").disconnect() end,        desc = "stop" },
+        { "<leader>dr", function() require("dap").restart() end,           desc = "restart" },
 
-        { "<leader>db", "<CMD>DapToggleBreakpoint<CR>",                  desc = "toggle breakpoint" },
-        { "<leader>dB", "<CMD>lua require'dap'.clear_breakpoints()<CR>", desc = "clear breakpoints" },
+        { "<leader>db", "<CMD>DapToggleBreakpoint<CR>",                    desc = "toggle breakpoint" },
+        { "<leader>dB", function() require("dap").clear_breakpoints() end, desc = "clear breakpoints" },
 
-        { "<leader>dc", "<CMD>DapContinue<CR>",                          desc = "continue" },
-        { "<leader>do", "<CMD>DapStepOver<CR>",                          desc = "step over" },
-        { "<leader>di", "<CMD>DapStepInto<CR>",                          desc = "step into" },
-        { "<leader>dO", "<CMD>DapStepOut<CR>",                           desc = "step out" },
-        { "<leader>dC", "<CMD>lua require'dap'.run_to_cursor()<CR>",     desc = "run to cursor" },
-        { "<leader>ds", "<CMD>lua require'dap'.goto_()<CR>",             desc = "skip to cursor" },
+        { "<leader>dc", "<CMD>DapContinue<CR>",                            desc = "continue" },
+        { "<leader>do", "<CMD>DapStepOver<CR>",                            desc = "step over" },
+        { "<leader>di", "<CMD>DapStepInto<CR>",                            desc = "step into" },
+        { "<leader>dO", "<CMD>DapStepOut<CR>",                             desc = "step out" },
+        { "<leader>dC", function() require("dap").run_to_cursor() end,     desc = "run to cursor" },
+        { "<leader>ds", function() require("dap").goto_() end,             desc = "skip to cursor" },
 
-        { "<leader>df", "<CMD>lua require'dap'.focus_frame()<CR>",       desc = "find current line" },
+        { "<leader>df", function() require("dap").focus_frame() end,       desc = "find current line" },
     },
 
 })
