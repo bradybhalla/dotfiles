@@ -47,12 +47,10 @@ return {
                 }
             }))
 
-            lspconfig.ocamllsp.setup(configure({}))
-
-            lspconfig.clangd.setup(configure({}))
-
-            lspconfig.hls.setup(configure({}))
-
-            lspconfig.rust_analyzer.setup(configure({}))
+            lspconfig.ocamllsp.setup(configure {})
+            lspconfig.clangd.setup(configure {})
+            lspconfig.hls.setup(configure {})
+            lspconfig.rust_analyzer.setup(configure {})
+            lspconfig.coq_lsp.setup(configure {})
         end
     } }

@@ -16,6 +16,10 @@ return {
 
                     DapBreakpoint = { fg = colors.blue },
                     DapStopped = { fg = colors.blue },
+
+                    coqProofDelim = { fg = colors.blue, bold = true },
+                    coqVernacCmd = { fg = colors.pink, bold = true },
+                    coqError = { fg = colors.red, bold = true },
                 }
             end
 
