@@ -43,14 +43,7 @@ return {
                     { name = "luasnip" }
                 }, {
                     { name = "buffer" },
-                }),
-                -- TODO: do you actually want this?
-                -- performance = {
-                --     max_view_entries = 10
-                -- },
-                -- completion = {
-                --     keyword_length = 2
-                -- }
+                })
             }
 
             cmp.setup.cmdline({ "/", "?" }, {

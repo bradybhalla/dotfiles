@@ -13,7 +13,6 @@ return {
     },
     {
         "whonore/Coqtail",
-        ft = "coq",
         init = function()
             -- don't use default insert mode mappings
             vim.g.coqtail_noimap = 1
@@ -30,5 +29,5 @@ return {
             endfunction
             ]]
         end
-    },
+    }
 }

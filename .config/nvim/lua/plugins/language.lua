@@ -1,5 +1,5 @@
 return {
-    -- lsp / formatter / debugger installer
+    -- installer
     { "williamboman/mason.nvim", build = ":MasonUpdate", opts = {} },
 
     -- language servers
@@ -27,7 +27,6 @@ return {
                 vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.icon, numhl = "" })
             end
 
-
             -- pass in custom options
             local function configure(changes)
                 return vim.tbl_deep_extend("force", {
@@ -36,20 +35,16 @@ return {
                 }, changes)
             end
 
-
             local lspconfig = require("lspconfig")
 
             lspconfig.pyright.setup(configure {})
-
             lspconfig.lua_ls.setup(configure {})
-
             lspconfig.ts_ls.setup(configure {
                 settings = {
                     typescript = { format = { semicolons = "insert" } },
                     javascript = { format = { semicolons = "insert" } }
                 }
             })
-
             lspconfig.ocamllsp.setup(configure {})
             lspconfig.clangd.setup(configure {})
             lspconfig.hls.setup(configure {})
