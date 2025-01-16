@@ -1,12 +1,6 @@
 -- text based file
 vim.cmd("runtime! ftplugin/text.lua")
 
--- VimTeX settings
-vim.cmd([[
-let g:vimtex_syntax_conceal["math_bounds"]=0
-let g:vimtex_quickfix_open_on_warning=0
-]])
-
 -- keymaps
 require("which-key").add({
     buffer = 0,
@@ -19,7 +13,6 @@ require("which-key").add({
         desc = "toggle VimTex conceal"
     }
 })
-
 
 -- VimTeX completions (uses omni instead of lsp)
 local cmp = require("cmp")
