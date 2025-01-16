@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # choose which set of configuration files to use
-ITEMS=( .config/nvim .config/tmux .config/alacritty .config/skhd .config/yabai .zshrc .zsh_aliases .p10k.zsh )
+ITEMS=( .config/nvim .config/tmux .config/alacritty .config/skhd .zshrc .zsh_aliases .p10k.zsh )
 # ITEMS=( .config/nvim .config/tmux )
 
 # create backup folder
