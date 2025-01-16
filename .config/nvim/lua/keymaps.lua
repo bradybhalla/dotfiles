@@ -98,4 +98,8 @@ require("which-key").add({
         { "<leader>df", function() require("dap").focus_frame() end,       desc = "find current line" },
     },
 
+    {
+        -- copilot
+        { "<C-y>", "copilot#Accept(\"\")", expr = true, replace_keycodes = false, mode = "i" },
+    }
 })

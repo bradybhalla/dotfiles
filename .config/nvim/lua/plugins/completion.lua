@@ -37,6 +37,7 @@ return {
                     ["<TAB>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
+                    ['<C-h>'] = cmp.mapping.abort()
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
@@ -63,5 +64,14 @@ return {
                 matching = { disallow_symbol_nonprefix_matching = false }
             })
         end
+    },
+
+    {
+        "github/copilot.vim",
+        config = function()
+            vim.g.copilot_no_tab_map = true
+            vim.cmd [[Copilot disable]]
+        end
     }
+
 }

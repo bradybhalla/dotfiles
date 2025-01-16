@@ -11,14 +11,14 @@ return {
                     SpellCap = { fg = colors.red }, -- capitalization errors
                     Conceal = { fg = colors.pink }, -- VimTeX conceal
 
-                    -- debugger symbols
                     DapBreakpoint = { fg = colors.blue },
                     DapStopped = { fg = colors.blue },
 
-                    -- nicer coq highlighting
                     coqProofDelim = { fg = colors.blue, bold = true },
                     coqVernacCmd = { fg = colors.pink, bold = true },
                     coqError = { fg = colors.red, bold = true },
+
+                    CopilotSuggestion = { fg = colors.subtext0 }
                 }
             end
 
