@@ -37,7 +37,7 @@ return {
                     ["<TAB>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ['<C-h>'] = cmp.mapping.abort()
+                    ["<C-h>"] = cmp.mapping.abort()
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
