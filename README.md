@@ -11,13 +11,13 @@ My setup for 90% of everything I do on a computer.
 - [lazygit](https://github.com/jesseduffield/lazygit): Git UI for the terminal. This saves me so much time.
 - [Catppuccin](https://catppuccin.com/): The color scheme I use for everything I can (frappé is the best flavor).
 - [skhd](https://github.com/koekeishiya/skhd): Quickly open apps.
-- Various shell utils: [fzf](https://github.com/junegunn/fzf) (fuzzy finder), [ripgrep](https://github.com/BurntSushi/ripgrep) (better grep), [fd](https://github.com/sharkdp/fd) (better find), [htop](https://htop.dev) (interactive process viewer), [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) (Python package and version manager), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (highlight valid/invalid commands and files), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (show command completion)
+- Various shell utils: [fzf](https://github.com/junegunn/fzf) (fuzzy finder), [ripgrep](https://github.com/BurntSushi/ripgrep) (better grep), [fd](https://github.com/sharkdp/fd) (better find), [htop](https://htop.dev) (interactive process viewer), [zoxide](https://github.com/ajeetdsouza/zoxide) (better cd), [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) (Python package and version manager), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (highlight valid/invalid commands and files), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (show command completion)
 
 ## Setup
 ### Setup for MacOS
 Clone this repository. Install [Alacritty](https://alacritty.org/) and [Homebrew](https://brew.sh) using instructions on their websites. Run
 ```
-brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop miniconda koekeishiya/formulae/skhd
+brew install neovim powerlevel10k fzf ripgrep fd lazygit tmux htop zoxide miniconda koekeishiya/formulae/skhd
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/bin/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/bin/zsh-autosuggestions
 ./configure.sh

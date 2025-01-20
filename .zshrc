@@ -25,6 +25,9 @@ export PATH=$PATH:/opt/homebrew/bin:$HOME/.ghcup/bin
 # fzf key bindings and completions
 eval "$(fzf --zsh)"
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # zsh-autosuggestions
 [[ -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
