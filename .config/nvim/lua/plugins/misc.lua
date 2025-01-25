@@ -20,12 +20,13 @@ return {
             -- easier keymaps for basic functions
             vim.cmd [[
             function CoqtailHookDefineMappings()
-                imap <buffer> <S-Down> <Plug>CoqNext
-                imap <buffer> <S-Left> <Plug>CoqToLine
-                imap <buffer> <S-Up> <Plug>CoqUndo
-                nmap <buffer> <S-Down> <Plug>CoqNext
-                nmap <buffer> <S-Left> <Plug>CoqToLine
-                nmap <buffer> <S-Up> <Plug>CoqUndo
+                nmap <buffer> <C-j> <Plug>CoqNext
+                nmap <buffer> <C-l> <Plug>CoqToLine
+                nmap <buffer> <C-k> <Plug>CoqUndo
+
+                imap <buffer> <M-j> <Plug>CoqNext
+                imap <buffer> <M-l> <Plug>CoqToLine
+                imap <buffer> <M-k> <Plug>CoqUndo
             endfunction
             ]]
         end

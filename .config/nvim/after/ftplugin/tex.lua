@@ -1,6 +1,3 @@
--- text based file
-vim.cmd("runtime! ftplugin/text.lua")
-
 -- keymaps
 require("which-key").add({
     buffer = 0,

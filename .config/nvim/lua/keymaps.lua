@@ -1,8 +1,19 @@
 require("which-key").add({
+    -- behavior
     {
-        -- behavior
-        { ">", ">gv", mode = "v" },
-        { "<", "<gv", mode = "v" },
+        -- indenting lines
+        { ">", ">gv" },
+        { "<", "<gv" },
+        mode = "v"
+    },
+
+    {
+        -- jk move within wrapped line
+        { "j",  "gj" },
+        { "gj", "j" },
+        { "k",  "gk" },
+        { "gk", "k" },
+        mode = { "n", "v" },
     },
 
     {

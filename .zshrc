@@ -26,7 +26,7 @@ export PATH=$PATH:/opt/homebrew/bin:$HOME/.ghcup/bin
 eval "$(fzf --zsh)"
 
 # zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 # zsh-autosuggestions
 [[ -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
