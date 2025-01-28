@@ -18,11 +18,11 @@ return {
             require("nvim-treesitter.configs").setup {
                 highlight = {
                     enable = true,
-                    disable = { "latex" }
+                    disable = { "latex" } -- vimtex has better highlighting
                 },
                 incremental_selection = {
                     enable = true,
-                    disable = { "vim" },
+                    disable = { "vim" }, -- causes error in q: window
                     keymaps = {
                         init_selection = "<CR>",
                         node_incremental = "<CR>",
