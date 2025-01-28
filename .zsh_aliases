@@ -14,24 +14,3 @@ notify(){
 ################
 
 alias firefox="open -a Firefox\ Developer\ Edition"
-
-###################
-# Quick directory #
-###################
-
-# utility function for fuzzy find on all directories from $HOME
-# does not include ~/Library/
-_gen_sd(){
-    query="/"
-    query+="${@:2}"
-    dir=$(fd --type d --follow --exclude "Library" --hidden --no-ignore . "$HOME" | \
-        fzf --height 10 --query "$query")
-
-    if [ ! -z "$dir" ]; then
-        $1 $dir
-    fi
-}
-
-# cd to any directory starting at $HOME
-alias sd="_gen_sd cd"
-
