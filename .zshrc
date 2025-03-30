@@ -56,7 +56,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # OCaml
-[[ -r "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
+[[ ! -r '/Users/bradybhalla/.opam/opam-init/init.zsh' ]] || source '/Users/bradybhalla/.opam/opam-init/init.zsh'
 
 # Ruby
 [[ -r "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ]] && source "/opt/homebrew/opt/chruby/share/chruby/chruby.sh"

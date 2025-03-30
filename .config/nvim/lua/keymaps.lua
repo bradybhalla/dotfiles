@@ -1,5 +1,4 @@
 require("which-key").add({
-    -- behavior
     {
         -- indenting lines
         { ">", ">gv" },
@@ -111,6 +110,11 @@ require("which-key").add({
 
     {
         -- copilot
-        { "<C-y>", "copilot#Accept(\"\")", expr = true, replace_keycodes = false, mode = "i" },
+        { "<M-k>", "copilot#Accept(\"\")", expr = true, replace_keycodes = false, },
+        { "<M-l>", "<Plug>(copilot-accept-word)" },
+        { "<M-j>", "<Plug>(copilot-accept-line)" },
+        { "<M-h>", "<Plug>(copilot-dismiss)" },
+
+        mode="i"
     }
 })

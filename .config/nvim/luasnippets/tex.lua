@@ -112,6 +112,9 @@ return {
     autosnip("ddx", {
         t("\\frac{d "), i(1), t("}{d "), i(2, "x"), t("}")
     }),
+    autosnip("smm", {
+        t("\\sum_{"), i(1), t("}^{"), i(2), t("}")
+    }),
 
     -- expand fraction
     s({ trig = [[\(\S\+\)\/\(\S\+\)]], trigEngine = "vim", hidden = true }, f(

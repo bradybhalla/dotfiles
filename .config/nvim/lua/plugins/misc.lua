@@ -24,9 +24,12 @@ return {
                 nmap <buffer> <C-l> <Plug>CoqToLine
                 nmap <buffer> <C-k> <Plug>CoqUndo
 
-                imap <buffer> <M-j> <Plug>CoqNext
-                imap <buffer> <M-l> <Plug>CoqToLine
-                imap <buffer> <M-k> <Plug>CoqUndo
+                " since <C-l> doesn't clear highlights
+                nmap <buffer> <Esc> <CMD>noh\|echo<CR>
+
+                imap <buffer> <C-j> <Plug>CoqNext
+                imap <buffer> <C-l> <Plug>CoqToLine
+                imap <buffer> <C-k> <Plug>CoqUndo
             endfunction
             ]]
         end
