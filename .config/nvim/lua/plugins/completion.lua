@@ -4,7 +4,6 @@ return {
         "L3MON4D3/LuaSnip",
         config = function()
             require("luasnip").config.setup({
-                store_selection_keys = "<S-TAB>", -- snippets using visual selection
                 enable_autosnippets = true,
                 update_events = "TextChanged,TextChangedI"
             })
@@ -35,9 +34,8 @@ return {
                 },
                 mapping = {
                     ["<TAB>"] = cmp.mapping.confirm({ select = true }),
-                    ["<C-j>"] = cmp.mapping.select_next_item(),
-                    ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ["<C-h>"] = cmp.mapping.abort()
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },

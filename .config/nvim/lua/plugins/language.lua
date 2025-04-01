@@ -13,25 +13,23 @@ return {
             -- diagnostic settings
             vim.diagnostic.config({
                 severity_sort = true,
-                update_in_insert = true
+                update_in_insert = true,
+                virtual_text = true,
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                        [vim.diagnostic.severity.HINT] = ""
+                    }
+                }
             })
-
-            -- diagnostic icons
-            local signs = {
-                { name = "DiagnosticSignError", icon = "" },
-                { name = "DiagnosticSignWarn", icon = "" },
-                { name = "DiagnosticSignInfo", icon = "" },
-                { name = "DiagnosticSignHint", icon = "" },
-            }
-            for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.icon, numhl = "" })
-            end
 
             -- pass in custom options
             local function configure(changes)
                 return vim.tbl_deep_extend("force", {
                     -- default options
-                    capabilities = require("cmp_nvim_lsp").default_capabilities()
+                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
                 }, changes)
             end
 
@@ -76,22 +74,4 @@ return {
             })
         end
     },
-
-    -- debuggers
-    {
-        "mfussenegger/nvim-dap",
-        dependencies = {
-            "rcarriga/nvim-dap-ui",
-            "nvim-neotest/nvim-nio",
-            "mfussenegger/nvim-dap-python"
-        },
-        config = function()
-            require("dap-python").setup("python")
-
-            require("dapui").setup()
-
-            vim.fn.sign_define("DapBreakpoint", { texthl = "DapBreakpoint", text = "●", numhl = "" })
-            vim.fn.sign_define("DapStopped", { texthl = "DapStopped", text = "→", numhl = "" })
-        end
-    }
 }

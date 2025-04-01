@@ -29,13 +29,3 @@ vim.opt.splitbelow       = true
 
 -- don't show insert in command line
 vim.opt.showmode         = false
-
--- fix filetype settings
-vim.g.filetype_pl        = "prolog"
-
--- nvim-tree says to do this
-vim.g.loaded_netrw       = 1
-vim.g.loaded_netrwPlugin = 1
-
-vim.opt.termguicolors    = true
-----------------------------

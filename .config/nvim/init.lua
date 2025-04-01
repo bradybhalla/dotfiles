@@ -1,4 +1,9 @@
+-- editor options
 require("./options")
-require("./commands")
+
+-- setup plugins
 require("./lazy")
+
+-- define user commands and keymaps
+require("./commands")
 require("./keymaps")

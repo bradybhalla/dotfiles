@@ -4,13 +4,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         "git",
         "clone",
         "--filter=blob:none",
+        "--branch=stable",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
+        lazypath
     })
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {}
-
-require("lazy").setup("plugins", opts)
+require("lazy").setup({
+    spec = { { import = "plugins" } },
+    install = { colorscheme = { "catppuccin" } }
+})
