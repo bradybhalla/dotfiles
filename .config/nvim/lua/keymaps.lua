@@ -33,12 +33,12 @@ maps[#maps + 1] = {
 -- telescope shortcuts
 maps[#maps + 1] = {
     { "<leader>f",  group = "telescope" },
-    { "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>",                desc = "find file" },
-    { "<leader>fa", "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", desc = "find file (no ignore)" },
-    { "<leader>fg", "<CMD>Telescope live_grep<CR>",                             desc = "find text" },
-    { "<leader>fb", "<CMD>Telescope buffers<CR>",                               desc = "find buffer" },
-    { "<leader>fh", "<CMD>Telescope help_tags<CR>",                             desc = "search help" },
-    { "<leader>ft", "<CMD>Telescope builtin<CR>",                               desc = "telescope builtin" },
+    { "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>",                desc = "files" },
+    { "<leader>fa", "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", desc = "files (no ignore)" },
+    { "<leader>fg", "<CMD>Telescope live_grep<CR>",                             desc = "text" },
+    { "<leader>fb", "<CMD>Telescope buffers<CR>",                               desc = "buffers" },
+    { "<leader>fh", "<CMD>Telescope help_tags<CR>",                             desc = "help" },
+    { "<leader>ft", "<CMD>Telescope builtin<CR>",                               desc = "builtins" },
 }
 
 -- filetree shortcuts
