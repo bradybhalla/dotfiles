@@ -50,6 +50,23 @@ maps[#maps + 1] = {
 }
 
 
+-- luasnip insert mode bindings
+maps[#maps + 1] = {
+    { "<S-TAB>", function() require("luasnip").expand() end, mode = "i" },
+    { "<C-f>",   function() require("luasnip").jump(1) end,  mode = { "i", "s" } },
+    { "<C-b>",   function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    {
+        "<C-e>",
+        function()
+            if require("luasnip").choice_active() then
+                require("luasnip").change_choice(1)
+            end
+        end,
+        mode = { "i", "s" }
+    },
+}
+
+
 -- copilot chat shortcuts
 local prompt_buffer = function()
     return {
@@ -64,6 +81,17 @@ local prompt_visual = function()
         context = "buffer"
     }
 end
+
+
+-- copilot insert mode bindings
+maps[#maps + 1] = {
+    { "<C-k>", "exists(\"*copilot#Accept\") ? copilot#Accept(\"\") : \"\"",     expr = true, replace_keycodes = false, },
+    { "<C-l>", "exists(\"*copilot#AcceptWord\") ? copilot#AcceptWord() : \"\"", expr = true, replace_keycodes = false },
+    { "<C-j>", "exists(\"*copilot#AcceptLine\") ? copilot#AcceptLine() : \"\"", expr = true, replace_keycodes = false },
+    { "<C-h>", "exists(\"*copilot#Dismiss\") ? copilot#Dismiss() : \"\"",       expr = true, replace_keycodes = false },
+    mode = "i"
+}
+
 
 maps[#maps + 1] = {
     { "<leader>i", group = "copilot chat" },
@@ -112,29 +140,5 @@ maps[#maps + 1] = {
     mode = { "n", "v" }
 }
 
--- luasnip insert mode bindings
-maps[#maps + 1] = {
-    { "<S-TAB>", function() require("luasnip").expand() end, mode = "i" },
-    { "<C-f>",   function() require("luasnip").jump(1) end,  mode = { "i", "s" } },
-    { "<C-b>",   function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    {
-        "<C-e>",
-        function()
-            if require("luasnip").choice_active() then
-                require("luasnip").change_choice(1)
-            end
-        end,
-        mode = { "i", "s" }
-    },
-}
-
--- copilot insert mode bindings
-maps[#maps + 1] = {
-    { "<C-k>", "copilot#Accept(\"\")",       expr = true, replace_keycodes = false, },
-    { "<C-l>", "<Plug>(copilot-accept-word)" },
-    { "<C-j>", "<Plug>(copilot-accept-line)" },
-    { "<C-h>", "<Plug>(copilot-dismiss)" },
-    mode = "i"
-}
 
 require("which-key").add(maps)
