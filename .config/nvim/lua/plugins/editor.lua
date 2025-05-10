@@ -32,7 +32,6 @@ return {
         end
     },
 
-    -- statusline
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -77,7 +76,6 @@ return {
         end
     },
 
-    -- filetree
     {
         "nvim-tree/nvim-tree.lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -88,14 +86,14 @@ return {
         }
     },
 
-    -- keymap management and popup
     {
         "folke/which-key.nvim",
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
-        opts = {}
+        opts = {
+            delay = function(ctx)
+                -- show up instantly on spelling, otherwise delay
+                return ctx.plugin == "spelling" and 0 or 200
+            end,
+        }
     },
 
     { "tpope/vim-surround" },
@@ -107,7 +105,18 @@ return {
 
             local Rule = require("nvim-autopairs.rule")
             local autopairs = require("nvim-autopairs")
-            autopairs.add_rule(Rule("$", "$", { "tex" }))
+            autopairs.add_rule(Rule("$", "$", "tex"))
+            autopairs.get_rules("`")[1].not_filetypes = { "ocaml" }
+            autopairs.get_rules("'")[1].not_filetypes = { "ocaml" }
+        end
+    },
+
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function()
+            require("treesitter-context").setup {}
+
+            vim.cmd [[ hi TreesitterContextBottom gui=none ]]
         end
     }
 

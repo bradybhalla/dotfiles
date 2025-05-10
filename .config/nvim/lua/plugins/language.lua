@@ -48,6 +48,7 @@ return {
             lspconfig.hls.setup(configure {})
             lspconfig.rust_analyzer.setup(configure {})
             lspconfig.coq_lsp.setup(configure {})
+            lspconfig.svelte.setup(configure {})
         end
     },
 

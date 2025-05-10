@@ -21,13 +21,13 @@ maps[#maps + 1] = {
 
 -- general shortcuts
 maps[#maps + 1] = {
-    { "<leader>q", "<CMD>q<CR>",            desc = "quit" },
-    { "<leader>w", "<CMD>w<CR>",            desc = "save" },
-    { "<leader>c", "\"+",                   desc = "system clipboard", mode = { "n", "v" } },
-    { "<leader>O", "<CMD>OpenFinder<CR>",   desc = "open finder" },
-    { "<leader>S", "<CMD>ToggleSpell<CR>",  desc = "toggle spellcheck" },
-    { "<leader>G", "<CMD>Lazygit<CR>",      desc = "lazygit" },
-    { "<leader>F", "<CMD>FormatBuffer<CR>", desc = "format buffer" },
+    { "<leader>q", "<CMD>q<CR>",           desc = "quit" },
+    { "<leader>w", "<CMD>w<CR>",           desc = "save" },
+    { "<leader>c", "\"+",                  desc = "system clipboard",       mode = { "n", "v" } },
+    { "<leader>O", "<CMD>OpenFinder<CR>",  desc = "open finder" },
+    { "<leader>S", "<CMD>ToggleSpell<CR>", desc = "toggle spellcheck" },
+    { "<leader>G", "<CMD>Lazygit<CR>",     desc = "lazygit" },
+    { "<leader>F", "<CMD>Format<CR>",      desc = "format buffer or range", mode = { "n", "v" } },
 }
 
 -- telescope shortcuts
@@ -39,6 +39,13 @@ maps[#maps + 1] = {
     { "<leader>fb", "<CMD>Telescope buffers<CR>",                               desc = "buffers" },
     { "<leader>fh", "<CMD>Telescope help_tags<CR>",                             desc = "help" },
     { "<leader>ft", "<CMD>Telescope builtin<CR>",                               desc = "builtins" },
+}
+
+-- lsp telescope shortcuts
+maps[#maps + 1] = {
+    { "<leader>l",  group = "lsp (telescope)" },
+    { "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>",  desc = "document symbols" },
+    { "<leader>lS", "<CMD>Telescope lsp_workspace_symbols<CR>", desc = "workspace symbols" },
 }
 
 -- filetree shortcuts
