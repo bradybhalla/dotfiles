@@ -46,5 +46,10 @@ return {
     },
 
     { "tpope/vim-surround" },
-    { "ggandor/leap.nvim" },
+    {
+        "ggandor/leap.nvim",
+        config = function()
+            require("leap").set_default_mappings()
+        end
+    },
 }

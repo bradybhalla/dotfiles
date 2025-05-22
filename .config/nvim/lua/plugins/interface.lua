@@ -28,9 +28,9 @@ return {
         }
     },
 
-    { "akinsho/toggleterm.nvim" },
+    { "akinsho/toggleterm.nvim", opts = {} },
 
-    { "lewis6991/gitsigns.nvim" },
+    { "lewis6991/gitsigns.nvim", opts = {} },
 
     {
         "nvim-lualine/lualine.nvim",
