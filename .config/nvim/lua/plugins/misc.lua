@@ -1,6 +1,4 @@
 return {
-    { "akinsho/toggleterm.nvim", opts = {} },
-    { "lewis6991/gitsigns.nvim", opts = {} },
     {
         "lervag/vimtex",
         init = function()

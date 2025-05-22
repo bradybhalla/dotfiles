@@ -109,41 +109,6 @@ maps[#maps + 1] = {
         end,
         desc = "toggle chat"
     },
-    {
-        "<leader>iC",
-        function()
-            require("CopilotChat").ask("Add comments to the selected code. " ..
-                "Only add comments if they enhance the readability of the code. " ..
-                "Do not add comments to code which is already easy to understand " ..
-                "Do not modify the existing code. " ..
-                "Do not modify existing comments.",
-                prompt_visual())
-        end,
-        desc = "add comments (visual selection)"
-    },
-    {
-        "<leader>ii",
-        function()
-            require("CopilotChat").ask(
-                "Write a code snippet which implements the selected comment. " ..
-                "Do not keep the original comment. " ..
-                "Do not add excessive additional comments.",
-                prompt_visual())
-        end,
-        desc = "implement from comment (visual selection)"
-    },
-    {
-        "<leader>id",
-        function()
-            require("CopilotChat").ask(
-                "Analyze the current file and determine if there is a bug. " ..
-                "If a bug exists, explain it and modify the code. " ..
-                "If a bug does not exist, state this.",
-                prompt_buffer())
-        end,
-        desc = "find and fix bugs"
-    },
-
     mode = { "n", "v" }
 }
 
