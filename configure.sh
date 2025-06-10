@@ -5,7 +5,7 @@ ITEMS=( .config/nvim
         .config/tmux
         .config/alacritty
         .config/skhd
-        .emacs
+        .spacemacs
         .zshrc
         .zsh_aliases
         .p10k.zsh )
