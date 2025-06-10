@@ -73,23 +73,6 @@ maps[#maps + 1] = {
     },
 }
 
-
--- copilot chat shortcuts
-local prompt_buffer = function()
-    return {
-        selection = require("CopilotChat.select").buffer,
-        highlight_selection = false
-    }
-end
-
-local prompt_visual = function()
-    return {
-        selection = require("CopilotChat.select").visual,
-        context = "buffer"
-    }
-end
-
-
 -- copilot insert mode bindings
 maps[#maps + 1] = {
     { "<C-k>", "exists(\"*copilot#Accept\") ? copilot#Accept(\"\") : \"\"",     expr = true, replace_keycodes = false, },
@@ -98,7 +81,6 @@ maps[#maps + 1] = {
     { "<C-h>", "exists(\"*copilot#Dismiss\") ? copilot#Dismiss() : \"\"",       expr = true, replace_keycodes = false },
     mode = "i"
 }
-
 
 maps[#maps + 1] = {
     { "<leader>i", group = "copilot chat" },
