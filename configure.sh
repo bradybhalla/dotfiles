@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # choose which set of configuration files to use
-ITEMS=( .config/nvim .config/tmux .config/alacritty .config/skhd .zshrc .zsh_aliases .p10k.zsh )
-# ITEMS=( .config/nvim .config/tmux )
+ITEMS=( .config/nvim
+        .config/tmux
+        .config/alacritty
+        .config/skhd
+        .emacs
+        .zshrc
+        .zsh_aliases
+        .p10k.zsh )
 
 # create backup folder
 if [ -d backup ]; then
@@ -25,7 +31,7 @@ for item in "${ITEMS[@]}"; do
     fi
 
     mkdir -p $(dirname "$HOME/$item")
-    cp -r "$item" "$HOME/$item"
+    cp -r "dotfiles/$item" "$HOME/$item"
 done
 
 echo "Done!"

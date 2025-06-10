@@ -97,6 +97,7 @@ return {
     ---------
     autocmd("bb", "mathbb"),
     autocmd("vv", "vec"),
+    autosnip(";;", {t("\\{"), i(1), t("\\}")}),
 
     autosnip("sseq", t("\\subseteq")),
     autosnip("...", t("\\ldots")),
@@ -158,7 +159,7 @@ return {
     % Setup/Packages %
     %%%%%%%%%%%%%%%%%%
 
-    \documentclass[a4paper, 11pt]{article}
+    \documentclass[11pt]{article}
 
     \usepackage{fullpage}
     \usepackage{amsmath}
