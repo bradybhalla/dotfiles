@@ -5,6 +5,7 @@ leader < escape ; default
 
 # open apps
 leader < shift - t : open -a Alacritty;                   skhd --key escape
+leader < shift - e : open -a Emacs;                       skhd --key escape
 leader < shift - b : open -a Firefox\ Developer\ Edition; skhd --key escape
 leader < shift - k : open -a Things3;                     skhd --key escape
 leader < shift - s : open -a Spotify;                     skhd --key escape
