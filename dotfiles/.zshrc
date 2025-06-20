@@ -17,7 +17,7 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 ########################
 
 # Set path
-export PATH=$PATH:/opt/homebrew/bin:$HOME/.ghcup/bin
+export PATH=$PATH:/opt/homebrew/bin:$HOME/.local/bin
 
 # Define aliases and functions
 [[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
