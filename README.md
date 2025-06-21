@@ -4,13 +4,13 @@ My setup for 90% of everything I do on a computer.
 
 ## Components
 
-- [Neovim](https://neovim.io): The best text editor. This configuration has LSP, autocomplete, telescope, a LaTeX setup, and more.
-- [tmux](https://github.com/tmux/tmux): Terminal multiplexer. Prefix `Ctrl-S`.
-- [Alacritty](https://alacritty.org/): A (blazingly?!) fast terminal emulator. Keybindings for use with tmux. Install MesloLGS Nerd Font if needed.
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k): Very nice zsh prompt.
-- [lazygit](https://github.com/jesseduffield/lazygit): Git UI for the terminal. This saves me so much time.
-- [Catppuccin](https://catppuccin.com/): The color scheme I use for everything I can (frappé is the best flavor).
-- [skhd](https://github.com/koekeishiya/skhd): Quickly open apps.
+- [Neovim](https://neovim.io): configured with LSP, autocomplete, telescope, LaTeX, and more.
+- [tmux](https://github.com/tmux/tmux): prefix `Ctrl-S`.
+- [Alacritty](https://alacritty.org/): keybindings for use with tmux. Install MesloLGS Nerd Font if needed.
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k): zsh prompt.
+- [lazygit](https://github.com/jesseduffield/lazygit): git ui for the terminal.
+- [Catppuccin](https://catppuccin.com/): frappé is the best flavor
+- [skhd](https://github.com/koekeishiya/skhd): used to quickly open apps
 - Various shell utils: [fzf](https://github.com/junegunn/fzf) (fuzzy finder), [ripgrep](https://github.com/BurntSushi/ripgrep) (better grep), [fd](https://github.com/sharkdp/fd) (better find), [htop](https://htop.dev) (interactive process viewer), [zoxide](https://github.com/ajeetdsouza/zoxide) (better cd), [miniconda](https://docs.conda.io/projects/miniconda/en/latest/) (Python package and version manager), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (highlight valid/invalid commands and files), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (show command completion)
 
 ## Setup
