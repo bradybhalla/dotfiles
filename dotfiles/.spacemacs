@@ -53,8 +53,8 @@ This function should only modify configuration layer settings."
           org-agenda-files (directory-files-recursively "~/org" "\\.org$")
           org-refile-targets '((org-agenda-files :maxlevel . 2))
           org-capture-templates
-          '(("t" "Todo" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n  %t\n  %a")
-            ("n" "Note" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n  %u\n  %a")))
+          '(("t" "Todo" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n%t\n%a")
+            ("n" "Note" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n%u\n%a")))
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
