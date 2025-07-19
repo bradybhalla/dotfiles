@@ -31,7 +31,7 @@ eval "$(zoxide init zsh --cmd cd)"
 # zsh-autosuggestions
 [[ -r "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$HOME/bin/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# zsh-syntax-highlighting (keep at bottom of .zshrc)
+# zsh-syntax-highlighting
 [[ -r "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 
