@@ -9,13 +9,16 @@ My setup for 90% of everything I do on a computer.
   LaTeX, and more.
 - [Spacemacs](https://www.spacemacs.org/)
 
-### Window/shortcut managers
+### Window managers / Keyboard shortcuts
 - [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager
 - [Rectangle](https://rectangleapp.com/): if you don't want a tiling window
   manager
-- [skhd](https://github.com/koekeishiya/skhd): used to quickly open apps
+- [skhd](https://github.com/koekeishiya/skhd): custom keyboard shortcuts, used
+  to quickly open apps
+- [Karabiner Elements](https://karabiner-elements.pqrs.org): bind `Caps Lock` to
+  mod-tap `Ctrl`/`Esc`
 
-### Terminal/shell
+### Terminal / Shell
 - [Alacritty](https://alacritty.org/): download MesloLGS Nerd Font if needed
 - [tmux](https://github.com/tmux/tmux): prefix `Ctrl-S`
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k): zsh prompt
@@ -35,22 +38,16 @@ My setup for 90% of everything I do on a computer.
 
 ## Setup
 
-### Setup for MacOS
+### Dotfiles Setup
 
 Install apps and tools listed above (most can be done with
-[Homebrew](https://brew.sh)). Run `./configure.sh` to put config files in the
-correct locations.
-
-### (Partial) Setup for Other Operating Systems
-
-Homebrew cannot be used, so the tools will have to be installed using other
-methods. This can be done by either finding binary releases at the links above
-or using a different package manager. Modify `ITEMS` in "configure.sh" to only
-contain the installed tools, then run `./configure.sh`.
+[Homebrew](https://brew.sh) on macOS). Modify `ITEMS` in "configure.sh" to only
+contain installed tools. Run `./configure.sh` to put config files in the correct
+locations.
 
 ### Neovim Setup
 
-After installing the tools above and running "configure.sh",
+After installing the tools above and running `./configure.sh`,
 1. Open Neovim and wait for plugins to install.
 2. Install language servers, formatters, debuggers. If you don't have them
    already, use `:Mason`.
