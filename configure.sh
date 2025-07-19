@@ -8,7 +8,8 @@ ITEMS=( .config/nvim
         .spacemacs
         .zshrc
         .zsh_aliases
-        .p10k.zsh )
+        .p10k.zsh
+        .aerospace.toml )
 
 # create backup folder
 if [ -d backup ]; then
