@@ -38,8 +38,9 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
-     ;; better-defaults
+     (auto-completion :variables
+                      auto-completion-return-key-behavior nil)
+     better-defaults
      emacs-lisp
      git
      ;; helm
@@ -58,14 +59,15 @@ This function should only modify configuration layer settings."
             ("T" "Todo w/ context" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n%t\n%a")
             ("N" "Note w/ context" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n%u\n%a")))
      (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
+            shell-default-shell 'vterm
+            shell-default-external "alacritty")
      spell-checking
      syntax-checking
      version-control
      treemacs
 
-     ocaml
+     (ocaml :variables
+            ocaml-format-on-save t)
      python
      c-c++
      html
