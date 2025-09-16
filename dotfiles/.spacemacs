@@ -32,40 +32,21 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     (auto-completion :variables
+   '((auto-completion :variables
                       auto-completion-return-key-behavior nil)
-     better-defaults
-     emacs-lisp
-     git
-     ;; helm
      (ivy :variables
           ivy-initial-inputs-alist nil)
-     lsp
-     markdown
-     ;; multiple-cursors
-     (org :variables
-          org-startup-indented t
-          org-agenda-files (directory-files-recursively "~/org" "\\.org$")
-          org-refile-targets '((org-agenda-files :maxlevel . 2))
-          org-capture-templates
-          '(("t" "Todo" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n%t")
-            ("n" "Note" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n%u")
-            ("T" "Todo w/ context" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n%t\n%a")
-            ("N" "Note w/ context" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n%u\n%a")))
      (shell :variables
             shell-default-shell 'vterm
-            shell-default-external "alacritty")
+            terminal-here-mac-terminal-command 'iterm2) ;; alacritty doesn't work correctly
      spell-checking
      syntax-checking
-     version-control
      treemacs
+     lsp
+     git
 
+     markdown
+     emacs-lisp
      (ocaml :variables
             ocaml-format-on-save t)
      python
@@ -76,7 +57,17 @@ This function should only modify configuration layer settings."
      rust
      haskell
      coq
-     prolog)
+     prolog
+
+     (org :variables
+          org-startup-indented t
+          org-agenda-files (directory-files-recursively "~/org" "\\.org$")
+          org-refile-targets '((org-agenda-files :maxlevel . 2))
+          org-capture-templates
+          '(("t" "Todo" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n%t")
+            ("n" "Note" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n%u")
+            ("T" "Todo w/ context" entry (file+headline "~/org/inbox.org" "TODOs") "* TODO %?\n%t\n%a")
+            ("N" "Note w/ context" entry (file+headline "~/org/inbox.org" "Notes") "* %?\n%u\n%a"))))
 
 
    ;; List of additional packages that will be installed without being wrapped
