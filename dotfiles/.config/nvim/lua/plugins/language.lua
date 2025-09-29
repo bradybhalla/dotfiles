@@ -6,7 +6,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
             { "folke/lazydev.nvim", opts = {} }, -- configure lua_ls for nvim
         },
         config = function()
@@ -25,30 +24,22 @@ return {
                 }
             })
 
-            -- pass in custom options
-            local function configure(changes)
-                return vim.tbl_deep_extend("force", {
-                    -- default options
-                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-                }, changes)
-            end
-
             local lspconfig = require("lspconfig")
 
-            lspconfig.pyright.setup(configure {})
-            lspconfig.lua_ls.setup(configure {})
-            lspconfig.ts_ls.setup(configure {
+            lspconfig.pyright.setup({})
+            lspconfig.lua_ls.setup({})
+            lspconfig.ts_ls.setup({
                 settings = {
                     typescript = { format = { semicolons = "insert" } },
                     javascript = { format = { semicolons = "insert" } }
                 }
             })
-            lspconfig.ocamllsp.setup(configure {})
-            lspconfig.clangd.setup(configure {})
-            lspconfig.hls.setup(configure {})
-            lspconfig.rust_analyzer.setup(configure {})
-            lspconfig.coq_lsp.setup(configure {})
-            lspconfig.svelte.setup(configure {})
+            lspconfig.ocamllsp.setup({})
+            lspconfig.clangd.setup({})
+            lspconfig.hls.setup({})
+            lspconfig.rust_analyzer.setup({})
+            lspconfig.coq_lsp.setup({})
+            lspconfig.svelte.setup({})
         end
     },
 

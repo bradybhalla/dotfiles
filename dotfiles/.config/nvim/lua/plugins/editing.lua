@@ -5,6 +5,10 @@ return {
         config = function()
             ---@diagnostic disable-next-line: missing-fields
             require("nvim-treesitter.configs").setup {
+                ensure_installed = {
+                    "json", "typescript", "javascript", "latex", "ocaml", "haskell", "python", "cpp",
+                    "comment"
+                },
                 highlight = {
                     enable = true,
                     disable = { "latex" } -- vimtex has better highlighting

@@ -1,17 +1,5 @@
 local commands = {
 
-    SetupTreesitter = function()
-        -- install commonly used parsers that are not included by default
-        local ts_parsers = {
-            "json", "typescript", "javascript", "latex", "ocaml", "haskell", "python", "cpp",
-            "comment"
-        }
-        for _, parser in ipairs(ts_parsers) do
-            require("nvim-treesitter.install").ensure_installed(parser)
-        end
-    end,
-
-
     Format = function()
         require("conform").format({ async = true, lsp_format = "fallback" })
     end,

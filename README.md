@@ -48,10 +48,8 @@ locations.
 ### Neovim Setup
 
 After installing the tools above and running `./configure.sh`,
-1. Open Neovim and wait for plugins to install.
+1. Open Neovim and wait for plugins/treesitter parsers to install.
 2. Install language servers, formatters, debuggers. If you don't have them
    already, use `:Mason`.
-3. Install common treesitter parsers with `:SetupTreesitter`. Other parsers can
-   be installed with `:TSInstall <parser name>`.
 3. Restart Neovim and type `:checkhealth` to make sure everything is working
    correctly.
