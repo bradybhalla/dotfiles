@@ -1,16 +1,4 @@
 return {
-    -- snippets
-    {
-        "L3MON4D3/LuaSnip",
-        config = function()
-            require("luasnip").config.setup({
-                enable_autosnippets = true,
-                update_events = "TextChanged,TextChangedI"
-            })
-            require("luasnip.loaders.from_lua").lazy_load() -- from luasnippets/
-        end
-    },
-
     -- autocomplete
     {
         "hrsh7th/nvim-cmp",
@@ -34,6 +22,7 @@ return {
                 },
                 mapping = {
                     ["<TAB>"] = cmp.mapping.confirm({ select = true }),
+                    ["<C-l>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
                 },
@@ -62,5 +51,17 @@ return {
                 matching = { disallow_symbol_nonprefix_matching = false }
             })
         end
-    }
+    },
+
+    -- snippets
+    {
+        "L3MON4D3/LuaSnip",
+        config = function()
+            require("luasnip").config.setup({
+                enable_autosnippets = true,
+                update_events = "TextChanged,TextChangedI"
+            })
+            require("luasnip.loaders.from_lua").lazy_load() -- from luasnippets/
+        end
+    },
 }

@@ -33,6 +33,16 @@ return {
     { "lewis6991/gitsigns.nvim", opts = {} },
 
     {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function()
+            require("treesitter-context").setup {}
+
+            vim.cmd [[ hi TreesitterContextBottom gui=none ]]
+        end
+    },
+
+
+    {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()

@@ -24,22 +24,13 @@ return {
                 }
             })
 
-            local lspconfig = require("lspconfig")
-
-            lspconfig.pyright.setup({})
-            lspconfig.lua_ls.setup({})
-            lspconfig.ts_ls.setup({
+            vim.lsp.config("ts_ls", {
                 settings = {
                     typescript = { format = { semicolons = "insert" } },
                     javascript = { format = { semicolons = "insert" } }
                 }
             })
-            lspconfig.ocamllsp.setup({})
-            lspconfig.clangd.setup({})
-            lspconfig.hls.setup({})
-            lspconfig.rust_analyzer.setup({})
-            lspconfig.coq_lsp.setup({})
-            lspconfig.svelte.setup({})
+            vim.lsp.enable({ "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd", "rust_analyzer" })
         end
     },
 

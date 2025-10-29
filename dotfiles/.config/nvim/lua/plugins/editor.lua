@@ -27,14 +27,7 @@ return {
         end
     },
 
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        config = function()
-            require("treesitter-context").setup {}
-
-            vim.cmd [[ hi TreesitterContextBottom gui=none ]]
-        end
-    },
+    { "tpope/vim-surround" },
 
     {
         "windwp/nvim-autopairs",
@@ -49,11 +42,5 @@ return {
         end
     },
 
-    { "tpope/vim-surround" },
-    {
-        "ggandor/leap.nvim",
-        config = function()
-            require("leap").set_default_mappings()
-        end
-    },
+    { "ggandor/leap.nvim" }
 }

@@ -21,8 +21,6 @@ maps[#maps + 1] = {
 
 -- general shortcuts
 maps[#maps + 1] = {
-    { "<leader>q", "<CMD>q<CR>",           desc = "quit" },
-    { "<leader>w", "<CMD>w<CR>",           desc = "save" },
     { "<leader>c", "\"+",                  desc = "system clipboard",       mode = { "n", "v" } },
     { "<leader>O", "<CMD>OpenFinder<CR>",  desc = "open finder" },
     { "<leader>S", "<CMD>ToggleSpell<CR>", desc = "toggle spellcheck" },
@@ -71,6 +69,12 @@ maps[#maps + 1] = {
         end,
         mode = { "i", "s" }
     },
+}
+
+-- leap bindings
+maps[#maps + 1] = {
+    { "s", "<Plug>(leap)",            mode = { "n", "x", "o" } },
+    { "S", "<Plug>(leap-from-window)" }
 }
 
 require("which-key").add(maps)
