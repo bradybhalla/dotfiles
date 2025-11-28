@@ -96,6 +96,7 @@ return {
     -- Math -
     ---------
     autocmd("bb", "mathbb"),
+    autocmd("cll", "mathcal"),
     autocmd("vv", "vec"),
     autosnip(";;", {t("\\{"), i(1), t("\\}")}),
 
