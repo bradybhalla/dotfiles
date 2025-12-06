@@ -14,12 +14,14 @@ vim.opt.breakindent    = true -- wrapping behavior
 vim.opt.linebreak      = true
 vim.opt.smoothscroll   = true
 
-vim.opt.splitright     = true
+vim.opt.splitright     = true -- window splitting direction
 vim.opt.splitbelow     = true
 
-vim.g.netrw_banner     = 0   -- don't show netrw help
+vim.opt.showmode       = false -- don't show mode in command line
 
-vim.g.mapleader        = " " -- set leader
+vim.g.netrw_banner     = 0     -- don't show netrw help
+
+vim.g.mapleader        = " "   -- set leader key
 
 
 require("./plugins") -- load and setup plugins
