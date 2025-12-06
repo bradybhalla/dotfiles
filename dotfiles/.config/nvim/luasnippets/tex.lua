@@ -1,3 +1,13 @@
+-- autoexpanding text snippets
+local function autosnip(trigger, value)
+    return s({ trig = trigger, snippetType = "autosnippet" }, value)
+end
+
+-- commands with one argument
+local function autocmd(trigger, name)
+    return autosnip(trigger, { t("\\" .. name .. "{"), i(1), t("}") })
+end
+
 -- environments with possible options
 local function autoenv(trigger, name, has_option)
     if name == nil then
@@ -32,15 +42,6 @@ local function autoenv(trigger, name, has_option)
     return s({ trig = trigger, snippetType = "autosnippet" }, nodes)
 end
 
--- simple snippets
-local function autosnip(trigger, value)
-    return s({ trig = trigger, snippetType = "autosnippet" }, value)
-end
-
--- simple command
-local function autocmd(trigger, name)
-    return autosnip(trigger, { t("\\" .. name .. "{"), i(1), t("}") })
-end
 
 -- list environemnts which recursively add new items
 local function autolist(trigger, env)
@@ -50,7 +51,7 @@ local function autolist(trigger, env)
                 i(1), t("\\end{" .. env .. "}")
             }),
             sn(nil, {
-                t("\t\\item "), i(1), t({"", ""}), d(2, create_item)
+                t("\t\\item "), i(1), t({ "", "" }), d(2, create_item)
             }),
         }))
     end
@@ -58,7 +59,7 @@ local function autolist(trigger, env)
     return s({ trig = trigger, snippetType = "autosnippet" }, {
         t({ "\\begin{" .. env .. "}", "\t\\item " }),
         i(1),
-        t({"", ""}),
+        t({ "", "" }),
         d(2, create_item)
     })
 end
@@ -98,7 +99,7 @@ return {
     autocmd("bb", "mathbb"),
     autocmd("cll", "mathcal"),
     autocmd("vv", "vec"),
-    autosnip(";;", {t("\\{"), i(1), t("\\}")}),
+    autosnip(";;", { t("\\{"), i(1), t("\\}") }),
 
     autosnip("sseq", t("\\subseteq")),
     autosnip("...", t("\\ldots")),
@@ -189,9 +190,6 @@ return {
     \let\originalright\right
     \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
     \renewcommand{\right}{\aftergroup\egroup\originalright}
-
-    % set of real numbers
-    \newcommand{\R}{\mathbb{R}}
 
     % theorem setup
     \theoremstyle{plain}
