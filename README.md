@@ -7,7 +7,7 @@ My setup for 90% of everything I do on a computer.
 ### Editors
 - [Neovim](https://neovim.io): configured with LSP, autocomplete, telescope,
   LaTeX, and more.
-- [Spacemacs](https://www.spacemacs.org/)
+- [Spacemacs](https://www.spacemacs.org/): mostly just the base config
 
 ### Window managers / Keyboard shortcuts
 - [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager

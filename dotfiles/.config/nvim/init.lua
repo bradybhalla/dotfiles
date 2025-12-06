@@ -41,8 +41,6 @@ require("which-key").add({
     -- misc shortcuts
     { "<leader>q", "<CMD>quit<CR>",                                                    desc = "quit" },
     { "<leader>s", "<CMD>write<CR>",                                                   desc = "save" },
-    { "<leader>w", "<C-w>" },
-    { "<leader>c", "\"+",                                                              mode = { "n", "v" } },
     { "<leader>S", function() vim.opt_local.spell = not vim.opt_local.spell:get() end, desc = "toggle spellcheck" },
     {
         "<leader>g",
@@ -61,6 +59,8 @@ require("which-key").add({
         end,
         desc = "lazygit"
     },
+    { "<leader>w",  "<C-w>" },
+    { "<leader>c",  "\"+",                 mode = { "n", "v" } },
 
     -- directory viewer
     { "<leader>d",  group = "directory" },
