@@ -21,7 +21,9 @@ vim.g.netrw_banner     = 0   -- don't show netrw help
 
 vim.g.mapleader        = " " -- set leader
 
-require("./plugins")         -- load and setup plugins
+
+require("./plugins") -- load and setup plugins
+
 
 vim.cmd.colorscheme "catppuccin-frappe"
 vim.cmd [[ hi TreesitterContextBottom gui=none ]] -- don't underline nvim context
