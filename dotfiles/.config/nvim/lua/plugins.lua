@@ -99,7 +99,7 @@ require("lazy").setup({
             opts = {
                 delay = function(ctx)
                     -- show up instantly on spelling, otherwise delay
-                    return ctx.plugin == "spelling" and 0 or 200
+                    return ctx.plugin == "spelling" and 0 or 400
                 end,
             }
         },

@@ -67,7 +67,9 @@ require("which-key").add({
     -- directory viewer
     { "<leader>d",  group = "directory" },
     { "<leader>df", "<CMD>vsplit %:h<CR>", desc = "current file directory" },
+    { "<leader>dF", "<CMD>edit %:h<CR>", desc = "current file directory (replace buffer)" },
     { "<leader>dw", "<CMD>vsplit .<CR>",   desc = "working directory" },
+    { "<leader>dW", "<CMD>edit .<CR>",   desc = "working directory (replace buffer)" },
     {
         "<leader>do",
         function()
