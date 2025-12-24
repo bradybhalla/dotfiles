@@ -5,11 +5,13 @@ My setup for 90% of everything I do on a computer.
 ## Components
 
 ### Editors
+
 - [Neovim](https://neovim.io): configured with LSP, autocomplete, telescope,
   LaTeX, and more.
 - [Spacemacs](https://www.spacemacs.org/): mostly just the base config
 
 ### Window managers / Keyboard shortcuts
+
 - [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager
 - [Rectangle](https://rectangleapp.com/): if you don't want a tiling window
   manager
@@ -19,6 +21,7 @@ My setup for 90% of everything I do on a computer.
   mod-tap `Ctrl`/`Esc`
 
 ### Terminal / Shell
+
 - [Alacritty](https://alacritty.org/): download MesloLGS Nerd Font if needed
 - [tmux](https://github.com/tmux/tmux): prefix `Ctrl-S`
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k): zsh prompt
@@ -27,6 +30,7 @@ My setup for 90% of everything I do on a computer.
   clone into `~/bin`
 
 ### Other helpful shell tools
+
 - [fzf](https://github.com/junegunn/fzf): fuzzy finder
 - [zoxide](https://github.com/ajeetdsouza/zoxide): `cd` alternative
 - [lazygit](https://github.com/jesseduffield/lazygit): git ui
@@ -53,3 +57,28 @@ After installing the tools above and running `./configure.sh`,
    already, use `:Mason`.
 3. Restart Neovim and type `:checkhealth` to make sure everything is working
    correctly.
+
+### Karabiner Elements Setup
+
+Download and install the Karabiner Elements app. Add a "Complex Modification" with the following contents:
+```json
+{
+    "description": "Tap Caps Lock for ESC or Hold for Control",
+    "manipulators": [
+        {
+            "from": {
+                "key_code": "caps_lock",
+                "modifiers": { "optional": ["any"] }
+            },
+            "to": [
+                {
+                "key_code": "left_control",
+                "lazy": true
+                }
+            ],
+            "to_if_alone": [{ "key_code": "escape" }],
+            "type": "basic"
+        }
+    ]
+}
+```

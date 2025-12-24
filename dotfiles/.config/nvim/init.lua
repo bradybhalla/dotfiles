@@ -17,10 +17,10 @@ vim.opt.smoothscroll   = true
 vim.opt.splitright     = true -- window splitting direction
 vim.opt.splitbelow     = true
 
-vim.opt.completeopt:append("menuone")  -- show completion menu for one item
+vim.opt.completeopt:append("menuone") -- show completion menu for one item
 
-vim.g.netrw_banner = 0                 -- don't show netrw help
-vim.g.mapleader    = " "               -- set leader key
+vim.g.netrw_banner = 0                -- don't show netrw help
+vim.g.mapleader    = " "              -- set leader key
 
 
 require("./plugins") -- load and setup plugins
