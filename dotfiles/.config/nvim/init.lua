@@ -29,63 +29,67 @@ require("./plugins") -- load and setup plugins
 vim.cmd.colorscheme "catppuccin-frappe"
 
 
-require("which-key").add({
-    -- editing behavior
-    { ">",          ">gv",                                                              mode = "v" },
-    { "<",          "<gv",                                                              mode = "v" },
-    { "j",          "gj",                                                               mode = { "n", "v" } },
-    { "gj",         "j",                                                                mode = { "n", "v" } },
-    { "k",          "gk",                                                               mode = { "n", "v" } },
-    { "gk",         "k",                                                                mode = { "n", "v" } },
+-- editing behavior
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set({ "n", "v" }, "j", "gj")
+vim.keymap.set({ "n", "v" }, "gj", "j")
+vim.keymap.set({ "n", "v" }, "k", "gk")
+vim.keymap.set({ "n", "v" }, "gk", "k")
 
-    -- misc shortcuts
-    { "<leader>q",  "<CMD>quit<CR>" },
-    { "<leader>s",  "<CMD>write<CR>" },
-    { "<leader>S",  function() vim.opt_local.spell = not vim.opt_local.spell:get() end, desc = "toggle spellcheck" },
-    { "<leader>w",  "<C-w>" },
-    { "<leader>c",  "\"+",                                                              mode = { "n", "v" } },
 
-    -- telescope
-    { "<leader>f",  group = "telescope" },
-    { "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>",                        desc = "find files" },
-    { "<leader>fi", "<CMD>Telescope find_files hidden=true no_ignore=true<CR>",         desc = "find files (no ignore)" },
-    { "<leader>fg", "<CMD>Telescope live_grep<CR>",                                     desc = "search text" },
-    { "<leader>fb", "<CMD>Telescope buffers<CR>",                                       desc = "find buffer" },
-    { "<leader>fh", "<CMD>Telescope help_tags<CR>",                                     desc = "search nvim help" },
+-- misc shortcuts
+vim.keymap.set("n", "<leader>q", "<CMD>quit<CR>")
+vim.keymap.set("n", "<leader>s", "<CMD>write<CR>")
+vim.keymap.set("n", "<leader>S", function()
+    vim.opt_local.spell = not vim.opt_local.spell:get()
+end)
+vim.keymap.set("n", "<leader>w", "<C-w>")
+vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
 
-    -- language / lsp
-    { "<leader>l",  group = "language" },
-    {
-        "<leader>lf",
-        function()
-            require("conform").format({ async = true, lsp_format = "fallback" })
-        end,
-        mode = { "n", "v" },
-        desc = "format"
-    },
-    { "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>",                                                         desc = "search document symbols" },
-    { "<leader>lS", "<CMD>Telescope lsp_workspace_symbols<CR>",                                                        desc = "search workspace symbols" },
 
-    -- luasnip
-    { "<S-TAB>",    function() require("luasnip").expand() end,                                                        mode = "i" },
-    { "<C-j>",      function() require("luasnip").jump(1) end,                                                         mode = { "i", "s" } },
-    { "<C-k>",      function() require("luasnip").jump(-1) end,                                                        mode = { "i", "s" } },
-    { "<C-d>",      function() if require("luasnip").choice_active() then require("luasnip").change_choice(1) end end, mode = { "i", "s" } },
+-- telescope
+vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>")
+vim.keymap.set("n", "<leader>fi",
+    "<CMD>Telescope find_files hidden=true no_ignore=true<CR>")
+vim.keymap.set("n", "<leader>fg", "<CMD>Telescope live_grep<CR>")
+vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
+vim.keymap.set("n", "<leader>fh", "<CMD>Telescope help_tags<CR>")
 
-    -- directory
-    { "<leader>d",  group = "directory" },
-    { "<leader>df", "<CMD>Explore<CR>",                                                                                desc = "current file directory" },
-    { "<leader>dw", "<CMD>Explore .<CR>",                                                                              desc = "working directory" },
-    {
-        "<leader>do",
-        function()
-            local file_path = vim.fn.expand("%")
-            if file_path ~= "" then
-                _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
-            else
-                _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
-            end
-        end,
-        desc = "open in Finder"
-    }
-})
+
+-- language / lsp
+vim.keymap.set({ "n", "v" }, "<leader>lf", function()
+    require("conform").format({ async = true, lsp_format = "fallback" })
+end)
+vim.keymap.set("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>")
+vim.keymap.set("n", "<leader>lS", "<CMD>Telescope lsp_workspace_symbols<CR>")
+
+
+-- luasnip
+vim.keymap.set("i", "<S-TAB>", function()
+    require("luasnip").expand()
+end)
+vim.keymap.set({ "i", "s" }, "<C-j>", function()
+    require("luasnip").jump(1)
+end)
+vim.keymap.set({ "i", "s" }, "<C-k>", function()
+    require("luasnip").jump(-1)
+end)
+vim.keymap.set({ "i", "s" }, "<C-d>", function()
+    if require("luasnip").choice_active() then
+        require("luasnip").change_choice(1)
+    end
+end)
+
+
+-- directory
+vim.keymap.set("n", "<leader>df", "<CMD>Explore<CR>")
+vim.keymap.set("n", "<leader>dw", "<CMD>Explore .<CR>")
+vim.keymap.set("n", "<leader>do", function()
+    local file_path = vim.fn.expand("%")
+    if file_path ~= "" then
+        _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
+    else
+        _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
+    end
+end)

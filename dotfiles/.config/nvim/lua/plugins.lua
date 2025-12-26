@@ -44,19 +44,13 @@ require("lazy").setup({
             config = function()
                 ---@diagnostic disable-next-line: missing-fields
                 require("nvim-treesitter.configs").setup {
-                    ensure_installed = { "json", "typescript", "javascript", "ocaml", "python", "cpp", "comment" },
+                    ensure_installed = {
+                        "json", "typescript", "javascript", "ocaml", "python",
+                        "cpp", "comment"
+                    },
                     highlight = { enable = true }
                 }
             end
-        },
-        {
-            "folke/which-key.nvim",
-            opts = {
-                delay = function(ctx)
-                    -- open instantly on spelling, otherwise delay
-                    return ctx.plugin == "spelling" and 0 or 400
-                end,
-            }
         },
 
 
@@ -80,11 +74,22 @@ require("lazy").setup({
         {
             "neovim/nvim-lspconfig",
             config = function()
-                vim.diagnostic.config({ severity_sort = true, update_in_insert = true, virtual_text = true })
-                vim.lsp.enable({ "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd", "rust_analyzer" })
+                vim.diagnostic.config({
+                    severity_sort = true,
+                    update_in_insert = true,
+                    virtual_text = true
+                })
+                vim.lsp.enable({
+                    "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
+                    "rust_analyzer"
+                })
             end
         },
-        { "stevearc/conform.nvim", opts = { formatters_by_ft = { ocaml = { "ocamlformat" } } } },
+        {
+            "stevearc/conform.nvim",
+            opts = {
+                formatters_by_ft = { ocaml = { "ocamlformat" } } }
+        },
 
 
         -- misc
