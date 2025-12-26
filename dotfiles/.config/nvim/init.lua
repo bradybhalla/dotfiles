@@ -44,6 +44,14 @@ vim.keymap.set("n", "<leader>s", "<CMD>write<CR>")
 vim.keymap.set("n", "<leader>S", function()
     vim.opt_local.spell = not vim.opt_local.spell:get()
 end)
+vim.keymap.set("n", "<leader>o", function()
+    local file_path = vim.fn.expand("%")
+    if file_path ~= "" then
+        _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
+    else
+        _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
+    end
+end)
 vim.keymap.set("n", "<leader>w", "<C-w>")
 vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
 
@@ -83,13 +91,3 @@ end)
 
 
 -- directory
-vim.keymap.set("n", "<leader>df", "<CMD>Explore<CR>")
-vim.keymap.set("n", "<leader>dw", "<CMD>Explore .<CR>")
-vim.keymap.set("n", "<leader>do", function()
-    local file_path = vim.fn.expand("%")
-    if file_path ~= "" then
-        _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
-    else
-        _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
-    end
-end)
