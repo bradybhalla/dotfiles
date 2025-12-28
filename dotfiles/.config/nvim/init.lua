@@ -29,21 +29,18 @@ require("./plugins") -- load and setup plugins
 vim.cmd.colorscheme "catppuccin-frappe"
 
 
--- editing behavior
-vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", ">", ">gv")         -- reselect after shifting
 vim.keymap.set("v", "<", "<gv")
-vim.keymap.set({ "n", "v" }, "j", "gj")
-vim.keymap.set({ "n", "v" }, "gj", "j")
-vim.keymap.set({ "n", "v" }, "k", "gk")
-vim.keymap.set({ "n", "v" }, "gk", "k")
+vim.keymap.set("i", "<C-l>", function() -- activate or accept omni completion
+    return vim.fn.pumvisible() == 1 and "<C-y>" or "<C-x><C-o>"
+end, { expr = true })
+vim.keymap.set({ "n", "v" }, "<leader>c", "\"+") -- system clipboard
+vim.keymap.set("n", "<leader>w", "<C-w>")        -- window commands
 
 
 -- misc shortcuts
 vim.keymap.set("n", "<leader>q", "<CMD>quit<CR>")
 vim.keymap.set("n", "<leader>s", "<CMD>write<CR>")
-vim.keymap.set("n", "<leader>S", function()
-    vim.opt_local.spell = not vim.opt_local.spell:get()
-end)
 vim.keymap.set("n", "<leader>o", function()
     local file_path = vim.fn.expand("%")
     if file_path ~= "" then
@@ -52,8 +49,17 @@ vim.keymap.set("n", "<leader>o", function()
         _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
     end
 end)
-vim.keymap.set("n", "<leader>w", "<C-w>")
-vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
+
+
+-- toggle settings
+vim.keymap.set("n", "<leader>ts", function()
+    vim.opt_local.spell = not vim.opt_local.spell:get()
+end)
+vim.keymap.set("n", "<leader>td", function()
+    vim.diagnostic.config({
+        virtual_text = not vim.diagnostic.config().virtual_text
+    })
+end)
 
 
 -- telescope

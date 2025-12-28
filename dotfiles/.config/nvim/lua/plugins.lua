@@ -69,15 +69,18 @@ require("lazy").setup({
 
 
         -- language tools
-        { "williamboman/mason.nvim", build = ":MasonUpdate", opts = {} },
-        { "folke/lazydev.nvim",      opts = {} },
+        {
+            "williamboman/mason.nvim",
+            build = ":MasonUpdate",
+            opts = {}
+        },
+        { "folke/lazydev.nvim", opts = {} },
         {
             "neovim/nvim-lspconfig",
             config = function()
                 vim.diagnostic.config({
                     severity_sort = true,
-                    update_in_insert = true,
-                    virtual_text = true
+                    update_in_insert = true
                 })
                 vim.lsp.enable({
                     "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
