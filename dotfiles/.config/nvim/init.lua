@@ -75,8 +75,6 @@ vim.keymap.set("n", "<leader>fh", "<CMD>Telescope help_tags<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>lf", function()
     require("conform").format({ async = true, lsp_format = "fallback" })
 end)
-vim.keymap.set("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>")
-vim.keymap.set("n", "<leader>lS", "<CMD>Telescope lsp_workspace_symbols<CR>")
 
 
 -- luasnip
@@ -94,6 +92,3 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
         require("luasnip").change_choice(1)
     end
 end)
-
-
--- directory

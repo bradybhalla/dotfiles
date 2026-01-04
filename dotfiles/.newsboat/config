@@ -1,0 +1,15 @@
+browser "open -a 'Firefox Developer Edition' '%u'"
+
+bind k everywhere up
+bind j everywhere down
+
+bind ^u everywhere pageup
+bind ^d everywhere pagedown
+
+color background          white   default
+color listnormal          white   default
+color listfocus           white  black
+color listnormal_unread   magenta default
+color listfocus_unread    magenta black   bold
+color info                blue  default
+color article             white   default

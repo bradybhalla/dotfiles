@@ -9,7 +9,9 @@ ITEMS=( .config/nvim
         .zshrc
         .zsh_aliases
         .p10k.zsh
-        .aerospace.toml )
+        .aerospace.toml
+        .newsboat/config
+    )
 
 # create backup folder
 if [ -d backup ]; then

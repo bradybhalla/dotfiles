@@ -29,8 +29,9 @@ My setup for 90% of everything I do on a computer.
   and [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):
   clone into `~/bin`
 
-### Other helpful shell tools
+### Other helpful tools/apps
 
+- [Newsboat](https://newsboat.org/index.html): terminal RSS feed reader
 - [fzf](https://github.com/junegunn/fzf): fuzzy finder
 - [zoxide](https://github.com/ajeetdsouza/zoxide): `cd` alternative
 - [lazygit](https://github.com/jesseduffield/lazygit): git ui
