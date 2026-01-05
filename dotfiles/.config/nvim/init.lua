@@ -29,6 +29,10 @@ require("./plugins") -- load and setup plugins
 vim.cmd.colorscheme "catppuccin-frappe"
 
 
+vim.keymap.set("n", "n", "nzz") -- center after jumping
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("v", ">", ">gv")         -- reselect after shifting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("i", "<C-l>", function() -- activate or accept omni completion
@@ -77,15 +81,23 @@ vim.keymap.set({ "n", "v" }, "<leader>lf", function()
 end)
 
 
--- luasnip
+-- snippets (luasnip has priority over vim.snippet)
 vim.keymap.set("i", "<S-TAB>", function()
     require("luasnip").expand()
 end)
 vim.keymap.set({ "i", "s" }, "<C-j>", function()
-    require("luasnip").jump(1)
+    if require("luasnip").jumpable(1) then
+        require("luasnip").jump(1)
+    elseif vim.snippet.active({ direction = 1 }) then
+        vim.snippet.jump(1)
+    end
 end)
 vim.keymap.set({ "i", "s" }, "<C-k>", function()
-    require("luasnip").jump(-1)
+    if require("luasnip").jumpable(-1) then
+        require("luasnip").jump(-1)
+    elseif vim.snippet.active({ direction = -1 }) then
+        vim.snippet.jump(-1)
+    end
 end)
 vim.keymap.set({ "i", "s" }, "<C-d>", function()
     if require("luasnip").choice_active() then
