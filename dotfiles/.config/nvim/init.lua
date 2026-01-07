@@ -1,3 +1,7 @@
+------------
+-- Options -
+------------
+
 vim.opt.number         = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn     = "yes" -- stop text from shifting
@@ -22,12 +26,140 @@ vim.opt.completeopt:append("menuone") -- show completion menu for one item
 vim.g.netrw_banner = 0                -- don't show netrw help
 vim.g.mapleader    = " "              -- set leader key
 
+-----------------
+-- Lazy/plugins -
+-----------------
 
-require("./plugins") -- load and setup plugins
+-- make sure lazy is installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--branch=stable",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- install and setup plugins
+require("lazy").setup({
+    spec = {
+        -- editor interface / navigation
+        {
+            "catppuccin/nvim",
+            name = "catppuccin",
+            priority = 1000,
+            opts = {
+                integrations = { mason = true },
+                custom_highlights = function(colors)
+                    return {
+                        SpellBad = { fg = colors.red }, -- spelling errors
+                        SpellCap = { fg = colors.red }, -- capitalization errors
+                        Conceal = { fg = colors.pink }, -- VimTeX conceal
+                    }
+                end
+            },
+
+        },
+        {
+            "nvim-telescope/telescope.nvim",
+            dependencies = { "nvim-lua/plenary.nvim" },
+            opts = {
+                defaults = { file_ignore_patterns = { "^.git/" } },
+                pickers = { live_grep = { additional_args = { "--hidden" } } }
+            }
+        },
+        {
+            "nvim-treesitter/nvim-treesitter",
+            build = ":TSUpdate",
+            config = function()
+                ---@diagnostic disable-next-line: missing-fields
+                require("nvim-treesitter.configs").setup {
+                    ensure_installed = {
+                        "json", "typescript", "javascript", "ocaml", "python",
+                        "cpp", "comment"
+                    },
+                    highlight = { enable = true }
+                }
+            end
+        },
+
+
+        -- editing
+        { "tpope/vim-surround" },
+        {
+            "L3MON4D3/LuaSnip",
+            config = function()
+                require("luasnip").config.setup({
+                    enable_autosnippets = true,
+                    update_events = "TextChanged,TextChangedI"
+                })
+                require("luasnip.loaders.from_lua").lazy_load() -- from luasnippets/
+            end
+        },
+
+
+        -- language tools
+        {
+            "williamboman/mason.nvim",
+            build = ":MasonUpdate",
+            opts = {}
+        },
+        { "folke/lazydev.nvim", opts = {} },
+        {
+            "neovim/nvim-lspconfig",
+            config = function()
+                vim.diagnostic.config({
+                    severity_sort = true,
+                    update_in_insert = true
+                })
+                vim.lsp.enable({
+                    "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
+                    "rust_analyzer"
+                })
+
+                -- better completion for supporting LSP servers
+                vim.api.nvim_create_autocmd("LspAttach", {
+                    group = vim.api.nvim_create_augroup("custom.lsp", {}),
+                    callback = function(args)
+                        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+                        if client:supports_method("textDocument/completion") then
+                            vim.lsp.completion.enable(true, client.id, args.buf, {})
+                        end
+                    end,
+                })
+            end
+        },
+        {
+            "stevearc/conform.nvim",
+            opts = {
+                formatters_by_ft = { ocaml = { "ocamlformat" } } }
+        },
+
+
+        -- misc
+        {
+            "lervag/vimtex",
+            init = function()
+                vim.g.vimtex_quickfix_open_on_warning = 0
+                vim.g.vimtex_syntax_conceal = { math_bounds = 0 }
+            end
+        }
+
+
+    },
+    install = { colorscheme = { "catppuccin" } }
+})
 
 
 vim.cmd.colorscheme "catppuccin-frappe"
 
+------------
+-- Keymaps -
+------------
 
 vim.keymap.set("n", "n", "nzz") -- center after jumping
 vim.keymap.set("n", "N", "Nzz")
@@ -106,9 +238,13 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
 end)
 
 
+--------------------------------------
+-- Filetype specific options/keymaps -
+--------------------------------------
+
 -- text-editing specific settings
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("CustomText", {}),
+    group = vim.api.nvim_create_augroup("custom.text-editing", {}),
     pattern = { "text", "tex", "markdown", "org" },
     callback = function()
         -- move within a line
@@ -125,7 +261,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- LaTeX specific settings
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("CustomLaTeX", {}),
+    group = vim.api.nvim_create_augroup("custom.latex", {}),
     pattern = "tex",
     callback = function()
         -- build and show current document
