@@ -104,3 +104,36 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
         require("luasnip").change_choice(1)
     end
 end)
+
+
+-- text-editing specific settings
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("CustomText", {}),
+    pattern = { "text", "tex", "markdown", "org" },
+    callback = function()
+        -- move within a line
+        vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = true })
+        vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = true })
+        vim.keymap.set({ "n", "v" }, "gj", "j", { buffer = true })
+        vim.keymap.set({ "n", "v" }, "gk", "k", { buffer = true })
+
+        -- fix spelling errors
+        vim.opt_local.spell = true
+        vim.keymap.set("i", "<C-f>", "<C-x>s", { buffer = true })
+    end
+})
+
+-- LaTeX specific settings
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("CustomLaTeX", {}),
+    pattern = "tex",
+    callback = function()
+        -- build and show current document
+        vim.keymap.set("n", "<leader>b", "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>", { buffer = true })
+
+        -- toggle conceal
+        vim.keymap.set("n", "<leader>tc", function()
+            vim.opt.conceallevel = 2 - vim.opt.conceallevel:get()
+        end, { buffer = true })
+    end
+})

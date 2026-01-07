@@ -19,14 +19,6 @@ offset = { x = 1, y = 2 }
 
 [keyboard]
 bindings = [
-    # natural text editing
-    { key = "ArrowLeft", mods = "Command", chars = "\u0001" },
-    { key = "ArrowRight", mods = "Command", chars = "\u0005" },
-    { key = "Backspace", mods = "Command", chars = "\u0015" },
-    { key = "ArrowLeft", mods = "Option", chars = "\u001bb" },
-    { key = "ArrowRight", mods = "Option", chars = "\u001bf" },
-    { key = "Backspace", mods = "Option", chars = "\u001b\u007f" },
-
     # tmux commands (Ctrl-s prefix)
     { key = "t", mods = "Command", chars = "\u0013c" }, # new window
     { key = "w", mods = "Command", chars = "\u0013x" }, # close pane
