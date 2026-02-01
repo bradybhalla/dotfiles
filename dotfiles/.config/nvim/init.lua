@@ -22,16 +22,19 @@ vim.opt.splitright     = true -- window splitting direction
 vim.opt.splitbelow     = true
 
 vim.opt.completeopt:append("menuone") -- show completion menu for one item
+vim.opt.completeopt:append("noinsert")
+vim.opt.completeopt:append("fuzzy")
 
-vim.g.netrw_banner = 0                -- don't show netrw help
-vim.g.mapleader    = " "              -- set leader key
+vim.opt.spellsuggest = "9"            -- max 9 items in z=
+
+vim.g.mapleader      = " "            -- set leader key
 
 -----------------
 -- Lazy/plugins -
 -----------------
 
 -- make sure lazy is installed
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath       = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -108,7 +111,8 @@ require("lazy").setup({
             build = ":MasonUpdate",
             opts = {}
         },
-        { "folke/lazydev.nvim", opts = {} },
+        { "folke/lazydev.nvim",     opts = {} },
+        { "mfussenegger/nvim-jdtls" },
         {
             "neovim/nvim-lspconfig",
             config = function()
@@ -211,6 +215,8 @@ vim.keymap.set("n", "<leader>fh", "<CMD>Telescope help_tags<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>lf", function()
     require("conform").format({ async = true, lsp_format = "fallback" })
 end)
+vim.keymap.set("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>")
+vim.keymap.set("n", "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>")
 
 
 -- snippets (luasnip has priority over vim.snippet)
@@ -245,7 +251,7 @@ end)
 -- text-editing specific settings
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.text-editing", {}),
-    pattern = { "text", "tex", "markdown", "org" },
+    pattern = { "tex", "markdown", "org", "typst" },
     callback = function()
         -- move within a line
         vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = true })
@@ -254,7 +260,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set({ "n", "v" }, "gk", "k", { buffer = true })
 
         -- fix spelling errors
-        vim.opt_local.spell = true
         vim.keymap.set("i", "<C-f>", "<C-x>s", { buffer = true })
     end
 })
@@ -271,5 +276,17 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "<leader>tc", function()
             vim.opt.conceallevel = 2 - vim.opt.conceallevel:get()
         end, { buffer = true })
+    end
+})
+
+
+-- Java custom lsp settings using jdtls plugin
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("custom.java", {}),
+    pattern = "java",
+    callback = function()
+        require("jdtls").start_or_attach({
+            cmd = { "jdtls" }
+        })
     end
 })

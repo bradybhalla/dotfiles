@@ -64,3 +64,8 @@ unset __conda_setup
 
 # Rust
 [[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+# Java
+# TODO: remove if this is here after 2026
+# I need this version for a class
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.9/libexec/openjdk.jdk/Contents/Home
