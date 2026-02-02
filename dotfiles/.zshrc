@@ -34,6 +34,9 @@ eval "$(zoxide init zsh --cmd cd)"
 # zsh-syntax-highlighting
 [[ -r "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$HOME/bin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# increase history size
+HISTSIZE=20000
+SAVEHIST=20000
 
 ###############
 # Programming #
