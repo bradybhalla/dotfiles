@@ -21,20 +21,16 @@ vim.opt.smoothscroll   = true
 vim.opt.splitright     = true -- window splitting direction
 vim.opt.splitbelow     = true
 
-vim.opt.completeopt:append("menuone") -- show completion menu for one item
-vim.opt.completeopt:append("noinsert")
-vim.opt.completeopt:append("fuzzy")
+vim.opt.spellsuggest   = "9" -- max 9 items in z=
 
-vim.opt.spellsuggest = "9"            -- max 9 items in z=
-
-vim.g.mapleader      = " "            -- set leader key
+vim.g.mapleader        = " " -- set leader key
 
 -----------------
 -- Lazy/plugins -
 -----------------
 
 -- make sure lazy is installed
-local lazypath       = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath         = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -104,6 +100,30 @@ require("lazy").setup({
                 require("luasnip.loaders.from_lua").lazy_load() -- from luasnippets/
             end
         },
+        {
+            "saghen/blink.cmp",
+            version = "1.*",
+
+            opts = {
+                snippets = { preset = "luasnip" },
+
+                keymap = {
+                    preset = "none",
+                    ["<C-l>"] = { "select_and_accept", "show" },
+                    ["<C-p>"] = { "select_prev" },
+                    ["<C-n>"] = { "select_next" },
+                    ["<C-e>"] = { "hide" },
+
+                    ["<C-j>"] = { "snippet_forward" },
+                    ["<C-k>"] = { "snippet_backward" },
+
+                    ["<C-u>"] = { "show_documentation", "hide_documentation" },
+                    ["<C-b>"] = { "scroll_documentation_up" },
+                    ["<C-f>"] = { "scroll_documentation_down" },
+
+                }
+            }
+        },
 
 
         -- language tools
@@ -125,17 +145,6 @@ require("lazy").setup({
                     "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
                     "rust_analyzer"
                 })
-
-                -- better completion for supporting LSP servers
-                vim.api.nvim_create_autocmd("LspAttach", {
-                    group = vim.api.nvim_create_augroup("custom.lsp", {}),
-                    callback = function(args)
-                        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-                        if client:supports_method("textDocument/completion") then
-                            vim.lsp.completion.enable(true, client.id, args.buf, {})
-                        end
-                    end,
-                })
             end
         },
         {
@@ -146,6 +155,7 @@ require("lazy").setup({
 
 
         -- misc
+        { "akinsho/toggleterm.nvim", opts = {} },
         {
             "lervag/vimtex",
             init = function()
@@ -170,13 +180,14 @@ vim.keymap.set("n", "n", "nzz") -- center after jumping
 vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("v", ">", ">gv")         -- reselect after shifting
+vim.keymap.set("v", ">", ">gv")                  -- reselect after shifting
 vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("i", "<C-l>", function() -- activate or accept omni completion
-    return vim.fn.pumvisible() == 1 and "<C-y>" or "<C-x><C-o>"
-end, { expr = true })
 vim.keymap.set({ "n", "v" }, "<leader>c", "\"+") -- system clipboard
 vim.keymap.set("n", "<leader>w", "<C-w>")        -- window commands
+vim.keymap.set({ "n", "v" }, "j", "gj")          -- move within wrapped line
+vim.keymap.set({ "n", "v" }, "k", "gk")
+vim.keymap.set({ "n", "v" }, "gj", "j")
+vim.keymap.set({ "n", "v" }, "gk", "k")
 
 
 -- misc shortcuts
@@ -190,11 +201,25 @@ vim.keymap.set("n", "<leader>o", function()
         _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
     end
 end)
+vim.keymap.set("n", "<leader>g", function()
+    local dir = vim.fn.expand("%:h")
+    if vim.fn.isdirectory(dir) == 0 then
+        dir = "."
+    end
+    require("toggleterm.terminal").Terminal:new({
+        cmd = "lazygit",
+        hidden = true,
+        direction = "float",
+        dir = dir,
+        count = 99
+    }):toggle()
+end)
 
 
 -- toggle settings
 vim.keymap.set("n", "<leader>ts", function()
     vim.opt_local.spell = not vim.opt_local.spell:get()
+    vim.print("spellcheck: " .. tostring(vim.opt_local.spell:get()))
 end)
 vim.keymap.set("n", "<leader>td", function()
     vim.diagnostic.config({
@@ -220,23 +245,9 @@ vim.keymap.set("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>")
 vim.keymap.set("n", "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>")
 
 
--- snippets (luasnip has priority over vim.snippet)
+-- snippets (others defined in blink.cmp setup)
 vim.keymap.set("i", "<S-TAB>", function()
     require("luasnip").expand()
-end)
-vim.keymap.set({ "i", "s" }, "<C-j>", function()
-    if require("luasnip").jumpable(1) then
-        require("luasnip").jump(1)
-    elseif vim.snippet.active({ direction = 1 }) then
-        vim.snippet.jump(1)
-    end
-end)
-vim.keymap.set({ "i", "s" }, "<C-k>", function()
-    if require("luasnip").jumpable(-1) then
-        require("luasnip").jump(-1)
-    elseif vim.snippet.active({ direction = -1 }) then
-        vim.snippet.jump(-1)
-    end
 end)
 vim.keymap.set({ "i", "s" }, "<C-d>", function()
     if require("luasnip").choice_active() then
@@ -248,22 +259,6 @@ end)
 --------------------------------------
 -- Filetype specific options/keymaps -
 --------------------------------------
-
--- text-editing specific settings
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("custom.text-editing", {}),
-    pattern = { "tex", "markdown", "org", "typst" },
-    callback = function()
-        -- move within a line
-        vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = true })
-        vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = true })
-        vim.keymap.set({ "n", "v" }, "gj", "j", { buffer = true })
-        vim.keymap.set({ "n", "v" }, "gk", "k", { buffer = true })
-
-        -- fix spelling errors
-        vim.keymap.set("i", "<C-f>", "<C-x>s", { buffer = true })
-    end
-})
 
 -- LaTeX specific settings
 vim.api.nvim_create_autocmd("FileType", {
