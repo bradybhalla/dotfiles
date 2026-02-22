@@ -1,6 +1,6 @@
-------------
--- Options -
-------------
+--------------------
+-- General options -
+--------------------
 
 vim.opt.number         = true
 vim.opt.relativenumber = true
@@ -61,7 +61,6 @@ require("lazy").setup({
                     }
                 end
             },
-
         },
         {
             "nvim-telescope/telescope.nvim",
@@ -81,11 +80,15 @@ require("lazy").setup({
                         "json", "typescript", "javascript", "ocaml", "python",
                         "cpp", "comment"
                     },
-                    highlight = { enable = true }
-                }
+                    highlight = { enable = true } }
             end
         },
         { "lewis6991/gitsigns.nvim" },
+        {
+            "stevearc/oil.nvim",
+            dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+            opts = { view_options = { show_hidden = true } }
+        },
 
 
         -- editing
@@ -103,10 +106,8 @@ require("lazy").setup({
         {
             "saghen/blink.cmp",
             version = "1.*",
-
             opts = {
                 snippets = { preset = "luasnip" },
-
                 keymap = {
                     preset = "none",
                     ["<C-l>"] = { "select_and_accept", "show" },
@@ -119,8 +120,7 @@ require("lazy").setup({
 
                     ["<C-u>"] = { "show_documentation", "hide_documentation" },
                     ["<C-b>"] = { "scroll_documentation_up" },
-                    ["<C-f>"] = { "scroll_documentation_down" },
-
+                    ["<C-f>"] = { "scroll_documentation_down" }
                 }
             }
         },
@@ -134,19 +134,7 @@ require("lazy").setup({
         },
         { "folke/lazydev.nvim",     opts = {} },
         { "mfussenegger/nvim-jdtls" },
-        {
-            "neovim/nvim-lspconfig",
-            config = function()
-                vim.diagnostic.config({
-                    severity_sort = true,
-                    update_in_insert = true
-                })
-                vim.lsp.enable({
-                    "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
-                    "rust_analyzer"
-                })
-            end
-        },
+        { "neovim/nvim-lspconfig" },
         {
             "stevearc/conform.nvim",
             opts = {
@@ -193,7 +181,8 @@ vim.keymap.set({ "n", "v" }, "gk", "k")
 -- misc shortcuts
 vim.keymap.set("n", "<leader>q", "<CMD>quit<CR>")
 vim.keymap.set("n", "<leader>s", "<CMD>write<CR>")
-vim.keymap.set("n", "<leader>o", function()
+vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>")
+vim.keymap.set("n", "<leader>O", function()
     local file_path = vim.fn.expand("%")
     if file_path ~= "" then
         _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
@@ -201,7 +190,7 @@ vim.keymap.set("n", "<leader>o", function()
         _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
     end
 end)
-vim.keymap.set("n", "<leader>g", function()
+vim.keymap.set("n", "<leader>G", function()
     local dir = vim.fn.expand("%:h")
     if vim.fn.isdirectory(dir) == 0 then
         dir = "."
@@ -219,12 +208,7 @@ end)
 -- toggle settings
 vim.keymap.set("n", "<leader>ts", function()
     vim.opt_local.spell = not vim.opt_local.spell:get()
-    vim.print("spellcheck: " .. tostring(vim.opt_local.spell:get()))
-end)
-vim.keymap.set("n", "<leader>td", function()
-    vim.diagnostic.config({
-        virtual_text = not vim.diagnostic.config().virtual_text
-    })
+    vim.print("spellcheck: " .. (vim.opt_local.spell:get() and "on" or "off"))
 end)
 
 
@@ -256,11 +240,31 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
 end)
 
 
---------------------------------------
--- Filetype specific options/keymaps -
---------------------------------------
+-----------------
+-- LSP settings -
+-----------------
 
--- LaTeX specific settings
+vim.diagnostic.config({
+    severity_sort = true,
+    update_in_insert = true
+})
+
+vim.lsp.config("tinymist", {
+    settings = {
+        exportPdf = "onSave"
+    }
+})
+
+vim.lsp.enable({
+    "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
+    "rust_analyzer", "tinymist"
+})
+
+-------------------------------
+-- Filetype specific settings -
+-------------------------------
+
+-- LaTeX specific keymaps
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.latex", {}),
     pattern = "tex",
@@ -276,7 +280,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Java custom lsp settings using jdtls plugin
+-- Java custom lsp setup through nvim-jdtls
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.java", {}),
     pattern = "java",
