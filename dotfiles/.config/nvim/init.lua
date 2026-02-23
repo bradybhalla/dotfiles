@@ -283,6 +283,16 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
+-- Typst specific keymaps
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("custom.typst", {}),
+    pattern = "typst",
+    callback = function()
+        vim.keymap.set("n", "<leader>b", "<CMD>silent !open -a Skim %:r.pdf<CR>", { buffer = true })
+    end
+})
+
+
 -- Java custom lsp setup through nvim-jdtls
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.java", {}),
