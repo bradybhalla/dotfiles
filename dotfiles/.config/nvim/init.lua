@@ -165,17 +165,17 @@ vim.cmd.colorscheme "catppuccin-frappe"
 ------------
 
 vim.keymap.set("n", "n", "nzz") -- center after jumping
-vim.keymap.set("n", "N", "Nzz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "N", "Nzz") -- center after jumping back
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- center after scrolling down
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- center after scrolling up
 vim.keymap.set("v", ">", ">gv")                  -- reselect after shifting
-vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", "<", "<gv")                  -- reselect after shifting
 vim.keymap.set({ "n", "v" }, "<leader>c", "\"+") -- system clipboard
 vim.keymap.set("n", "<leader>w", "<C-w>")        -- window commands
-vim.keymap.set({ "n", "v" }, "j", "gj")          -- move within wrapped line
-vim.keymap.set({ "n", "v" }, "k", "gk")
-vim.keymap.set({ "n", "v" }, "gj", "j")
-vim.keymap.set({ "n", "v" }, "gk", "k")
+    vim.keymap.set({ "n", "v" }, "j", "gj")          -- move within wrapped line
+vim.keymap.set({ "n", "v" }, "k", "gk")          -- move within wrapped line
+vim.keymap.set({ "n", "v" }, "gj", "j")          -- move by actual line
+vim.keymap.set({ "n", "v" }, "gk", "k")          -- move by actual line
 
 
 -- misc shortcuts
@@ -208,7 +208,7 @@ end)
 -- toggle settings
 vim.keymap.set("n", "<leader>ts", function()
     vim.opt_local.spell = not vim.opt_local.spell:get()
-    vim.print("spellcheck: " .. (vim.opt_local.spell:get() and "on" or "off"))
+    vim.notify("spellcheck: " .. (vim.opt_local.spell:get() and "on" or "off"))
 end)
 
 
@@ -239,6 +239,9 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
     end
 end)
 
+-- llm
+vim.keymap.set("n", "<leader>ii", require("./llm_utils").insert_below_cursor)
+vim.keymap.set("v", "<leader>ie", require("./llm_utils").edit_selection)
 
 -----------------
 -- LSP settings -

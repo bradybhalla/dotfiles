@@ -31,15 +31,15 @@ My setup for 90% of everything I do on a computer.
 
 ### Other helpful tools/apps
 
-- [Newsboat](https://newsboat.org/index.html): terminal RSS feed reader
-- [fzf](https://github.com/junegunn/fzf): fuzzy finder
-- [zoxide](https://github.com/ajeetdsouza/zoxide): `cd` alternative
 - [lazygit](https://github.com/jesseduffield/lazygit): git ui
+- [zoxide](https://github.com/ajeetdsouza/zoxide): `cd` alternative
+- [fzf](https://github.com/junegunn/fzf): fuzzy finder
 - [ripgrep](https://github.com/BurntSushi/ripgrep): `grep` alternative
 - [fd](https://github.com/sharkdp/fd): `find` alternative
 - [htop](https://htop.dev): process viewer
 - [miniconda](https://docs.conda.io/projects/miniconda/en/latest/): Python
   package and environment manager
+- [Newsboat](https://newsboat.org/index.html): terminal RSS feed reader
 
 ## Setup
 
