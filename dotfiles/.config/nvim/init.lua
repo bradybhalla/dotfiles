@@ -164,23 +164,24 @@ vim.cmd.colorscheme "catppuccin-frappe"
 -- Keymaps -
 ------------
 
-vim.keymap.set("n", "n", "nzz")                  -- center after jumping
-vim.keymap.set("n", "N", "Nzz")                  -- center after jumping back
-vim.keymap.set("n", "<C-d>", "<C-d>zz")          -- center after scrolling down
-vim.keymap.set("n", "<C-u>", "<C-u>zz")          -- center after scrolling up
-vim.keymap.set("v", ">", ">gv")                  -- reselect after shifting
-vim.keymap.set("v", "<", "<gv")                  -- reselect after shifting
-vim.keymap.set({ "n", "v" }, "<leader>c", "\"+") -- system clipboard
-vim.keymap.set("n", "<leader>w", "<C-w>")        -- window commands
-vim.keymap.set({ "n", "v" }, "j", "gj")          -- move within wrapped line
-vim.keymap.set({ "n", "v" }, "k", "gk")          -- move within wrapped line
-vim.keymap.set({ "n", "v" }, "gj", "j")          -- move by actual line
-vim.keymap.set({ "n", "v" }, "gk", "k")          -- move by actual line
+-- editing behavior
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set({ "n", "v" }, "j", "gj")
+vim.keymap.set({ "n", "v" }, "k", "gk")
+vim.keymap.set({ "n", "v" }, "gj", "j")
+vim.keymap.set({ "n", "v" }, "gk", "k")
 
 
 -- misc shortcuts
 vim.keymap.set("n", "<leader>q", "<CMD>quit<CR>")
 vim.keymap.set("n", "<leader>s", "<CMD>write<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
+vim.keymap.set("n", "<leader>w", "<C-w>")
 vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>")
 vim.keymap.set("n", "<leader>O", function()
     local file_path = vim.fn.expand("%")
