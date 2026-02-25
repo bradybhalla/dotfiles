@@ -6,18 +6,11 @@ local function prompt_and_output_code(system, input, buf, start_row, end_row)
     local start_extmark = vim.api.nvim_buf_set_extmark(buf, ns_id, start_row, 0, {})
     local end_extmark = vim.api.nvim_buf_set_extmark(buf, ns_id, end_row, 0, {})
 
-    if (end_row == start_row) then
-        vim.api.nvim_buf_set_extmark(buf, ns_id, start_row - 1, 0, {
+    for i = start_row, math.max(end_row - 1, start_row) do
+        vim.api.nvim_buf_set_extmark(buf, ns_id, i, 0, {
             sign_text = "*",
             sign_hl_group = "DiagnosticInfo"
         })
-    else
-        for i = start_row, end_row - 1 do
-            vim.api.nvim_buf_set_extmark(buf, ns_id, i, 0, {
-                sign_text = "*",
-                sign_hl_group = "DiagnosticInfo"
-            })
-        end
     end
 
     vim.system({ "llm", "-s", system, "-x" }, { stdin = input, text = true },
