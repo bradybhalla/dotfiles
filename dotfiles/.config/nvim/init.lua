@@ -94,6 +94,18 @@ require("lazy").setup({
         -- editing
         { "tpope/vim-surround" },
         {
+            "windwp/nvim-autopairs",
+            config = function()
+                local autopairs = require("nvim-autopairs")
+                autopairs.setup {}
+
+                local Rule = require("nvim-autopairs.rule")
+                autopairs.add_rule(Rule("$", "$", { "tex", "typst" }))
+
+                autopairs.get_rule("'")[1].not_filetypes = { "ocaml" }
+            end
+        },
+        {
             "L3MON4D3/LuaSnip",
             config = function()
                 require("luasnip").config.setup({
