@@ -252,10 +252,6 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
     end
 end)
 
--- llm
-vim.keymap.set("n", "<leader>ii", require("./llm_utils").insert_below_cursor)
-vim.keymap.set("v", "<leader>ie", require("./llm_utils").edit_selection)
-
 -----------------
 -- LSP settings -
 -----------------
