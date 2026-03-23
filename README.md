@@ -2,66 +2,53 @@
 
 My setup for 90% of everything I do on a computer.
 
-## Components
+## Main Components
 
 ### Editors
 
-- [Neovim](https://neovim.io): configured with LSP, autocomplete, telescope,
-  LaTeX, and more.
-- [Spacemacs](https://www.spacemacs.org/): mostly just the base config
+- [Neovim](https://neovim.io): main text editor
+- [Spacemacs](https://www.spacemacs.org/): for Org mode. Need to install manually since setup instructions just install Emacs
 
 ### Window managers / Keyboard shortcuts
 
-- [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager
-- [Rectangle](https://rectangleapp.com/): if you don't want a tiling window
-  manager
-- [skhd](https://github.com/koekeishiya/skhd): custom keyboard shortcuts, used
-  to quickly open apps
-- [Karabiner Elements](https://karabiner-elements.pqrs.org): bind `Caps Lock` to
-  mod-tap `Ctrl`/`Esc`
+- [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager for MacOS. Sometimes acts weird but it's the best I've found so far
+- [Rectangle](https://rectangleapp.com/): for when I don't feel like a tiling window manager
+- [skhd](https://github.com/koekeishiya/skhd): keyboard shortcuts mainly to open apps I use frequently
+- [Karabiner Elements](https://karabiner-elements.pqrs.org): bind `Caps Lock` to mod-tap `Ctrl`/`Esc`. See instructions below
 
-### Terminal / Shell
+### Shell / terminal
 
-- [Alacritty](https://alacritty.org/): download MesloLGS Nerd Font if needed
+- [Zsh](https://www.zsh.org/): with Powerlevel10k prompt, autosuggestions, syntax highlighting
 - [tmux](https://github.com/tmux/tmux): prefix `Ctrl-S`
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k): zsh prompt
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-  and [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):
-  clone into `~/bin`
+- [Alacritty](https://alacritty.org/): if only there was image support
 
-### Other helpful tools/apps
+### Other helpful tools
 
 - [lazygit](https://github.com/jesseduffield/lazygit): git ui
 - [zoxide](https://github.com/ajeetdsouza/zoxide): `cd` alternative
 - [fzf](https://github.com/junegunn/fzf): fuzzy finder
-- [ripgrep](https://github.com/BurntSushi/ripgrep): `grep` alternative
-- [fd](https://github.com/sharkdp/fd): `find` alternative
-- [htop](https://htop.dev): process viewer
-- [miniconda](https://docs.conda.io/projects/miniconda/en/latest/): Python
-  package and environment manager
-- [Newsboat](https://newsboat.org/index.html): terminal RSS feed reader
+- ...
 
-## Setup
 
-### Dotfiles Setup
+## MacOS Setup
 
-Install apps and tools listed above (most can be done with
-[Homebrew](https://brew.sh) on macOS). Modify `ITEMS` in "configure.sh" to only
-contain installed tools. Run `./configure.sh` to put config files in the correct
-locations.
+Most programs and all my dotfiles can be installed using nix Home Manager with `home-manager switch --flake .#bradybhalla`.
 
-### Neovim Setup
+Apps and programs that don't work well with nix can be installed using homebrew with `brew bundle`. I might eventually use nix-darwin instead but probably not.
 
-After installing the tools above and running `./configure.sh`,
-1. Open Neovim and wait for plugins/treesitter parsers to install.
-2. Install language servers, formatters, debuggers. If you don't have them
-   already, use `:Mason`.
-3. Restart Neovim and type `:checkhealth` to make sure everything is working
-   correctly.
+## Linux Setup
 
-### Karabiner Elements Setup
+I don't currently have nix set up for Linux, but everything should work with only a few modifications to "flake.nix" and "home.nix". Look in "Brewfile" to see what additional packages (if any) are needed.
 
-Download and install the Karabiner Elements app. Add a "Complex Modification" with the following contents:
+If you don't have nix then it will be more annoying, but you can install all the programs another way and look in "home.nix" to see where the dotfiles should go. Zsh will be the most annoying part since it is fully managed through Home Manager.
+
+## Windows Setup
+
+No.
+
+## Karabiner Elements Instructions
+
+Add a "Complex Modification" with the following contents:
 ```json
 {
     "description": "Tap Caps Lock for ESC or Hold for Control",

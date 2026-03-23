@@ -25,12 +25,13 @@ vim.opt.spellsuggest   = "9" -- max 9 items in z=
 
 vim.g.mapleader        = " " -- set leader key
 
+
 -----------------
 -- Lazy/plugins -
 -----------------
 
 -- make sure lazy is installed
-local lazypath         = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -72,13 +73,14 @@ require("lazy").setup({
         },
         {
             "nvim-treesitter/nvim-treesitter",
+            branch = "master", -- default is now on main but it is annoying
             build = ":TSUpdate",
             config = function()
                 ---@diagnostic disable-next-line: missing-fields
                 require("nvim-treesitter.configs").setup {
                     ensure_installed = {
                         "json", "typescript", "javascript", "ocaml", "python",
-                        "cpp", "comment"
+                        "cpp", "nix", "comment", "typst"
                     },
                     highlight = { enable = true } }
             end
@@ -150,7 +152,12 @@ require("lazy").setup({
         {
             "stevearc/conform.nvim",
             opts = {
-                formatters_by_ft = { ocaml = { "ocamlformat" } } }
+                formatters_by_ft = {
+                    ocaml = { "ocamlformat" },
+                    python = { "black" },
+                    nix = { "nixfmt" }
+                }
+            }
         },
 
 
@@ -171,6 +178,7 @@ require("lazy").setup({
 
 
 vim.cmd.colorscheme "catppuccin-frappe"
+
 
 ------------
 -- Keymaps -
@@ -252,6 +260,7 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
     end
 end)
 
+
 -----------------
 -- LSP settings -
 -----------------
@@ -271,6 +280,7 @@ vim.lsp.enable({
     "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
     "rust_analyzer", "tinymist"
 })
+
 
 -------------------------------
 -- Filetype specific settings -
