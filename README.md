@@ -9,7 +9,7 @@ My setup for 90% of everything I do on a computer.
 - [Neovim](https://neovim.io): main text editor
 - [Spacemacs](https://www.spacemacs.org/): for Org mode. Need to install manually since setup instructions just install Emacs
 
-### Window managers / Keyboard shortcuts
+### Window managers / keyboard shortcuts
 
 - [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager for MacOS. Sometimes acts weird but it's the best I've found so far
 - [Rectangle](https://rectangleapp.com/): for when I don't feel like a tiling window manager
@@ -30,16 +30,28 @@ My setup for 90% of everything I do on a computer.
 - ...
 
 
-## Setup (with Nix)
+## Setup
 
-For MacOS:
-- `home-manager switch --flake .#bradybhalla` to install most programs and dotfiles.
-- `brew bundle` to install the rest. I might eventually use nix-darwin instead but probably not.
+### MacOS (with Nix)
 
-For Linux:
-- Update "flake.nix" and "home.nix" to use the right system, username, and paths before using home-manager.
-- Install apps from "Brewfile" another way.
+`home-manager switch --flake .#bradybhalla` to install most programs and dotfiles.
 
+`brew bundle` to install apps and programs that don't work well with nix. I might eventually use nix-darwin instead (but probably not).
+
+
+### Linux (with Nix)
+
+Update "flake.nix" and "home.nix" to use the right system, username, and paths before using home-manager like above.
+
+Install any required apps listed in "Brewfile".
+
+### Without Nix
+
+Install programs listed in "home.nix" and "Brewfile" another way.
+
+Copy all dotfiles from "./dotfiles" to the home directory.
+
+You will need to make a ".zshrc" because zsh is fully configued with home-manager.
 
 ## Karabiner Elements Instructions
 
