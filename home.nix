@@ -43,23 +43,13 @@ in
     cmake
     skhd
 
-    (python3.withPackages (ps: [
-      ps.numpy
-      ps.matplotlib
-      ps.pandas
-    ]))
-    black
     uv
     nodejs
     ghc
     stack
     rustup
     typst
-    ocamlPackages.ocaml
-    ocamlPackages.dune_3
-    ocamlPackages.utop
-    ocamlPackages.ocaml-lsp
-    ocamlPackages.ocamlformat
+    opam
     nixfmt
 
     claude-code
@@ -92,19 +82,17 @@ in
     syntaxHighlighting.enable = true;
   };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.fzf.enable = true;
 
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
     options = [
       "--cmd"
       "cd"
     ];
   };
+
+  programs.opam.enable = true;
 
   home.file =
     let

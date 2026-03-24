@@ -30,21 +30,16 @@ My setup for 90% of everything I do on a computer.
 - ...
 
 
-## MacOS Setup
+## Setup (with Nix)
 
-Most programs and all my dotfiles can be installed using nix Home Manager with `home-manager switch --flake .#bradybhalla`.
+For MacOS:
+- `home-manager switch --flake .#bradybhalla` to install most programs and dotfiles.
+- `brew bundle` to install the rest. I might eventually use nix-darwin instead but probably not.
 
-Apps and programs that don't work well with nix can be installed using homebrew with `brew bundle`. I might eventually use nix-darwin instead but probably not.
+For Linux:
+- Update "flake.nix" and "home.nix" to use the right system, username, and paths before using home-manager.
+- Install apps from "Brewfile" another way.
 
-## Linux Setup
-
-I don't currently have nix set up for Linux, but everything should work with only a few modifications to "flake.nix" and "home.nix". Look in "Brewfile" to see what additional packages (if any) are needed.
-
-If you don't have nix then it will be more annoying, but you can install all the programs another way and look in "home.nix" to see where the dotfiles should go. Zsh will be the most annoying part since it is fully managed through Home Manager.
-
-## Windows Setup
-
-No.
 
 ## Karabiner Elements Instructions
 
