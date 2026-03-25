@@ -36,7 +36,7 @@ My setup for 90% of everything I do on a computer.
 
 `home-manager switch --flake .#bradybhalla` to install most programs and dotfiles.
 
-`brew bundle` to install apps and programs that don't work well with nix. I might eventually use nix-darwin instead (but probably not).
+`brew bundle` to install apps and programs that don't work well with nix. I might eventually use nix-darwin instead but probably not.
 
 
 ### Linux (with Nix)
