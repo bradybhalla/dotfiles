@@ -29,6 +29,7 @@ in
     fd
     htop
     lazygit
+    skhd
 
     tree
     imagemagick
@@ -41,7 +42,8 @@ in
     ffmpeg
     gcc
     cmake
-    skhd
+    glibtool
+    ispell
 
     uv
     nodejs

@@ -13,7 +13,7 @@ My setup for 90% of everything I do on a computer.
 
 - [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager for MacOS. Sometimes acts weird but it's the best I've found so far
 - [Rectangle](https://rectangleapp.com/): for when I don't feel like a tiling window manager
-- [skhd](https://github.com/koekeishiya/skhd): keyboard shortcuts mainly to open apps I use frequently
+- [skhd](https://github.com/koekeishiya/skhd): keyboard shortcuts to open apps/websites I use frequently
 - [Karabiner Elements](https://karabiner-elements.pqrs.org): bind `Caps Lock` to mod-tap `Ctrl`/`Esc`. See instructions below
 
 ### Shell / terminal
