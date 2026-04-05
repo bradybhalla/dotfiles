@@ -16,12 +16,12 @@ in
 
   home.sessionPath = [
     "/opt/homebrew/bin"
+    "${homeDir}/.ghcup/bin"
   ];
 
   home.packages = with pkgs; [
     neovim
     tmux
-
     zsh-powerlevel10k
     zoxide
     fzf
@@ -29,41 +29,38 @@ in
     fd
     htop
     lazygit
-    skhd
-
     git
     tree
-    imagemagick
     wget
     curl
     croc
     rlwrap
-    pandoc
     jq
+    tree-sitter
+
+    skhd
+    nerd-fonts.meslo-lg
+    imagemagick
+    pngpaste
+    pandoc
     ffmpeg
-    gcc
-    cmake
-    glibtool
     ispell
     texliveMedium
-    pngpaste
+
+    cmake
+    gcc
+    glibtool
 
     uv
     nodejs
-    ghc
-    stack
     rustup
     typst
     opam
     nixfmt
+    maven
+    javaPackages.compiler.temurin-bin.jre-21
 
     claude-code
-    (llm.withPlugins {
-      llm-gemini = true;
-      llm-cmd = true;
-    })
-
-    nerd-fonts.meslo-lg
   ];
 
   programs.home-manager.enable = true;

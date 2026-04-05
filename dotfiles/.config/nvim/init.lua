@@ -72,16 +72,17 @@ require("lazy").setup({
         },
         {
             "nvim-treesitter/nvim-treesitter",
-            branch = "master", -- default is now on main but it is annoying
-            build = ":TSUpdate",
             config = function()
-                ---@diagnostic disable-next-line: missing-fields
-                require("nvim-treesitter.configs").setup {
-                    ensure_installed = {
-                        "json", "typescript", "javascript", "ocaml", "python",
-                        "cpp", "nix", "comment", "typst", "haskell"
-                    },
-                    highlight = { enable = true } }
+                vim.api.nvim_create_autocmd('FileType', {
+                    callback = function()
+                        pcall(vim.treesitter.start)
+                    end,
+                })
+
+                require('nvim-treesitter').install(
+                    "json", "typescript", "javascript", "ocaml", "python",
+                    "cpp", "nix", "comment", "typst", "haskell"
+                )
             end
         },
         { "lewis6991/gitsigns.nvim" },
