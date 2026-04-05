@@ -47,13 +47,27 @@ This function should only modify configuration layer settings."
 
      markdown
      emacs-lisp
-     (ocaml :variables
-            ocaml-format-on-save t)
+     ocaml
+     python
+     haskell
 
      (org :variables
+          org-directory "~/Dropbox/org"
+          org-roam-directory (file-truename "~/Dropbox/org-roam")
+
+          org-enable-roam-support t
+          org-enable-roam-ui t
+
+          org-startup-folded 'content
           org-startup-indented t
-          org-agenda-files (directory-files-recursively "~/Dropbox/org" "\\.org$")
-          org-refile-targets '((org-agenda-files :maxlevel . 2))))
+
+          org-agenda-files (list org-directory org-roam-directory)
+
+          org-image-max-width 400
+          org-image-max-height 400
+
+          org-babel-python-command "python3"
+          ))
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -573,8 +587,42 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  )
 
+  ;; paste images into org-roam (images directory must exist)
+  (defun my/org-paste-image-from-clipboard (name)
+    (interactive "sImage name: ")
+    (let* ((filename (format-time-string
+                      (concat "images/" "%Y-%m-%d-%H%M%S-" name ".png"))))
+      (shell-command (concat "pngpaste " filename))
+      (insert (concat "[[file:" filename "]]"))
+      (message (concat "Saved: " filename))))
+
+  ;; search through normal org files (not org roam)
+  (defun my/org-file-find ()
+    (interactive)
+    (counsel-fzf nil org-directory "Org file: "))
+
+  ;; custom keymaps
+  (evil-define-key '(normal insert) org-mode-map
+    (kbd "C-c P") #'my/org-paste-image-from-clipboard
+    (kbd "C-c n i") #'org-roam-node-insert)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "S" #'my/org-file-find
+    "b C" #'org-babel-remove-result)
+  (spacemacs/set-leader-keys
+    "a o S" #'my/org-file-find)
+
+  ;; additional org mode / org-roam setup
+  (add-hook 'org-mode-hook #'turn-on-auto-fill)
+  (org-roam-db-autosync-mode)
+  (org-babel-do-load-languages ;; enable languages to execute from src blocks
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (haskell . t)
+     (sqlite . t)))
+  (with-eval-after-load 'org-roam ;; collapse org-roam buffer sections by default
+    (add-to-list 'org-roam-buffer-postrender-functions #'magit-section-show-level-2-all)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

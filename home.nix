@@ -31,6 +31,7 @@ in
     lazygit
     skhd
 
+    git
     tree
     imagemagick
     wget
@@ -44,6 +45,8 @@ in
     cmake
     glibtool
     ispell
+    texliveMedium
+    pngpaste
 
     uv
     nodejs
@@ -75,6 +78,7 @@ in
       ls = "ls --color=auto";
       lg = "lazygit";
       firefox = "open -a Firefox\\ Developer\\ Edition";
+      titan = "ssh -t bbhalla@titan.caltech.edu \"~/run-nix.sh\""; # TODO remove July 2026
     };
     initContent = lib.mkBefore ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -82,6 +86,17 @@ in
     '';
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+    config = {
+      global = {
+        hide_env_diff = true;
+      };
+    };
   };
 
   programs.fzf.enable = true;

@@ -7,11 +7,10 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn     = "yes" -- stop text from shifting
 
 vim.opt.tabstop        = 4     -- tab size 4
-vim.opt.softtabstop    = 4
-vim.opt.shiftwidth     = 4
-vim.opt.expandtab      = true -- use spaces instead of tabs
+vim.opt.shiftwidth     = 0     -- use tabstop
+vim.opt.expandtab      = true  -- use spaces instead of tabs
 
-vim.opt.ignorecase     = true -- search case sensitivity
+vim.opt.ignorecase     = true  -- search case sensitivity
 vim.opt.smartcase      = true
 
 vim.opt.breakindent    = true -- wrapping behavior
@@ -80,7 +79,7 @@ require("lazy").setup({
                 require("nvim-treesitter.configs").setup {
                     ensure_installed = {
                         "json", "typescript", "javascript", "ocaml", "python",
-                        "cpp", "nix", "comment", "typst"
+                        "cpp", "nix", "comment", "typst", "haskell"
                     },
                     highlight = { enable = true } }
             end
@@ -146,8 +145,6 @@ require("lazy").setup({
             build = ":MasonUpdate",
             opts = {}
         },
-        { "folke/lazydev.nvim",     opts = {} },
-        { "mfussenegger/nvim-jdtls" },
         { "neovim/nvim-lspconfig" },
         {
             "stevearc/conform.nvim",
@@ -156,9 +153,13 @@ require("lazy").setup({
                     ocaml = { "ocamlformat" },
                     python = { "black" },
                     nix = { "nixfmt" }
-                }
+                },
+                default_format_opts = { lsp_format = "fallback" }
             }
         },
+        { "folke/lazydev.nvim",      opts = {} },
+        { "mfussenegger/nvim-jdtls" },
+        { "tarides/ocaml.nvim",      opts = { keymaps = {} } },
 
 
         -- misc
@@ -244,7 +245,7 @@ vim.keymap.set("n", "<leader>fh", "<CMD>Telescope help_tags<CR>")
 
 -- language / lsp
 vim.keymap.set({ "n", "v" }, "<leader>lf", function()
-    require("conform").format({ async = true, lsp_format = "fallback" })
+    require("conform").format()
 end)
 vim.keymap.set("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>")
 vim.keymap.set("n", "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>")
@@ -278,21 +279,21 @@ vim.lsp.config("tinymist", {
 
 vim.lsp.enable({
     "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
-    "rust_analyzer", "tinymist"
+    "rust_analyzer", "tinymist", "hls"
 })
 
 
--------------------------------
--- Filetype specific settings -
--------------------------------
+------------------------------
+-- Filetype specific configs -
+------------------------------
 
--- LaTeX specific keymaps
+-- LaTeX keymaps
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.latex", {}),
     pattern = "tex",
-    callback = function()
+    callback = function(args)
         -- build and show current document
-        vim.keymap.set("n", "<leader>b", "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>", { buffer = true })
+        vim.keymap.set("n", "<leader>b", "<CMD>w<CR><CMD>VimtexCompileSS -pdf -pv<CR>", { buffer = args.buf })
 
         -- toggle conceal
         vim.keymap.set("n", "<leader>tc", function()
@@ -302,23 +303,41 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Typst specific keymaps
+-- Typst keymaps
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.typst", {}),
     pattern = "typst",
-    callback = function()
-        vim.keymap.set("n", "<leader>b", "<CMD>silent !open -a Skim %:r.pdf<CR>", { buffer = true })
+    callback = function(args)
+        vim.keymap.set("n", "<leader>b", "<CMD>silent !open -a Skim %:r.pdf<CR>", { buffer = args.buf })
     end
 })
 
 
--- Java custom lsp setup through nvim-jdtls
+-- Java lsp setup through nvim-jdtls
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.java", {}),
     pattern = "java",
     callback = function()
-        require("jdtls").start_or_attach({
-            cmd = { "jdtls" }
-        })
+        require("jdtls").start_or_attach({ cmd = { "jdtls" } })
     end
+})
+
+
+-- OCaml custom keymaps and autoformat
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("custom.ocaml", {}),
+    pattern = { "ocaml", "dune" },
+    callback = function(args)
+        vim.opt_local.tabstop = 2
+        vim.keymap.set("n", "<C-c><C-a>", "<CMD>OCamlSwitchIntfImpl<CR>", { buffer = args.buf })
+        vim.keymap.set("n", "<leader>li", "<CMD>OCamlSwitchIntfImpl<CR>", { buffer = args.buf })
+        vim.keymap.set("n", "<leader>lI", "<CMD>OCamlInferIntf<CR>", { buffer = args.buf })
+    end,
+})
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("custom.autoformat", { clear = false }),
+    pattern = { "*.ml", "*.mli", "dune", "dune-project" },
+    callback = function(args)
+        require("conform").format({ bufnr = args.buf })
+    end,
 })

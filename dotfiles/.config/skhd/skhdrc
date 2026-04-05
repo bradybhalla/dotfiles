@@ -14,3 +14,4 @@ leader < s : open -a Spotify;  skhd --key escape
 leader < shift - g : open -a "Firefox Developer Edition" "https://github.com"; skhd --key escape
 leader < shift - d : open -a "Firefox Developer Edition" "https://desmos.com/calculator"; skhd --key escape
 leader < shift - c : open -a "Firefox Developer Edition" "https://claude.ai"; skhd --key escape
+leader < shift - n : open -a "Firefox Developer Edition" "https://search.nixos.org/packages"; skhd --key escape
