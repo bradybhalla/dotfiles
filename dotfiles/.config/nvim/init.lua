@@ -1,6 +1,6 @@
---------------------
--- General options -
---------------------
+-----------
+-- Config -
+-----------
 
 vim.opt.number         = true
 vim.opt.relativenumber = true
@@ -25,162 +25,10 @@ vim.opt.spellsuggest   = "9" -- max 9 items in z=
 vim.g.mapleader        = " " -- set leader key
 
 
------------------
--- Lazy/plugins -
------------------
-
--- make sure lazy is installed
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "--branch=stable",
-        "https://github.com/folke/lazy.nvim.git",
-        lazypath
-    })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- install and setup plugins
-require("lazy").setup({
-    spec = {
-        -- editor interface / navigation
-        {
-            "catppuccin/nvim",
-            name = "catppuccin",
-            priority = 1000,
-            opts = {
-                integrations = { mason = true },
-                custom_highlights = function(colors)
-                    return {
-                        SpellBad = { fg = colors.red }, -- spelling errors
-                        SpellCap = { fg = colors.red }, -- capitalization errors
-                        Conceal = { fg = colors.pink }, -- VimTeX conceal
-                    }
-                end
-            },
-        },
-        {
-            "nvim-telescope/telescope.nvim",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            opts = {
-                defaults = { file_ignore_patterns = { "^.git/" } },
-                pickers = { live_grep = { additional_args = { "--hidden" } } }
-            }
-        },
-        {
-            "nvim-treesitter/nvim-treesitter",
-            config = function()
-                vim.api.nvim_create_autocmd('FileType', {
-                    callback = function()
-                        pcall(vim.treesitter.start)
-                    end,
-                })
-
-                require('nvim-treesitter').install(
-                    "json", "typescript", "javascript", "ocaml", "python",
-                    "cpp", "nix", "comment", "typst", "haskell"
-                )
-            end
-        },
-        { "lewis6991/gitsigns.nvim" },
-        {
-            "stevearc/oil.nvim",
-            dependencies = { { "nvim-mini/mini.icons", opts = {} } },
-            opts = { view_options = { show_hidden = true } }
-        },
-
-
-        -- editing
-        { "tpope/vim-surround" },
-        {
-            "windwp/nvim-autopairs",
-            config = function()
-                local autopairs = require("nvim-autopairs")
-                autopairs.setup {}
-
-                local Rule = require("nvim-autopairs.rule")
-                autopairs.add_rule(Rule("$", "$", { "tex", "typst" }))
-
-                autopairs.get_rule("'")[1].not_filetypes = { "ocaml" }
-            end
-        },
-        {
-            "L3MON4D3/LuaSnip",
-            config = function()
-                require("luasnip").config.setup({
-                    enable_autosnippets = true,
-                    update_events = "TextChanged,TextChangedI"
-                })
-                require("luasnip.loaders.from_lua").lazy_load() -- from luasnippets/
-            end
-        },
-        {
-            "saghen/blink.cmp",
-            version = "1.*",
-            opts = {
-                snippets = { preset = "luasnip" },
-                keymap = {
-                    preset = "none",
-                    ["<C-l>"] = { "select_and_accept", "show" },
-                    ["<C-p>"] = { "select_prev" },
-                    ["<C-n>"] = { "select_next" },
-                    ["<C-e>"] = { "hide" },
-
-                    ["<C-j>"] = { "snippet_forward" },
-                    ["<C-k>"] = { "snippet_backward" },
-
-                    ["<C-u>"] = { "show_documentation", "hide_documentation" },
-                    ["<C-b>"] = { "scroll_documentation_up" },
-                    ["<C-f>"] = { "scroll_documentation_down" }
-                }
-            }
-        },
-
-
-        -- language tools
-        {
-            "williamboman/mason.nvim",
-            build = ":MasonUpdate",
-            opts = {}
-        },
-        { "neovim/nvim-lspconfig" },
-        {
-            "stevearc/conform.nvim",
-            opts = {
-                formatters_by_ft = {
-                    ocaml = { "ocamlformat" },
-                    python = { "black" },
-                    nix = { "nixfmt" }
-                },
-                default_format_opts = { lsp_format = "fallback" }
-            }
-        },
-        { "folke/lazydev.nvim",      opts = {} },
-        { "mfussenegger/nvim-jdtls" },
-        { "tarides/ocaml.nvim",      opts = { keymaps = {} } },
-
-
-        -- misc
-        { "akinsho/toggleterm.nvim", opts = {} },
-        {
-            "lervag/vimtex",
-            init = function()
-                vim.g.vimtex_quickfix_open_on_warning = 0
-                vim.g.vimtex_syntax_conceal = { math_bounds = 0 }
-            end
-        }
-
-
-    },
-    install = { colorscheme = { "catppuccin" } }
-})
-
-
-vim.cmd.colorscheme "catppuccin-frappe"
-
+require("./interface")
+require("./editing")
+require("./language-tools")
+require("./misc-plugins")
 
 ------------
 -- Keymaps -
@@ -263,27 +111,6 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
 end)
 
 
------------------
--- LSP settings -
------------------
-
-vim.diagnostic.config({
-    severity_sort = true,
-    update_in_insert = true
-})
-
-vim.lsp.config("tinymist", {
-    settings = {
-        exportPdf = "onSave"
-    }
-})
-
-vim.lsp.enable({
-    "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
-    "rust_analyzer", "tinymist", "hls"
-})
-
-
 ------------------------------
 -- Filetype specific configs -
 ------------------------------
@@ -333,12 +160,12 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "<C-c><C-a>", "<CMD>OCamlSwitchIntfImpl<CR>", { buffer = args.buf })
         vim.keymap.set("n", "<leader>li", "<CMD>OCamlSwitchIntfImpl<CR>", { buffer = args.buf })
         vim.keymap.set("n", "<leader>lI", "<CMD>OCamlInferIntf<CR>", { buffer = args.buf })
-    end,
+    end
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("custom.autoformat", { clear = false }),
     pattern = { "*.ml", "*.mli", "dune", "dune-project" },
     callback = function(args)
         require("conform").format({ bufnr = args.buf })
-    end,
+    end
 })
