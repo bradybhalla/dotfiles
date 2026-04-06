@@ -5,16 +5,16 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "blink.cmp": {
-      "rev": "49f211fe5d729df53df4c042d7c3464cf47d199e",
+      "rev": "3536ce464e82843b00c76718d9bfe1994647d686",
       "src": "https://github.com/saghen/blink.cmp",
-      "version": "1.0.0 - 1.1.0"
+      "version": "'v1.5.0'"
     },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "4e34ff26875b92167d47038bd83a11026d57dcd8",
+      "rev": "db486b42299b2e3f5831809617af21becf268a39",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lazydev.nvim": {
@@ -76,6 +76,10 @@
     "vimtex": {
       "rev": "9306903316c3ddd250676b7cf97c84a84c9c8f99",
       "src": "https://github.com/lervag/vimtex"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }

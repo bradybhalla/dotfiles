@@ -1,5 +1,14 @@
-require("mason").setup()
+require("nvim-treesitter").install {
+    "json", "typescript", "javascript", "ocaml", "python",
+    "cpp", "nix", "typst", "haskell", "comment"
+}
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
+})
 
+require("mason").setup()
 require("conform").setup({
     formatters_by_ft = {
         ocaml = { "ocamlformat" },
@@ -8,13 +17,9 @@ require("conform").setup({
     },
     default_format_opts = { lsp_format = "fallback" }
 })
-
 require("lazydev").setup()
-
 require("ocaml").setup({
-    params = {
-        client = "ocamllsp",
-    },
+    params = { client = "ocamllsp" },
     keymaps = {}
 })
 
@@ -37,4 +42,3 @@ vim.lsp.enable({
     "pyright", "lua_ls", "ts_ls", "ocamllsp", "clangd",
     "rust_analyzer", "tinymist", "hls"
 })
-

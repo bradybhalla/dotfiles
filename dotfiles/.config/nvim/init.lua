@@ -2,23 +2,12 @@
 -- Install plugins -
 --------------------
 
--- TODO: blink.cmp doesn't have install instructions for vim.pack but this seems to work okay for now
-vim.api.nvim_create_autocmd("PackChanged", {
-    callback =
-        function(ev)
-            local name, kind = ev.data.spec.name, ev.data.kind
-            if name == "blink.cmp" and (kind == "install" or kind == "update") then
-                vim.system({ "cargo build --release" }, { cwd = ev.data.path })
-            end
-        end
-})
-
+-- to delete manually, remove from ~/.local/share/nvim/site/pack/core/opt
 vim.pack.add({
     -- interface
     "https://github.com/catppuccin/nvim",
     "https://github.com/nvim-telescope/telescope.nvim",
     "https://github.com/nvim-lua/plenary.nvim", -- dependency for telescope
-    "https://github.com/nvim-treesitter/nvim-treesitter",
     "https://github.com/lewis6991/gitsigns.nvim",
     "https://github.com/stevearc/oil.nvim",
     "https://github.com/nvim-mini/mini.icons", -- dependency for oil
@@ -27,9 +16,10 @@ vim.pack.add({
     "https://github.com/tpope/vim-surround",
     "https://github.com/windwp/nvim-autopairs",
     "https://github.com/L3MON4D3/LuaSnip",
-    { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.0"), },
+    { src = "https://github.com/saghen/blink.cmp", version = "v1.5.0" }, -- new versions don't install binary correctly
 
     -- language tools
+    "https://github.com/nvim-treesitter/nvim-treesitter",
     "https://github.com/williamboman/mason.nvim",
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/stevearc/conform.nvim",
@@ -40,6 +30,7 @@ vim.pack.add({
     -- misc
     "https://github.com/akinsho/toggleterm.nvim",
     "https://github.com/lervag/vimtex",
+    "https://github.com/folke/which-key.nvim",
 })
 
 ---------------------------
@@ -64,102 +55,53 @@ vim.opt.smoothscroll   = true
 vim.opt.splitright     = true -- window splitting direction
 vim.opt.splitbelow     = true
 
-vim.opt.spellsuggest   = "9" -- max 9 items in z=
+vim.opt.spellsuggest   = "9" -- max 9 items in z= (which-key overrides it)
 
 vim.g.mapleader        = " " -- set leader key
 
-
-require("./interface")      -- colorscheme, navigation, ...
-require("./editing")        -- autocompletion, snippets, ...
-require("./language-tools") -- lsp, formatters, ...
+require("./interface")       -- colorscheme, navigation, ...
+require("./editing")         -- completion, keymap modifications, ...
+require("./language-tools")  -- lsp, treesitter, formatters, ...
 require("./misc-plugins")
 
+local utils = require("./utils")
+require("which-key").add({
+    { "<leader>o",  "<CMD>Oil<CR>",                                             desc = "Oil" },
+    { "<leader>G",  utils.lazygit,                                              desc = "Lazygit" },
+    { "<leader>c",  "\"+",                                                      mode = { "n", "v" } },
 
--- editing behavior
-vim.keymap.set("n", "n", "nzz")
-vim.keymap.set("n", "N", "Nzz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set({ "n", "v" }, "j", "gj")
-vim.keymap.set({ "n", "v" }, "k", "gk")
-vim.keymap.set({ "n", "v" }, "gj", "j")
-vim.keymap.set({ "n", "v" }, "gk", "k")
+    { "<leader>q",  group = "quit" },
+    { "<leader>qq", "<CMD>qall<CR>",                                            desc = "quit" },
+    { "<leader>qs", "<CMD>wqall<CR>",                                           desc = "save and quit" },
 
+    { "<leader>f",  group = "file" },
+    { "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>",                desc = "find file" },
+    { "<leader>fh", "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", desc = "find hidden file" },
+    { "<leader>fs", "<CMD>write<CR>",                                           desc = "save file" },
+    { "<leader>fo", utils.open_file_in_finder,                                  desc = "open file in Finder" },
 
-vim.keymap.set("n", "<leader>qq", "<CMD>qall<CR>")
-vim.keymap.set("n", "<leader>qs", "<CMD>wqall<CR>")
+    { "<leader>b",  group = "buffer" },
+    { "<leader>bb", "<CMD>Telescope buffers<CR>",                               desc = "find buffer" },
+    { "<leader>bd", "<CMD>bdelete<CR>",                                         desc = "delete buffer" },
 
-vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>")
-vim.keymap.set("n", "<leader>fh",
-    "<CMD>Telescope find_files hidden=true no_ignore=true<CR>")
-vim.keymap.set("n", "<leader>fs", "<CMD>write<CR>")
-vim.keymap.set("n", "<leader>fo", function()
-    local file_path = vim.fn.expand("%")
-    if file_path ~= "" then
-        _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
-    else
-        _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
-    end
-end)
+    { "<leader>w",  "<C-w>",                                                    desc = "window" },
+    { "<leader>wd", "<CMD>close<CR>",                                           desc = "close window" },
 
-vim.keymap.set("n", "<leader>bb", "<CMD>Telescope buffers<CR>")
-vim.keymap.set("n", "<leader>bd", "<CMD>bdelete<CR>")
+    { "<leader>g",  group = "grep" },
+    { "<leader>gg", "<CMD>Telescope live_grep<CR>",                             desc = "search text" },
 
-vim.keymap.set("n", "<leader>w", "<C-w>")
-vim.keymap.set("n", "<leader>wd", "<CMD>close<CR>")
+    { "<leader>l",  group = "language" },
+    { "<leader>lf", function() require("conform").format() end,                 desc = "format buffer" },
+    { "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>",                  desc = "search document symbols" },
+    { "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",         desc = "search workspace symbols" },
 
-vim.keymap.set("n", "<leader>gg", "<CMD>Telescope live_grep<CR>")
+    { "<leader>h",  group = "help" },
+    { "<leader>hh", "<CMD>Telescope help_tags<CR>",                             desc = "search help" },
 
-vim.keymap.set("n", "<leader>h", "<CMD>Telescope help_tags<CR>")
-
-vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
-vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>")
-vim.keymap.set("n", "<leader>G", function()
-    local dir = vim.fn.expand("%:h")
-    if vim.fn.isdirectory(dir) == 0 then
-        dir = "."
-    end
-    require("toggleterm.terminal").Terminal:new({
-        cmd = "lazygit",
-        hidden = true,
-        direction = "float",
-        dir = dir,
-        count = 99
-    }):toggle()
-end)
-
-
--- toggles
-vim.keymap.set("n", "<leader>ts", function()
-    vim.opt_local.spell = not vim.opt_local.spell:get()
-    vim.notify("spellcheck: " .. (vim.opt_local.spell:get() and "on" or "off"))
-end)
-vim.keymap.set("n", "<leader>td", function()
-    local val = not vim.diagnostic.config().virtual_text
-    vim.diagnostic.config({ virtual_text = val})
-    vim.notify("diagnostic virtual text: " .. (val and "on" or "off"))
-end)
-
-
--- language / lsp
-vim.keymap.set({ "n", "v" }, "<leader>lf", function()
-    require("conform").format()
-end)
-vim.keymap.set("n", "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>")
-vim.keymap.set("n", "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>")
-
-
--- snippets (others defined in blink.cmp setup)
-vim.keymap.set("i", "<S-TAB>", function()
-    require("luasnip").expand()
-end)
-vim.keymap.set({ "i", "s" }, "<C-d>", function()
-    if require("luasnip").choice_active() then
-        require("luasnip").change_choice(1)
-    end
-end)
+    { "<leader>t",  group = "toggle" },
+    { "<leader>ts", utils.toggle_spellcheck,                                    desc = "toggle spellcheck" },
+    { "<leader>td", utils.toggle_diagnostic_virtual_text,                       desc = "toggle diagnostic virtual text" },
+})
 
 
 ------------------------------------
@@ -208,9 +150,12 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = { "ocaml", "dune" },
     callback = function(args)
         vim.opt_local.tabstop = 2
-        vim.keymap.set("n", "<C-c><C-a>", "<CMD>OCamlSwitchIntfImpl<CR>", { buffer = args.buf })
-        vim.keymap.set("n", "<leader>li", "<CMD>OCamlSwitchIntfImpl<CR>", { buffer = args.buf })
-        vim.keymap.set("n", "<leader>lI", "<CMD>OCamlInferIntf<CR>", { buffer = args.buf })
+        require("which-key").add({
+            { "<C-c><C-a>", "<CMD>OCamlSwitchIntfImpl<CR>" },
+            { "<leader>li", "<CMD>OCamlSwitchIntfImpl<CR>", desc = "OCaml switch .ml/.mli" },
+            { "<leader>lI", "<CMD>OCamlInferIntf<CR>",      desc = "OCaml infer .mli from .ml" },
+            buffer = args.buf
+        })
     end
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
