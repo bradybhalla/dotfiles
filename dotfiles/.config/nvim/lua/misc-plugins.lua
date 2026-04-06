@@ -1,13 +1,3 @@
---------------------------
--- Miscellaneous plugins -
---------------------------
-
-vim.pack.add({
-    "https://github.com/akinsho/toggleterm.nvim",
-    "https://github.com/lervag/vimtex",
-})
-
-
 require("toggleterm").setup()
 
 vim.g.vimtex_quickfix_open_on_warning = 0

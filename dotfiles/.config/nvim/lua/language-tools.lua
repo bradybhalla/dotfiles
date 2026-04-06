@@ -1,16 +1,3 @@
--------------------
--- Language tools -
--------------------
-
-vim.pack.add({
-    "https://github.com/williamboman/mason.nvim",
-    "https://github.com/neovim/nvim-lspconfig",
-    "https://github.com/stevearc/conform.nvim",
-    "https://github.com/folke/lazydev.nvim",
-    "https://github.com/mfussenegger/nvim-jdtls",
-    "https://github.com/tarides/ocaml.nvim",
-})
-
 require("mason").setup()
 
 require("conform").setup({

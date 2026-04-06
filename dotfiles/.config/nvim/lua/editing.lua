@@ -1,22 +1,3 @@
-------------
--- Editing -
-------------
-
--- TODO: blink.cmp doesn't have install instructions for vim.pack but this seems to work okay for now
-local hooks = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == "blink.cmp" and (kind == "install" or kind == "update") then
-        vim.system({ "cargo build --release" }, { cwd = ev.data.path })
-    end
-end
-vim.api.nvim_create_autocmd("PackChanged", { callback = hooks })
-vim.pack.add({
-    "https://github.com/tpope/vim-surround",
-    "https://github.com/windwp/nvim-autopairs",
-    "https://github.com/L3MON4D3/LuaSnip",
-    { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.0"), },
-})
-
 local autopairs = require("nvim-autopairs")
 autopairs.setup {}
 local Rule = require("nvim-autopairs.rule")

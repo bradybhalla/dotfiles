@@ -1,6 +1,50 @@
------------
--- Config -
------------
+--------------------
+-- Install plugins -
+--------------------
+
+-- TODO: blink.cmp doesn't have install instructions for vim.pack but this seems to work okay for now
+vim.api.nvim_create_autocmd("PackChanged", {
+    callback =
+        function(ev)
+            local name, kind = ev.data.spec.name, ev.data.kind
+            if name == "blink.cmp" and (kind == "install" or kind == "update") then
+                vim.system({ "cargo build --release" }, { cwd = ev.data.path })
+            end
+        end
+})
+
+vim.pack.add({
+    -- interface
+    "https://github.com/catppuccin/nvim",
+    "https://github.com/nvim-telescope/telescope.nvim",
+    "https://github.com/nvim-lua/plenary.nvim", -- dependency for telescope
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/lewis6991/gitsigns.nvim",
+    "https://github.com/stevearc/oil.nvim",
+    "https://github.com/nvim-mini/mini.icons", -- dependency for oil
+
+    -- editing
+    "https://github.com/tpope/vim-surround",
+    "https://github.com/windwp/nvim-autopairs",
+    "https://github.com/L3MON4D3/LuaSnip",
+    { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.0"), },
+
+    -- language tools
+    "https://github.com/williamboman/mason.nvim",
+    "https://github.com/neovim/nvim-lspconfig",
+    "https://github.com/stevearc/conform.nvim",
+    "https://github.com/folke/lazydev.nvim",
+    "https://github.com/mfussenegger/nvim-jdtls",
+    "https://github.com/tarides/ocaml.nvim",
+
+    -- misc
+    "https://github.com/akinsho/toggleterm.nvim",
+    "https://github.com/lervag/vimtex",
+})
+
+---------------------------
+-- General configuration -
+---------------------------
 
 vim.opt.number         = true
 vim.opt.relativenumber = true
@@ -25,14 +69,11 @@ vim.opt.spellsuggest   = "9" -- max 9 items in z=
 vim.g.mapleader        = " " -- set leader key
 
 
-require("./interface")
-require("./editing")
-require("./language-tools")
+require("./interface")      -- colorscheme, navigation, ...
+require("./editing")        -- autocompletion, snippets, ...
+require("./language-tools") -- lsp, formatters, ...
 require("./misc-plugins")
 
-------------
--- Keymaps -
-------------
 
 -- editing behavior
 vim.keymap.set("n", "n", "nzz")
@@ -47,13 +88,14 @@ vim.keymap.set({ "n", "v" }, "gj", "j")
 vim.keymap.set({ "n", "v" }, "gk", "k")
 
 
--- misc shortcuts
-vim.keymap.set("n", "<leader>q", "<CMD>quit<CR>")
-vim.keymap.set("n", "<leader>s", "<CMD>write<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
-vim.keymap.set("n", "<leader>w", "<C-w>")
-vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>")
-vim.keymap.set("n", "<leader>O", function()
+vim.keymap.set("n", "<leader>qq", "<CMD>qall<CR>")
+vim.keymap.set("n", "<leader>qs", "<CMD>wqall<CR>")
+
+vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>")
+vim.keymap.set("n", "<leader>fh",
+    "<CMD>Telescope find_files hidden=true no_ignore=true<CR>")
+vim.keymap.set("n", "<leader>fs", "<CMD>write<CR>")
+vim.keymap.set("n", "<leader>fo", function()
     local file_path = vim.fn.expand("%")
     if file_path ~= "" then
         _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
@@ -61,6 +103,19 @@ vim.keymap.set("n", "<leader>O", function()
         _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
     end
 end)
+
+vim.keymap.set("n", "<leader>bb", "<CMD>Telescope buffers<CR>")
+vim.keymap.set("n", "<leader>bd", "<CMD>bdelete<CR>")
+
+vim.keymap.set("n", "<leader>w", "<C-w>")
+vim.keymap.set("n", "<leader>wd", "<CMD>close<CR>")
+
+vim.keymap.set("n", "<leader>gg", "<CMD>Telescope live_grep<CR>")
+
+vim.keymap.set("n", "<leader>h", "<CMD>Telescope help_tags<CR>")
+
+vim.keymap.set({ "n", "v" }, "<leader>c", "\"+")
+vim.keymap.set("n", "<leader>o", "<CMD>Oil<CR>")
 vim.keymap.set("n", "<leader>G", function()
     local dir = vim.fn.expand("%:h")
     if vim.fn.isdirectory(dir) == 0 then
@@ -76,20 +131,16 @@ vim.keymap.set("n", "<leader>G", function()
 end)
 
 
--- toggle settings
+-- toggles
 vim.keymap.set("n", "<leader>ts", function()
     vim.opt_local.spell = not vim.opt_local.spell:get()
     vim.notify("spellcheck: " .. (vim.opt_local.spell:get() and "on" or "off"))
 end)
-
-
--- telescope
-vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>")
-vim.keymap.set("n", "<leader>fi",
-    "<CMD>Telescope find_files hidden=true no_ignore=true<CR>")
-vim.keymap.set("n", "<leader>fg", "<CMD>Telescope live_grep<CR>")
-vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
-vim.keymap.set("n", "<leader>fh", "<CMD>Telescope help_tags<CR>")
+vim.keymap.set("n", "<leader>td", function()
+    local val = not vim.diagnostic.config().virtual_text
+    vim.diagnostic.config({ virtual_text = val})
+    vim.notify("diagnostic virtual text: " .. (val and "on" or "off"))
+end)
 
 
 -- language / lsp
@@ -111,11 +162,11 @@ vim.keymap.set({ "i", "s" }, "<C-d>", function()
 end)
 
 
-------------------------------
--- Filetype specific configs -
-------------------------------
+------------------------------------
+-- Filetype-specific configuration -
+------------------------------------
 
--- LaTeX keymaps
+-- LaTeX
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.latex", {}),
     pattern = "tex",
@@ -131,7 +182,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Typst keymaps
+-- Typst
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.typst", {}),
     pattern = "typst",
@@ -141,7 +192,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Java lsp setup through nvim-jdtls
+-- Java
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.java", {}),
     pattern = "java",
@@ -151,7 +202,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- OCaml custom keymaps and autoformat
+-- OCaml
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.ocaml", {}),
     pattern = { "ocaml", "dune" },
@@ -163,7 +214,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("custom.autoformat", { clear = false }),
+    group = vim.api.nvim_create_augroup("custom.ocaml", { clear = false }),
     pattern = { "*.ml", "*.mli", "dune", "dune-project" },
     callback = function(args)
         require("conform").format({ bufnr = args.buf })

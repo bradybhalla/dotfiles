@@ -1,17 +1,3 @@
-----------------------------------
--- Editor interface / navigation -
-----------------------------------
-
-vim.pack.add({
-    "https://github.com/catppuccin/nvim",
-    "https://github.com/nvim-telescope/telescope.nvim",
-    "https://github.com/nvim-lua/plenary.nvim", -- dependency for telescope
-    "https://github.com/nvim-treesitter/nvim-treesitter",
-    "https://github.com/lewis6991/gitsigns.nvim",
-    "https://github.com/stevearc/oil.nvim",
-    "https://github.com/nvim-mini/mini.icons", -- dependency for oil
-})
-
 require("catppuccin").setup({
     integrations = { mason = true },
     custom_highlights = function(colors)
