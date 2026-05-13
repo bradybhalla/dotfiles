@@ -69,6 +69,10 @@
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
+    "vim-hugo": {
+      "rev": "324fb8c7371d31701349c1192e25a0bdcf9898f8",
+      "src": "https://github.com/phelipetls/vim-hugo"
+    },
     "vim-surround": {
       "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
       "src": "https://github.com/tpope/vim-surround"

@@ -13,3 +13,5 @@ color listnormal_unread   magenta default
 color listfocus_unread    magenta black   bold
 color info                blue  default
 color article             white   default
+
+cleanup-on-quit yes

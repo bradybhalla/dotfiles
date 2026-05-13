@@ -3,9 +3,8 @@ require("nvim-treesitter").install {
     "cpp", "nix", "typst", "haskell", "comment"
 }
 vim.api.nvim_create_autocmd("FileType", {
-    callback = function()
-        pcall(vim.treesitter.start)
-    end,
+    group = vim.api.nvim_create_augroup("custom.nvim-treesitter", {}),
+    callback = function() pcall(vim.treesitter.start) end
 })
 
 require("mason").setup()
@@ -13,7 +12,8 @@ require("conform").setup({
     formatters_by_ft = {
         ocaml = { "ocamlformat" },
         python = { "black" },
-        nix = { "nixfmt" }
+        nix = { "nixfmt" },
+        haskell = { "ormolu" }
     },
     default_format_opts = { lsp_format = "fallback" }
 })

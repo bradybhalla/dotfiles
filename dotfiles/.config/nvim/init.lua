@@ -26,6 +26,7 @@ vim.pack.add({
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/mfussenegger/nvim-jdtls",
     "https://github.com/tarides/ocaml.nvim",
+    "https://github.com/phelipetls/vim-hugo",
 
     -- misc
     "https://github.com/akinsho/toggleterm.nvim",
@@ -61,7 +62,7 @@ vim.g.mapleader        = " " -- set leader key
 
 require("./interface")       -- colorscheme, navigation, ...
 require("./editing")         -- completion, keymap modifications, ...
-require("./language-tools")  -- lsp, treesitter, formatters, ...
+require("./language-tools")  -- treesitter, lsp, formatters, ...
 require("./misc-plugins")
 
 local utils = require("./utils")
@@ -84,16 +85,18 @@ require("which-key").add({
     { "<leader>bb", "<CMD>Telescope buffers<CR>",                               desc = "find buffer" },
     { "<leader>bd", "<CMD>bdelete<CR>",                                         desc = "delete buffer" },
 
-    { "<leader>w",  "<C-w>",                                                    desc = "window" },
+    { "<leader>w",  proxy = "<C-w>",                                            group = "window" },
     { "<leader>wd", "<CMD>close<CR>",                                           desc = "close window" },
 
     { "<leader>g",  group = "grep" },
     { "<leader>gg", "<CMD>Telescope live_grep<CR>",                             desc = "search text" },
+    { "<leader>gt", "<CMD>Telescope live_grep default_text=(TODO|CR)<CR>",      desc = "search TODO/CR" },
 
     { "<leader>l",  group = "language" },
     { "<leader>lf", function() require("conform").format() end,                 desc = "format buffer" },
     { "<leader>ls", "<CMD>Telescope lsp_document_symbols<CR>",                  desc = "search document symbols" },
     { "<leader>lS", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",         desc = "search workspace symbols" },
+    { "<leader>ld", "<CMD>Telescope diagnostics<CR>",                           desc = "view all diagnostics" },
 
     { "<leader>h",  group = "help" },
     { "<leader>hh", "<CMD>Telescope help_tags<CR>",                             desc = "search help" },
@@ -101,6 +104,9 @@ require("which-key").add({
     { "<leader>t",  group = "toggle" },
     { "<leader>ts", utils.toggle_spellcheck,                                    desc = "toggle spellcheck" },
     { "<leader>td", utils.toggle_diagnostic_virtual_text,                       desc = "toggle diagnostic virtual text" },
+
+    { "<leader>s",  group = "search" },
+    { "<leader>sc", "<CMD>nohlsearch<CR>",                                      desc = "clear highlights" },
 })
 
 
@@ -158,9 +164,14 @@ vim.api.nvim_create_autocmd("FileType", {
         })
     end
 })
+
+
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("custom.ocaml", { clear = false }),
-    pattern = { "*.ml", "*.mli", "dune", "dune-project" },
+    group = vim.api.nvim_create_augroup("custom.autoformat", {}),
+    pattern = {
+        "*.ml", "*.mli", "dune", "dune-project", -- ocaml
+        "*.hs"                                   -- haskell
+    },
     callback = function(args)
         require("conform").format({ bufnr = args.buf })
     end

@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '((auto-completion :variables
+   '(html
+     (auto-completion :variables
                       auto-completion-return-key-behavior nil)
      (ivy :variables
           ivy-initial-inputs-alist nil)
@@ -42,7 +43,6 @@ This function should only modify configuration layer settings."
      syntax-checking
      treemacs
      lsp
-     version-control
      git
 
      markdown
@@ -57,6 +57,7 @@ This function should only modify configuration layer settings."
 
           org-enable-roam-support t
           org-enable-roam-ui t
+          org-enable-hugo-support t
 
           org-startup-folded 'content
           org-startup-indented t
@@ -67,7 +68,38 @@ This function should only modify configuration layer settings."
           org-image-max-height 400
 
           org-babel-python-command "python3"
-          ))
+
+          org-capture-templates
+          '(("t" "Quick todo" entry (file "~/Dropbox/org/inbox.org")
+             "* TODO %^{Title}\nSCHEDULED: %t\n%i"
+             :immediate-finish t)
+            ("T" "Todo" entry (file "~/Dropbox/org/inbox.org")
+             "* TODO %?\nSCHEDULED: %t\n%i"
+             ))
+
+          org-refile-targets '((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9))
+          org-outline-path-complete-in-steps nil
+          org-refile-use-outline-path 'file ; select from file.org/heading1/heading2
+          org-reverse-note-order t ; refiling adds to the top
+
+          org-publish-project-alist
+          `(("org"
+             :base-directory ,org-directory
+             :publishing-directory "~/Dropbox/org-html-mirror"
+             :publishing-function org-html-publish-to-html
+             :with-planning t
+             :html-validation-link nil
+             )
+            ("desmos-compiler"
+             :base-directory "~/Dropbox/org-roam"
+             :publishing-directory "~/Documents/code/desmos-compiler/docs"
+             :publishing-function org-org-publish-to-org
+             :include ("20260329204523-desmos_compiler.org" "20260331091007-desmos_compiler_cs_81.org")
+             :exclude ".*")
+            )
+          )
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -78,7 +110,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '( org-super-agenda )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -588,41 +620,98 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  ;; paste images into org-roam (images directory must exist)
+  ;; custom keymaps
   (defun my/org-paste-image-from-clipboard (name)
+    "Paste images into org-roam (images directory must exist)"
     (interactive "sImage name: ")
     (let* ((filename (format-time-string
                       (concat "images/" "%Y-%m-%d-%H%M%S-" name ".png"))))
       (shell-command (concat "pngpaste " filename))
       (insert (concat "[[file:" filename "]]"))
       (message (concat "Saved: " filename))))
-
-  ;; search through normal org files (not org roam)
   (defun my/org-file-find ()
+    "search through normal org files (not org roam)"
     (interactive)
     (counsel-fzf nil org-directory "Org file: "))
-
-  ;; custom keymaps
   (evil-define-key '(normal insert) org-mode-map
     (kbd "C-c P") #'my/org-paste-image-from-clipboard
     (kbd "C-c n i") #'org-roam-node-insert)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "S" #'my/org-file-find
     "b C" #'org-babel-remove-result)
-  (spacemacs/set-leader-keys
+  (spacemacs/set-leader-keys ; search files in main org directory
     "a o S" #'my/org-file-find)
+  (spacemacs/set-leader-keys ; jump to heading in the file
+    "a o j" #'counsel-org-goto)
+  (spacemacs/set-leader-keys
+    "g g" #'counsel-rg)
 
   ;; additional org mode / org-roam setup
-  (add-hook 'org-mode-hook #'turn-on-auto-fill)
   (org-roam-db-autosync-mode)
   (org-babel-do-load-languages ;; enable languages to execute from src blocks
    'org-babel-load-languages
    '((emacs-lisp . t)
      (python . t)
      (haskell . t)
-     (sqlite . t)))
+     (sqlite . t)
+     (shell . t)))
   (with-eval-after-load 'org-roam ;; collapse org-roam buffer sections by default
-    (add-to-list 'org-roam-buffer-postrender-functions #'magit-section-show-level-2-all)))
+    (add-to-list 'org-roam-buffer-postrender-functions #'magit-section-show-level-2-all))
+
+
+  (org-super-agenda-mode 1)
+  ;; org agenda view (C-c a d or SPC a o o d)
+  (setq org-agenda-custom-commands
+        '(("d" "Daily View"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-agenda-start-day nil)
+                        (org-agenda-overriding-header "")
+                        (org-super-agenda-groups
+                         '((:name "Schedule"
+                                  :time-grid t
+                                  :order 1)
+                           (:name "Completed"
+                                  :todo "DONE"
+                                  :order 99)
+                           (:name "Lower priority"
+                                  :priority "C"
+                                  :order 98)
+                           (:name "Today"
+                                  :deadline today
+                                  :deadline past
+                                  :scheduled today
+                                  :scheduled past
+                                  :order 2)
+                           (:name "Upcoming Deadlines"
+                                  :deadline future
+                                  :order 3))))))
+           nil
+           ("~/Dropbox/org-html-mirror/agenda.html")
+           )))
+
+  ;; auto-publish org-directory files to the org-html-mirror directory
+  (defun my/publish-org-mode-html-mirror ()
+    (when (and buffer-file-name
+               (string-prefix-p (expand-file-name org-directory)
+                                (expand-file-name buffer-file-name)))
+      (condition-case err
+          (org-publish-current-file)
+        (error nil))))
+  (add-hook 'after-save-hook
+            (lambda ()
+              (when (derived-mode-p 'org-mode)
+                (my/publish-org-mode-html-mirror))))
+
+
+  (spacemacs/toggle-highlight-current-line-globally-off)
+
+  (custom-set-faces
+   '(org-level-1 ((t (:height 1.1))))
+   '(org-level-2 ((t (:height 1.1))))
+   '(org-document-title ((t (:height 1.25))))
+   )
+
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
