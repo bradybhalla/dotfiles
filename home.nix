@@ -45,11 +45,13 @@ in
     pandoc
     ffmpeg
     ispell
-    texliveMedium
+    texliveFull
+    ollama
 
     cmake
-    gcc
     glibtool
+    glfw
+    clang-tools
 
     uv
     nodejs
@@ -59,8 +61,10 @@ in
     nixfmt
     maven
     javaPackages.compiler.temurin-bin.jre-21
+    hugo
 
     claude-code
+    ansible
   ];
 
   programs.home-manager.enable = true;
@@ -75,7 +79,10 @@ in
       ls = "ls --color=auto";
       lg = "lazygit";
       firefox = "open -a Firefox\\ Developer\\ Edition";
-      titan = "ssh -t bbhalla@titan.caltech.edu \"~/run-nix.sh\""; # TODO remove July 2026
+    };
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
     initContent = lib.mkBefore ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme

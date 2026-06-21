@@ -48,3 +48,9 @@ vim.keymap.set({ "n", "v" }, "k", "gk")
 vim.keymap.set({ "n", "v" }, "gj", "j")
 vim.keymap.set({ "n", "v" }, "gk", "k")
 
+-- selections
+vim.keymap.set("n", "<C-k>", "van", { remap = true })
+vim.keymap.set("v", "<C-k>", "an", { remap = true })
+vim.keymap.set("v", "<C-j>", "in", { remap = true })
+vim.keymap.set("v", "<C-h>", "[n", { remap = true })
+vim.keymap.set("v", "<C-l>", "]n", { remap = true })

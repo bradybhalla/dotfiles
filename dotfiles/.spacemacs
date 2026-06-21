@@ -59,7 +59,6 @@ This function should only modify configuration layer settings."
           org-enable-roam-ui t
           org-enable-hugo-support t
 
-          org-startup-folded 'content
           org-startup-indented t
 
           org-agenda-files (list org-directory org-roam-directory)
@@ -70,12 +69,12 @@ This function should only modify configuration layer settings."
           org-babel-python-command "python3"
 
           org-capture-templates
-          '(("t" "Quick todo" entry (file "~/Dropbox/org/inbox.org")
+          '(("q" "Quick todo" entry (file "~/Dropbox/org/inbox.org")
              "* TODO %^{Title}\nSCHEDULED: %t\n%i"
              :immediate-finish t)
-            ("T" "Todo" entry (file "~/Dropbox/org/inbox.org")
-             "* TODO %?\nSCHEDULED: %t\n%i"
-             ))
+            ("t" "Todo" entry (file "~/Dropbox/org/inbox.org")
+             "* TODO %?\nSCHEDULED: %t\n%i")
+            )
 
           org-refile-targets '((nil :maxlevel . 9)
                                (org-agenda-files :maxlevel . 9))
@@ -90,14 +89,7 @@ This function should only modify configuration layer settings."
              :publishing-function org-html-publish-to-html
              :with-planning t
              :html-validation-link nil
-             )
-            ("desmos-compiler"
-             :base-directory "~/Dropbox/org-roam"
-             :publishing-directory "~/Documents/code/desmos-compiler/docs"
-             :publishing-function org-org-publish-to-org
-             :include ("20260329204523-desmos_compiler.org" "20260331091007-desmos_compiler_cs_81.org")
-             :exclude ".*")
-            )
+             ))
           )
      )
 
@@ -643,8 +635,16 @@ before packages are loaded."
     "a o S" #'my/org-file-find)
   (spacemacs/set-leader-keys ; jump to heading in the file
     "a o j" #'counsel-org-goto)
+  (spacemacs/set-leader-keys ; jump to heading in all org files
+    "a o J" #'counsel-org-goto-all)
   (spacemacs/set-leader-keys
     "g g" #'counsel-rg)
+  (evil-define-key '(normal insert) org-mode-map
+    ;; rebind M- commands to C- since I use M- for Aerospace
+    (kbd "C-h") 'org-metaleft       ; promote / outdent
+    (kbd "C-l") 'org-metaright      ; demote / indent
+    (kbd "C-k") 'org-metaup         ; move up
+    (kbd "C-j") 'org-metadown)       ; move down
 
   ;; additional org mode / org-roam setup
   (org-roam-db-autosync-mode)
@@ -685,23 +685,7 @@ before packages are loaded."
                            (:name "Upcoming Deadlines"
                                   :deadline future
                                   :order 3))))))
-           nil
-           ("~/Dropbox/org-html-mirror/agenda.html")
-           )))
-
-  ;; auto-publish org-directory files to the org-html-mirror directory
-  (defun my/publish-org-mode-html-mirror ()
-    (when (and buffer-file-name
-               (string-prefix-p (expand-file-name org-directory)
-                                (expand-file-name buffer-file-name)))
-      (condition-case err
-          (org-publish-current-file)
-        (error nil))))
-  (add-hook 'after-save-hook
-            (lambda ()
-              (when (derived-mode-p 'org-mode)
-                (my/publish-org-mode-html-mirror))))
-
+           nil)))
 
   (spacemacs/toggle-highlight-current-line-globally-off)
 
