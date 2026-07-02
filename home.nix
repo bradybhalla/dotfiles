@@ -6,7 +6,7 @@
 }:
 let
   username = "bradybhalla";
-  homeDir = "/Users/bradybhalla";
+  homeDir = "/home/bradybhalla";
   dotfilesRepoDir = "${homeDir}/Documents/dotfiles";
 in
 {
@@ -14,10 +14,7 @@ in
   home.homeDirectory = homeDir;
   home.stateVersion = "25.05";
 
-  home.sessionPath = [
-    "/opt/homebrew/bin"
-    "${homeDir}/.ghcup/bin"
-  ];
+  home.sessionPath = [ ];
 
   home.packages = with pkgs; [
     neovim
@@ -38,10 +35,8 @@ in
     jq
     tree-sitter
 
-    skhd
     nerd-fonts.meslo-lg
     imagemagick
-    pngpaste
     pandoc
     ffmpeg
     ispell
@@ -61,7 +56,18 @@ in
     javaPackages.compiler.temurin-bin.jre-21
 
     claude-code
+    alacritty
+
   ];
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
+
+  gtk.enable = true;
 
   programs.home-manager.enable = true;
 
@@ -74,7 +80,7 @@ in
     shellAliases = {
       ls = "ls --color=auto";
       lg = "lazygit";
-      firefox = "open -a Firefox\\ Developer\\ Edition";
+      # firefox = "open -a Firefox\\ Developer\\ Edition"; # only on Mac
       titan = "ssh -t bbhalla@titan.caltech.edu \"~/run-nix.sh\""; # TODO remove July 2026
     };
     initContent = lib.mkBefore ''
@@ -122,5 +128,7 @@ in
       ".p10k.zsh".source = linkHere ".p10k.zsh";
       ".spacemacs".source = linkHere ".spacemacs";
       ".newsboat/config".source = linkHere ".newsboat/config";
+      ".config/hypr".source = linkHere ".config/hypr";
+      ".config/waybar".source = linkHere ".config/waybar";
     };
 }
