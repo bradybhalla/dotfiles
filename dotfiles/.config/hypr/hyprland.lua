@@ -1,4 +1,17 @@
 local catppuccin = require("catppuccin-macchiato")
+hl.config({
+    cursor = {
+        no_hardware_cursors = true,
+    },
+})
+-- Monitor configuration
+hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.2 })
+hl.monitor({ output = "Unknown-1", disabled = true })
+
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("spice-vdagent")
+    -- hl.exec_cmd("hyprpaper")
+end)
 
 local terminal    = "alacritty"
 local fileManager = "dolphin"
@@ -44,8 +57,8 @@ for i = 1, 10 do
 end
 
 -- Special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("scratchpad"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:scratchpad" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -105,13 +118,20 @@ hl.window_rule({
 
 hl.config({
     general = {
-        border_size = 2,
+        border_size = 3,
+        gaps_in= 3,
+        gaps_out= 5,
         ["col.active_border"]   = catppuccin.blue,
         ["col.inactive_border"] = catppuccin.overlay0,
     },
     decoration = {
         rounding = 10,
     },
+    misc = {
+    disable_hyprland_logo = true,
+    disable_splash_rendering = true,
+    force_default_wallpaper = 0,
+  },
 })
 
 hl.animation({ leaf = "global", enabled = true, speed = 2, bezier = "default" })

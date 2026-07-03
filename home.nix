@@ -58,7 +58,35 @@ in
     claude-code
     alacritty
 
+    # waybar and dependencies
+    waybar
+    playerctl
+    brightnessctl
+    networkmanagerapplet
+
+    (haskellPackages.ghcWithPackages (
+      hpkgs: with hpkgs; [
+        lacroix
+      ]
+    ))
+
   ];
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [
+        "~/.config/hypr/ocean-background.jpg"
+      ];
+      wallpaper = [
+        {
+          monitor = "";
+          path = "~/.config/hypr/ocean-background.jpg";
+        }
+      ];
+      splash = false;
+    };
+  };
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -68,6 +96,7 @@ in
   };
 
   gtk.enable = true;
+  gtk.gtk4.theme = null;
 
   programs.home-manager.enable = true;
 
@@ -128,7 +157,11 @@ in
       ".p10k.zsh".source = linkHere ".p10k.zsh";
       ".spacemacs".source = linkHere ".spacemacs";
       ".newsboat/config".source = linkHere ".newsboat/config";
-      ".config/hypr".source = linkHere ".config/hypr";
+      ".config/hypr/catppuccin-macchiato.lua".source = linkHere ".config/hypr/catppuccin-macchiato.lua";
+      ".config/hypr/hyprland.lua".source = linkHere ".config/hypr/hyprland.lua";
+      ".config/hypr/hyprlock.conf".source = linkHere ".config/hypr/hyprlock.conf";
+      ".config/hypr/hyprtoolkit.conf".source = linkHere ".config/hypr/hyprtoolkit.conf";
+      ".config/hypr/ocean-background.jpg".source = linkHere ".config/hypr/ocean-background.jpg";
       ".config/waybar".source = linkHere ".config/waybar";
     };
 }
