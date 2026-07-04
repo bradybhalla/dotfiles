@@ -2,16 +2,13 @@
   config,
   pkgs,
   lib,
+  username,
+  dotfilesRepoDir,
   ...
 }:
-let
-  username = "bradybhalla";
-  homeDir = "/home/bradybhalla";
-  dotfilesRepoDir = "${homeDir}/Documents/dotfiles";
-in
 {
   home.username = username;
-  home.homeDirectory = homeDir;
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.05";
 
   home.sessionPath = [ ];
@@ -57,46 +54,7 @@ in
 
     claude-code
     alacritty
-
-    # waybar and dependencies
-    waybar
-    playerctl
-    brightnessctl
-    networkmanagerapplet
-
-    (haskellPackages.ghcWithPackages (
-      hpkgs: with hpkgs; [
-        lacroix
-      ]
-    ))
-
   ];
-
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [
-        "~/.config/hypr/ocean-background.jpg"
-      ];
-      wallpaper = [
-        {
-          monitor = "";
-          path = "~/.config/hypr/ocean-background.jpg";
-        }
-      ];
-      splash = false;
-    };
-  };
-
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 24;
-  };
-
-  gtk.enable = true;
-  gtk.gtk4.theme = null;
 
   programs.home-manager.enable = true;
 
@@ -109,8 +67,6 @@ in
     shellAliases = {
       ls = "ls --color=auto";
       lg = "lazygit";
-      # firefox = "open -a Firefox\\ Developer\\ Edition"; # only on Mac
-      titan = "ssh -t bbhalla@titan.caltech.edu \"~/run-nix.sh\""; # TODO remove July 2026
     };
     initContent = lib.mkBefore ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -145,23 +101,14 @@ in
 
   home.file =
     let
-      # link everything directly for quicker changes
       linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
     in
     {
       ".config/nvim".source = linkHere ".config/nvim";
       ".tmux.conf".source = linkHere ".tmux.conf";
       ".config/alacritty".source = linkHere ".config/alacritty";
-      ".aerospace.toml".source = linkHere ".aerospace.toml";
-      ".config/skhd/skhdrc".source = linkHere ".config/skhd/skhdrc";
       ".p10k.zsh".source = linkHere ".p10k.zsh";
       ".spacemacs".source = linkHere ".spacemacs";
       ".newsboat/config".source = linkHere ".newsboat/config";
-      ".config/hypr/catppuccin-macchiato.lua".source = linkHere ".config/hypr/catppuccin-macchiato.lua";
-      ".config/hypr/hyprland.lua".source = linkHere ".config/hypr/hyprland.lua";
-      ".config/hypr/hyprlock.conf".source = linkHere ".config/hypr/hyprlock.conf";
-      ".config/hypr/hyprtoolkit.conf".source = linkHere ".config/hypr/hyprtoolkit.conf";
-      ".config/hypr/ocean-background.jpg".source = linkHere ".config/hypr/ocean-background.jpg";
-      ".config/waybar".source = linkHere ".config/waybar";
     };
 }

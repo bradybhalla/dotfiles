@@ -8,11 +8,6 @@ hl.config({
 hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.2 })
 hl.monitor({ output = "Unknown-1", disabled = true })
 
-hl.on("hyprland.start", function ()
-    hl.exec_cmd("spice-vdagent")
-    -- hl.exec_cmd("hyprpaper")
-end)
-
 local terminal    = "alacritty"
 local fileManager = "dolphin"
 local menu        = "hyprlauncher"
