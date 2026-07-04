@@ -1,9 +1,11 @@
 {
   config,
   pkgs,
-  dotfilesRepoDir,
   ...
 }:
+let
+  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
+in
 {
   programs.zsh.shellAliases = {
     firefox = "open -a Firefox\\ Developer\\ Edition";

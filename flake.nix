@@ -38,55 +38,33 @@
         modules = [ ./hosts/macbook-pro-brady/configuration.nix ];
       };
 
-      homeConfigurations = {
-        "bradybhalla@pc-brady" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
+      homeConfigurations =
+        let
+          mkHome =
+            { system, homeModule }:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+              };
+              modules = [ homeModule ];
+            };
+        in
+        {
+          "bradybhalla@pc-brady" = mkHome {
             system = "x86_64-linux";
-            config.allowUnfree = true;
+            homeModule = ./hosts/pc-brady/home.nix;
           };
-          extraSpecialArgs = {
-            username = "bradybhalla";
-            dotfilesRepoDir = "/home/bradybhalla/Documents/dotfiles";
-          };
-          modules = [
-            ./modules/home/common.nix
-            ./modules/home/extended-utils.nix
-            ./modules/home/desktop.nix
-          ];
-        };
 
-        "bradybhalla@macbook-pro-brady" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
+          "bradybhalla@macbook-pro-brady" = mkHome {
             system = "aarch64-darwin";
-            config.allowUnfree = true;
+            homeModule = ./hosts/macbook-pro-brady/home.nix;
           };
-          extraSpecialArgs = {
-            username = "bradybhalla";
-            dotfilesRepoDir = "/Users/bradybhalla/Documents/dotfiles";
-          };
-          modules = [
-            ./modules/home/common.nix
-            ./modules/home/extended-utils.nix
-            ./modules/home/macos-utils.nix
-          ];
-        };
 
-        "bradybhalla@vm-macbook-brady" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
+          "bradybhalla@vm-macbook-brady" = mkHome {
             system = "aarch64-linux";
-            config.allowUnfree = true;
+            homeModule = ./hosts/vm-macbook-brady/home.nix;
           };
-          extraSpecialArgs = {
-            username = "bradybhalla";
-            dotfilesRepoDir = "/home/bradybhalla/Documents/dotfiles";
-          };
-          modules = [
-            ./modules/home/common.nix
-            ./modules/home/extended-utils.nix
-            ./modules/home/desktop.nix
-          ];
         };
-
-      };
     };
 }

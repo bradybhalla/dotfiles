@@ -41,6 +41,8 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   users.users."bradybhalla".extraGroups = [ "libvirtd" ];
+
+  # TODO maybe remove: may or may not be needed for vm networking
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   # 1Password
@@ -56,9 +58,6 @@
     package = pkgs.ollama-cuda;
   };
 
-  # Firmware
-  hardware.enableRedistributableFirmware = true;
-
   # Sunshine
   services.sunshine = {
     enable = true;
@@ -73,5 +72,11 @@
     protonup-qt
   ];
 
-  system.stateVersion = "26.11";
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "26.11"; # Did you read the comment?
 }

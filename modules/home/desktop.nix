@@ -1,9 +1,11 @@
 {
   config,
   pkgs,
-  dotfilesRepoDir,
   ...
 }:
+let
+  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
+in
 {
   home.packages = with pkgs; [
     hyprland

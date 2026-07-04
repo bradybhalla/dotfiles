@@ -2,10 +2,12 @@
   config,
   pkgs,
   lib,
-  username,
-  dotfilesRepoDir,
   ...
 }:
+let
+  username = "bradybhalla";
+  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
+in
 {
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";

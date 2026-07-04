@@ -4,6 +4,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  hardware.enableRedistributableFirmware = true;
+
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Denver";
@@ -103,7 +105,7 @@
     enable = true;
     trustedInterfaces = [ config.services.tailscale.interfaceName ];
     allowedUDPPorts = [ config.services.tailscale.port ];
-    checkReversePath = false;
+    checkReversePath = false; # TODO maybe remove: may or may not be needed for vm networking, also maybe useful for tailscale?
   };
   systemd.services.tailscaled.serviceConfig.Environment = [
     "TS_DEBUG_FIREWALL_MODE=nftables"
