@@ -20,13 +20,6 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  # 1Password
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = [ "bradybhalla" ];
-  };
-
   # Firewall additions
   networking.firewall.trustedInterfaces = [ "virbr0" ];
   networking.firewall.allowedTCPPorts = [

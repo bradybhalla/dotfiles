@@ -43,6 +43,13 @@
   users.users."bradybhalla".extraGroups = [ "libvirtd" ];
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 
+  # 1Password
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "bradybhalla" ];
+  };
+
   # Ollama with CUDA
   services.ollama = {
     enable = true;
