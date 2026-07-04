@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -22,18 +22,18 @@
     }:
     {
       nixosConfigurations = {
-        pc = nixpkgs.lib.nixosSystem {
+        "pc" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/pc/configuration.nix ];
         };
 
-        "nixos-vm-on-macbook" = nixpkgs.lib.nixosSystem {
+        "macbook-vm" = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [ ./hosts/macbook-vm/configuration.nix ];
         };
       };
 
-      darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."macbook-pro" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [ ./hosts/mac/configuration.nix ];
       };
@@ -54,7 +54,7 @@
           ];
         };
 
-        "bradybhalla@mac" = home-manager.lib.homeManagerConfiguration {
+        "bradybhalla@macbook-pro" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "aarch64-darwin";
             config.allowUnfree = true;

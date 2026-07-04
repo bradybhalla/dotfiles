@@ -27,7 +27,7 @@
     tree
     wget
     curl
-    croc
+    # croc # TODO broken: broken right now but enable later
     rlwrap
     jq
     tree-sitter

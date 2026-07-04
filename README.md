@@ -1,6 +1,9 @@
 # dotfiles
 
 My configuration for 90% of everything I do on a computer.
+- "dotfiles/" contains dotfiles for each program
+- "modules/home/" contains components that home-manager can load
+- "hosts/" contains system-level configurations for each system. These can load components from "modules/nixos/"
 
 ## Some tools I use
 
@@ -13,39 +16,25 @@ My configuration for 90% of everything I do on a computer.
 - [fzf](https://github.com/junegunn/fzf): fuzzy finder
 - ...
 
+
 ## Setup
 
+On NixOS, first make sure the correct "hardware-configuration.nix" file is in "hosts/<host>/". If needed you can regenerate it with `nixos-generate-config --show-hardware-config`. Run
 ```sh
-# only if on nixos
-sudo nixos-rebuild switch --flake .
-
-# only if on macos
-sudo nix-darwin switch --flake .
-
-home-manager switch --flake .
+sudo nixos-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake .#<host>
 ```
 
-### Karabiner Elements Instructions
-
-Add a "Complex Modification" with the following contents:
-```json
-{
-    "description": "Tap Caps Lock for ESC or Hold for Control",
-    "manipulators": [
-        {
-            "from": {
-                "key_code": "caps_lock",
-                "modifiers": { "optional": ["any"] }
-            },
-            "to": [
-                {
-                "key_code": "left_control",
-                "lazy": true
-                }
-            ],
-            "to_if_alone": [{ "key_code": "escape" }],
-            "type": "basic"
-        }
-    ]
-}
+On MacOS, run
+```sh
+sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake .#<host>
 ```
+
+Finally, regardless of the operating system, set up home manager with
+```sh
+sudo nix run home-manager/master#home-manager -- switch --flake .#<user>@<host>
+```
+
+After setting everything up you can rebuild by running
+- `sudo nixos-rebuild switch --flake .#<host>` (NixOS system)
+- `sudo darwin-rebuild switch --flake .#<host>` (MacOS system)
+- `home-manager switch --flake .#<user>@<host>` (home manager)

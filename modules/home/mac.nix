@@ -16,5 +16,6 @@
     {
       ".aerospace.toml".source = linkHere ".aerospace.toml";
       ".config/skhd/skhdrc".source = linkHere ".config/skhd/skhdrc";
+      ".config/karabiner/karabiner.json".source = linkHere ".config/karabiner/karabiner.json";
     };
 }
