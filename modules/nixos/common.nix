@@ -37,6 +37,9 @@
     "flakes"
   ];
 
+  # TODO split this into more modules (desktop, apps)
+
+
   programs.zsh.enable = true;
   programs.hyprland = {
     enable = true;
