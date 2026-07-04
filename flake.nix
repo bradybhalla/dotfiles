@@ -1,5 +1,5 @@
 {
-  description = "bradybhalla's system configurations";
+  description = "bradybhalla's dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
