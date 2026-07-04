@@ -9,6 +9,11 @@
     firefox = "open -a Firefox\\ Developer\\ Edition";
   };
 
+  home.packages = with pkgs; [
+    pngpaste
+    skhd
+  ];
+
   home.file =
     let
       linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";

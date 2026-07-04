@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "brady-pc";
 
   # NVIDIA
   nix.settings = {
@@ -38,10 +38,10 @@
 
   # Virtualization
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "bradybhalla" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   users.users."bradybhalla".extraGroups = [ "libvirtd" ];
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   # Ollama with CUDA
   services.ollama = {
@@ -51,9 +51,6 @@
 
   # Firmware
   hardware.enableRedistributableFirmware = true;
-
-  # Firewall
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   # Sunshine
   services.sunshine = {

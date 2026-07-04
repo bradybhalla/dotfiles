@@ -4,7 +4,14 @@
 }:
 
 {
+
   system.primaryUser = "bradybhalla";
+
+  networking = {
+    computerName = "macbook-pro-brady";
+    hostName = "macbook-pro-brady";
+    localHostName = "macbook-pro-brady";
+  };
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [

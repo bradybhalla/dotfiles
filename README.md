@@ -18,6 +18,8 @@ My configuration for 90% of everything I do on a computer.
 
 ## Setup
 
+Clone this repo into "~/Documents/dotfiles". If you clone into a different location then update the path in "flake.nix".
+
 On NixOS, first make sure the correct "hardware-configuration.nix" file is in "hosts/<host>/". If needed you can regenerate it with `nixos-generate-config --show-hardware-config`. Run
 ```sh
 sudo nixos-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake .#<host>
@@ -25,12 +27,12 @@ sudo nixos-rebuild --extra-experimental-features "nix-command flakes" -- switch 
 
 On MacOS, run
 ```sh
-sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake .#<host>
+sudo nix run nix-darwin#darwin-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake .#<host>
 ```
 
 Finally, regardless of the operating system, set up home manager with
 ```sh
-sudo nix run home-manager/master#home-manager -- switch --flake .#<user>@<host>
+nix run home-manager#home-manager -- switch --flake .#<user>@<host>
 ```
 
 After setting everything up you can rebuild by running

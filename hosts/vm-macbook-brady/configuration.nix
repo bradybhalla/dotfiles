@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "nixos-vm-on-macbook";
+  networking.hostName = "brady-vm-macbook";
 
   # VM-specific graphics
   hardware.graphics.enable = true;

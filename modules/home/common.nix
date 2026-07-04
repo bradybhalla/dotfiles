@@ -31,32 +31,6 @@
     rlwrap
     jq
     tree-sitter
-
-    nerd-fonts.meslo-lg
-    imagemagick
-    pandoc
-    ffmpeg
-    ispell
-    texliveFull
-    ollama
-
-    cmake
-    glibtool
-    glfw
-    clang-tools
-
-    uv
-    nodejs
-    rustup
-    typst
-    opam
-    nixfmt
-    maven
-    javaPackages.compiler.temurin-bin.jre-21
-    hugo
-
-    claude-code
-    alacritty
   ];
 
   programs.home-manager.enable = true;
@@ -112,6 +86,5 @@
       ".config/alacritty".source = linkHere ".config/alacritty";
       ".p10k.zsh".source = linkHere ".p10k.zsh";
       ".spacemacs".source = linkHere ".spacemacs";
-      ".newsboat/config".source = linkHere ".newsboat/config";
     };
 }

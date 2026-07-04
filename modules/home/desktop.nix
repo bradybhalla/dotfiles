@@ -22,12 +22,12 @@
     enable = true;
     settings = {
       preload = [
-        "~/.config/hypr/ocean-background.jpg"
+        "${dotfilesRepoDir}/dotfiles/backgrounds/ocean-background.jpg"
       ];
       wallpaper = [
         {
           monitor = "";
-          path = "~/.config/hypr/ocean-background.jpg";
+          path = "${dotfilesRepoDir}/dotfiles/backgrounds/ocean-background.jpg";
         }
       ];
       splash = false;
@@ -53,7 +53,6 @@
       ".config/hypr/hyprland.lua".source = linkHere ".config/hypr/hyprland.lua";
       ".config/hypr/hyprlock.conf".source = linkHere ".config/hypr/hyprlock.conf";
       ".config/hypr/hyprtoolkit.conf".source = linkHere ".config/hypr/hyprtoolkit.conf";
-      ".config/hypr/ocean-background.jpg".source = linkHere ".config/hypr/ocean-background.jpg";
       ".config/waybar".source = linkHere ".config/waybar";
     };
 }

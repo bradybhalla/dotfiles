@@ -22,24 +22,24 @@
     }:
     {
       nixosConfigurations = {
-        "pc" = nixpkgs.lib.nixosSystem {
+        "pc-brady" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/pc/configuration.nix ];
+          modules = [ ./hosts/pc-brady/configuration.nix ];
         };
 
-        "macbook-vm" = nixpkgs.lib.nixosSystem {
+        "vm-macbook-brady" = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [ ./hosts/macbook-vm/configuration.nix ];
+          modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
         };
       };
 
-      darwinConfigurations."macbook-pro" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."macbook-pro-brady" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        modules = [ ./hosts/mac/configuration.nix ];
+        modules = [ ./hosts/macbook-pro-brady/configuration.nix ];
       };
 
       homeConfigurations = {
-        "bradybhalla@pc" = home-manager.lib.homeManagerConfiguration {
+        "bradybhalla@pc-brady" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
@@ -50,11 +50,12 @@
           };
           modules = [
             ./modules/home/common.nix
+            ./modules/home/extended-utils.nix
             ./modules/home/desktop.nix
           ];
         };
 
-        "bradybhalla@macbook-pro" = home-manager.lib.homeManagerConfiguration {
+        "bradybhalla@macbook-pro-brady" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "aarch64-darwin";
             config.allowUnfree = true;
@@ -65,11 +66,12 @@
           };
           modules = [
             ./modules/home/common.nix
-            ./modules/home/mac.nix
+            ./modules/home/extended-utils.nix
+            ./modules/home/macos-utils.nix
           ];
         };
 
-        "bradybhalla@nixos-vm-on-macbook" = home-manager.lib.homeManagerConfiguration {
+        "bradybhalla@vm-macbook-brady" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "aarch64-linux";
             config.allowUnfree = true;
@@ -80,6 +82,7 @@
           };
           modules = [
             ./modules/home/common.nix
+            ./modules/home/extended-utils.nix
             ./modules/home/desktop.nix
           ];
         };

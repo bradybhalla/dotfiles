@@ -50,12 +50,17 @@
     vim
     wget
     git
-    kitty
+    kitty # so there is a terminal with the default hyprland config
 
+    # login screen
     (catppuccin-sddm.override {
       flavor = "mocha";
       accent = "blue";
     })
+
+    alacritty
+    skimpdf
+    emacs
   ];
 
   services.openssh = {
