@@ -28,11 +28,6 @@
         };
 
         "vm-macbook-brady" = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
-        };
-
-        "vm-pc-brady" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
         };
@@ -67,7 +62,7 @@
           };
 
           "bradybhalla@vm-macbook-brady" = mkHome {
-            system = "aarch64-linux";
+            system = "x86_64-linux";
             homeModule = ./hosts/vm-macbook-brady/home.nix;
           };
         };
