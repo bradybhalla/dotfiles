@@ -31,6 +31,11 @@
           system = "aarch64-linux";
           modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
         };
+
+        "vm-pc-brady" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
+        };
       };
 
       darwinConfigurations."macbook-pro-brady" = nix-darwin.lib.darwinSystem {

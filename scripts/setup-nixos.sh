@@ -6,8 +6,11 @@ set -euo pipefail
 : "${HOST:?HOST is not set}"
 : "${USER:?USER is not set}"
 
-# prompt for sudo
+echo "Configuring system as $USER@$HOST"
+
+# prompt for sudo and keep it alive for the rest of the script
 sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done &
 
 export NIX_CONFIG="extra-experimental-features = nix-command flakes"
 
