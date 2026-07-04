@@ -59,7 +59,7 @@
     })
 
     alacritty
-    skimpdf
+    # skimpdf # TODO broken: doesn't work on aarch64?
     emacs
   ];
 
