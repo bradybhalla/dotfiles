@@ -2,9 +2,12 @@
 
 set -euo pipefail
 
-# Require HOST and USER to be passed in
+# require HOST and USER to be passed in
 : "${HOST:?HOST is not set}"
 : "${USER:?USER is not set}"
+
+# prompt for sudo
+sudo -v
 
 export NIX_CONFIG="extra-experimental-features = nix-command flakes"
 

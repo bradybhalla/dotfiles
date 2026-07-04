@@ -2,9 +2,12 @@
 
 set -euo pipefail
 
-# Require HOST and USER to be passed in
+# require HOST and USER to be passed in
 : "${HOST:?HOST is not set}"
 : "${USER:?USER is not set}"
+
+# prompt for sudo
+sudo -v
 
 export NIX_CONFIG="extra-experimental-features = nix-command flakes"
 
@@ -16,7 +19,7 @@ fi
 cd "$DOTFILES_DIR"
 
 echo "Building nix-darwin config..."
-sudo --preserve-env=NIX_CONFIG \
+sudo -H --preserve-env=NIX_CONFIG \
   nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake ".#$HOST"
 
 echo "Building home manager config..."
