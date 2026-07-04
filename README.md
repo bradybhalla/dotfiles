@@ -18,23 +18,25 @@ My configuration for 90% of everything I do on a computer.
 ### NixOS
 Fill in <host> and <user> and then run the following:
 ```sh
-export HOST=<host>
-export USER=<user>
-nix run --extra-experimental-features "nix-command flakes" nixpkgs#git -- clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
+export HOST=pc-brady
+export USER=bradybhalla
+export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+nix run nixpkgs#git -- clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 sudo nixos-generate-config --show-hardware-config > "hosts/$HOST/hardware-configuration.nix"
-sudo nixos-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake ".#$HOST"
+sudo --preserve-env=NIX_CONFIG nixos-rebuild -- switch --flake ".#$HOST"
 nix run github:nix-community/home-manager -- switch --flake ".#$USER@$HOST"
 ```
 
 ### MacOS
-Install Nix, fill in <host> and <user>, and then run the following:
+Install Nix, fill in HOST and USER, and then run the following:
 ```sh
-export HOST=<host>
-export USER=<user>
-nix run --extra-experimental-features "nix-command flakes" nixpkgs#git -- clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
+export HOST=macbook-pro-brady
+export USER=bradybhalla
+export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+nix run nixpkgs#git -- clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-sudo nix run github:nix-darwin/nix-darwin#darwin-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake ".#$HOST"
+sudo --preserve-env=NIX_CONFIG nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake ".#$HOST"
 nix run github:nix-community/home-manager -- switch --flake ".#$USER@$HOST"
 ```
 
