@@ -27,12 +27,14 @@
       "karabiner-elements"
       "nikitabobko/tap/aerospace"
       "emacs-app"
+      "tailscale-app"
+
       "appcleaner"
       "daisydisk"
       "rectangle"
       "skim"
-      "tailscale-app"
       "balenaetcher"
+      "moonlight"
     ];
     brews = [
       "newsboat"

@@ -1,12 +1,9 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    nerd-fonts.meslo-lg
-
     imagemagick
     pandoc
     ffmpeg
-    ispell
 
     texliveFull
     typst
@@ -28,5 +25,8 @@
     claude-code
 
     ansible
+
+    emacs
+    ispell
   ];
 }

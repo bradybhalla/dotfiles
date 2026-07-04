@@ -31,6 +31,8 @@
     rlwrap
     jq
     tree-sitter
+
+    nerd-fonts.meslo-lg
   ];
 
   programs.home-manager.enable = true;

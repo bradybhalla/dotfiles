@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "brady-vm-macbook";
+  networking.hostName = "vm-macbook-brady";
 
   # VM-specific graphics
   hardware.graphics.enable = true;
@@ -19,9 +19,6 @@
   # QEMU/SPICE guest support
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
-
-  # SDDM catppuccin theme
-  services.displayManager.sddm.theme = "catppuccin-mocha-mauve";
 
   # 1Password
   programs._1password.enable = true;
