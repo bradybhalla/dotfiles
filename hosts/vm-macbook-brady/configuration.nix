@@ -33,5 +33,5 @@
     spice-vdagent
   ];
 
-  system.stateVersion = "26.11";
+  system.stateVersion = "26.05";
 }

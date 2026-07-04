@@ -16,29 +16,27 @@ My configuration for 90% of everything I do on a computer.
 ## Setup
 
 ### NixOS
-Fill in <host> and <user> and then run the following:
-```sh
-export HOST=pc-brady
-export USER=bradybhalla
-export NIX_CONFIG="extra-experimental-features = nix-command flakes"
-nix run nixpkgs#git -- clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-sudo nixos-generate-config --show-hardware-config > "hosts/$HOST/hardware-configuration.nix"
-sudo --preserve-env=NIX_CONFIG nixos-rebuild -- switch --flake ".#$HOST"
-nix run github:nix-community/home-manager -- switch --flake ".#$USER@$HOST"
-```
+
+- Make sure that "system.stateVersion" of the configuration you want to use matches the one at "/etc/nixos/configuration.nix".
+- Fill in HOST and USER.
+- Run
+  ```sh
+  export HOST=pc-brady
+  export USER=bradybhalla
+  curl -fsSL https://raw.githubusercontent.com/bradybhalla/dotfiles/main/scripts/setup-nixos.sh | bash
+  ```
 
 ### MacOS
-Install Nix, fill in HOST and USER, and then run the following:
-```sh
-export HOST=macbook-pro-brady
-export USER=bradybhalla
-export NIX_CONFIG="extra-experimental-features = nix-command flakes"
-nix run nixpkgs#git -- clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-sudo --preserve-env=NIX_CONFIG nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake ".#$HOST"
-nix run github:nix-community/home-manager -- switch --flake ".#$USER@$HOST"
-```
+
+- Install [Nix](https://nixos.org/download/) and [Homebrew](https://brew.sh)
+- Fill in HOST and USER
+- Run
+  ```sh
+  export HOST=macbook-pro-brady
+  export USER=bradybhalla
+  curl -fsSL https://raw.githubusercontent.com/bradybhalla/dotfiles/main/scripts/setup-macos.sh | bash
+  ```
 
 ### Without Nix
-Install programs with your package manager of choice, then copy dotfiles from "dotfiles/" into your home directory.
+
+Install programs with your package manager of choice, then copy files from "dotfiles/" into your home directory. Note that this will be missing dotfiles for programs that are configured entirely through home manager.

@@ -35,9 +35,16 @@
       "skim"
       "balenaetcher"
       "moonlight"
+
+      # add these after deleting the apps
+      # "1password"
+      # "firefox@developer-edition"
+      # "spotify"
+      # "iterm2" # backup terminal
+      # "docker-desktop"
+      # "utm"
     ];
     brews = [
-      "newsboat"
       "ghcup"
     ];
   };
