@@ -2,22 +2,16 @@
   config,
   pkgs,
   lib,
+  username,
+  dotfilesRepoDir,
   ...
 }:
-let
-  username = "bradybhalla";
-  homeDir = "/Users/bradybhalla";
-  dotfilesRepoDir = "${homeDir}/Documents/dotfiles";
-in
 {
   home.username = username;
-  home.homeDirectory = homeDir;
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.05";
 
-  home.sessionPath = [
-    "/opt/homebrew/bin"
-    "${homeDir}/.ghcup/bin"
-  ];
+  home.sessionPath = [ ];
 
   home.packages = with pkgs; [
     neovim
@@ -33,15 +27,13 @@ in
     tree
     wget
     curl
-    croc
+    # croc # TODO broken: broken right now but enable later
     rlwrap
     jq
     tree-sitter
 
-    skhd
     nerd-fonts.meslo-lg
     imagemagick
-    pngpaste
     pandoc
     ffmpeg
     ispell
@@ -64,7 +56,7 @@ in
     hugo
 
     claude-code
-    ansible
+    alacritty
   ];
 
   programs.home-manager.enable = true;
@@ -78,11 +70,6 @@ in
     shellAliases = {
       ls = "ls --color=auto";
       lg = "lazygit";
-      firefox = "open -a Firefox\\ Developer\\ Edition";
-    };
-    sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
     };
     initContent = lib.mkBefore ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -117,15 +104,12 @@ in
 
   home.file =
     let
-      # link everything directly for quicker changes
       linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
     in
     {
       ".config/nvim".source = linkHere ".config/nvim";
       ".tmux.conf".source = linkHere ".tmux.conf";
       ".config/alacritty".source = linkHere ".config/alacritty";
-      ".aerospace.toml".source = linkHere ".aerospace.toml";
-      ".config/skhd/skhdrc".source = linkHere ".config/skhd/skhdrc";
       ".p10k.zsh".source = linkHere ".p10k.zsh";
       ".spacemacs".source = linkHere ".spacemacs";
       ".newsboat/config".source = linkHere ".newsboat/config";
