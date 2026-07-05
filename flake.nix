@@ -11,6 +11,11 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+   silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+   };
   };
 
   outputs =
@@ -19,16 +24,18 @@
       home-manager,
       nix-darwin,
       ...
-    }:
+    }@inputs:
     {
       nixosConfigurations = {
         "desktop" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/desktop/configuration.nix ];
         };
 
         "vm-on-laptop" = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
           modules = [ ./hosts/vm-on-laptop/configuration.nix ];
         };
       };

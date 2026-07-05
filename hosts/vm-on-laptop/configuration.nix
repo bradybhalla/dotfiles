@@ -8,6 +8,7 @@
   imports = [
     ../../modules/nixos/common.nix
     ./hardware-configuration.nix
+    ../../modules/nixos/sydney.nix
   ];
 
   networking.hostName = "nixos-vm-on-laptop";

@@ -18,17 +18,38 @@ My configuration for 90% of everything I do on a computer.
 ### NixOS
 
 - Make sure that "system.stateVersion" of the configuration you want to use matches the one at "/etc/nixos/configuration.nix"
-- Clone this repo as "~/dotfiles".
-- Generate the host's hardware configuration with `sudo nixos-generate-config --show-hardware-config > hosts/<host>/hardware-configuration.nix`
-- `sudo nixos-rebuild switch --flake .#<host>`
-- `home-manager switch --flake .#<user>@<host>`
+- Clone this repo as "~/dotfiles"
+  ```sh
+  git clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
+  ```
+- Generate the hardware configuration 
+  ```sh
+  sudo nixos-generate-config --show-hardware-config > hosts/<host>/hardware-configuration.nix
+  ```
+- Rebuild system
+  ```sh
+  sudo nixos-rebuild switch --flake .#<host>
+  ```
+- Set up home manager
+  ```sh
+  home-manager switch --flake .#<user>@<host>`
+  ```
 
 ### MacOS
 
-- Install [Nix](https://nixos.org/download/) and [Homebrew](https://brew.sh).
-- Clone this repo as "~/dotfiles".
-- `sudo darwin-rebuild switch --flake .#<host>`
-- `home-manager switch --flake .#<user>@<host>`
+- Install [Nix](https://nixos.org/download/) and [Homebrew](https://brew.sh) (see websites for instructions)
+- Clone this repo as "~/dotfiles"
+  ```sh
+  git clone https://github.com/bradybhalla/dotfiles.git ~/dotfiles
+  ```
+- Rebuild system
+  ```sh
+  sudo darwin-rebuild switch --flake .#<host>
+  ```
+- Set up home manager
+  ```sh
+  home-manager switch --flake .#<user>@<host>`
+  ```
 
 ### Without Nix
 

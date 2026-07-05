@@ -1,6 +1,13 @@
-{ config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
+  imports = [ inputs.silentSDDM.nixosModules.default ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -47,7 +54,6 @@
     withUWSM = true;
     xwayland.enable = true;
   };
-  programs.waybar.enable = true;
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -56,19 +62,10 @@
     git
     kitty # so there is a terminal with the default hyprland config
 
-    # login screen
-    (catppuccin-sddm.override {
-      flavor = "mocha";
-      accent = "blue";
-      font = "Noto Sans";
-      fontSize = "9";
-      background = "${./wallpaper.png}";
-      loginBackground = true;
-    })
-
     alacritty
     # skimpdf # TODO broken: doesn't work on aarch64?
     emacs
+    vlc
   ];
 
   services.openssh = {
@@ -84,12 +81,11 @@
     layout = "us";
     variant = "";
   };
-  services.displayManager.sddm = {
+  programs.silentSDDM = {
     enable = true;
-    wayland.enable = false;
-    theme = "catppuccin-mocha-blue";
+    theme = "catppuccin-frappe";
+    # settings = { ... }; see example in module
   };
-  services.accounts-daemon.enable = true; # makes sddm remember default sessions
 
   # Audio
   services.pulseaudio.enable = false; # enabled by default, replaced with pipewire

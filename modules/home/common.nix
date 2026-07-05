@@ -33,6 +33,7 @@ in
     jq
     tree-sitter
     gcc
+    claude-code
 
     nerd-fonts.meslo-lg
   ];

@@ -1,4 +1,4 @@
-local catppuccin = require("catppuccin-macchiato")
+local catppuccin = require("catppuccin-frappe")
 hl.config({
     cursor = {
         no_hardware_cursors = true,
@@ -7,6 +7,11 @@ hl.config({
 -- Monitor configuration
 hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
 hl.monitor({ output = "Unknown-1", disabled = true })
+
+hl.on("hyprland.start", function () 
+  hl.exec_cmd("waybar")
+  hl.exec_cmd("hyprpaper")
+end)
 
 local terminal    = "alacritty"
 local fileManager = "dolphin"

@@ -8,33 +8,18 @@ let
 in
 {
   home.packages = with pkgs; [
+    waybar
+
     hyprland
     hyprlauncher
     hyprshutdown
     hyprlock
-
-    waybar
+    hyprpaper
 
     playerctl
     brightnessctl
     networkmanagerapplet
   ];
-
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [
-        "${dotfilesRepoDir}/dotfiles/backgrounds/ocean-background.jpg"
-      ];
-      wallpaper = [
-        {
-          monitor = "";
-          path = "${dotfilesRepoDir}/dotfiles/backgrounds/ocean-background.jpg";
-        }
-      ];
-      splash = false;
-    };
-  };
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -51,10 +36,8 @@ in
       linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
     in
     {
-      ".config/hypr/catppuccin-macchiato.lua".source = linkHere ".config/hypr/catppuccin-macchiato.lua";
-      ".config/hypr/hyprland.lua".source = linkHere ".config/hypr/hyprland.lua";
-      ".config/hypr/hyprlock.conf".source = linkHere ".config/hypr/hyprlock.conf";
-      ".config/hypr/hyprtoolkit.conf".source = linkHere ".config/hypr/hyprtoolkit.conf";
+      ".config/hypr".source = linkHere ".config/hypr";
       ".config/waybar".source = linkHere ".config/waybar";
+      ".backgrounds".source = linkHere ".backgrounds";
     };
 }
