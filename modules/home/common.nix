@@ -33,6 +33,7 @@ in
     rlwrap
     jq
     tree-sitter
+    gcc
 
     nerd-fonts.meslo-lg
   ];

@@ -14,7 +14,7 @@
 
   # VM-specific graphics
   hardware.graphics.enable = true;
-  environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
+  environment.variables.LIBGL_ALWAYS_SOFTWARE = "1"; # alacritty was not showing up correctly
 
   # QEMU/SPICE guest support
   services.qemuGuest.enable = true;
