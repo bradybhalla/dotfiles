@@ -6,7 +6,6 @@
 }:
 let
   username = "bradybhalla";
-  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
 in
 {
   home.username = username;
@@ -83,6 +82,7 @@ in
 
   home.file =
     let
+      dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
       linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
     in
     {

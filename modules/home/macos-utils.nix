@@ -3,9 +3,6 @@
   pkgs,
   ...
 }:
-let
-  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
-in
 {
   programs.zsh.shellAliases = {
     firefox = "open -a Firefox\\ Developer\\ Edition";
@@ -18,6 +15,7 @@ in
 
   home.file =
     let
+      dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
       linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
     in
     {

@@ -56,7 +56,7 @@
             homeModules = [
               ./modules/home/common.nix
               ./modules/home/extended-utils.nix
-              ./modules/home/desktop.nix
+              ./modules/home/hyprland-desktop.nix
             ];
           };
 
@@ -74,7 +74,7 @@
             homeModules = [
               ./modules/home/common.nix
               # ./modules/home/extended-utils.nix
-              ./modules/home/desktop.nix
+              ./modules/home/hyprland-desktop.nix
             ];
           };
         };

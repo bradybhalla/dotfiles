@@ -17,18 +17,16 @@ My configuration for 90% of everything I do on a computer.
 
 ### NixOS
 
-First make sure that "system.stateVersion" of the configuration you want to use matches the one at "/etc/nixos/configuration.nix".
-
-- Clone the repo into the home directory.
+- Make sure that "system.stateVersion" of the configuration you want to use matches the one at "/etc/nixos/configuration.nix"
+- Clone this repo as "~/dotfiles".
 - Generate the host's hardware configuration with `sudo nixos-generate-config --show-hardware-config > hosts/<host>/hardware-configuration.nix`
 - `sudo nixos-rebuild switch --flake .#<host>`
 - `home-manager switch --flake .#<user>@<host>`
 
 ### MacOS
 
-First make sure you have installed [Nix](https://nixos.org/download/) and [Homebrew](https://brew.sh).
-
-- Clone the repo into the home directory.
+- Install [Nix](https://nixos.org/download/) and [Homebrew](https://brew.sh).
+- Clone this repo as "~/dotfiles".
 - `sudo darwin-rebuild switch --flake .#<host>`
 - `home-manager switch --flake .#<user>@<host>`
 
