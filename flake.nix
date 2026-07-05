@@ -34,7 +34,7 @@
 
         "vm-pc-brady" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
+          modules = [ ./hosts/vm-pc-brady/configuration.nix ];
         };
       };
 

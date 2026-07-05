@@ -21,9 +21,7 @@ if [ ! -d "$DOTFILES_DIR" ]; then
 fi
 cd "$DOTFILES_DIR"
 
-echo "Pulling latest dotfiles..."
-nix run nixpkgs#git -- fetch origin
-nix run nixpkgs#git -- reset --hard origin/main
+nix run nixpkgs#git -- pull
 
 echo "Building nix-darwin config..."
 sudo -H --preserve-env=NIX_CONFIG \
