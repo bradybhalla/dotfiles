@@ -8,9 +8,9 @@
   system.primaryUser = "bradybhalla";
 
   networking = {
-    computerName = "macbook-pro-brady";
-    hostName = "macbook-pro-brady";
-    localHostName = "macbook-pro-brady";
+    computerName = "Brady's MacBook Pro";
+    hostName = "brady-macbook-pro";
+    localHostName = "brady-macbook-pro";
   };
 
   nixpkgs.config.allowUnfree = true;

@@ -22,25 +22,20 @@
     }:
     {
       nixosConfigurations = {
-        "pc-brady" = nixpkgs.lib.nixosSystem {
+        "desktop" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/pc-brady/configuration.nix ];
+          modules = [ ./hosts/desktop/configuration.nix ];
         };
 
-        "vm-macbook-brady" = nixpkgs.lib.nixosSystem {
+        "vm-on-laptop" = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
-        };
-
-        "vm-pc-brady" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/vm-pc-brady/configuration.nix ];
+          modules = [ ./hosts/vm-on-laptop/configuration.nix ];
         };
       };
 
-      darwinConfigurations."macbook-pro-brady" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."laptop" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        modules = [ ./hosts/macbook-pro-brady/configuration.nix ];
+        modules = [ ./hosts/laptop/configuration.nix ];
       };
 
       homeConfigurations =
@@ -56,7 +51,7 @@
             };
         in
         {
-          "bradybhalla@pc-brady" = mkHome {
+          "bradybhalla@desktop" = mkHome {
             system = "x86_64-linux";
             homeModules = [
               ./modules/home/common.nix
@@ -65,7 +60,7 @@
             ];
           };
 
-          "bradybhalla@macbook-pro-brady" = mkHome {
+          "bradybhalla@laptop" = mkHome {
             system = "aarch64-darwin";
             homeModules = [
               ./modules/home/common.nix
@@ -74,17 +69,8 @@
             ];
           };
 
-          "bradybhalla@vm-macbook-brady" = mkHome {
+          "bradybhalla@vm-on-laptop" = mkHome {
             system = "aarch64-linux";
-            homeModules = [
-              ./modules/home/common.nix
-              # ./modules/home/extended-utils.nix
-              ./modules/home/desktop.nix
-            ];
-          };
-
-          "bradybhalla@vm-pc-brady" = mkHome {
-            system = "x86_64-linux";
             homeModules = [
               ./modules/home/common.nix
               # ./modules/home/extended-utils.nix
