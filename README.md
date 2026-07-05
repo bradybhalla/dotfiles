@@ -18,8 +18,7 @@ My configuration for 90% of everything I do on a computer.
 ### NixOS
 
 - Make sure that "system.stateVersion" of the configuration you want to use matches the one at "/etc/nixos/configuration.nix".
-- Fill in HOST and USER.
-- Run
+- Fill in HOST and USER and run
   ```sh
   export HOST=pc-brady
   export USER=bradybhalla
@@ -29,8 +28,7 @@ My configuration for 90% of everything I do on a computer.
 ### MacOS
 
 - Install [Nix](https://nixos.org/download/) and [Homebrew](https://brew.sh)
-- Fill in HOST and USER
-- Run
+- Fill in HOST and USER and run
   ```sh
   export HOST=macbook-pro-brady
   export USER=bradybhalla

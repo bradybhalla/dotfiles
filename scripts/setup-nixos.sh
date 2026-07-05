@@ -21,6 +21,10 @@ if [ ! -d "$DOTFILES_DIR" ]; then
 fi
 cd "$DOTFILES_DIR"
 
+echo "Pulling latest dotfiles..."
+nix run nixpkgs#git -- fetch origin
+nix run nixpkgs#git -- reset --hard origin/main
+
 echo "Generating hardware config..."
 sudo nixos-generate-config --show-hardware-config > "hosts/$HOST/hardware-configuration.nix"
 

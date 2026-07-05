@@ -21,6 +21,10 @@ if [ ! -d "$DOTFILES_DIR" ]; then
 fi
 cd "$DOTFILES_DIR"
 
+echo "Pulling latest dotfiles..."
+nix run nixpkgs#git -- fetch origin
+nix run nixpkgs#git -- reset --hard origin/main
+
 echo "Building nix-darwin config..."
 sudo -H --preserve-env=NIX_CONFIG \
   nix run github:nix-darwin/nix-darwin#darwin-rebuild -- switch --flake ".#$HOST"

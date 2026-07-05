@@ -28,8 +28,13 @@
         };
 
         "vm-macbook-brady" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = "aarch64-linux";
           modules = [ ./hosts/vm-macbook-brady/configuration.nix ];
+        };
+
+        "vm-pc-brady" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/vm-pc-brady/configuration.nix ];
         };
       };
 
@@ -41,29 +46,50 @@
       homeConfigurations =
         let
           mkHome =
-            { system, homeModule }:
+            { system, homeModules }:
             home-manager.lib.homeManagerConfiguration {
               pkgs = import nixpkgs {
                 inherit system;
                 config.allowUnfree = true;
               };
-              modules = [ homeModule ];
+              modules = homeModules;
             };
         in
         {
           "bradybhalla@pc-brady" = mkHome {
             system = "x86_64-linux";
-            homeModule = ./hosts/pc-brady/home.nix;
+            homeModules = [
+              ./modules/home/common.nix
+              ./modules/home/extended-utils.nix
+              ./modules/home/desktop.nix
+            ];
           };
 
           "bradybhalla@macbook-pro-brady" = mkHome {
             system = "aarch64-darwin";
-            homeModule = ./hosts/macbook-pro-brady/home.nix;
+            homeModules = [
+              ./modules/home/common.nix
+              ./modules/home/extended-utils.nix
+              ./modules/home/macos-utils.nix
+            ];
           };
 
           "bradybhalla@vm-macbook-brady" = mkHome {
+            system = "aarch64-linux";
+            homeModules = [
+              ./modules/home/common.nix
+              # ./modules/home/extended-utils.nix
+              ./modules/home/desktop.nix
+            ];
+          };
+
+          "bradybhalla@vm-pc-brady" = mkHome {
             system = "x86_64-linux";
-            homeModule = ./hosts/vm-macbook-brady/home.nix;
+            homeModules = [
+              ./modules/home/common.nix
+              # ./modules/home/extended-utils.nix
+              ./modules/home/desktop.nix
+            ];
           };
         };
     };
