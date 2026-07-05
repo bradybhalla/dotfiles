@@ -41,7 +41,6 @@
 
   # TODO split this into more modules (desktop, apps)
 
-
   programs.zsh.enable = true;
   programs.hyprland = {
     enable = true;
@@ -61,6 +60,10 @@
     (catppuccin-sddm.override {
       flavor = "mocha";
       accent = "blue";
+      font = "Noto Sans";
+      fontSize = "9";
+      background = "${./wallpaper.png}";
+      loginBackground = true;
     })
 
     alacritty
@@ -86,6 +89,7 @@
     wayland.enable = false;
     theme = "catppuccin-mocha-blue";
   };
+  services.accounts-daemon.enable = true; # makes sddm remember default sessions
 
   # Audio
   services.pulseaudio.enable = false; # enabled by default, replaced with pipewire
