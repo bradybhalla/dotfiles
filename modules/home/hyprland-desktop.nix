@@ -1,11 +1,8 @@
 {
-  config,
   pkgs,
+  linkHere,
   ...
 }:
-let
-  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
-in
 {
   home.packages = with pkgs; [
     waybar
@@ -47,13 +44,9 @@ in
     };
   };
 
-  home.file =
-    let
-      linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
-    in
-    {
-      ".config/hypr".source = linkHere ".config/hypr";
-      ".config/waybar".source = linkHere ".config/waybar";
-      ".config/eww".source = linkHere ".config/eww";
-    };
+  home.file = {
+    ".config/hypr".source = linkHere ".config/hypr";
+    ".config/waybar".source = linkHere ".config/waybar";
+    ".config/eww".source = linkHere ".config/eww";
+  };
 }

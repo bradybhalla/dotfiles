@@ -1,16 +1,23 @@
 {
   config,
-  pkgs,
   lib,
+  pkgs,
+  linkHere,
   ...
 }:
 let
   username = "bradybhalla";
+  dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
 in
 {
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.05";
+
+  # Shared helpers, injected into every home module via the module system's
+  # fixpoint so they can depend on config.home.homeDirectory.
+  _module.args.linkHere =
+    path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
 
   home.sessionPath = [ ];
 
@@ -33,7 +40,6 @@ in
     jq
     tree-sitter
     gcc
-    claude-code
 
     nerd-fonts.meslo-lg
   ];
@@ -81,16 +87,11 @@ in
 
   programs.opam.enable = true;
 
-  home.file =
-    let
-      dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
-      linkHere = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
-    in
-    {
-      ".config/nvim".source = linkHere ".config/nvim";
-      ".tmux.conf".source = linkHere ".tmux.conf";
-      ".config/alacritty".source = linkHere ".config/alacritty";
-      ".p10k.zsh".source = linkHere ".p10k.zsh";
-      ".spacemacs".source = linkHere ".spacemacs";
-    };
+  home.file = {
+    ".config/nvim".source = linkHere ".config/nvim";
+    ".tmux.conf".source = linkHere ".tmux.conf";
+    ".config/alacritty".source = linkHere ".config/alacritty";
+    ".p10k.zsh".source = linkHere ".p10k.zsh";
+    ".spacemacs".source = linkHere ".spacemacs";
+  };
 }
