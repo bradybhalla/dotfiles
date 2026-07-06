@@ -17,23 +17,15 @@
     "hyprland/workspaces",
   ],
   "modules-right": [
-    // "mpris", # replaced with music popup
     "tray",
     "pulseaudio",
-    "custom/music",
+    "mpris",
     "custom/night-mode",
     "clock",
   ],
   "margin-left": 4,
   "margin-right": 4,
   "margin-top": 4,
-  "custom/music": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/music-tooltip.sh",
-    "return-type": "json",
-    "interval": 5,
-    "on-click": "eww open --toggle music",
-  },
   "custom/night-mode": {
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/night-mode.sh",
@@ -59,14 +51,10 @@
     "max-length": 40
   },
   "mpris": {
-    "format": "{status_icon} {title}",
-    "max-length": 30,
-    "status-icons": {
-      "playing": "",
-      "paused": "",
-    },
-    "dynamic-len": 50,
-    "enable-tooltip-len-limits": true,
+    "format": "",
+    "tooltip-format": "{artist} - {title}",
+    "ignored-players": ["firefox"],
+    "on-click": "eww open --toggle music",
   },
   "cpu": {
     "format": " {usage}%",
@@ -83,7 +71,7 @@
         "months": "<span color='#c6d0f5'><b>{}</b></span>",
         "days": "<span color='#c6d0f5'>{}</span>",
         "weekdays": "<span color='#8caaee'><b>{}</b></span>",
-        "today": "<span color='#e5c890'><b>{}</b></span>",
+        "today": "<span color='#a6d189'><b>{}</b></span>",
       },
     },
   },
@@ -91,8 +79,8 @@
       "format": "{icon} {volume}%",
       "tooltip": true,
       "format-muted": " {volume}%",
-      "on-click": "pamixer -t",
-      "on-click-right": "pavucontrol",
+      "on-click-right": "pamixer -t",
+      "on-click": "pavucontrol",
       "on-scroll-up": "pamixer -i 5",
       "on-scroll-down": "pamixer -d 5",
       "scroll-step": 5,

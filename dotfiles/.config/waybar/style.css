@@ -21,7 +21,6 @@ tooltip {
 
 /* -- Module spacing (flat, no background) -- */
 #custom-night-mode,
-#custom-music,
 #custom-nixos,
 #workspaces,
 #tray,
@@ -31,19 +30,12 @@ tooltip {
 #memory,
 #clock,
 #window {
-  margin: 0.2em 0.2em;
-  padding: 0.1em 0.2em;
+  margin: 0.2em 0.4em;
   /* background: @red; */
 }
 
 #window {
   color: @subtext0;
-}
-
-#custom-music {
-    color: @mauve;
-    padding-left: 0.15em;
-    padding-right: 0.5em;
 }
 
 #clock {
@@ -52,12 +44,12 @@ tooltip {
 }
 
 #mpris {
-  color: @sky;
+  color: @mauve;
+  padding-right: 0.35em;
 }
 
-
 #custom-night-mode {
-    padding-right: 0.45em;
+    padding-right: 0.3em;
 }
 
 #custom-night-mode.day-mode {
@@ -80,7 +72,7 @@ tooltip {
 
 /* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
-  padding-right: 0.50em;
+  padding-right: 0.4em;
   margin-left: 0.5em;
   color: @blue;
 }
@@ -113,4 +105,9 @@ tooltip {
 
 #workspaces button.active {
   color: @blue;
+  font-weight: bold;
+}
+
+window#waybar.fullscreen #workspaces button.active {
+  color: @teal;
 }
