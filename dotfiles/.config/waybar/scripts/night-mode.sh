@@ -19,9 +19,9 @@ case "$1" in
     ;;
   *)
     if [ "$temp" != 6000 ]; then
-      printf '{"text":"%s"}\n' "$on_icon"
+      printf '{"text":"%s", "class": "night-mode", "tooltip": "Night mode on"}\n' "$on_icon"
     else
-      printf '{"text":"%s"}\n' "$off_icon"
+      printf '{"text":"%s", "class": "day-mode", "tooltip": "Night mode off"}\n' "$off_icon"
     fi
     ;;
 esac

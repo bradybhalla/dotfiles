@@ -28,5 +28,6 @@
 
     emacs
     ispell
+    pciutils
   ];
 }

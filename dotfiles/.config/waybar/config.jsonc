@@ -11,54 +11,50 @@
     "custom/nixos",
     "memory",
     "cpu",
-    "tray",
+    "hyprland/workspaces",
+    "hyprland/window"
   ],
   "modules-center": [
-    "custom/media-prev",
-    "mpris",
-    "custom/media-next",
   ],
   "modules-right": [
+    "mpris",
+    "tray",
     "pulseaudio",
-    "custom/sunset",
-    "bluetooth",
-    "network",
-    "clock#date",
-    "clock#time"
+    "custom/night-mode",
+    "clock",
   ],
 
-  "custom/sunset": {
+  "custom/night-mode": {
     "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/sunset.sh",
+    "exec": "$HOME/.config/waybar/scripts/night-mode.sh",
     "return-type": "json",
     "interval": "once",
-    "on-click": "$HOME/.config/waybar/scripts/sunset.sh toggle",
+    "on-click": "$HOME/.config/waybar/scripts/night-mode.sh toggle",
   },
   "custom/nixos": {
     "format": "",
     "tooltip-format": "About",
     "on-click": "hyprsysteminfo",
   },
-  "custom/media-prev": {
-    "format": "",
-    "on-click": "playerctl previous",
+  "hyprland/workspaces": {
+    "format": "{id}",
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "icon": true,
     "tooltip": false,
+    "separate-outputs": true,
+    "max-length": 40
   },
   "mpris": {
-    // left-click: play/pause · middle-click: previous · right-click: next
     "format": "{status_icon} {title}",
     "max-length": 30,
-    "min-length": 10,
     "status-icons": {
       "playing": "",
       "paused": "",
     },
-    "tooltip": "{}",
-  },
-  "custom/media-next": {
-    "format": "",
-    "on-click": "playerctl next",
-    "tooltip": false,
+    "dynamic-len": 50,
+    "enable-tooltip-len-limits": true,
   },
   "cpu": {
     "format": " {usage}%",
@@ -66,30 +62,8 @@
   "memory": {
     "format": " {percentage}%",
   },
-  "bluetooth": {
-    "format-on": "󰂯",
-    "format-connected": "󰂯",
-    "format-off": "󰂲",
-    "format-disabled": "󰂲",
-    "format-no-controller": "󰂲",
-    "tooltip-format-on": "No Bluetooth connections",
-    "tooltip-format-off": "Bluetooth off",
-    "tooltip-format-disabled": "Bluetooth disabled",
-    "tooltip-format-no-controller": "No Bluetooth controller",
-    "tooltip-format-connected": "{device_enumerate}",
-  },
-  "network": {
-    "format-wifi": "{icon}",
-    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
-    "max-length": 10,
-    "format-ethernet":" ",
-    "format-disconnected": "󰤮 ",
-    "tooltip-format-wifi": "Wireless: {essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "Wired: {ifname}",
-    "tooltip-format-disconnected": "Internet disconnected",
-  },
-  "clock#date": {
-    "format": "{:%a %b %d}",
+  "clock": {
+    "format": "{:%a %b %d %I:%M %p}",
     "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
       "mode": "month",
@@ -101,14 +75,10 @@
       },
     },
   },
-  "clock#time": {
-    "format": "{:%I:%M %p}",
-    "tooltip": false,
-  },
   "pulseaudio": {
       "format": "{icon} {volume}%",
       "tooltip": true,
-      "format-muted": " ",
+      "format-muted": " {volume}%",
       "on-click": "pamixer -t",
       "on-scroll-up": "pamixer -i 5",
       "on-scroll-down": "pamixer -d 5",

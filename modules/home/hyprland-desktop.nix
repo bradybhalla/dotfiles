@@ -18,10 +18,12 @@ in
     hyprsunset
     hyprsysteminfo
 
-    pciutils
-    pamixer
-    playerctl
-    cava
+    pamixer # volume cli
+    playerctl # control audio
+    cava # visualize live audio
+
+    # maybe move to linux apps
+    pavucontrol # audio device setttings
   ];
 
   # playerctld tracks the active MPRIS player so waybar's mpris module can

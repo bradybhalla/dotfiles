@@ -6,11 +6,10 @@
   font-size: 16px;
   min-height: 10px;
   border: none;
-  color: @text;
 }
 
 window#waybar {
-  background: none;
+  background: alpha(@base, 0.7);
 }
 
 tooltip {
@@ -18,25 +17,66 @@ tooltip {
   border-radius: 10px;
 }
 
-/* -- Standard pill: every styled module is its own rounded pill -- */
-#custom-sunset,
-#custom-media-prev,
+/* -- Module spacing (flat, no background) -- */
+#custom-night-mode,
 #mpris,
-#custom-media-next,
 #pulseaudio,
 #cpu,
 #memory,
-#bluetooth,
-#network,
-#clock {
-  margin: 0.2em 0.5em;
+#tray,
+#clock,
+#window {
+  margin: 0.2em 0.0em;
   padding: 0.1em 0.6em;
-  background: @base;
-  border-radius: 0.4em;
+  color: @text;
 }
 
-#custom-sunset {
+#custom-night-mode {
     padding-right: 0.8em;
+}
+
+#window {
+  color: @subtext0;
+}
+
+#clock {
+  color: @lavender;
+}
+
+#mpris {
+  color: @sky;
+}
+
+#tray {
+  border: 1px solid @overlay0;
+  border-radius: 0.5em;
+}
+
+#custom-night-mode.day-mode {
+  color: @yellow;
+}
+
+#custom-night-mode.night-mode {
+  color: @blue;
+}
+
+/* -- Memory & CPU: red, packed close together -- */
+#memory,
+#cpu {
+  color: @flamingo;
+}
+
+#memory {
+  padding-right: 0.2em;
+}
+
+#cpu {
+  padding-left: 0.2em;
+}
+
+/* -- Pulseaudio: green -- */
+#pulseaudio {
+  color: @mauve;
 }
 
 /* -- NixOS logo: bare icon, no pill -- */
@@ -46,7 +86,29 @@ tooltip {
   color: @blue;
 }
 
-/* -- Cava visualizer (center) -- */
-#cava {
-  padding: 0 10px;
+/* -- Workspaces: numbers packed close together -- */
+#workspaces {
+  margin: 0.2em 0.6em;
+}
+
+#workspaces button {
+  padding: 0 0.3em;
+  margin: 0;
+  color: @overlay0;
+  background: transparent;
+  border: none;
+  border-radius: 2em;
+  box-shadow: none;
+  text-shadow: none;
+  min-width: 0;
+}
+
+#workspaces button:hover {
+  background: transparent;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+#workspaces button.active {
+  color: @blue;
 }
