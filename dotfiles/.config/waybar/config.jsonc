@@ -9,16 +9,18 @@
 
   "modules-left": [
     "custom/nixos",
-    "custom/sunset",
     "memory",
     "cpu",
     "tray",
   ],
   "modules-center": [
-    "cava"
+    "custom/media-prev",
+    "mpris",
+    "custom/media-next",
   ],
   "modules-right": [
     "pulseaudio",
+    "custom/sunset",
     "bluetooth",
     "network",
     "clock#date",
@@ -30,15 +32,33 @@
     "exec": "$HOME/.config/waybar/scripts/sunset.sh",
     "return-type": "json",
     "interval": "once",
-    "signal": 8,
     "on-click": "$HOME/.config/waybar/scripts/sunset.sh toggle",
   },
   "custom/nixos": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/sysinfo.sh",
-    "return-type": "json",
-    "interval": "once",
-    "tooltip": true,
+    "format": "",
+    "tooltip-format": "About",
+    "on-click": "hyprsysteminfo",
+  },
+  "custom/media-prev": {
+    "format": "",
+    "on-click": "playerctl previous",
+    "tooltip": false,
+  },
+  "mpris": {
+    // left-click: play/pause · middle-click: previous · right-click: next
+    "format": "{status_icon} {title}",
+    "max-length": 30,
+    "min-length": 10,
+    "status-icons": {
+      "playing": "",
+      "paused": "",
+    },
+    "tooltip": "{}",
+  },
+  "custom/media-next": {
+    "format": "",
+    "on-click": "playerctl next",
+    "tooltip": false,
   },
   "cpu": {
     "format": " {usage}%",
@@ -59,10 +79,11 @@
     "tooltip-format-connected": "{device_enumerate}",
   },
   "network": {
-    "format-wifi": "󰖩 {essid}",
+    "format-wifi": "{icon}",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
     "max-length": 10,
     "format-ethernet":" ",
-    "format-disconnected": "󰖪 ",
+    "format-disconnected": "󰤮 ",
     "tooltip-format-wifi": "Wireless: {essid} ({signalStrength}%)",
     "tooltip-format-ethernet": "Wired: {ifname}",
     "tooltip-format-disconnected": "Internet disconnected",

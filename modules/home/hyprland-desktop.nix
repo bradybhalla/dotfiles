@@ -15,11 +15,18 @@ in
     hyprshutdown
     hyprlock
     hyprpaper
+    hyprsunset
+    hyprsysteminfo
 
     pciutils
     pamixer
+    playerctl
     cava
   ];
+
+  # playerctld tracks the active MPRIS player so waybar's mpris module can
+  # follow whatever is currently playing.
+  services.playerctld.enable = true;
 
   home.pointerCursor = {
     gtk.enable = true;

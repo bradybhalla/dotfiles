@@ -83,7 +83,7 @@
   };
   programs.silentSDDM = {
     enable = true;
-    theme = "default";
+    theme = "catppuccin-macchiato";
     settings = {
     "LockScreen" = {display = false;};
     };

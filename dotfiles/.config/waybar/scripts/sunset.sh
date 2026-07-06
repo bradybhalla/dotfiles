@@ -1,30 +1,27 @@
 #!/usr/bin/env bash
-# Toggle hyprsunset night light. Click once -> 4500K, click again -> identity.
-
-state_file="${XDG_RUNTIME_DIR:-/tmp}/hyprsunset.state"
+# Toggle hyprsunset night light based on the current temperature.
+# `hyprctl hyprsunset temperature` echoes back the last set value: 6000
+# (neutral default) or 4500 (warm). `identity` is avoided because the getter
+# doesn't reflect it, so we set 6000 to turn the night light "off".
 
 on_icon="󰖔"   # night (warm active)
-off_icon="󰖙"  # sunny (normal)
+off_icon=""  # sunny (normal)
 
-is_on() { [ -f "$state_file" ]; }
+temp="$(hyprctl hyprsunset temperature)"
 
 case "$1" in
   toggle)
-    if is_on; then
-      hyprctl hyprsunset identity
-      rm -f "$state_file"
+    if [ "$temp" != 6000 ]; then
+      hyprctl hyprsunset temperature 6000
     else
       hyprctl hyprsunset temperature 4500
-      touch "$state_file"
     fi
-    # Tell waybar to refresh this module
-    pkill -RTMIN+8 waybar 2>/dev/null
     ;;
   *)
-    if is_on; then
-      printf '{"text":"%s","class":"on","tooltip":"Night light on (4500K)"}\n' "$on_icon"
+    if [ "$temp" != 6000 ]; then
+      printf '{"text":"%s"}\n' "$on_icon"
     else
-      printf '{"text":"%s","class":"off","tooltip":"Night light off"}\n' "$off_icon"
+      printf '{"text":"%s"}\n' "$off_icon"
     fi
     ;;
 esac

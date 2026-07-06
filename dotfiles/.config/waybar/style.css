@@ -1,9 +1,9 @@
 @import "catppuccin-frappe.css";
 
-/* -- Global rules -- */
+/* -- Global -- */
 * {
   font-family: MesloLGS Nerd Font;
-  font-size: 22px;
+  font-size: 16px;
   min-height: 10px;
   border: none;
   color: @text;
@@ -13,16 +13,16 @@ window#waybar {
   background: none;
 }
 
-/* -- Tooltips -- */
 tooltip {
   background: @base;
   border-radius: 10px;
 }
 
-/* -- Shared rules for all styled modules -- */
-#custom-nixos,
+/* -- Standard pill: every styled module is its own rounded pill -- */
 #custom-sunset,
-#custom-playerctl,
+#custom-media-prev,
+#mpris,
+#custom-media-next,
 #pulseaudio,
 #cpu,
 #memory,
@@ -30,135 +30,23 @@ tooltip {
 #network,
 #clock {
   margin: 0.2em 0.5em;
-  min-width: 1.3em;
-}
-
-/* Solid pill background for everything except the bare logo */
-#custom-playerctl,
-#pulseaudio,
-#cpu,
-#memory,
-#bluetooth,
-#network,
-#clock {
-  background: @base;
   padding: 0.1em 0.6em;
+  background: @base;
   border-radius: 0.4em;
 }
 
-/* =====================================================================
-   LEFT   (nixos · [ram | cpu] · tray)
-   ===================================================================== */
+#custom-sunset {
+    padding-right: 0.8em;
+}
+
+/* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
+  margin: 0.2em 1em 0.2em 0.5em;
   font-size: 1.2em;
   color: @blue;
-  margin-left: 0.5em;
-  margin-right: 1em;
 }
 
-#custom-sunset.on {
-  color: @peach;
-}
-
-#custom-sunset.off {
-  color: @overlay1;
-}
-
-/* Group: RAM + CPU -> one connected block */
-#memory,
-#cpu {
-  margin-left: 0;
-  margin-right: 0;
-  border-radius: 0;
-}
-
-#memory {
-  /* first in group */
-  margin-left: 0.5em;
-  padding-right: 0.3em;
-  border-top-left-radius: 0.4em;
-  border-bottom-left-radius: 0.4em;
-}
-
-#cpu {
-  /* last in group */
-  margin-right: 0.5em;
-  padding-left: 0.3em;
-  border-top-right-radius: 0.4em;
-  border-bottom-right-radius: 0.4em;
-}
-
-/* tray sits at the end of the left section (no background) */
-
-/* =====================================================================
-   CENTER   (media / playerctl)
-   ===================================================================== */
-#custom-playerctl {
-  transition: min-width 200ms ease, padding 200ms ease;
-}
-
-/* Collapse the pill when nothing is playing */
-#custom-playerctl.empty {
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  min-width: 0;
-}
-
-/* =====================================================================
-   RIGHT   ([audio | bluetooth | wifi] · clock)
-   ===================================================================== */
-/* Group: Audio + Bluetooth + WiFi -> one connected block */
-#pulseaudio,
-#bluetooth,
-#network {
-  margin-left: 0;
-  margin-right: 0;
-  border-radius: 0;
-}
-
-#bluetooth {
-  /* middle of group */
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-}
-
-#pulseaudio {
-  /* first in group */
-  margin-left: 0.5em;
-  padding-right: 0.3em;
-  border-top-left-radius: 0.4em;
-  border-bottom-left-radius: 0.4em;
-}
-
-#network {
-  /* last in group */
-  margin-right: 0.5em;
-  padding-left: 0.3em;
-  border-top-right-radius: 0.4em;
-  border-bottom-right-radius: 0.4em;
-}
-
-/* Group: Date + Time -> one connected block */
-#clock.date,
-#clock.time {
-  margin-left: 0;
-  margin-right: 0;
-  border-radius: 0;
-}
-
-#clock.date {
-  /* first in group */
-  margin-left: 0.5em;
-  padding-right: 0.3em;
-  border-top-left-radius: 0.4em;
-  border-bottom-left-radius: 0.4em;
-}
-
-#clock.time {
-  /* last in group */
-  margin-right: 0.5em;
-  padding-left: 0.3em;
-  border-top-right-radius: 0.4em;
-  border-bottom-right-radius: 0.4em;
+/* -- Cava visualizer (center) -- */
+#cava {
+  padding: 0 10px;
 }
