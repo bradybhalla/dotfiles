@@ -22,13 +22,14 @@ in
     playerctl # control audio
     cava # visualize live audio
 
-    # maybe move to linux apps
+    # TODO: maybe move to linux apps
     pavucontrol # audio device setttings
   ];
 
   # playerctld tracks the active MPRIS player so waybar's mpris module can
   # follow whatever is currently playing.
   services.playerctld.enable = true;
+  services.network-manager-applet.enable = true;
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -37,8 +38,13 @@ in
     size = 24;
   };
 
-  gtk.enable = true;
-  gtk.gtk4.theme = null;
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+  };
 
   home.file =
     let
@@ -47,6 +53,5 @@ in
     {
       ".config/hypr".source = linkHere ".config/hypr";
       ".config/waybar".source = linkHere ".config/waybar";
-      ".backgrounds".source = linkHere ".backgrounds";
     };
 }

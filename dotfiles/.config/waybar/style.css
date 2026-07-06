@@ -3,13 +3,14 @@
 /* -- Global -- */
 * {
   font-family: MesloLGS Nerd Font;
-  font-size: 16px;
+  font-size: 18px;
   min-height: 10px;
   border: none;
 }
 
 window#waybar {
   background: alpha(@base, 0.7);
+  border-radius: 10px;
 }
 
 tooltip {
@@ -19,20 +20,22 @@ tooltip {
 
 /* -- Module spacing (flat, no background) -- */
 #custom-night-mode,
+#custom-nixos,
+#workspaces,
+#tray,
 #mpris,
 #pulseaudio,
 #cpu,
 #memory,
-#tray,
 #clock,
 #window {
-  margin: 0.2em 0.0em;
-  padding: 0.1em 0.6em;
-  color: @text;
+  margin: 0.2em 0.2em;
+  padding: 0.1em 0.2em;
+  /* background: @red; */
 }
 
 #custom-night-mode {
-    padding-right: 0.8em;
+    padding-right: 0.45em;
 }
 
 #window {
@@ -41,15 +44,11 @@ tooltip {
 
 #clock {
   color: @lavender;
+  margin-right: 0.5em;
 }
 
 #mpris {
   color: @sky;
-}
-
-#tray {
-  border: 1px solid @overlay0;
-  border-radius: 0.5em;
 }
 
 #custom-night-mode.day-mode {
@@ -60,18 +59,9 @@ tooltip {
   color: @blue;
 }
 
-/* -- Memory & CPU: red, packed close together -- */
 #memory,
 #cpu {
   color: @flamingo;
-}
-
-#memory {
-  padding-right: 0.2em;
-}
-
-#cpu {
-  padding-left: 0.2em;
 }
 
 /* -- Pulseaudio: green -- */
@@ -81,23 +71,24 @@ tooltip {
 
 /* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
-  margin: 0.2em 1em 0.2em 0.5em;
-  font-size: 1.2em;
+  padding-right: 0.50em;
+  margin-left: 0.5em;
   color: @blue;
 }
 
-/* -- Workspaces: numbers packed close together -- */
-#workspaces {
-  margin: 0.2em 0.6em;
+#tray, #workspaces {
+  border: 1px solid @overlay0;
+  border-radius: 0.5em;
+}
+#workspaces button, #tray widget>image {
+  padding: 0;
+  margin: 0 0.3em;
 }
 
 #workspaces button {
-  padding: 0 0.3em;
-  margin: 0;
   color: @overlay0;
-  background: transparent;
+  background: none;
   border: none;
-  border-radius: 2em;
   box-shadow: none;
   text-shadow: none;
   min-width: 0;

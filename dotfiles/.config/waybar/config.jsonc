@@ -18,12 +18,14 @@
   ],
   "modules-right": [
     "mpris",
-    "tray",
     "pulseaudio",
+    "tray",
     "custom/night-mode",
     "clock",
   ],
-
+  "margin-left": 4,
+  "margin-right": 4,
+  "margin-top": 4,
   "custom/night-mode": {
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/night-mode.sh",
@@ -33,7 +35,7 @@
   },
   "custom/nixos": {
     "format": "",
-    "tooltip-format": "About",
+    "tooltip": false,
     "on-click": "hyprsysteminfo",
   },
   "hyprland/workspaces": {

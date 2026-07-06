@@ -85,7 +85,12 @@
     enable = true;
     theme = "catppuccin-macchiato";
     settings = {
-    "LockScreen" = {display = false;};
+      "General" = {
+        scale = 2.0;
+      };
+      "LockScreen" = {
+        display = false;
+      };
     };
   };
 
@@ -114,4 +119,13 @@
   ];
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
+
+  # TODO: I added this when trying to fix some mising files but it didnt work
+  # unless there is a good reason it can probably be deleted.
+  programs.fuse.userAllowOther = true;
+  boot.kernelModules = [ "fuse" ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 }

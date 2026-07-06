@@ -30,6 +30,8 @@
     enable = true;
     powerOnBoot = true;
   };
+  # TODO: ideally I would want to put this in my home config but
+  # it wasn't able to find icons that way
   services.blueman.enable = true;
 
   # Gaming
