@@ -12,6 +12,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("waybar")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("hyprsunset")
+  hl.exec_cmd("eww daemon")
 end)
 
 local terminal    = "alacritty"
@@ -36,6 +37,7 @@ hl.bind(mainMod .. " + F",         hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + SHIFT + Q",         hl.dsp.exec_cmd(locker))
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + M",         hl.dsp.exec_cmd("eww open --toggle music"))
 
 -- Move focus with mainMod + hjk;
 hl.bind(mainMod .. " + H",         hl.dsp.focus({ direction = "left" }))

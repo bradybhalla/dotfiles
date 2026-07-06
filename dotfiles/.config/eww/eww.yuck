@@ -1,0 +1,32 @@
+(deflisten music
+  :initial `{"status": "None", "title": "Nothing playing", "artist": "", "album": "", "art": ""}`
+  "scripts/music-info.sh")
+
+(deflisten cava :initial "" "scripts/cava-bars.sh")
+
+(defwidget album-art []
+  (box :class "album-art" :width 75 :height 75 :valign "center"
+       :style "background-image: url('${music.art}');"))
+
+(defwidget track-info []
+  (box :orientation "v" :space-evenly false :spacing 4 :hexpand true :valign "center"
+    (label :class "title"  :halign "start" :xalign 0 :wrap true :text {music.title})
+    (label :class "artist" :halign "start" :limit-width 28 :text {music.artist})
+    (label :class "album"  :halign "start" :limit-width 28 :text {music.album})))
+
+(defwidget music-player []
+  (box :class "music-player" :orientation "v" :space-evenly false :spacing 10
+    (box :orientation "h" :space-evenly false :spacing 12
+      (album-art)
+      (track-info))
+    (label :class "cava" :halign "center" :text cava)))
+
+(defwindow music
+  :monitor 0
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  :namespace "eww-music"
+  :geometry (geometry :x "4px" :y "4px" :anchor "top right"
+                      :width "440px" :height "0px")
+  (music-player))

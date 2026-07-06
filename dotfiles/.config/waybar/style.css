@@ -20,6 +20,7 @@ tooltip {
 
 /* -- Module spacing (flat, no background) -- */
 #custom-night-mode,
+#custom-music,
 #custom-nixos,
 #workspaces,
 #tray,
@@ -34,12 +35,14 @@ tooltip {
   /* background: @red; */
 }
 
-#custom-night-mode {
-    padding-right: 0.45em;
-}
-
 #window {
   color: @subtext0;
+}
+
+#custom-music {
+    color: @mauve;
+    padding-left: 0.15em;
+    padding-right: 0.5em;
 }
 
 #clock {
@@ -49,6 +52,11 @@ tooltip {
 
 #mpris {
   color: @sky;
+}
+
+
+#custom-night-mode {
+    padding-right: 0.45em;
 }
 
 #custom-night-mode.day-mode {
@@ -88,7 +96,7 @@ tooltip {
 }
 
 #workspaces button {
-  color: @overlay0;
+  color: @overlay1;
   background: none;
   border: none;
   box-shadow: none;

@@ -21,6 +21,7 @@ in
     pamixer # volume cli
     playerctl # control audio
     cava # visualize live audio
+    eww # desktop widgets
 
     # TODO: maybe move to linux apps
     pavucontrol # audio device setttings
@@ -51,5 +52,6 @@ in
     {
       ".config/hypr".source = linkHere ".config/hypr";
       ".config/waybar".source = linkHere ".config/waybar";
+      ".config/eww".source = linkHere ".config/eww";
     };
 }
