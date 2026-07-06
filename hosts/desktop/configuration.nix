@@ -6,8 +6,9 @@
 
 {
   imports = [
-    ../../modules/nixos/common.nix
     ./hardware-configuration.nix
+    ../../modules/nixos/common.nix
+    ../../modules/nixos/dropbox.nix
   ];
 
   networking.hostName = "brady-desktop";

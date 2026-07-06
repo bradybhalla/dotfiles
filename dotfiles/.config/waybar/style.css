@@ -3,13 +3,13 @@
 /* -- Global -- */
 * {
   font-family: MesloLGS Nerd Font;
-  font-size: 18px;
+  font-size: 20px;
   min-height: 10px;
   border: none;
 }
 
 window#waybar {
-  background: alpha(@base, 0.7);
+  background: alpha(@base, 0.4);
   border-radius: 10px;
 }
 
@@ -76,7 +76,9 @@ tooltip {
   color: @blue;
 }
 
-#tray, #workspaces {
+#tray
+/* #workspaces uncomment if workspaces are moving back to the side */
+{
   border: 1px solid @overlay0;
   border-radius: 0.5em;
 }

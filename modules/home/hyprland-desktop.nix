@@ -26,8 +26,6 @@ in
     pavucontrol # audio device setttings
   ];
 
-  # playerctld tracks the active MPRIS player so waybar's mpris module can
-  # follow whatever is currently playing.
   services.playerctld.enable = true;
   services.network-manager-applet.enable = true;
 

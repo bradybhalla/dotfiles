@@ -11,10 +11,10 @@
     "custom/nixos",
     "memory",
     "cpu",
-    "hyprland/workspaces",
     "hyprland/window"
   ],
   "modules-center": [
+    "hyprland/workspaces",
   ],
   "modules-right": [
     "mpris",
