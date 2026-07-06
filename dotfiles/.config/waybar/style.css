@@ -16,6 +16,7 @@ window#waybar {
 tooltip {
   background: @base;
   border-radius: 10px;
+  border: 2px solid @overlay0;
 }
 
 /* -- Module spacing (flat, no background) -- */

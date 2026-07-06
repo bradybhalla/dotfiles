@@ -26,7 +26,6 @@
 
     ansible
 
-    emacs
     ispell
     pciutils
   ];

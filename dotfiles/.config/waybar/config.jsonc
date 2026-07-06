@@ -28,8 +28,10 @@
   "margin-right": 4,
   "margin-top": 4,
   "custom/music": {
-    "format": "",
-    "tooltip": false,
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/music-tooltip.sh",
+    "return-type": "json",
+    "interval": 5,
     "on-click": "eww open --toggle music",
   },
   "custom/night-mode": {
@@ -40,8 +42,10 @@
     "on-click": "$HOME/.config/waybar/scripts/night-mode.sh toggle",
   },
   "custom/nixos": {
-    "format": "",
-    "tooltip": false,
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/nixos-tooltip.sh",
+    "return-type": "json",
+    "interval": 60,
     "on-click": "hyprsysteminfo",
   },
   "hyprland/workspaces": {
@@ -88,6 +92,7 @@
       "tooltip": true,
       "format-muted": " {volume}%",
       "on-click": "pamixer -t",
+      "on-click-right": "pavucontrol",
       "on-scroll-up": "pamixer -i 5",
       "on-scroll-down": "pamixer -d 5",
       "scroll-step": 5,

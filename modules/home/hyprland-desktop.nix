@@ -19,9 +19,11 @@ in
     hyprsysteminfo
 
     pamixer # volume cli
-    playerctl # control audio
+    playerctl # control playing audio
     cava # visualize live audio
     eww # desktop widgets
+
+    procps # needed a different 'uptime'
 
     # TODO: maybe move to linux apps
     pavucontrol # audio device setttings

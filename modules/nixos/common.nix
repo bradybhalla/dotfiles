@@ -64,7 +64,7 @@
 
     alacritty
     # skimpdf # TODO broken: doesn't work on aarch64?
-    emacs
+    emacs-pgtk # pgtk makes it look normal on wayland
     vlc
   ];
 
