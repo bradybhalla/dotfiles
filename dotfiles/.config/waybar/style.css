@@ -3,174 +3,162 @@
 /* -- Global rules -- */
 * {
   font-family: MesloLGS Nerd Font;
-  font-size: 18px;
+  font-size: 22px;
   min-height: 10px;
   border: none;
+  color: @text;
 }
 
 window#waybar {
-  background: rgba(34, 36, 54, 0.6);
+  background: none;
 }
 
-window#waybar.hidden {
-  opacity: 0.2;
+/* -- Tooltips -- */
+tooltip {
+  background: @base;
+  border-radius: 10px;
 }
 
-/* - Genera rules for visible modules -- */
-#custom-archicon,
-#clock,
+/* -- Shared rules for all styled modules -- */
+#custom-nixos,
+#custom-sunset,
+#custom-playerctl,
+#pulseaudio,
 #cpu,
 #memory,
-#disk,
-#temperature,
-#idle_inhibitor,
-#pulseaudio,
-#pulseaudio-slider,
+#bluetooth,
 #network,
-#language {
-  color: #161320;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  padding-left: 10px;
-  padding-right: 10px;
-  transition: none;
-}
-
-/* Separation to the left */
-#custom-archicon,
-#cpu,
-#idle_inhibitor {
-  margin-left: 5px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-/* Separation to the rigth */
-#clock,
-#temperature,
-#language {
-  margin-right: 5px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-/* -- Specific styles -- */
-
-/* Modules left */
-#custom-archicon {
-  font-size: 20px;
-  color: #89B4FA;
-  background: #161320;
-  padding-right: 17px;
-}
-
 #clock {
-  background: #ABE9B3;
+  margin: 0.2em 0.5em;
+  min-width: 1.3em;
 }
 
+/* Solid pill background for everything except the bare logo */
+#custom-playerctl,
+#pulseaudio,
+#cpu,
+#memory,
+#bluetooth,
+#network,
+#clock {
+  background: @base;
+  padding: 0.1em 0.6em;
+  border-radius: 0.4em;
+}
+
+/* =====================================================================
+   LEFT   (nixos · [ram | cpu] · tray)
+   ===================================================================== */
+#custom-nixos {
+  font-size: 1.2em;
+  color: @blue;
+  margin-left: 0.5em;
+  margin-right: 1em;
+}
+
+#custom-sunset.on {
+  color: @peach;
+}
+
+#custom-sunset.off {
+  color: @overlay1;
+}
+
+/* Group: RAM + CPU -> one connected block */
+#memory,
 #cpu {
-  background: #96CDFB;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
 }
 
 #memory {
-  background: #DDB6F2;
+  /* first in group */
+  margin-left: 0.5em;
+  padding-right: 0.3em;
+  border-top-left-radius: 0.4em;
+  border-bottom-left-radius: 0.4em;
 }
 
-#disk {
-  background: #F5C2E7;
+#cpu {
+  /* last in group */
+  margin-right: 0.5em;
+  padding-left: 0.3em;
+  border-top-right-radius: 0.4em;
+  border-bottom-right-radius: 0.4em;
 }
 
-#temperature {
-  background: #F8BD96;
+/* tray sits at the end of the left section (no background) */
+
+/* =====================================================================
+   CENTER   (media / playerctl)
+   ===================================================================== */
+#custom-playerctl {
+  transition: min-width 200ms ease, padding 200ms ease;
 }
 
-/* Modules center */
-#workspaces {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  margin: 6px 5px;
-  padding: 0px 6px;
-}
-
-#workspaces button {
-  color: #B5E8E0;
+/* Collapse the pill when nothing is playing */
+#custom-playerctl.empty {
   background: transparent;
-  padding: 4px 4px;
-  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
 }
 
-#workspaces button.occupied {
-  color: #A6E3A1;
+/* =====================================================================
+   RIGHT   ([audio | bluetooth | wifi] · clock)
+   ===================================================================== */
+/* Group: Audio + Bluetooth + WiFi -> one connected block */
+#pulseaudio,
+#bluetooth,
+#network {
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
 }
 
-#workspaces button.active {
-  color: #89B4FA;
-  text-shadow: 0 0 4px #ABE9B3;
-}
-
-#workspaces button:hover {
-  color: #89B4FA;
-}
-
-#workspaces button.active:hover {}
-
-/* Modules right */
-#taskbar {
-  background: transparent;
-  border-radius: 10px;
-  padding: 0px 5px;
-  margin: 6px 5px;
-}
-
-#taskbar button {
-  padding: 0px 5px;
-  margin: 0px 3px;
-  border-radius: 6px;
-  transition: background 0.3s ease;
-}
-
-#taskbar button.active {
-  background: rgba(34, 36, 54, 0.5);
-}
-
-#taskbar button:hover {
-  background: rgba(34, 36, 54, 0.5);
-}
-
-#idle_inhibitor {
-  background: #B5E8E0;
-  padding-right: 15px;
+#bluetooth {
+  /* middle of group */
+  padding-left: 0.3em;
+  padding-right: 0.3em;
 }
 
 #pulseaudio {
-  min-width: 55px;
-  color: #1A1826;
-  background: #F5E0DC;
+  /* first in group */
+  margin-left: 0.5em;
+  padding-right: 0.3em;
+  border-top-left-radius: 0.4em;
+  border-bottom-left-radius: 0.4em;
 }
-
-#pulseaudio-slider {
-  color: #1A1826;
-  background: #E8A2AF;
-  min-width: 50px;
-}
-
-#pulseaudio-slider slider {}
-
 
 #network {
-  background: #CBA6F7;
-  padding-right: 13px;
+  /* last in group */
+  margin-right: 0.5em;
+  padding-left: 0.3em;
+  border-top-right-radius: 0.4em;
+  border-bottom-right-radius: 0.4em;
 }
 
-#language {
-  background: #A6E3A1;
-  padding-right: 15px;
+/* Group: Date + Time -> one connected block */
+#clock.date,
+#clock.time {
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
 }
 
-/* === Optional animation === */
-@keyframes blink {
-  to {
-    background-color: #BF616A;
-    color: #B5E8E0;
-  }
+#clock.date {
+  /* first in group */
+  margin-left: 0.5em;
+  padding-right: 0.3em;
+  border-top-left-radius: 0.4em;
+  border-bottom-left-radius: 0.4em;
+}
+
+#clock.time {
+  /* last in group */
+  margin-right: 0.5em;
+  padding-left: 0.3em;
+  border-top-right-radius: 0.4em;
+  border-bottom-right-radius: 0.4em;
 }

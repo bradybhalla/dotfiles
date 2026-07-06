@@ -1,37 +1,105 @@
 {
   "layer": "top",
   "position": "top",
-  "autohide": true,
+  "autohide": false,
   "autohide-blocked": false,
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  /* === Modules Order === */
+
   "modules-left": [
-    "custom/icon",
-    "idle_inhibitor",
+    "custom/nixos",
+    "custom/sunset",
+    "memory",
+    "cpu",
+    "tray",
   ],
   "modules-center": [
-    "hyprland/workspaces"
+    "cava"
   ],
   "modules-right": [
     "pulseaudio",
-    "hyprland/language",
-    "cpu",
-    "memory",
     "bluetooth",
     "network",
     "clock#date",
     "clock#time"
   ],
-  /* === Modules Left === */
-  "custom/icon": {
-    "format": "",
+
+  "custom/sunset": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/sunset.sh",
+    "return-type": "json",
+    "interval": "once",
+    "signal": 8,
+    "on-click": "$HOME/.config/waybar/scripts/sunset.sh toggle",
+  },
+  "custom/nixos": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/sysinfo.sh",
+    "return-type": "json",
+    "interval": "once",
+    "tooltip": true,
+  },
+  "cpu": {
+    "format": " {usage}%",
+  },
+  "memory": {
+    "format": " {percentage}%",
+  },
+  "bluetooth": {
+    "format-on": "󰂯",
+    "format-connected": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-no-controller": "󰂲",
+    "tooltip-format-on": "No Bluetooth connections",
+    "tooltip-format-off": "Bluetooth off",
+    "tooltip-format-disabled": "Bluetooth disabled",
+    "tooltip-format-no-controller": "No Bluetooth controller",
+    "tooltip-format-connected": "{device_enumerate}",
+  },
+  "network": {
+    "format-wifi": "󰖩 {essid}",
+    "max-length": 10,
+    "format-ethernet":" ",
+    "format-disconnected": "󰖪 ",
+    "tooltip-format-wifi": "Wireless: {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "Wired: {ifname}",
+    "tooltip-format-disconnected": "Internet disconnected",
   },
   "clock#date": {
     "format": "{:%a %b %d}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "format": {
+        "months": "<span color='#c6d0f5'><b>{}</b></span>",
+        "days": "<span color='#c6d0f5'>{}</span>",
+        "weekdays": "<span color='#8caaee'><b>{}</b></span>",
+        "today": "<span color='#e5c890'><b>{}</b></span>",
+      },
+    },
   },
   "clock#time": {
     "format": "{:%I:%M %p}",
+    "tooltip": false,
+  },
+  "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "tooltip": true,
+      "format-muted": " ",
+      "on-click": "pamixer -t",
+      "on-scroll-up": "pamixer -i 5",
+      "on-scroll-down": "pamixer -d 5",
+      "scroll-step": 5,
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", "", ""]
+      }
   },
 }

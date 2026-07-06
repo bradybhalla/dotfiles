@@ -83,8 +83,10 @@
   };
   programs.silentSDDM = {
     enable = true;
-    theme = "catppuccin-frappe";
-    # settings = { ... }; see example in module
+    theme = "default";
+    settings = {
+    "LockScreen" = {display = false;};
+    };
   };
 
   # Audio

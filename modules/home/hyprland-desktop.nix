@@ -16,9 +16,9 @@ in
     hyprlock
     hyprpaper
 
-    playerctl
-    brightnessctl
-    networkmanagerapplet
+    pciutils
+    pamixer
+    cava
   ];
 
   home.pointerCursor = {
