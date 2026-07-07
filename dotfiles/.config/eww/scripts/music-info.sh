@@ -5,10 +5,16 @@
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/eww/album-art"
 mkdir -p "$cache_dir"
 
+url_decode() {
+  # turn each %XX escape into the corresponding byte
+  local s="${1//%/\\x}"
+  printf '%b' "$s"
+}
+
 resolve_art() {
   local url="$1"
   case "$url" in
-    file://*) printf '%s' "${url#file://}" ;;
+    file://*) url_decode "${url#file://}" ;;
     http://*|https://*)
       local f="$cache_dir/$(printf '%s' "$url" | sha256sum | cut -d' ' -f1)"
       if [ ! -s "$f" ]; then
