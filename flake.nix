@@ -17,11 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: this is an open pr into a rofi theme repo, not a permanent solution
-    rofi-themes = {
-      url = "github:danhab99/rofi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
