@@ -54,6 +54,7 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; # make electron apps use wayland
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -86,7 +87,7 @@
     theme = "catppuccin-macchiato";
     settings = {
       "General" = {
-        scale = 2.0;
+        scale = 1.5;
       };
       "LockScreen" = {
         display = false;

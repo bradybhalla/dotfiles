@@ -6,6 +6,7 @@ hl.config({
         no_hardware_cursors = true,
     },
 })
+
 -- Monitor configuration for VMs
 hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
 hl.monitor({ output = "Unknown-1", disabled = true })
@@ -23,7 +24,7 @@ local fileManager = "dolphin"
 local menu        = "rofi -show drun"
 local browser     = "firefox"
 local locker      = "hyprlock"
-local logout      = "hyprshutdown"
+local logout      = "hyprshutdown -p 'uwsm stop'"
 
 ---------------------
 ---- KEYBINDINGS ----

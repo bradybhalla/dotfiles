@@ -1,6 +1,7 @@
 {
   pkgs,
   linkHere,
+  config,
   ...
 }:
 {
@@ -22,6 +23,8 @@
     eww # desktop widgets
 
     procps # needed a different 'uptime'
+
+    spotify
 
     # TODO: maybe move to linux apps
     pavucontrol # audio device setttings
@@ -63,6 +66,9 @@
     # For older GTK3 apps that key off this flag rather than the portal.
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+    # Keep the pre-26.05 default: apply the same Catppuccin theme to GTK4 apps.
+    # Silences the home-manager deprecation warning without changing appearance.
+    gtk4.theme = config.gtk.theme;
   };
 
   # hyprsysteminfo and friends are Qt6 apps, not GTK. Catppuccin has no native
