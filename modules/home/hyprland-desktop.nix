@@ -5,15 +5,16 @@
 }:
 {
   home.packages = with pkgs; [
-    waybar
+    waybar # status bar
 
-    hyprland
-    hyprlauncher
-    hyprshutdown
-    hyprlock
-    hyprpaper
-    hyprsunset
-    hyprsysteminfo
+    hyprland # window manager
+    hyprshutdown # logout nicely
+    hyprlock # lock screen
+    hyprpaper # wallpaper
+    hyprsunset # night mode
+    hyprsysteminfo # about screen
+
+    rofi
 
     pamixer # volume cli
     playerctl # control playing audio
@@ -86,5 +87,6 @@
     ".config/hypr".source = linkHere ".config/hypr";
     ".config/waybar".source = linkHere ".config/waybar";
     ".config/eww".source = linkHere ".config/eww";
+    ".config/rofi".source = linkHere ".config/rofi";
   };
 }

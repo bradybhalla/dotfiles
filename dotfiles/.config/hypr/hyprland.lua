@@ -1,4 +1,6 @@
 local catppuccin = require("catppuccin-frappe")
+
+-- with some login screens the cursor was staying around
 hl.config({
     cursor = {
         no_hardware_cursors = true,
@@ -9,18 +11,16 @@ hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", s
 hl.monitor({ output = "Unknown-1", disabled = true })
 
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar")
-  hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("hyprsunset")
-  hl.exec_cmd("eww daemon")
+  hl.exec_cmd("waybar") -- status bar
+  hl.exec_cmd("hyprpaper") -- wallpaper
+  hl.exec_cmd("hyprsunset") -- background process for night mode
+  hl.exec_cmd("eww daemon") -- background process for eww widgets
+  hl.exec_cmd("1password --silent") -- 1password applet
 end)
 
 local terminal    = "alacritty"
 local fileManager = "dolphin"
--- The adi1090x launcher theme (type-1/style-5, set in modules/home/hyprland-desktop.nix)
--- hardcodes onedark colors + JetBrains Mono, so override both at launch to get
--- catppuccin + MesloLGS. Keep the type/style path in sync with the nix module.
-local menu        = [[rofi -show drun -theme ~/.config/rofi/launchers/type-1/style-5.rasi -theme-str '@import "~/.config/rofi/colors/catppuccin.rasi"' -theme-str '* { font: "MesloLGS Nerd Font 12"; }']]
+local menu        = "rofi -show drun"
 local browser     = "firefox"
 local locker      = "hyprlock"
 local logout      = "hyprshutdown"
@@ -126,7 +126,7 @@ hl.window_rule({
     size  = "1100 800",
 })
 hl.window_rule({
-    name  = "pavucontrol (volume control)",
+    name  = "1Password",
     match = { class = "1password" },
     float = true,
 })
