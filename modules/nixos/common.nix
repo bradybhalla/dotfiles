@@ -120,12 +120,15 @@
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
 
-  # TODO: I added this when trying to fix some mising files but it didnt work
-  # unless there is a good reason it can probably be deleted.
-  programs.fuse.userAllowOther = true;
-  boot.kernelModules = [ "fuse" ];
+  # TODO: fix xdg portal service error I was getting. idk if all of this is actually needed.
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+  security.wrappers.fusermount3 = {
+    source = "${pkgs.fuse3}/bin/fusermount3";
+    owner = "root";
+    group = "root";
+    setuid = true;
   };
 }

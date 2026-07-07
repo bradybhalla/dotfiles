@@ -40,7 +40,7 @@ tooltip {
 
 #clock {
   color: @lavender;
-  margin-right: 0.5em;
+  margin-right: 0.6em;
 }
 
 #mpris {
@@ -73,19 +73,19 @@ tooltip {
 /* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
   padding-right: 0.4em;
-  margin-left: 0.5em;
+  margin-left: 0.6em;
   color: @blue;
 }
 
 #tray
-/* #workspaces uncomment if workspaces are moving back to the side */
 {
   border: 1px solid @overlay0;
   border-radius: 0.5em;
 }
-#workspaces button, #tray widget>image {
-  padding: 0;
-  margin: 0 0.3em;
+#tray widget>image,
+#workspaces button
+{
+  margin: 0 0.4em;
 }
 
 #workspaces button {
@@ -95,6 +95,7 @@ tooltip {
   box-shadow: none;
   text-shadow: none;
   min-width: 0;
+  padding: 0;
 }
 
 #workspaces button:hover {

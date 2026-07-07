@@ -17,7 +17,10 @@ end)
 
 local terminal    = "alacritty"
 local fileManager = "dolphin"
-local menu        = "hyprlauncher"
+-- The adi1090x launcher theme (type-1/style-5, set in modules/home/hyprland-desktop.nix)
+-- hardcodes onedark colors + JetBrains Mono, so override both at launch to get
+-- catppuccin + MesloLGS. Keep the type/style path in sync with the nix module.
+local menu        = [[rofi -show drun -theme ~/.config/rofi/launchers/type-1/style-5.rasi -theme-str '@import "~/.config/rofi/colors/catppuccin.rasi"' -theme-str '* { font: "MesloLGS Nerd Font 12"; }']]
 local browser     = "firefox"
 local locker      = "hyprlock"
 local logout      = "hyprshutdown"
@@ -108,6 +111,21 @@ hl.window_rule({
     name  = "fullscreen-border",
     match = { fullscreen = true, focus = true },
     border_color = catppuccin.teal
+})
+
+-- special windows
+hl.window_rule({
+    name  = "blueman (bluetooth tray)",
+    match = { class = ".blueman-manager-wrapped" },
+    float = true,
+    center = true,
+})
+hl.window_rule({
+    name  = "pavucontrol (volume control)",
+    match = { class = "org.pulseaudio.pavucontrol" },
+    float = true,
+    size  = "1100 800",
+    center = true,
 })
 
 
