@@ -29,20 +29,33 @@ no_player() {
   jq -cn '{status: "None", title: "Nothing playing", artist: "", album: "", art: ""}'
 }
 
+# Close the eww popup (no-op if it is already closed).
+close_widget() {
+  eww close music >/dev/null 2>&1
+}
+
 no_player
 # deflisten does not restart a script that exits, so restart playerctl ourselves
 while true; do
+  prev=""
   playerctl --ignore-player=firefox --follow metadata \
     --format $'{{status}}\t{{title}}\t{{artist}}\t{{album}}\t{{mpris:artUrl}}' 2>/dev/null |
   while IFS=$'\t' read -r status title artist album arturl; do
-    if [ -z "$status" ]; then
+    if [ -z "$status" ] || [ "$status" = "Stopped" ]; then
       no_player
+      # Auto-close only when transitioning away from an active track, so
+      # opening the widget while nothing is playing keeps it open.
+      case "$prev" in
+        Playing|Paused) close_widget ;;
+      esac
+      prev="$status"
       continue
     fi
     art="$(resolve_art "$arturl")"
     jq -cn --arg status "$status" --arg title "$title" --arg artist "$artist" \
            --arg album "$album" --arg art "$art" \
            '{status: $status, title: $title, artist: $artist, album: $album, art: $art}'
+    prev="$status"
   done
   no_player
   sleep 2
