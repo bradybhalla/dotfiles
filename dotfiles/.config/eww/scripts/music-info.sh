@@ -35,11 +35,11 @@ close_widget() {
 }
 
 no_player
-# deflisten does not restart a script that exits, so restart playerctl ourselves
+# deflisten does not restart a script that exits, so restart playerctl ourselves.
+# Process substitution (not a pipe) keeps the read loop in this shell so $prev
+# survives after playerctl exits when the last player quits.
 while true; do
   prev=""
-  playerctl --ignore-player=firefox --follow metadata \
-    --format $'{{status}}\t{{title}}\t{{artist}}\t{{album}}\t{{mpris:artUrl}}' 2>/dev/null |
   while IFS=$'\t' read -r status title artist album arturl; do
     if [ -z "$status" ] || [ "$status" = "Stopped" ]; then
       no_player
@@ -56,7 +56,13 @@ while true; do
            --arg album "$album" --arg art "$art" \
            '{status: $status, title: $title, artist: $artist, album: $album, art: $art}'
     prev="$status"
-  done
+  done < <(playerctl --ignore-player=firefox --follow metadata \
+    --format $'{{status}}\t{{title}}\t{{artist}}\t{{album}}\t{{mpris:artUrl}}' 2>/dev/null)
+  # playerctl exited: the followed player quit without emitting a final line.
+  # Close the widget if we were showing an active track.
   no_player
+  case "$prev" in
+    Playing|Paused) close_widget ;;
+  esac
   sleep 2
 done
