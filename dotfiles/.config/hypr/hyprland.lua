@@ -118,14 +118,17 @@ hl.window_rule({
     name  = "blueman (bluetooth tray)",
     match = { class = ".blueman-manager-wrapped" },
     float = true,
-    center = true,
 })
 hl.window_rule({
     name  = "pavucontrol (volume control)",
     match = { class = "org.pulseaudio.pavucontrol" },
     float = true,
     size  = "1100 800",
-    center = true,
+})
+hl.window_rule({
+    name  = "pavucontrol (volume control)",
+    match = { class = "1password" },
+    float = true,
 })
 
 
@@ -137,7 +140,7 @@ hl.config({
     general = {
         border_size = 3,
         gaps_in= 3,
-        gaps_out= 5,
+        gaps_out= 6,
         ["col.active_border"]   = catppuccin.blue,
         ["col.inactive_border"] = catppuccin.overlay0,
     },

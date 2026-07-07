@@ -56,7 +56,6 @@
                 config.allowUnfree = true;
               };
               modules = homeModules;
-              extraSpecialArgs = { inherit inputs; };
             };
         in
         {
