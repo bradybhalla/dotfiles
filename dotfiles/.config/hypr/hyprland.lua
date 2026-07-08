@@ -11,12 +11,18 @@ hl.config({
 hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
 hl.monitor({ output = "Unknown-1", disabled = true })
 
-hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar") -- status bar
+-- 1password's tray applet checks for the StatusNotifierWatcher name once at
+-- startup and gives up if waybar hasn't claimed it yet, so wait for waybar to
+-- own it first. (Qt apps like maestral re-register on their own and don't need this.)
+local waitForTray = "until busctl --user status org.kde.StatusNotifierWatcher >/dev/null 2>&1; do sleep 0.2; done;"
+
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("waybar") -- status bar (provides the system tray / StatusNotifierWatcher)
   hl.exec_cmd("hyprpaper") -- wallpaper
   hl.exec_cmd("hyprsunset") -- background process for night mode
   hl.exec_cmd("eww daemon") -- background process for eww widgets
-  hl.exec_cmd("1password --silent") -- 1password applet
+  hl.exec_cmd("sh -c '" .. waitForTray .. " exec 1password --silent'") -- 1password tray applet  TODO: it seems like this is needed but double check
+  hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet
 end)
 
 local terminal    = "alacritty"
@@ -50,10 +56,10 @@ hl.bind(mainMod .. " + K",         hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",         hl.dsp.focus({ direction = "down" }))
 
 -- Move windows with mainMod + SHIFT + hjk;
-hl.bind(mainMod .. " + SHIFT + H",         hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + K",         hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + J",         hl.dsp.window.move({ direction = "down" }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]

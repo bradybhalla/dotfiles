@@ -9,7 +9,6 @@
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
     ../../modules/nixos/sddm-display-manager.nix
-    ../../modules/nixos/dropbox.nix
   ];
 
   networking.hostName = "brady-desktop";

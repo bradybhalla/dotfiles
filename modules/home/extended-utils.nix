@@ -34,6 +34,7 @@
   programs.claude-code = {
     enable = true;
     settings = {
+      model = "opus";
       env.EDITOR = "${pkgs.neovim}/bin/nvim";
       statusLine = {
         type = "command";

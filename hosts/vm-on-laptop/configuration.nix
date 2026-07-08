@@ -9,7 +9,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
     ../../modules/nixos/sddm-display-manager.nix
-    ../../modules/nixos/sydney.nix
+    # ../../modules/nixos/sydney.nix
   ];
 
   networking.hostName = "nixos-vm-on-laptop";
