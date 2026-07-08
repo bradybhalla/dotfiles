@@ -15,6 +15,13 @@
     hyprpaper # wallpaper
     hyprsunset # night mode
     hyprsysteminfo # about screen
+    # TODO: review new packages
+    hypridle # lock/screen-off when idle
+    hyprshot # screenshots
+
+    swaynotificationcenter # notification daemon + control center
+    libnotify # notify-send
+    qimgv # image viewer (video support via mpv is built in)
 
     rofi
 
@@ -48,5 +55,6 @@
     ".config/waybar".source = linkHere ".config/waybar";
     ".config/eww".source = linkHere ".config/eww";
     ".config/rofi".source = linkHere ".config/rofi";
+    ".config/swaync".source = linkHere ".config/swaync"; # TODO: review new link
   };
 }

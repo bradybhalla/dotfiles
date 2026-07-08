@@ -20,6 +20,8 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("waybar") -- status bar (provides the system tray / StatusNotifierWatcher)
   hl.exec_cmd("hyprpaper") -- wallpaper
   hl.exec_cmd("hyprsunset") -- background process for night mode
+  hl.exec_cmd("hypridle") -- lock and screen-off on idle  TODO: review new autostart
+  hl.exec_cmd("swaync") -- notification daemon and control center  TODO: review new autostart
   hl.exec_cmd("eww daemon") -- background process for eww widgets
   hl.exec_cmd("sh -c '" .. waitForTray .. " exec 1password --silent'") -- 1password tray applet  TODO: it seems like this is needed but double check
   hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet and daemon
@@ -48,6 +50,14 @@ hl.bind(mainMod .. " + SHIFT + Q",         hl.dsp.exec_cmd(locker))
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + M",         hl.dsp.exec_cmd("eww open --toggle music"))
+hl.bind(mainMod .. " + I",         hl.dsp.exec_cmd("swaync-client -t -sw")) -- TODO: review new bind (notification panel)
+
+-- Screenshots (copied to clipboard and saved)
+-- TODO: review new binds
+local screenshotArgs = "-o ~/Pictures/Screenshots"
+hl.bind("Print",                   hl.dsp.exec_cmd("hyprshot -m output " .. screenshotArgs))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region " .. screenshotArgs))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("hyprshot -m window " .. screenshotArgs))
 
 -- Move focus with mainMod + hjk;
 hl.bind(mainMod .. " + H",         hl.dsp.focus({ direction = "left" }))
@@ -135,6 +145,11 @@ hl.window_rule({
 hl.window_rule({
     name  = "1Password",
     match = { class = "1password" },
+    float = true,
+})
+hl.window_rule({
+    name  = "qimgv (image viewer)",
+    match = { class = "qimgv" },
     float = true,
 })
 

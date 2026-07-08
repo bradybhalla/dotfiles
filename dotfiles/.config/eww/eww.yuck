@@ -23,10 +23,13 @@
 
 (defwindow music
   :monitor 0
-  :stacking "overlay"
+  ; TODO: review changes (stacking overlay -> fg, offsets 4px -> 6px)
+  ; "fg" (top layer) keeps this below swaync notifications, which are on overlay
+  :stacking "fg"
   :exclusive false
   :focusable false
   :namespace "eww-music"
-  :geometry (geometry :x "4px" :y "4px" :anchor "top right"
+  ; 6px offsets match hyprland gaps_out so the widget sits where a window border would
+  :geometry (geometry :x "6px" :y "6px" :anchor "top right"
                       :width "440px" :height "0px")
   (music-player))

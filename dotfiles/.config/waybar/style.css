@@ -21,6 +21,8 @@ tooltip {
 
 /* -- Module spacing (flat, no background) -- */
 #custom-night-mode,
+#custom-notifications,
+#gamemode,
 #custom-nixos,
 #workspaces,
 #tray,
@@ -60,6 +62,57 @@ tooltip {
   color: @blue;
 }
 
+/* TODO: review new styles below (gamemode, notifications, dropdown menu) */
+
+/* Feral GameMode indicator (only shown while a game is running) */
+#gamemode {
+  color: @green;
+}
+
+#custom-notifications {
+  color: @text;
+}
+
+#custom-notifications.notification,
+#custom-notifications.inhibited-notification {
+  color: @peach;
+}
+
+#custom-notifications.dnd-none,
+#custom-notifications.dnd-notification,
+#custom-notifications.dnd-inhibited-none,
+#custom-notifications.dnd-inhibited-notification {
+  color: @overlay1;
+}
+
+/* -- Dropdown menu (nixos icon) -- */
+menu {
+  background: @base;
+  border: 2px solid @overlay0;
+  border-radius: 10px;
+  padding: 0.3em;
+}
+
+menuitem {
+  color: @text;
+  border-radius: 6px;
+  padding: 0.25em 0.75em;
+}
+
+menuitem:hover {
+  background: @surface0;
+}
+
+menuitem:disabled {
+  color: @blue;
+  font-weight: bold;
+}
+
+menu separator {
+  background: @overlay0;
+  margin: 0.25em 0;
+}
+
 #memory,
 #cpu {
   color: @flamingo;
@@ -75,6 +128,7 @@ tooltip {
   padding-right: 0.4em;
   margin-left: 0.6em;
   color: @blue;
+  font-size: 18px; /* TODO: review (smaller than global 22px) */
 }
 
 #tray

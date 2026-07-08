@@ -20,25 +20,70 @@
     "tray",
     "pulseaudio",
     "mpris",
+    "gamemode",
     "custom/night-mode",
+    "custom/notifications",
     "clock",
   ],
   "margin-left": 4,
   "margin-right": 4,
   "margin-top": 4,
   "custom/night-mode": {
+    // TODO: review switch from interval exec to persistent watcher
     "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/night-mode.sh",
+    // persistent watcher: streams an update whenever the state changes,
+    // including automatic hyprsunset profile transitions
+    "exec": "$HOME/.config/waybar/scripts/night-mode.sh watch",
     "return-type": "json",
-    "interval": "once",
+    "exec-on-event": false,
     "on-click": "$HOME/.config/waybar/scripts/night-mode.sh toggle",
   },
+  // Feral GameMode indicator, only visible while a game runs with gamemoderun
+  // TODO test
+  "gamemode": {
+    "format": "{glyph}",
+    "format-alt": "{glyph} {count}",
+    "hide-not-running": true,
+    "use-icon": true,
+    "icon-size": 20,
+    "icon-spacing": 4,
+    "tooltip-format": "Games running: {count}",
+  },
+  "custom/notifications": {
+    // TODO: review new module (swaync badge; left-click panel, right-click DND)
+    "format": "{icon}",
+    // TODO: replace with nerd-font icons (bell, bell-badge, bell-off)
+    "format-icons": {
+      "notification": "N*",
+      "none": "N",
+      "dnd-notification": "D*",
+      "dnd-none": "D",
+      "inhibited-notification": "N*",
+      "inhibited-none": "N",
+      "dnd-inhibited-notification": "D*",
+      "dnd-inhibited-none": "D",
+    },
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
+  },
   "custom/nixos": {
+    // TODO: review new dropdown menu (replaces on-click hyprsysteminfo; see menu.ui)
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/nixos-tooltip.sh",
     "return-type": "json",
     "interval": 60,
-    "on-click": "hyprsysteminfo",
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/menu.ui",
+    "menu-actions": {
+      "about": "hyprsysteminfo",
+      "uptime": "notify-send Uptime \"$(uptime -p)\"",
+      "logout": "hyprshutdown -p 'uwsm stop'",
+      "reboot": "hyprshutdown -t 'Rebooting...' -p 'systemctl reboot'",
+      "shutdown": "hyprshutdown -t 'Shutting down...' -p 'systemctl poweroff'",
+    },
   },
   "hyprland/workspaces": {
     "format": "{id}",
