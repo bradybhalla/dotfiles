@@ -1,13 +1,11 @@
 {
-  inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
 
 {
-  imports = [ inputs.silentSDDM.nixosModules.default ];
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -81,18 +79,6 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-  };
-  programs.silentSDDM = {
-    enable = true;
-    theme = "catppuccin-macchiato";
-    settings = {
-      "General" = {
-        scale = 1.5;
-      };
-      "LockScreen" = {
-        display = false;
-      };
-    };
   };
 
   # Audio
