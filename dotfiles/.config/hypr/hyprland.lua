@@ -22,7 +22,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("hyprsunset") -- background process for night mode
   hl.exec_cmd("eww daemon") -- background process for eww widgets
   hl.exec_cmd("sh -c '" .. waitForTray .. " exec 1password --silent'") -- 1password tray applet  TODO: it seems like this is needed but double check
-  hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet
+  hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet and daemon
 end)
 
 local terminal    = "alacritty"
