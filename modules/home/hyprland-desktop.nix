@@ -15,13 +15,12 @@
     hyprpaper # wallpaper
     hyprsunset # night mode
     hyprsysteminfo # about screen
-    # TODO: review new packages
-    hypridle # lock/screen-off when idle
+    hypridle # idle behavior
     hyprshot # screenshots
 
     swaynotificationcenter # notification daemon + control center
-    libnotify # notify-send
-    qimgv # image viewer (video support via mpv is built in)
+    libnotify # notify-send command
+    swayosd # on-screen display for volume/media/brightness
 
     rofi
 
@@ -32,11 +31,15 @@
 
     procps # needed a different 'uptime'
 
-    spotify
-
-    # TODO: maybe move to linux apps
+    # TODO: maybe move to linux apps (except some are needed by the config here)
     pavucontrol # audio device setttings
     nemo # file manager
+    spotify
+    qimgv # image/video viewer
+
+    # dropbox replacement
+    maestral # for cli
+    maestral-gui # tray and daemon
   ];
 
   services.playerctld.enable = true;
@@ -55,6 +58,7 @@
     ".config/waybar".source = linkHere ".config/waybar";
     ".config/eww".source = linkHere ".config/eww";
     ".config/rofi".source = linkHere ".config/rofi";
-    ".config/swaync".source = linkHere ".config/swaync"; # TODO: review new link
+    ".config/swaync".source = linkHere ".config/swaync";
+    ".config/swayosd".source = linkHere ".config/swayosd";
   };
 }

@@ -2,6 +2,7 @@
 
 # TODO: review rewrite (added watch mode for waybar, day temp 6000 -> 6500,
 # night mode = anything below 5000)
+# TODO: is day mode actually 6500?
 
 on_icon="󰖔"
 off_icon=""

@@ -58,13 +58,14 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    git
+    git # TODO cc: turn into program.enable?
     kitty # so there is a terminal with the default hyprland config
 
     alacritty
     # skimpdf # TODO broken: doesn't work on aarch64?
     emacs-pgtk # pgtk makes it look normal on wayland
     vlc
+    python3
   ];
 
   services.openssh = {

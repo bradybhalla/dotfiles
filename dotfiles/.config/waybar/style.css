@@ -32,7 +32,7 @@ tooltip {
 #memory,
 #clock,
 #window {
-  margin: 0.2em 0.4em;
+  margin: 0.2em 0.2em;
   /* background: @red; */
 }
 
@@ -42,12 +42,12 @@ tooltip {
 
 #clock {
   color: @lavender;
-  margin-right: 0.6em;
+  margin-right: 0.4em;
 }
 
 #mpris {
   color: @mauve;
-  padding-right: 0.35em;
+  padding-right: 0.1em;
 }
 
 #custom-night-mode {
@@ -120,26 +120,27 @@ menu separator {
 
 /* -- Pulseaudio: green -- */
 #pulseaudio {
+  padding-right: 0.38em;
   color: @mauve;
 }
 
 /* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
   padding-right: 0.4em;
-  margin-left: 0.6em;
+  margin-left: 0.4em;
   color: @blue;
   font-size: 18px; /* TODO: review (smaller than global 22px) */
 }
 
 #tray
 {
-  border: 1px solid @overlay0;
-  border-radius: 0.5em;
+  border: 2px solid @overlay0;
+  border-radius: 10px;
 }
 #tray widget>image,
 #workspaces button
 {
-  margin: 0 0.4em;
+  margin: 0 0.2em;
 }
 
 #workspaces button {

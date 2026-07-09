@@ -1,0 +1,58 @@
+@import "catppuccin-frappe.css";
+
+window#osd {
+  border-radius: 10px;
+  border: 2px solid @mauve;
+  background: alpha(@mantle, 1);
+  box-shadow: none;
+  min-width: 500px;
+}
+
+window#osd #container {
+  margin: 16px;
+}
+
+window#osd image {
+  color: @mauve;
+}
+window#osd label {
+  color: @text;
+  font-family: "MesloLGS Nerd Font";
+}
+
+window#osd progressbar:disabled,
+window#osd image:disabled {
+  opacity: 0.5;
+}
+
+window#osd progressbar,
+window#osd segmentedprogress {
+  min-height: 6px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+}
+
+window#osd trough,
+window#osd segment {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: alpha(@surface0, 0.5);
+}
+
+window#osd progress,
+window#osd segment.active {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: @mauve;
+}
+
+window#osd segment {
+  margin-left: 8px;
+}
+
+window#osd segment:first-child {
+  margin-left: 0;
+}

@@ -39,7 +39,7 @@
     "on-click": "$HOME/.config/waybar/scripts/night-mode.sh toggle",
   },
   // Feral GameMode indicator, only visible while a game runs with gamemoderun
-  // TODO test
+  // TODO test, see if you can make steam default, also apparently the cpu power modes are not getting activated correctly
   "gamemode": {
     "format": "{glyph}",
     "format-alt": "{glyph} {count}",
@@ -96,10 +96,15 @@
     "max-length": 40
   },
   "mpris": {
-    "format": "",
+    "format": "{status_icon}",
+    "status-icons": {
+      "playing": "",
+      "paused": "",
+    },
     "tooltip-format": "{artist} - {title}",
     "ignored-players": ["firefox"],
-    "on-click": "eww open --toggle music",
+    "on-click-right": "eww open --toggle music",
+    "on-click": "swayosd-client --playerctl play-pause",
   },
   "cpu": {
     "format": " {usage}%",
@@ -121,14 +126,13 @@
     },
   },
   "pulseaudio": {
-      "format": "{icon} {volume}%",
+      "format": "{icon}",
       "tooltip": true,
-      "format-muted": " {volume}%",
-      "on-click-right": "pamixer -t",
+      "format-muted": "",
+      "on-click-right": "swayosd-client --output-volume mute-toggle",
       "on-click": "pavucontrol",
-      "on-scroll-up": "pamixer -i 5",
-      "on-scroll-down": "pamixer -d 5",
-      "scroll-step": 5,
+      "on-scroll-up": "swayosd-client --output-volume raise --max-volume 100",
+      "on-scroll-down": "swayosd-client --output-volume lower",
       "format-icons": {
           "headphone": "",
           "hands-free": "",

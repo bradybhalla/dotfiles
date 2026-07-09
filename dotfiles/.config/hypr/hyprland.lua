@@ -17,12 +17,16 @@ hl.monitor({ output = "Unknown-1", disabled = true })
 local waitForTray = "until busctl --user status org.kde.StatusNotifierWatcher >/dev/null 2>&1; do sleep 0.2; done;"
 
 hl.on("hyprland.start", function ()
-  hl.exec_cmd("waybar") -- status bar (provides the system tray / StatusNotifierWatcher)
+  -- start desktop components
+  hl.exec_cmd("waybar") -- status bar
   hl.exec_cmd("hyprpaper") -- wallpaper
-  hl.exec_cmd("hyprsunset") -- background process for night mode
-  hl.exec_cmd("hypridle") -- lock and screen-off on idle  TODO: review new autostart
-  hl.exec_cmd("swaync") -- notification daemon and control center  TODO: review new autostart
-  hl.exec_cmd("eww daemon") -- background process for eww widgets
+  hl.exec_cmd("swaync") -- notifications
+  hl.exec_cmd("swayosd-server") -- on-screen display for volume/media
+  hl.exec_cmd("eww daemon") -- widgets
+
+  -- start other processes
+  hl.exec_cmd("hyprsunset") -- allows night mode
+  hl.exec_cmd("hypridle") -- idle behavior
   hl.exec_cmd("sh -c '" .. waitForTray .. " exec 1password --silent'") -- 1password tray applet  TODO: it seems like this is needed but double check
   hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet and daemon
 end)
@@ -40,6 +44,7 @@ local logout      = "hyprshutdown -p 'uwsm stop'"
 
 local mainMod = "SUPER"
 
+-- TODO: rework binds
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + N",      hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + space",  hl.dsp.exec_cmd(menu))
@@ -50,10 +55,10 @@ hl.bind(mainMod .. " + SHIFT + Q",         hl.dsp.exec_cmd(locker))
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + M",         hl.dsp.exec_cmd("eww open --toggle music"))
-hl.bind(mainMod .. " + I",         hl.dsp.exec_cmd("swaync-client -t -sw")) -- TODO: review new bind (notification panel)
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
 -- Screenshots (copied to clipboard and saved)
--- TODO: review new binds
+-- TODO: maybe just save to desktop?
 local screenshotArgs = "-o ~/Pictures/Screenshots"
 hl.bind("Print",                   hl.dsp.exec_cmd("hyprshot -m output " .. screenshotArgs))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region " .. screenshotArgs))
@@ -87,18 +92,18 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Volume keys
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+-- Volume keys (swayosd-client shows an on-screen display)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise --max-volume 100"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"),                  { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"),            { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),             { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("swayosd-client --brightness raise"),                     { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("swayosd-client --brightness lower"),                     { locked = true, repeating = true })
 
-hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("swayosd-client --playerctl next"),       { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("swayosd-client --playerctl prev"),       { locked = true })
 
 
 ---------------------------
@@ -133,24 +138,30 @@ hl.window_rule({
 -- special windows
 hl.window_rule({
     name  = "blueman (bluetooth tray)",
-    match = { class = ".blueman-manager-wrapped" },
+    match = { class = "^\\.blueman-manager-wrapped$" },
     float = true,
 })
 hl.window_rule({
     name  = "pavucontrol (volume control)",
-    match = { class = "org.pulseaudio.pavucontrol" },
+    match = { class = "^org\\.pulseaudio\\.pavucontrol$" },
     float = true,
     size  = "1100 800",
 })
 hl.window_rule({
     name  = "1Password",
-    match = { class = "1password" },
+    match = { class = "^1password$" },
     float = true,
 })
 hl.window_rule({
     name  = "qimgv (image viewer)",
-    match = { class = "qimgv" },
+    match = { class = "^qimgv$" },
     float = true,
+})
+hl.window_rule({
+    name  = "firefox picture-in-picture",
+    match = { class = "^firefox$", title = "^Picture-in-Picture$" },
+    float = true,
+    pin   = true,
 })
 
 

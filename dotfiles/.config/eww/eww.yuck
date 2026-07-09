@@ -23,8 +23,7 @@
 
 (defwindow music
   :monitor 0
-  ; TODO: review changes (stacking overlay -> fg, offsets 4px -> 6px)
-  ; "fg" (top layer) keeps this below swaync notifications, which are on overlay
+  ; "fg" is a level below "overlay" so it wont be above notifications
   :stacking "fg"
   :exclusive false
   :focusable false
