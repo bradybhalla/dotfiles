@@ -25,14 +25,13 @@ tooltip {
 #gamemode,
 #custom-nixos,
 #workspaces,
-#tray,
 #mpris,
 #pulseaudio,
 #cpu,
 #memory,
 #clock,
 #window {
-  margin: 0.2em 0.2em;
+  margin: 0.2em 0.4em;
   /* background: @red; */
 }
 
@@ -42,7 +41,7 @@ tooltip {
 
 #clock {
   color: @lavender;
-  margin-right: 0.4em;
+  margin-right: 0.6em;
 }
 
 #mpris {
@@ -70,48 +69,45 @@ tooltip {
 }
 
 #custom-notifications {
-  color: @text;
+  color: @subtext0;
+  padding-right: 0.2em;
 }
 
 #custom-notifications.notification,
-#custom-notifications.inhibited-notification {
+#custom-notifications.dnd-notification,
+#custom-notifications.inhibited-notification,
+#custom-notifications.dnd-inhibited-notification
+{
   color: @peach;
 }
 
-#custom-notifications.dnd-none,
-#custom-notifications.dnd-notification,
-#custom-notifications.dnd-inhibited-none,
-#custom-notifications.dnd-inhibited-notification {
-  color: @overlay1;
-}
-
 /* -- Dropdown menu (nixos icon) -- */
-menu {
-  background: @base;
-  border: 2px solid @overlay0;
-  border-radius: 10px;
-  padding: 0.3em;
-}
-
-menuitem {
-  color: @text;
-  border-radius: 6px;
-  padding: 0.25em 0.75em;
-}
-
-menuitem:hover {
-  background: @surface0;
-}
-
-menuitem:disabled {
-  color: @blue;
-  font-weight: bold;
-}
-
-menu separator {
-  background: @overlay0;
-  margin: 0.25em 0;
-}
+/* menu { */
+/*   background: @base; */
+/*   border: 2px solid @overlay0; */
+/*   border-radius: 10px; */
+/*   padding: 0.3em; */
+/* } */
+/**/
+/* menuitem { */
+/*   color: @text; */
+/*   border-radius: 6px; */
+/*   padding: 0.25em 0.75em; */
+/* } */
+/**/
+/* menuitem:hover { */
+/*   background: @surface0; */
+/* } */
+/**/
+/* menuitem:disabled { */
+/*   color: @blue; */
+/*   font-weight: bold; */
+/* } */
+/**/
+/* menu separator { */
+/*   background: @overlay0; */
+/*   margin: 0.25em 0; */
+/* } */
 
 #memory,
 #cpu {
@@ -127,20 +123,21 @@ menu separator {
 /* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
   padding-right: 0.4em;
-  margin-left: 0.4em;
+  margin-left: 0.6em;
   color: @blue;
   font-size: 18px; /* TODO: review (smaller than global 22px) */
 }
 
 #tray
 {
-  border: 2px solid @overlay0;
-  border-radius: 10px;
+  margin: 0.2em 0.0em;
+  /* border: 2px solid @overlay0; */
+  /* border-radius: 10px; */
 }
 #tray widget>image,
 #workspaces button
 {
-  margin: 0 0.2em;
+  margin: 0 0.4em;
 }
 
 #workspaces button {

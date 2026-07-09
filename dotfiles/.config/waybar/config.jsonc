@@ -50,18 +50,16 @@
     "tooltip-format": "Games running: {count}",
   },
   "custom/notifications": {
-    // TODO: review new module (swaync badge; left-click panel, right-click DND)
     "format": "{icon}",
-    // TODO: replace with nerd-font icons (bell, bell-badge, bell-off)
     "format-icons": {
-      "notification": "N*",
-      "none": "N",
-      "dnd-notification": "D*",
-      "dnd-none": "D",
-      "inhibited-notification": "N*",
-      "inhibited-none": "N",
-      "dnd-inhibited-notification": "D*",
-      "dnd-inhibited-none": "D",
+      "notification": "󰂚",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󱏧",
+      "inhibited-none": "󱏨",
+      "dnd-inhibited-notification": "󰂠",
+      "dnd-inhibited-none": "󰪓"
     },
     "return-type": "json",
     "exec": "swaync-client -swb",
@@ -102,7 +100,6 @@
       "paused": "",
     },
     "tooltip-format": "{artist} - {title}",
-    "ignored-players": ["firefox"],
     "on-click-right": "eww open --toggle music",
     "on-click": "swayosd-client --playerctl play-pause",
   },

@@ -16,14 +16,14 @@ configuration {
   urgent-foreground:           @red;
   lightbg:                     @mantle;
   background-color:            transparent;
-  border-color:                @mauve;
+  border-color:                @sapphire;
   normal-background:           @background;
   selected-urgent-background:  @red;
   spacing:                     2;
   urgent-background:           @background;
   selected-normal-foreground:  @text;
   active-foreground:           @blue;
-  background:                  @base;
+  background:                  @mantle;
   selected-active-background:  @blue;
   active-background:           @background;
   selected-normal-background:  @surface1;
