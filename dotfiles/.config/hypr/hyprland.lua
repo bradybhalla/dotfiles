@@ -164,6 +164,10 @@ hl.window_rule({
     pin   = true,
 })
 
+hl.layer_rule({
+  match = { namespace = "waybar" },
+  blur = true,
+})
 
 ---------------------------
 ---- THEME ----------------
@@ -179,6 +183,9 @@ hl.config({
     },
     decoration = {
         rounding = 10,
+    blur = {
+        passes = 3,
+    },
     },
     misc = {
     disable_hyprland_logo = true,

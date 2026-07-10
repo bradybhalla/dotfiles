@@ -20,17 +20,16 @@
     "tray",
     "pulseaudio",
     "mpris",
-    "gamemode",
     "custom/night-mode",
     "custom/notifications",
     "clock",
   ],
-  "margin-left": 4,
-  "margin-right": 4,
-  "margin-top": 4,
+  "margin-left": 0,
+  "margin-right": 0,
+  "margin-top": 0,
   "custom/night-mode": {
-    // TODO: review switch from interval exec to persistent watcher
     "format": "{}",
+
     // persistent watcher: streams an update whenever the state changes,
     // including automatic hyprsunset profile transitions
     "exec": "$HOME/.config/waybar/scripts/night-mode.sh watch",
@@ -38,19 +37,9 @@
     "exec-on-event": false,
     "on-click": "$HOME/.config/waybar/scripts/night-mode.sh toggle",
   },
-  // Feral GameMode indicator, only visible while a game runs with gamemoderun
-  // TODO test, see if you can make steam default, also apparently the cpu power modes are not getting activated correctly
-  "gamemode": {
-    "format": "{glyph}",
-    "format-alt": "{glyph} {count}",
-    "hide-not-running": true,
-    "use-icon": true,
-    "icon-size": 20,
-    "icon-spacing": 4,
-    "tooltip-format": "Games running: {count}",
-  },
   "custom/notifications": {
-    "format": "{icon}",
+    "format": "{icon}<span font-size='5pt'> </span>",
+
     "format-icons": {
       "notification": "󰂚",
       "none": "󰂜",
@@ -68,8 +57,8 @@
     "escape": true,
   },
   "custom/nixos": {
-    // TODO: review new dropdown menu (replaces on-click hyprsysteminfo; see menu.ui)
-    "format": "{}",
+    "format": "{}<span font-size='9pt'> </span>",
+
     "exec": "$HOME/.config/waybar/scripts/nixos-tooltip.sh",
     "return-type": "json",
     "interval": 60,
@@ -96,8 +85,8 @@
   "mpris": {
     "format": "{status_icon}",
     "status-icons": {
-      "playing": "",
-      "paused": "",
+      "playing": "<span font-size='1pt'> </span>",
+      "paused": "<span font-size='4pt'> </span>",
     },
     "tooltip-format": "{artist} - {title}",
     "on-click-right": "eww open --toggle music",
@@ -125,19 +114,13 @@
   "pulseaudio": {
       "format": "{icon}",
       "tooltip": true,
-      "format-muted": "",
+      "format-muted": "<span font-size='12pt'> </span>",
       "on-click-right": "swayosd-client --output-volume mute-toggle",
       "on-click": "pavucontrol",
       "on-scroll-up": "swayosd-client --output-volume raise --max-volume 100",
       "on-scroll-down": "swayosd-client --output-volume lower",
       "format-icons": {
-          "headphone": "",
-          "hands-free": "",
-          "headset": "",
-          "phone": "",
-          "portable": "",
-          "car": "",
-          "default": ["", "", ""]
+          "default": ["", "<span font-size='7pt'> </span>", "<span font-size='16pt'> </span>"]
       }
   },
   "tray": {

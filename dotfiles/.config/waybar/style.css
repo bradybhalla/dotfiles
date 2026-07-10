@@ -5,12 +5,11 @@
   font-family: MesloLGS Nerd Font;
   font-size: 22px;
   min-height: 10px;
-  border: none;
 }
 
 window#waybar {
-  background: alpha(@base, 0.4);
-  border-radius: 10px;
+  background: none;
+  border-radius: 0px;
 }
 
 tooltip {
@@ -22,16 +21,17 @@ tooltip {
 /* -- Module spacing (flat, no background) -- */
 #custom-night-mode,
 #custom-notifications,
-#gamemode,
 #custom-nixos,
-#workspaces,
 #mpris,
 #pulseaudio,
 #cpu,
 #memory,
 #clock,
+#tray widget>image,
 #window {
-  margin: 0.2em 0.4em;
+  margin: 0.2em 0.3em;
+  padding: 0 0;
+  min-width: 25px;
   /* background: @red; */
 }
 
@@ -46,11 +46,6 @@ tooltip {
 
 #mpris {
   color: @mauve;
-  padding-right: 0.1em;
-}
-
-#custom-night-mode {
-    padding-right: 0.3em;
 }
 
 #custom-night-mode.day-mode {
@@ -61,16 +56,10 @@ tooltip {
   color: @blue;
 }
 
-/* TODO: review new styles below (gamemode, notifications, dropdown menu) */
-
-/* Feral GameMode indicator (only shown while a game is running) */
-#gamemode {
-  color: @green;
-}
+/* TODO: review new styles below (notifications, dropdown menu) */
 
 #custom-notifications {
   color: @subtext0;
-  padding-right: 0.2em;
 }
 
 #custom-notifications.notification,
@@ -82,32 +71,33 @@ tooltip {
 }
 
 /* -- Dropdown menu (nixos icon) -- */
-/* menu { */
-/*   background: @base; */
-/*   border: 2px solid @overlay0; */
-/*   border-radius: 10px; */
-/*   padding: 0.3em; */
-/* } */
-/**/
-/* menuitem { */
-/*   color: @text; */
-/*   border-radius: 6px; */
-/*   padding: 0.25em 0.75em; */
-/* } */
-/**/
-/* menuitem:hover { */
-/*   background: @surface0; */
-/* } */
-/**/
-/* menuitem:disabled { */
-/*   color: @blue; */
-/*   font-weight: bold; */
-/* } */
-/**/
-/* menu separator { */
-/*   background: @overlay0; */
-/*   margin: 0.25em 0; */
-/* } */
+menu {
+  background: @base;
+  border: 2px solid @overlay0;
+  border-radius: 10px;
+  padding: 0.3em;
+}
+
+menuitem {
+  color: @text;
+  border-radius: 6px;
+  padding: 0.25em 0.75em;
+}
+
+menuitem:hover {
+  background: @surface0;
+}
+
+menuitem:disabled {
+  color: @blue;
+  font-weight: bold;
+}
+
+menu separator {
+  background: @overlay0;
+  min-height: 2px;
+  margin: 0.15em 0;
+}
 
 #memory,
 #cpu {
@@ -116,28 +106,14 @@ tooltip {
 
 /* -- Pulseaudio: green -- */
 #pulseaudio {
-  padding-right: 0.38em;
   color: @mauve;
 }
 
 /* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
-  padding-right: 0.4em;
   margin-left: 0.6em;
   color: @blue;
   font-size: 18px; /* TODO: review (smaller than global 22px) */
-}
-
-#tray
-{
-  margin: 0.2em 0.0em;
-  /* border: 2px solid @overlay0; */
-  /* border-radius: 10px; */
-}
-#tray widget>image,
-#workspaces button
-{
-  margin: 0 0.4em;
 }
 
 #workspaces button {
@@ -148,6 +124,7 @@ tooltip {
   text-shadow: none;
   min-width: 0;
   padding: 0;
+  margin: 0 0.5em;
 }
 
 #workspaces button:hover {

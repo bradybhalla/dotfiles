@@ -4,8 +4,8 @@
 # night mode = anything below 5000)
 # TODO: is day mode actually 6500?
 
-on_icon="󰖔"
-off_icon=""
+on_icon="󰖔<span font-size='5pt'> </span>"
+off_icon="<span font-size='9pt'> </span>"
 
 # hyprsunset.conf schedules 6500 (day) / 3600 (night), so treat anything
 # below 5000 as night regardless of which side set it
@@ -25,6 +25,7 @@ status() {
 case "$1" in
   toggle)
     if is_night; then
+        # TODO: is this actually the default?
       hyprctl hyprsunset temperature 6500
     else
       hyprctl hyprsunset temperature 3600
@@ -40,7 +41,7 @@ case "$1" in
         echo "$current"
         last="$current"
       fi
-      sleep 1
+      sleep 0.3
     done
     ;;
   *)
