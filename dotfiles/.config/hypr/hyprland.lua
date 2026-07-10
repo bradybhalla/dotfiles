@@ -116,6 +116,16 @@ hl.window_rule({
     suppress_event = "maximize",
 })
 
+-- No window blur by default. Hyprland's decoration:blur:enabled is a global
+-- master switch (and must stay on for the waybar layer_rule blur to render),
+-- so instead we disable blur for every window and opt back in only where
+-- wanted -- add `no_blur = false` to a specific window rule to re-enable it.
+hl.window_rule({
+    name  = "no-blur-by-default",
+    match = { class = ".*" },
+    no_blur = true,
+})
+
 hl.window_rule({
     name  = "fix-xwayland-drags",
     match = {
@@ -162,6 +172,20 @@ hl.window_rule({
     match = { class = "^firefox$", title = "^Picture-in-Picture$" },
     float = true,
     pin   = true,
+    -- don't steal focus when it pops out (can still be focused afterward by
+    -- hover/click -- unlike no_focus, which would disable focus entirely and
+    -- break the hover-fade opacity below).
+    no_initial_focus = true,
+    -- spawn in the bottom-right corner, lined up with tiled window borders.
+    -- move positions the content box and the border is drawn outside it, so
+    -- the margin is gaps_out(6) + border_size(3) = 9 (tiled window content
+    -- sits inset by that same 9px). monitor_w/h and window_w/h are this lua
+    -- config's position tokens (native 100%-w is NOT supported here).
+    move  = "monitor_w-window_w-9 monitor_h-window_h-9",
+    -- fade to 20% while hovered/focused, full opacity otherwise.
+    -- relies on focus-follows-mouse (follow_mouse = 1, the default) so
+    -- "active" == "pointer is over it": opacity <active> <inactive>
+    opacity = "0.2 1.0",
 })
 
 hl.layer_rule({

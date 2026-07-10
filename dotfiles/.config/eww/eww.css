@@ -13,6 +13,15 @@
   color: @text;
 }
 
+/* fade way down while the pointer is over it so it stops covering the screen.
+   hover must live on the eventbox (windowed); a plain box never gets :hover */
+.music-eventbox {
+  transition: opacity 200ms ease;
+}
+.music-eventbox:hover {
+  opacity: 0.2;
+}
+
 .album-art {
   min-width: 75px;
   min-height: 75px;

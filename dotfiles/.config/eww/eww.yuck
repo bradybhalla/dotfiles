@@ -4,6 +4,15 @@
 
 (deflisten cava :initial "" "scripts/cava-bars.sh")
 
+; Side-effect listener: emits no value, its job is to `eww close music` when the
+; last MPRIS player leaves the bus (mirrors waybar's mpris module). eww runs a
+; deflisten only while its variable is referenced by an open window and kills it
+; (and its dbus-monitor child) on close, so this is scoped to the music window
+; -- no separate launch from the compositor needed. Referenced in the eventbox
+; :class below purely to keep it active; the value stays "" so the class is
+; unchanged.
+(deflisten presence :initial "" "scripts/music-presence.sh")
+
 (defwidget album-art []
   (box :class "album-art" :width 75 :height 75 :valign "center"
        :style "background-image: url('${music.art}');"))
@@ -15,11 +24,14 @@
     (label :class "album"  :halign "start" :limit-width 28 :text {music.album})))
 
 (defwidget music-player []
-  (box :class "music-player" :orientation "v" :space-evenly false :spacing 10
-    (box :orientation "h" :space-evenly false :spacing 12
-      (album-art)
-      (track-info))
-    (label :class "cava" :halign "center" :text cava)))
+  ; eventbox has its own input window, so :hover actually fires here
+  ; (a plain box is windowless and never receives pointer state)
+  (eventbox :class "music-eventbox${presence}"
+    (box :class "music-player" :orientation "v" :space-evenly false :spacing 10
+      (box :orientation "h" :space-evenly false :spacing 12
+        (album-art)
+        (track-info))
+      (label :class "cava" :halign "center" :text cava))))
 
 (defwindow music
   :monitor 0
