@@ -29,9 +29,6 @@
   "margin-top": 0,
   "custom/night-mode": {
     "format": "{}",
-
-    // persistent watcher: streams an update whenever the state changes,
-    // including automatic hyprsunset profile transitions
     "exec": "$HOME/.config/waybar/scripts/night-mode.sh watch",
     "return-type": "json",
     "exec-on-event": false,
