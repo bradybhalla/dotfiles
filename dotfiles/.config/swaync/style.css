@@ -1,0 +1,203 @@
+@import "catppuccin-frappe.css";
+
+/*
+ * swaync theme — Catppuccin Frappé.
+ *
+ * swaync loads its packaged default CSS first, then this file on top, so we
+ * only override the :root variables the default styling already reads, plus a
+ * few selectors for things not driven by a variable.
+ *
+ * Rules:
+ *   - @green is the accent/highlight, borders are 2px, radius is 10px,
+ *     and there are never shadows or (decorative) opacity/translucency.
+ *   - Raw palette names (@green, @surface0, ...) appear ONLY in the semantic
+ *     variable block below. Everything else references those semantics via
+ *     var(...); the only exception is genuine one-off values.
+ */
+
+:root {
+  /* ---- Semantic colors: the only place raw palette names appear ---- */
+  --accent: @flamingo;         /* Highlight / selected / active accent */
+  --accent-fg: @mantle;        /* Foreground on top of --accent */
+  --critical: @red;            /* Critical / danger */
+  --bg: @base;                 /* Normal background */
+  --bg-dark: @mantle;          /* Darker / recessed background */
+  --surface: @surface0;        /* Elevated surfaces: buttons, hover, close */
+  --surface-hover: @surface1;  /* Hover on elevated surfaces */
+  --fg: @text;                 /* Normal foreground */
+  --fg-muted: @subtext0;       /* Muted foreground (dnd, inhibitors, placeholder) */
+  --fg-disabled: @overlay0;    /* Disabled foreground */
+
+  /* ---- Panel translucency ---- */
+  --bg-alpha: 1;                            /* 1 = opaque, 0 = invisible */
+  --bg-see-through: alpha(@base, var(--bg-alpha));
+
+  /* ---- Widget buttons (darker than the base panel) ---- */
+  --button-bg: @crust;
+  --button-hover: var(--surface);
+
+  /* ---- Shape ---- */
+  --border-radius: 10px;
+  --border: 2px solid var(--accent);
+  --cc-border: var(--border);  /* Control center panel border */
+  --edge-gap: 6px;             /* Matches Hyprland gaps_out */
+
+  /* ---- Font ---- */
+  --font-size-body: 18px;
+  --font-size-summary: 18px;
+
+  /* ---- swaync built-in variables, mapped onto the semantics above ---- */
+  --cc-bg: var(--bg-see-through);
+  --noti-bg: 48, 52, 70;       /* One-off: @base as an r,g,b triple (used via rgba) */
+  --noti-bg-alpha: 1;          /* No translucency */
+  --noti-bg-darker: var(--bg-dark);
+  --noti-bg-hover: var(--surface);
+  --noti-bg-focus: var(--surface);
+  --noti-close-bg: var(--surface);
+  --noti-close-bg-hover: var(--surface-hover);
+  --text-color: var(--fg);
+  --text-color-disabled: var(--fg-disabled);
+  --bg-selected: var(--accent);
+  --noti-border-color: var(--accent);
+  --notification-shadow: none;
+}
+
+/* Font for the whole notification center + notifications */
+.control-center,
+.notification-row,
+.floating-notifications {
+  font-family: "MesloLGS Nerd Font";
+  font-size: 18px;
+}
+
+/* Kill remaining shadows the variables don't cover */
+.app-icon {
+  -gtk-icon-shadow: none;
+}
+
+/* No blue keyboard-focus outline anywhere in the panel */
+*:focus,
+*:focus-visible {
+  outline: none;
+}
+
+/* Recolor the remaining GTK-default blue bits to the palette */
+progressbar progress,
+progress {
+  background-color: var(--accent);
+}
+selection {
+  background-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* Control center panel border (matches notifications by default) */
+.control-center {
+  border: var(--cc-border);
+}
+
+/* Notification group has no background of its own (even when focused) */
+.notification-group,
+.notification-group:focus {
+  background: transparent;
+}
+
+/* Critical notifications use the danger color for their border */
+.notification.critical {
+  border-color: var(--critical);
+}
+
+/* More padding inside notifications (around the summary/body content) */
+.notification-default-action {
+  padding: 12px;
+}
+
+/* Align floating notifications with the Hyprland window border (gaps_out) */
+.floating-notifications .notification-background {
+  padding-right: var(--edge-gap);
+}
+
+/* "No notifications" placeholder: muted, fully opaque */
+.control-center .control-center-list-placeholder {
+  opacity: 1;
+  color: var(--fg-muted);
+}
+.notification-group.collapsed.not-expanded {
+  opacity: 1;
+}
+.widget-calendar .calendar-container .date-label {
+  opacity: 1;
+}
+
+/*
+ * Buttons across every enabled widget (title, dnd, inhibitors). Upstream only
+ * sets border-radius on these, so without this they fall back to the default
+ * GTK theme colors.
+ */
+.widget-title > button,
+.widget-inhibitors > button {
+  background-color: var(--button-bg);
+  color: var(--fg);
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+.widget-title > button:hover,
+.widget-inhibitors > button:hover {
+  background-color: var(--button-hover);
+  color: var(--fg);
+}
+
+.widget-title > button:active,
+.widget-inhibitors > button:active {
+  background-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* Title widget label in the accent color */
+.widget-title > label {
+  color: var(--accent);
+}
+
+/* Tighten vertical spacing so title, dnd and inhibitors sit close together */
+.widget-title,
+.widget-dnd,
+.widget-inhibitors {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* But keep some space above the title (first widget in the panel) */
+.widget-title {
+  margin-top: 8px;
+}
+
+/* DND and inhibitors share the same larger label size + left padding */
+.widget-dnd label,
+.widget-inhibitors > label {
+  font-size: 1.4rem;
+  padding-left: 14px;
+  color: var(--fg-muted);
+}
+
+/* DND toggle switch */
+.widget-dnd switch {
+  background-color: var(--surface);
+}
+.widget-dnd switch slider {
+  background-color: var(--fg);
+}
+.widget-dnd switch:checked slider {
+  background-color: var(--accent-fg);
+}
+
+/* Accent highlight on interactive/selected states */
+.widget-dnd switch:checked {
+  background-color: var(--accent);
+}
+.widget-calendar .calendar-container calendar:selected {
+  background-color: var(--accent);
+  color: var(--accent-fg);
+}

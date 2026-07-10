@@ -1,42 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- TODO: review new file (dropdown menu for the waybar nixos icon) -->
+<!-- TODO: icon-name values below are placeholders (Adwaita symbolic names) - swap for preferred icons -->
 <interface>
   <object class="GtkMenu" id="menu">
     <child>
-      <object class="GtkMenuItem" id="user">
-        <property name="label">bradybhalla</property>
-        <property name="sensitive">False</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkSeparatorMenuItem" id="sep1"/>
-    </child>
-    <child>
       <object class="GtkMenuItem" id="about">
-        <property name="label">About This Computer</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="uptime">
-        <property name="label">Uptime</property>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">help-about-symbolic</property>
+                <property name="pixel-size">16</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">About</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
     <child>
       <object class="GtkSeparatorMenuItem" id="sep2"/>
     </child>
     <child>
+      <object class="GtkMenuItem" id="lock">
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-lock-screen-symbolic</property>
+                <property name="pixel-size">16</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Lock</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
       <object class="GtkMenuItem" id="logout">
-        <property name="label">Log Out</property>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-log-out-symbolic</property>
+                <property name="pixel-size">16</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Log Out</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="reboot">
-        <property name="label">Reboot</property>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-reboot-symbolic</property>
+                <property name="pixel-size">16</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Reboot</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="shutdown">
-        <property name="label">Shut Down</property>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">system-shutdown-symbolic</property>
+                <property name="pixel-size">16</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Shut Down</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </object>

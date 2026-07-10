@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# TODO: review rewrite (added watch mode for waybar, day temp 6000 -> 6500,
-# night mode = anything below 5000)
-# TODO: is day mode actually 6500?
+# Day temp is 6000, hyprsunset's built-in default (matches the day profile in
+# hyprsunset.conf). Night mode is treated as anything below 5000.
 
 on_icon="󰖔<span font-size='5pt'> </span>"
 off_icon="<span font-size='9pt'> </span>"
@@ -25,8 +24,8 @@ status() {
 case "$1" in
   toggle)
     if is_night; then
-        # TODO: is this actually the default?
-      hyprctl hyprsunset temperature 6500
+      # 6000 = hyprsunset default, day profile from hyprsunset.conf
+      hyprctl hyprsunset temperature 6000
     else
       hyprctl hyprsunset temperature 3600
     fi

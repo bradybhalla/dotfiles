@@ -67,7 +67,7 @@ tooltip {
 #custom-notifications.inhibited-notification,
 #custom-notifications.dnd-inhibited-notification
 {
-  color: @peach;
+  color: @flamingo;
 }
 
 /* -- Dropdown menu (nixos icon) -- */

@@ -66,7 +66,7 @@
     "menu-file": "~/.config/waybar/menu.ui",
     "menu-actions": {
       "about": "hyprsysteminfo",
-      "uptime": "notify-send Uptime \"$(uptime -p)\"",
+      "lock": "loginctl lock-session",
       "logout": "hyprshutdown -p 'uwsm stop'",
       "reboot": "hyprshutdown -t 'Rebooting...' -p 'systemctl reboot'",
       "shutdown": "hyprshutdown -t 'Shutting down...' -p 'systemctl poweroff'",
