@@ -1,20 +1,6 @@
-local catppuccin = require("catppuccin-frappe")
-
--- with some login screens the cursor was staying around
-hl.config({
-    cursor = {
-        no_hardware_cursors = true,
-    },
-})
-
--- Monitor configuration for VMs
-hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
-hl.monitor({ output = "Unknown-1", disabled = true })
-
--- 1password's tray applet checks for the StatusNotifierWatcher name once at
--- startup and gives up if waybar hasn't claimed it yet, so wait for waybar to
--- own it first. (Qt apps like maestral re-register on their own and don't need this.)
-local waitForTray = "until busctl --user status org.kde.StatusNotifierWatcher >/dev/null 2>&1; do sleep 0.2; done;"
+---------------------
+---- INITIAL SETUP --
+---------------------
 
 hl.on("hyprland.start", function ()
   -- start desktop components
@@ -27,9 +13,25 @@ hl.on("hyprland.start", function ()
   -- start other processes
   hl.exec_cmd("hyprsunset") -- allows night mode
   hl.exec_cmd("hypridle") -- idle behavior
-  hl.exec_cmd("sh -c '" .. waitForTray .. " exec 1password --silent'") -- 1password tray applet  TODO: it seems like this is needed but double check
   hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet and daemon
+  -- 1password tray applet (loop to make sure it stays up)
+  hl.exec_cmd("sh -c '" .. [[
+prev=""
+while true; do
+  owner=$(busctl --user status org.kde.StatusNotifierWatcher 2>/dev/null | grep -oP "^PID=\K[0-9]+")
+  if [ -n "$owner" ] && [ "$owner" != "$prev" ]; then
+    pkill -x 1password 2>/dev/null
+    1password --silent &
+    prev="$owner"
+  fi
+  sleep 2
+done
+]] .. "'")
 end)
+
+---------------------
+---- KEYBINDINGS ----
+---------------------
 
 local terminal    = "alacritty"
 local fileManager = "dolphin"
@@ -38,72 +40,132 @@ local browser     = "firefox"
 local locker      = "hyprlock"
 local logout      = "hyprshutdown -p 'uwsm stop'"
 
----------------------
----- KEYBINDINGS ----
----------------------
-
 local mainMod = "SUPER"
 
--- TODO: rework binds
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + N",      hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + space",  hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + Q",         hl.dsp.window.close())
-hl.bind(mainMod .. " + CTRL + SHIFT + Q", hl.dsp.exec_cmd(logout))
-hl.bind(mainMod .. " + F",         hl.dsp.window.fullscreen({ mode = 1 }))
-hl.bind(mainMod .. " + SHIFT + Q",         hl.dsp.exec_cmd(locker))
-hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + M",         hl.dsp.exec_cmd("eww open --toggle music"))
-hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("swaync-client -t -sw"))
-
--- Screenshots (copied to clipboard and saved)
--- TODO: maybe just save to desktop?
 local screenshotArgs = "-o ~/Pictures/Screenshots"
-hl.bind("Print",                   hl.dsp.exec_cmd("hyprshot -m output " .. screenshotArgs))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region " .. screenshotArgs))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("hyprshot -m window " .. screenshotArgs))
 
--- Move focus with mainMod + hjk;
-hl.bind(mainMod .. " + H",         hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K",         hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J",         hl.dsp.focus({ direction = "down" }))
+-- every keybind, as { key, action, opts? }. a string action is run as a shell
+-- command; a dispatcher/function is bound directly. see bind() above for how
+-- opts (including withMod) is handled. registered by the loop at the end.
+-- TODO: rework binds
+local binds = {
+    -- apps and window actions
+    { "Return", terminal },
+    { "Space",  menu },
+    { "B",      browser },
+    { "E",         "emacsclient -c -a ''" },
+    { "F",      hl.dsp.window.fullscreen({ mode = 1 }) },
+    { "SHIFT + F",      hl.dsp.window.float({ action = "toggle" }) },
+    { "N",      "swaync-client -t -sw" },
+    { "Q",      hl.dsp.window.close() },
+    { "SHIFT + Q", locker },
+    { "CTRL + SHIFT + Q", logout },
+    { "M",      "eww open --toggle music" },
 
--- Move windows with mainMod + SHIFT + hjk;
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
+    -- Screenshots (copied to clipboard and saved)
+    -- TODO: maybe just save to desktop?
+    { "Print",     "hyprshot -m output " .. screenshotArgs, { withMod = false } },
+    { "SHIFT + S", "hyprshot -m region " .. screenshotArgs },
+    { "SHIFT + W", "hyprshot -m window " .. screenshotArgs },
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
-    local key = i % 10
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+    -- Window focus and moving
+    { "H", hl.dsp.focus({ direction = "left" }) },
+    { "L", hl.dsp.focus({ direction = "right" }) },
+    { "K", hl.dsp.focus({ direction = "up" }) },
+    { "J", hl.dsp.focus({ direction = "down" }) },
+    { "SHIFT + H", hl.dsp.window.move({ direction = "left" }) },
+    { "SHIFT + L", hl.dsp.window.move({ direction = "right" }) },
+    { "SHIFT + K", hl.dsp.window.move({ direction = "up" }) },
+    { "SHIFT + J", hl.dsp.window.move({ direction = "down" }) },
+
+    -- Workspace focus and moving
+    { "1", hl.dsp.focus({ workspace = 1 }) },
+    { "2", hl.dsp.focus({ workspace = 2 }) },
+    { "3", hl.dsp.focus({ workspace = 3 }) },
+    { "4", hl.dsp.focus({ workspace = 4 }) },
+    { "5", hl.dsp.focus({ workspace = 5 }) },
+    { "6", hl.dsp.focus({ workspace = 6 }) },
+    { "7", hl.dsp.focus({ workspace = 7 }) },
+    { "8", hl.dsp.focus({ workspace = 8 }) },
+    { "9", hl.dsp.focus({ workspace = 9 }) },
+    { "0", hl.dsp.focus({ workspace = 10 }) },
+    { "SHIFT + 1", hl.dsp.window.move({ workspace = 1 }) },
+    { "SHIFT + 2", hl.dsp.window.move({ workspace = 2 }) },
+    { "SHIFT + 3", hl.dsp.window.move({ workspace = 3 }) },
+    { "SHIFT + 4", hl.dsp.window.move({ workspace = 4 }) },
+    { "SHIFT + 5", hl.dsp.window.move({ workspace = 5 }) },
+    { "SHIFT + 6", hl.dsp.window.move({ workspace = 6 }) },
+    { "SHIFT + 7", hl.dsp.window.move({ workspace = 7 }) },
+    { "SHIFT + 8", hl.dsp.window.move({ workspace = 8 }) },
+    { "SHIFT + 9", hl.dsp.window.move({ workspace = 9 }) },
+    { "SHIFT + 0", hl.dsp.window.move({ workspace = 10 }) },
+
+    -- window/workspace with mouse keys
+    { "mouse_down", hl.dsp.focus({ workspace = "e+1" }) }, -- scroll through workspaces
+    { "mouse_up",   hl.dsp.focus({ workspace = "e-1" }) },
+    { "mouse:272", hl.dsp.window.drag(),   { mouse = true } }, -- move with left mouse
+    { "mouse:273", hl.dsp.window.resize(), { mouse = true } }, -- resize with right mouse
+
+    -- Volume, brightness, and audio control
+    { "XF86AudioRaiseVolume", "swayosd-client --output-volume raise --max-volume 100", { locked = true, repeating = true, withMod = false } },
+    { "XF86AudioLowerVolume", "swayosd-client --output-volume lower",                  { locked = true, repeating = true, withMod = false } },
+    { "XF86AudioMute",        "swayosd-client --output-volume mute-toggle",            { locked = true, repeating = true, withMod = false } },
+    { "XF86AudioMicMute",     "swayosd-client --input-volume mute-toggle",             { locked = true, repeating = true, withMod = false } },
+    { "XF86MonBrightnessUp",  "swayosd-client --brightness raise",                     { locked = true, repeating = true, withMod = false } },
+    { "XF86MonBrightnessDown","swayosd-client --brightness lower",                     { locked = true, repeating = true, withMod = false } },
+    { "XF86AudioNext",  "swayosd-client --playerctl next",       { locked = true, withMod = false } },
+    { "XF86AudioPause", "swayosd-client --playerctl play-pause", { locked = true, withMod = false } },
+    { "XF86AudioPlay",  "swayosd-client --playerctl play-pause", { locked = true, withMod = false } },
+    { "XF86AudioPrev",  "swayosd-client --playerctl prev",       { locked = true, withMod = false } },
+}
+
+local function bind(key, action, opts)
+    opts = opts or {}
+    local withMod = opts.withMod
+    if withMod == nil then withMod = true end
+    opts.withMod = nil            -- strip it so hl.bind never sees it
+    if withMod then key = mainMod .. " + " .. key end
+    if type(action) == "string" then action = hl.dsp.exec_cmd(action) end
+    hl.bind(key, action, opts)
 end
 
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+for _, b in ipairs(binds) do
+    bind(b[1], b[2], b[3])
+end
 
--- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Volume keys (swayosd-client shows an on-screen display)
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise --max-volume 100"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"),                  { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"),            { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),             { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("swayosd-client --brightness raise"),                     { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("swayosd-client --brightness lower"),                     { locked = true, repeating = true })
+---------------------------
+---- THEME ----------------
+---------------------------
 
-hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("swayosd-client --playerctl next"),       { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("swayosd-client --playerctl prev"),       { locked = true })
+local catppuccin = require("catppuccin-frappe")
+
+hl.config({
+    general = {
+        border_size = 3,
+        gaps_in= 3,
+        gaps_out= 6,
+        ["col.active_border"]   = catppuccin.blue,
+        ["col.inactive_border"] = catppuccin.overlay0,
+    },
+    decoration = {
+        rounding = 10,
+    blur = {
+        passes = 3,
+    },
+    },
+    misc = {
+    disable_hyprland_logo = true,
+    disable_splash_rendering = true,
+    force_default_wallpaper = 0,
+  },
+    -- with some login screens the cursor was staying around
+    cursor = {
+        no_hardware_cursors = true,
+    },
+})
+
+hl.animation({ leaf = "global", enabled = true, speed = 2, bezier = "default" })
 
 
 ---------------------------
@@ -163,6 +225,11 @@ hl.window_rule({
     float = true,
 })
 hl.window_rule({
+    name  = "1Password Quick Access",
+    match = { title = "^Quick Access — 1Password$" },
+    stay_focused = true
+})
+hl.window_rule({
     name  = "qimgv (image viewer)",
     match = { class = "^qimgv$" },
     float = true,
@@ -172,19 +239,9 @@ hl.window_rule({
     match = { class = "^firefox$", title = "^Picture-in-Picture$" },
     float = true,
     pin   = true,
-    -- don't steal focus when it pops out (can still be focused afterward by
-    -- hover/click -- unlike no_focus, which would disable focus entirely and
-    -- break the hover-fade opacity below).
     no_initial_focus = true,
-    -- spawn in the bottom-right corner, lined up with tiled window borders.
-    -- move positions the content box and the border is drawn outside it, so
-    -- the margin is gaps_out(6) + border_size(3) = 9 (tiled window content
-    -- sits inset by that same 9px). monitor_w/h and window_w/h are this lua
-    -- config's position tokens (native 100%-w is NOT supported here).
     move  = "monitor_w-window_w-9 monitor_h-window_h-9",
-    -- fade to 20% while hovered/focused, full opacity otherwise.
-    -- relies on focus-follows-mouse (follow_mouse = 1, the default) so
-    -- "active" == "pointer is over it": opacity <active> <inactive>
+    -- opacity 20% while hovered
     opacity = "0.2 1.0",
 })
 
@@ -193,29 +250,11 @@ hl.layer_rule({
   blur = true,
 })
 
+
 ---------------------------
----- THEME ----------------
+---- MONITORS -------------
 ---------------------------
 
-hl.config({
-    general = {
-        border_size = 3,
-        gaps_in= 3,
-        gaps_out= 6,
-        ["col.active_border"]   = catppuccin.blue,
-        ["col.inactive_border"] = catppuccin.overlay0,
-    },
-    decoration = {
-        rounding = 10,
-    blur = {
-        passes = 3,
-    },
-    },
-    misc = {
-    disable_hyprland_logo = true,
-    disable_splash_rendering = true,
-    force_default_wallpaper = 0,
-  },
-})
-
-hl.animation({ leaf = "global", enabled = true, speed = 2, bezier = "default" })
+-- Monitor configuration for VMs
+hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
+hl.monitor({ output = "Unknown-1", disabled = true })

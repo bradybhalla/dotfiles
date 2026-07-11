@@ -19,9 +19,9 @@
 
 (defwidget track-info []
   (box :orientation "v" :space-evenly false :spacing 4 :hexpand true :valign "center"
-    (label :class "title"  :halign "start" :xalign 0 :wrap true :text {music.title})
-    (label :class "artist" :halign "start" :limit-width 28 :text {music.artist})
-    (label :class "album"  :halign "start" :limit-width 28 :text {music.album})))
+    (label :class "title"  :halign "start" :xalign 0 :limit-width 999 :text {music.title})
+    (label :class "artist" :halign "start" :limit-width 999 :text {music.artist})
+    (label :class "album"  :halign "start" :limit-width 999 :text {music.album})))
 
 (defwidget music-player []
   ; eventbox has its own input window, so :hover actually fires here

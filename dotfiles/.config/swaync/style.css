@@ -145,3 +145,47 @@ selection {
 .widget-dnd switch:checked slider {
   background-color: var(--accent-fg);
 }
+
+/* --- Notification popup tweaks --- */
+
+/* Hovering the notification body must never tint it (buttons still react) */
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: transparent;
+}
+
+/* Notification buttons (actions + inline-reply send) match the CC widget buttons */
+.notification-row .notification-background .notification .notification-action > button,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
+  background: var(--button-bg);
+  color: var(--fg);
+  border: none;
+  border-radius: var(--border-radius);
+}
+.notification-row .notification-background .notification .notification-action > button:hover,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:hover {
+  background: var(--hover);
+}
+.notification-row .notification-background .notification .notification-action > button:active,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:active {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:disabled {
+  background: var(--button-bg);
+  color: var(--fg-disabled);
+  border: none;
+}
+
+/* Inline reply input: mantle background, no border, never show GTK blue */
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry:hover,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry:focus,
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry:focus-within {
+  background: var(--bg-dark);
+  color: var(--fg);
+  caret-color: var(--fg);
+  border: none;
+  box-shadow: none;
+  outline: none;
+  border-radius: var(--border-radius);
+}

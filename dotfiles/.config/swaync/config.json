@@ -7,6 +7,7 @@
   "control-center-margin-bottom": 6,
   "control-center-margin-right": 4,
   "fit-to-screen": true,
+  "notification-inline-replies": true,
   "notification-window-width": 440,
   "widgets": [
     "title",
