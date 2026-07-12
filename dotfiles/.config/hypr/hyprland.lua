@@ -14,19 +14,6 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("hyprsunset") -- allows night mode
   hl.exec_cmd("hypridle") -- idle behavior
   hl.exec_cmd("maestral_qt") -- dropbox (maestral) tray applet and daemon
-  -- 1password tray applet (loop to make sure it stays up)
-  hl.exec_cmd("sh -c '" .. [[
-prev=""
-while true; do
-  owner=$(busctl --user status org.kde.StatusNotifierWatcher 2>/dev/null | grep -oP "^PID=\K[0-9]+")
-  if [ -n "$owner" ] && [ "$owner" != "$prev" ]; then
-    pkill -x 1password 2>/dev/null
-    1password --silent &
-    prev="$owner"
-  fi
-  sleep 2
-done
-]] .. "'")
 end)
 
 ---------------------
