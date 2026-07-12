@@ -1,3 +1,5 @@
+# libvirt/KVM virtualization host setup (virt-manager, USB redirection)
+
 {
   ...
 }:

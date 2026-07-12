@@ -1,3 +1,5 @@
+# NVIDIA GPU driver (open kernel modules) and CUDA setup
+
 {
   pkgs,
   ...

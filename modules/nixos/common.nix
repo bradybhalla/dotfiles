@@ -1,3 +1,6 @@
+# base NixOS system config shared across all hosts: boot, locale, users,
+# networking, audio, and other core services
+
 {
   config,
   pkgs,

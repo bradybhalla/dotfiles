@@ -1,3 +1,5 @@
+# Hyprland session enablement plus the SDDM (silentSDDM) login greeter
+
 {
   inputs,
   pkgs,

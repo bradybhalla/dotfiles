@@ -1,3 +1,5 @@
+# apps for linux that aren't particularly tied to another module
+
 { pkgs, ... }:
 {
   home.packages = with pkgs; [

@@ -1,3 +1,5 @@
+# Steam/Proton gaming setup: gamemode, mangohud, protonup-qt
+
 {
   pkgs,
   ...

@@ -1,3 +1,5 @@
+# Hyprland desktop environment: bar, launcher, notifications, and themes
+
 {
   pkgs,
   linkHere,

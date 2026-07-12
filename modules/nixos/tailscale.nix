@@ -1,3 +1,5 @@
+# Tailscale setup
+
 {
   config,
   ...

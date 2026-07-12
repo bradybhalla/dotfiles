@@ -1,3 +1,6 @@
+# base home-manager config shared across all hosts: shell, git, core CLI
+# tools
+
 {
   config,
   lib,

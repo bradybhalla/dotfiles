@@ -1,3 +1,5 @@
+# extra dev/build tooling plus Claude Code setup
+
 { pkgs, linkHere, ... }:
 {
   home.packages = with pkgs; [

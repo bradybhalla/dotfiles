@@ -1,3 +1,4 @@
+# NOTE: imported into common.nix so probably don't need to manually import
 # general theming of GUIs
 # - catppuccin themes for gtk and qt
 # - sets things to dark mode where possible
