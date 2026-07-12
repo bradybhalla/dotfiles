@@ -31,7 +31,6 @@ in
     fd
     htop
     lazygit
-    git
     tree
     wget
     curl
@@ -45,6 +44,12 @@ in
   ];
 
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = "Brady Bhalla";
+    userEmail = "34150846+bradybhalla@users.noreply.github.com";
+  };
 
   programs.zsh = {
     enable = true;

@@ -1,14 +1,25 @@
 {
   inputs,
-  config,
   pkgs,
-  lib,
   ...
 }:
 
 {
   imports = [ inputs.silentSDDM.nixosModules.default ];
 
+  services.xserver.enable = true;
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; # electron apps should use wayland
+
+  # SDDM greeter (silentSDDM)
   environment.systemPackages = with pkgs; [
     bibata-cursors # cursor theme for the SDDM greeter (see below)
   ];

@@ -61,12 +61,10 @@ local binds = {
     { "SHIFT + Q", locker },
     { "CTRL + SHIFT + Q", logout },
     { "M",      "eww open --toggle music" },
+    { "P",      "1password --quick-access" },
 
     -- Screenshots (copied to clipboard and saved)
-    -- TODO: maybe just save to desktop?
-    { "Print",     "hyprshot -m output " .. screenshotArgs, { withMod = false } },
-    { "SHIFT + S", "hyprshot -m region " .. screenshotArgs },
-    { "SHIFT + W", "hyprshot -m window " .. screenshotArgs },
+    { "S", "hyprshot -m region " .. screenshotArgs },
 
     -- Window focus and moving
     { "H", hl.dsp.focus({ direction = "left" }) },
@@ -106,13 +104,11 @@ local binds = {
     { "mouse:272", hl.dsp.window.drag(),   { mouse = true } }, -- move with left mouse
     { "mouse:273", hl.dsp.window.resize(), { mouse = true } }, -- resize with right mouse
 
-    -- Volume, brightness, and audio control
+    -- Volume and audio control
     { "XF86AudioRaiseVolume", "swayosd-client --output-volume raise --max-volume 100", { locked = true, repeating = true, withMod = false } },
     { "XF86AudioLowerVolume", "swayosd-client --output-volume lower",                  { locked = true, repeating = true, withMod = false } },
     { "XF86AudioMute",        "swayosd-client --output-volume mute-toggle",            { locked = true, repeating = true, withMod = false } },
     { "XF86AudioMicMute",     "swayosd-client --input-volume mute-toggle",             { locked = true, repeating = true, withMod = false } },
-    { "XF86MonBrightnessUp",  "swayosd-client --brightness raise",                     { locked = true, repeating = true, withMod = false } },
-    { "XF86MonBrightnessDown","swayosd-client --brightness lower",                     { locked = true, repeating = true, withMod = false } },
     { "XF86AudioNext",  "swayosd-client --playerctl next",       { locked = true, withMod = false } },
     { "XF86AudioPause", "swayosd-client --playerctl play-pause", { locked = true, withMod = false } },
     { "XF86AudioPlay",  "swayosd-client --playerctl play-pause", { locked = true, withMod = false } },
@@ -178,10 +174,7 @@ hl.window_rule({
     suppress_event = "maximize",
 })
 
--- No window blur by default. Hyprland's decoration:blur:enabled is a global
--- master switch (and must stay on for the waybar layer_rule blur to render),
--- so instead we disable blur for every window and opt back in only where
--- wanted -- add `no_blur = false` to a specific window rule to re-enable it.
+-- needed because blur is enabled for waybar but I don't want it anywhere else
 hl.window_rule({
     name  = "no-blur-by-default",
     match = { class = ".*" },
@@ -241,7 +234,7 @@ hl.window_rule({
     pin   = true,
     no_initial_focus = true,
     move  = "monitor_w-window_w-9 monitor_h-window_h-9",
-    -- opacity 20% while hovered
+    -- opacity 20% while focused
     opacity = "0.2 1.0",
 })
 

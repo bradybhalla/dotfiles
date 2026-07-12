@@ -1,191 +1,439 @@
-@import "catppuccin-frappe.css";
+/* swaync (GTK4) — catppuccin frappe, styled to match the eww widgets:
+ * flat cards, 2px accent border, 10px radius.
+ * Tweak the "theme knobs" block; everything below only uses those vars. */
+
+@import url("catppuccin-frappe.css");
 
 :root {
+  /* ---- theme knobs (palette comes from catppuccin-frappe.css) ---- */
   --accent: @flamingo;
-  --accent-fg: @mantle;
-  --critical: @red;
-  --bg: @base;
-  --bg-dark: @mantle;
-  --hover: @surface0;
-  --button-bg: @crust;
-  --fg: @text;
-  --fg-muted: @subtext0;
-  --fg-disabled: @overlay0;
+  --on-accent: @crust;                    /* text/icons on accent backgrounds */
+  --muted: @subtext0;
+  --text: @text;
+  --subtext1: @subtext1;
 
-  --border-radius: 10px;
-  --border: 2px solid var(--accent);
-  --edge-gap: 6px;
+  --cc-bg: @base;                         /* control center */
+  --noti-bg: @mantle;                     /* notification cards */
+  --window-border: 2px solid var(--accent);
+  --card-border: 1px solid @surface1;     /* cards inside the control center */
+  --critical-color: @red;
 
-  --font-size-body: 18px;
-  --font-size-summary: 18px;
+  --button-bg: @surface0;
+  --button-hover-bg: @surface1;
+  --button-active-bg: @surface2;
+  --input-bg: @crust;
 
-  --cc-bg: var(--bg);
-  --noti-bg: 48, 52, 70; /* catppuccin-frappe base */
-  --noti-bg-alpha: 1;
-  --noti-bg-darker: var(--bg-dark);
-  --noti-bg-hover: var(--hover);
-  --noti-bg-focus: var(--hover);
-  --noti-close-bg: var(--hover);
-  --noti-close-bg-hover: var(--hover);
-  --text-color: var(--fg);
-  --text-color-disabled: var(--fg-disabled);
-  --bg-selected: var(--accent);
-  --noti-border-color: var(--accent);
-  --notification-shadow: none;
+  --radius: 10px;
+  --radius-small: 8px;
+  --font-size: 15px;                      /* base size; all text scales off this */
+  --notification-icon-size: 64px;
+  --hover-transition: background 0.15s ease-in-out;
+
+  /* redirect GTK's built-in accent (focus rings, selections, checks) */
+  --accent-color: var(--accent);
+  --accent-bg-color: var(--accent);
+  --accent-fg-color: var(--on-accent);
 }
 
-.control-center,
-.notification-row,
-.floating-notifications {
+* {
   font-family: "MesloLGS Nerd Font";
-  font-size: var(--font-size-body);
+  font-size: var(--font-size);
+  outline: none; /* no GTK focus rings; focus is shown via backgrounds below */
 }
 
-.app-icon {
-  -gtk-icon-shadow: none;
+notificationwindow,
+blankwindow,
+.blank-window,
+.floating-notifications {
+  background: transparent;
 }
 
-*:focus,
-*:focus-visible {
+/* ---------- notification cards ---------- */
+
+.notification-row {
+  background: none;
   outline: none;
 }
 
-progressbar progress,
-progress {
-  background-color: var(--accent);
-}
-selection {
-  background-color: var(--accent);
-  color: var(--accent-fg);
+.notification-row .notification-background {
+  /* 6px right inset lines floating notifications up with the eww
+   * widgets and hyprland gaps_out */
+  padding: 6px;
 }
 
-.control-center {
-  border: var(--border);
-  padding: 8px;
+/* inside the control center, card borders line up with the widget labels */
+.control-center .notification-background {
+  padding: 6px 16px;
 }
 
-.notification-group,
+.notification {
+  background: var(--noti-bg);
+  color: var(--text);
+  border: var(--window-border);
+  border-radius: var(--radius);
+  padding: 0;
+  box-shadow: none;
+}
+
+/* inside the control center the window already has the accent border,
+ * so cards get a quieter one */
+.control-center .notification {
+  border: var(--card-border);
+}
+
+.notification.critical {
+  border-width: 2px;
+  border-color: var(--critical-color);
+}
+
+/* the whole-card action (shows summary/body) is a button; flatten it */
+.notification-default-action {
+  background: transparent;
+  color: var(--text);
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  box-shadow: none;
+  text-shadow: none;
+  padding: 14px; /* match the eww cards */
+  margin: 0;
+}
+
+.notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 0;
+}
+
+.notification label {
+  /* undo GTK4's 50% opacity filter on dim-label (also hits action buttons) */
+  filter: none;
+}
+
+.notification-content .image {
+  -gtk-icon-filter: none;
+  -gtk-icon-size: var(--notification-icon-size);
+  border-radius: var(--radius-small);
+  margin: 4px;
+}
+
+.notification-content .app-icon {
+  -gtk-icon-filter: none;
+  -gtk-icon-size: calc(var(--notification-icon-size) / 3);
+  margin: 6px;
+}
+
+.notification-content .text-box .summary {
+  font-size: calc(var(--font-size) + 1px);
+  font-weight: bold;
+  color: var(--text);
+  background: transparent;
+  text-shadow: none;
+}
+
+.notification-content .text-box .time {
+  font-size: calc(var(--font-size) - 1px);
+  font-weight: normal;
+  color: var(--muted);
+  background: transparent;
+  text-shadow: none;
+  margin-right: 30px;
+}
+
+.notification-content .text-box .body {
+  font-size: var(--font-size);
+  font-weight: normal;
+  color: var(--subtext1);
+  background: transparent;
+  text-shadow: none;
+}
+
+.notification-content .body-image {
+  margin-top: 4px;
+  border-radius: var(--radius-small);
+  background-color: transparent;
+  -gtk-icon-filter: none;
+}
+
+.notification-content progressbar {
+  margin-top: 4px;
+}
+
+.notification-content progressbar trough {
+  background: @surface0;
+  border: none;
+  border-radius: 9999px;
+  min-height: 6px;
+}
+
+.notification-content progressbar progress {
+  background: var(--accent);
+  border: none;
+  border-radius: 9999px;
+  min-height: 6px;
+}
+
+/* ---------- buttons (one recipe everywhere) ---------- */
+
+.widget-title > button,
+.widget-inhibitors > button,
+.notification-action > button,
+.inline-reply-button,
+.notification-group-buttons > button,
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: var(--button-bg);
+  color: var(--text);
+  border: none;
+  border-radius: var(--radius-small);
+  box-shadow: none;
+  text-shadow: none;
+  padding: 4px 12px;
+  transition: var(--hover-transition);
+}
+
+.widget-title > button:hover,
+.widget-inhibitors > button:hover,
+.notification-action > button:hover,
+.inline-reply-button:hover,
+.notification-group-buttons > button:hover,
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: var(--button-hover-bg);
+  color: var(--text);
+}
+
+.widget-title > button:active,
+.widget-inhibitors > button:active,
+.notification-action > button:active,
+.inline-reply-button:active,
+.notification-group-buttons > button:active,
+.notification-group-collapse-button:active,
+.notification-group-close-all-button:active {
+  background: var(--button-active-bg);
+}
+
+.notification-alt-actions {
+  background: none;
+  padding: 4px;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.notification-action {
+  margin: 4px;
+  padding: 0;
+}
+
+.close-button {
+  background: var(--button-bg);
+  color: var(--text);
+  border: none;
+  border-radius: 100%;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0;
+  margin-top: 8px;
+  margin-right: 8px;
+  min-width: 24px;
+  min-height: 24px;
+  transition: var(--hover-transition);
+}
+
+.close-button:hover {
+  background: var(--button-hover-bg);
+  border: none;
+  box-shadow: none;
+}
+
+/* ---------- inputs ---------- */
+
+.inline-reply {
+  margin-top: 4px;
+}
+
+.inline-reply-entry {
+  background: var(--input-bg);
+  color: var(--text);
+  caret-color: var(--text);
+  border: 1px solid @surface1;
+  border-radius: var(--radius-small);
+  box-shadow: none;
+  padding: 4px 8px;
+}
+
+.inline-reply-entry:focus,
+.inline-reply-entry:focus-within {
+  border-color: @surface2;
+}
+
+.inline-reply-entry selection {
+  background: @surface2;
+  color: var(--text);
+}
+
+.inline-reply-button {
+  margin-left: 4px;
+}
+
+.inline-reply-button:disabled {
+  background: transparent;
+  color: var(--muted);
+}
+
+/* ---------- notification groups ---------- */
+
+.notification-group {
+  transition: opacity 200ms ease-in-out;
+}
+
 .notification-group:focus {
   background: transparent;
 }
 
-.notification.critical {
-  border-color: var(--critical);
+.notification-group .notification-group-buttons,
+.notification-group .notification-group-headers {
+  margin: 0 16px;
+  color: var(--text);
 }
 
-.notification-default-action {
-  padding: 12px;
+.notification-group .notification-group-headers .notification-group-icon {
+  color: var(--muted);
+  -gtk-icon-size: 24px;
 }
 
-/* Flush floating notifications with the Hyprland window border */
-.floating-notifications .notification-background {
-  padding-right: var(--edge-gap);
+.notification-group .notification-group-headers .notification-group-header {
+  color: var(--muted);
+  font-size: var(--font-size);
+}
+
+.notification-group .notification-group-close-button .close-button {
+  margin: 12px 20px;
+}
+
+.notification-group.collapsed.not-expanded {
+  opacity: 0.4;
+}
+
+.notification-group.collapsed .notification-row .notification {
+  background-color: var(--noti-bg);
+}
+
+.notification-group.collapsed .notification-row:not(:last-child) .notification-action,
+.notification-group.collapsed .notification-row:not(:last-child) .notification-default-action {
+  opacity: 0;
+}
+
+/* ---------- control center ---------- */
+
+.control-center {
+  background: var(--cc-bg);
+  color: var(--text);
+  border: var(--window-border);
+  border-radius: var(--radius);
+  padding: 8px 0;
+}
+
+.control-center .control-center-list {
+  background: transparent;
 }
 
 .control-center .control-center-list-placeholder {
+  color: var(--muted);
+  font-size: calc(var(--font-size) * 1.2);
+  margin: 24px;
   opacity: 1;
-  color: var(--fg-muted);
-}
-.notification-group.collapsed.not-expanded {
-  opacity: 1;
 }
 
-/* Widget buttons */
-.widget-title > button,
-.widget-inhibitors > button {
-  background-color: var(--button-bg);
-  color: var(--fg);
-  border: none;
-  border-radius: var(--border-radius);
-}
-.widget-title > button:hover,
-.widget-inhibitors > button:hover {
-  background-color: var(--hover);
-}
-.widget-title > button:active,
-.widget-inhibitors > button:active {
-  background-color: var(--accent);
-  color: var(--accent-fg);
+.control-center scrollbar {
+  background: transparent;
 }
 
-.widget-title > label {
-  color: var(--accent);
-  font-size: 2rem;
+.control-center scrollbar slider {
+  background: @surface1;
+  border-radius: 9999px;
+  min-width: 6px;
 }
 
-/* Keep title, dnd and inhibitors close together */
-.widget-title,
-.widget-dnd,
-.widget-inhibitors {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-top: 6px;
-  padding-bottom: 6px;
+.control-center scrollbar slider:hover {
+  background: @surface2;
 }
+
+/* ---------- widgets ---------- */
+
+.widget {
+  margin: 0 8px;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+}
+
 .widget-title {
   margin-top: 8px;
 }
 
-.widget-dnd label,
+.widget-title > label {
+  color: var(--accent);
+  font-size: calc(var(--font-size) * 1.6);
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.widget-title > button {
+  margin-left: 8px;
+}
+
 .widget-inhibitors > label {
-  font-size: 1.4rem;
-  padding-left: 14px;
-  color: var(--fg-muted);
+  color: var(--text);
+  font-size: calc(var(--font-size) * 1.25);
+  margin-right: 8px;
 }
 
-.widget-dnd switch {
-  background-color: var(--hover);
-}
-.widget-dnd switch slider {
-  background-color: var(--fg);
-}
-.widget-dnd switch:checked {
-  background-color: var(--accent);
-}
-.widget-dnd switch:checked slider {
-  background-color: var(--accent-fg);
+.widget-inhibitors > button {
+  margin-left: 8px;
 }
 
-/* --- Notification popup tweaks --- */
-
-/* Hovering the notification body must never tint it (buttons still react) */
-.notification-row .notification-background .notification .notification-default-action:hover {
-  background: transparent;
+.widget-dnd {
+  color: var(--text);
+  /* separator between the header controls and the notification list */
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid @surface0;
+  border-radius: 0;
 }
 
-/* Notification buttons (actions + inline-reply send) match the CC widget buttons */
-.notification-row .notification-background .notification .notification-action > button,
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
+.widget-dnd > label {
+  color: var(--text);
+  font-size: calc(var(--font-size) * 1.25);
+  margin-right: 8px;
+}
+
+.widget-dnd > switch {
   background: var(--button-bg);
-  color: var(--fg);
   border: none;
-  border-radius: var(--border-radius);
-}
-.notification-row .notification-background .notification .notification-action > button:hover,
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:hover {
-  background: var(--hover);
-}
-.notification-row .notification-background .notification .notification-action > button:active,
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:active {
-  background: var(--accent);
-  color: var(--accent-fg);
-}
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button:disabled {
-  background: var(--button-bg);
-  color: var(--fg-disabled);
-  border: none;
-}
-
-/* Inline reply input: mantle background, no border, never show GTK blue */
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry,
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry:hover,
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry:focus,
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-entry:focus-within {
-  background: var(--bg-dark);
-  color: var(--fg);
-  caret-color: var(--fg);
-  border: none;
+  border-radius: 9999px;
   box-shadow: none;
-  outline: none;
-  border-radius: var(--border-radius);
+  margin-left: 8px;
+  transition: var(--hover-transition);
+}
+
+.widget-dnd > switch:hover {
+  background: var(--button-hover-bg);
+}
+
+.widget-dnd > switch:checked {
+  background: var(--accent);
+}
+
+.widget-dnd > switch slider {
+  background: @overlay2;
+  border: none;
+  border-radius: 9999px;
+  box-shadow: none;
+}
+
+.widget-dnd > switch:checked slider {
+  background: var(--on-accent);
 }

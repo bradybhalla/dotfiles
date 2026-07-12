@@ -8,8 +8,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
-    ../../modules/nixos/sddm-display-manager.nix
-    # ../../modules/nixos/sydney.nix
+    ../../modules/nixos/desktop-environment.nix
+    ../../modules/nixos/tailscale.nix
   ];
 
   networking.hostName = "nixos-vm-on-laptop";
@@ -24,16 +24,16 @@
 
   # Firewall additions
   networking.firewall.trustedInterfaces = [ "virbr0" ];
-  networking.firewall.allowedTCPPorts = [
-    17500 # dropbox
-  ];
-  networking.firewall.allowedUDPPorts = [
-    17500 # dropbox
-  ];
 
   environment.systemPackages = with pkgs; [
     spice-vdagent
   ];
 
-  system.stateVersion = "26.05";
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "26.05"; # Did you read the comment?
 }

@@ -8,45 +8,21 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
-    ../../modules/nixos/sddm-display-manager.nix
+    ../../modules/nixos/desktop-environment.nix
+    ../../modules/nixos/tailscale.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/gaming.nix
+    ../../modules/nixos/vm-host.nix
   ];
 
   networking.hostName = "brady-desktop";
-
-  # NVIDIA
-  nix.settings = {
-    substituters = [ "https://cache.nixos-cuda.org" ];
-    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
-  };
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
-  hardware.nvidia.modesetting.enable = true;
 
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-  # TODO: ideally I would want to put this in my home config but
-  # it wasn't able to find icons that way
   services.blueman.enable = true;
-
-  # Gaming
-  programs.steam.enable = true;
-  programs.gamemode.enable = true;
-
-  # Virtualization
-  programs.virt-manager.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-  users.users."bradybhalla".extraGroups = [ "libvirtd" ];
-
-  # TODO maybe remove: may or may not be needed for vm networking
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   # 1Password
   programs._1password.enable = true;
@@ -68,12 +44,6 @@
     capSysAdmin = true;
     openFirewall = true;
   };
-
-  environment.systemPackages = with pkgs; [
-    cudatoolkit
-    mangohud
-    protonup-qt
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

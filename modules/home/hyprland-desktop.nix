@@ -44,6 +44,7 @@
 
   services.playerctld.enable = true;
   services.network-manager-applet.enable = true;
+  services.udiskie.enable = true; # automount removable media (needs services.udisks2)
 
   home.pointerCursor = {
     gtk.enable = true;
