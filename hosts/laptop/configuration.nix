@@ -36,13 +36,24 @@
       "balenaetcher"
       "moonlight"
 
-      # add these after deleting the apps
-      # "1password"
-      # "firefox@developer-edition"
-      # "spotify"
-      # "iterm2" # backup terminal
-      # "docker-desktop"
-      # "utm"
+      "dropbox"
+      "steam"
+      "zoom"
+      "docker-desktop"
+
+      "1password"
+      "firefox@developer-edition"
+      "spotify"
+      "iterm2"
+      "utm"
+      "slack"
+      "sublime-text"
+      "discord"
+      "google-chrome"
+      "visual-studio-code"
+      "zotero"
+      "arduino-ide"
+      "raspberry-pi-imager"
     ];
     brews = [
       "ghcup"
