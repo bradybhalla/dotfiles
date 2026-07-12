@@ -47,8 +47,10 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Brady Bhalla";
-    userEmail = "34150846+bradybhalla@users.noreply.github.com";
+    settings.user = {
+      name = "Brady Bhalla";
+      email = "34150846+bradybhalla@users.noreply.github.com";
+    };
   };
 
   programs.zsh = {
