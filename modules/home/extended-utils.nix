@@ -19,7 +19,6 @@
     uv
     nodejs
     rustup
-    opam
     ghc
     haskell-language-server
     nixfmt
@@ -32,6 +31,8 @@
     fastfetch
     gdu
   ];
+
+  programs.opam.enable = true;
 
   programs.claude-code = {
     enable = true;

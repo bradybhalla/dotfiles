@@ -95,8 +95,6 @@ in
     ];
   };
 
-  programs.opam.enable = true;
-
   home.file = {
     ".config/nvim".source = linkHere ".config/nvim";
     ".tmux.conf".source = linkHere ".tmux.conf";
