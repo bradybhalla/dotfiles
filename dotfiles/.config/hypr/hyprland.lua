@@ -20,8 +20,8 @@ end)
 ---- KEYBINDINGS ----
 ---------------------
 
+-- TODO: get rid of these
 local terminal    = "alacritty"
-local fileManager = "dolphin"
 local menu        = "rofi -show drun"
 local browser     = "firefox"
 local locker      = "hyprlock"

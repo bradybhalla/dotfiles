@@ -29,12 +29,6 @@
     eww # desktop widgets
     procps # needed a different 'uptime'
     pavucontrol # audio device setttings
-
-    # dropbox replacement
-    maestral # for cli
-    maestral-gui # tray and daemon
-
-    nemo # file manager
   ];
 
   services.playerctld.enable = true;

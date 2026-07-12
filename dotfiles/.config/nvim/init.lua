@@ -90,7 +90,7 @@ require("which-key").add({
 
     { "<leader>g",  group = "grep" },
     { "<leader>gg", "<CMD>Telescope live_grep<CR>",                             desc = "search text" },
-    { "<leader>gt", "<CMD>Telescope live_grep default_text=(TODO|CR)<CR>",      desc = "search TODO/CR" },
+    { "<leader>gt", "<CMD>Telescope live_grep default_text=TODO<CR>",      desc = "search TODOs" },
 
     { "<leader>l",  group = "language" },
     { "<leader>lf", function() require("conform").format() end,                 desc = "format buffer" },

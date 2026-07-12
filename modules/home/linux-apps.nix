@@ -6,10 +6,16 @@
     alacritty
     emacs-pgtk # pgtk makes it look normal on wayland
     spotify
+
+    # dropbox replacement
+    maestral # for cli
+    maestral-gui # tray and daemon
+
+    nemo # file manager
     qimgv # image viewer
     mpv # video player
 
-    # TODO: hacky solution to make it work
+    # TODO: hacky solution to make pdf viewer work
     # sioyek's QOpenGLWidget can't create an EGL context on the NVIDIA open
     # driver under native Wayland (journal: "QEGLPlatformContext: Failed to
     # create context: 3009" == EGL_BAD_MATCH): NVIDIA's EGL rejects the GLES2
