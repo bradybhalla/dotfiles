@@ -65,6 +65,7 @@
               ./modules/home/common.nix
               ./modules/home/extended-utils.nix
               ./modules/home/hyprland-desktop.nix
+              ./modules/home/linux-apps.nix
             ];
           };
 
@@ -83,6 +84,7 @@
               ./modules/home/common.nix
               # ./modules/home/extended-utils.nix
               ./modules/home/hyprland-desktop.nix
+              ./modules/home/linux-apps.nix
             ];
           };
         };

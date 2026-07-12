@@ -59,11 +59,6 @@
     git
     python3
     kitty # so there is a terminal with the default hyprland config
-
-    alacritty
-    emacs-pgtk # pgtk makes it look normal on wayland
-    vlc
-    sioyek
   ];
 
   # Audio

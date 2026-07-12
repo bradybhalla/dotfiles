@@ -8,7 +8,6 @@
 
   home.packages = with pkgs; [
     waybar # status bar
-
     hyprland # window manager, installed globally but I need cli tools
     hyprshutdown # logout nicely
     hyprlock # lock screen
@@ -17,29 +16,23 @@
     hyprsysteminfo # about screen
     hypridle # idle behavior
     hyprshot # screenshots
-
     swaynotificationcenter # notification daemon + control center
     libnotify # notify-send command
     swayosd # on-screen display for volume/media/brightness
-
-    rofi
-
+    rofi # drun
+    wl-clipboard # wl-copy / wl-paste clipboard
     pamixer # volume cli
     playerctl # control playing audio
     cava # visualize live audio
     eww # desktop widgets
-
     procps # needed a different 'uptime'
-
-    # TODO: maybe move to linux apps (except some are needed by the config here)
     pavucontrol # audio device setttings
-    nemo # file manager
-    spotify
-    qimgv # image/video viewer
 
     # dropbox replacement
     maestral # for cli
     maestral-gui # tray and daemon
+
+    nemo # file manager
   ];
 
   services.playerctld.enable = true;
@@ -52,7 +45,6 @@
     name = "Bibata-Modern-Classic";
     size = 24;
   };
-
 
   home.file = {
     ".config/hypr".source = linkHere ".config/hypr";
