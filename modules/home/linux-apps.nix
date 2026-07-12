@@ -5,8 +5,9 @@
   home.packages = with pkgs; [
     alacritty
     emacs-pgtk # pgtk makes it look normal on wayland
-    spotify
+    spotify # TODO: only works on x86
 
+    # TODO: no longer maintained
     # dropbox replacement
     maestral # for cli
     maestral-gui # tray and daemon
