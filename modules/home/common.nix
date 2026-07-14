@@ -41,7 +41,11 @@ in
     rlwrap
     jq
     tree-sitter
+
     gcc
+    wget
+    zip
+    unzip
 
     nerd-fonts.meslo-lg
   ];

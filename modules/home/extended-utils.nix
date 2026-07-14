@@ -3,6 +3,8 @@
 { pkgs, linkHere, ... }:
 {
   home.packages = with pkgs; [
+    sqlite
+
     imagemagick
     pandoc
     ffmpeg
