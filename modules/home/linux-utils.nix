@@ -1,17 +1,19 @@
-# apps for linux that aren't particularly tied to another module
+# Linux-specific tools that aren't particularly tied to another module
 
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    # apps and tools I use
     alacritty
     emacs-pgtk # pgtk makes it look normal on wayland
     spotify # TODO: only works on x86
-
-    # TODO: no longer maintained
-    # dropbox replacement
     maestral # for cli
+
+    # non-global tray icons
+    trayscale
     maestral-gui # tray and daemon
 
+    # utility apps
     nemo # file manager
     qimgv # image viewer
     mpv # video player

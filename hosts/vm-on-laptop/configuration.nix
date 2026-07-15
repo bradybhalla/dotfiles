@@ -22,9 +22,6 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  # Firewall additions
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
-
   environment.systemPackages = with pkgs; [
     spice-vdagent
   ];

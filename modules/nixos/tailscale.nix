@@ -6,9 +6,13 @@
 }:
 
 {
+  # from https://wiki.nixos.org/wiki/Tailscale
+
   services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "both";
   networking.nftables.enable = true;
   networking.firewall = {
+    enable = true;
     trustedInterfaces = [ config.services.tailscale.interfaceName ];
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
