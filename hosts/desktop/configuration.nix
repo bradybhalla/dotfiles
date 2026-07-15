@@ -28,7 +28,7 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "bradybhalla" ];
+    polkitPolicyOwners = [ "brady" ];
   };
 
   # Ollama with CUDA

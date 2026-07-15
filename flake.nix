@@ -1,5 +1,5 @@
 {
-  description = "bradybhalla's dotfiles";
+  description = "Brady Bhalla's dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -59,7 +59,7 @@
             };
         in
         {
-          "bradybhalla@desktop" = mkHome {
+          "brady@desktop" = mkHome {
             system = "x86_64-linux";
             homeModules = [
               ./modules/home/common.nix
@@ -69,7 +69,7 @@
             ];
           };
 
-          "bradybhalla@laptop" = mkHome {
+          "brady@laptop" = mkHome {
             system = "aarch64-darwin";
             homeModules = [
               ./modules/home/common.nix
@@ -78,7 +78,7 @@
             ];
           };
 
-          "bradybhalla@vm-on-laptop" = mkHome {
+          "brady@vm-on-laptop" = mkHome {
             system = "aarch64-linux";
             homeModules = [
               ./modules/home/common.nix

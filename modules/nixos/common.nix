@@ -34,7 +34,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  users.users."bradybhalla" = {
+  users.users."brady" = {
     isNormalUser = true;
     description = "Brady Bhalla";
     extraGroups = [

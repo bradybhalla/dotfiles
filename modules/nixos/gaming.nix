@@ -8,7 +8,7 @@
 {
   programs.steam.enable = true;
   programs.gamemode.enable = true;
-  users.users."bradybhalla".extraGroups = [ "gamemode" ];
+  users.users."brady".extraGroups = [ "gamemode" ];
 
   environment.systemPackages = with pkgs; [
     mangohud

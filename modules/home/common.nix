@@ -9,7 +9,7 @@
   ...
 }:
 let
-  username = "bradybhalla";
+  username = "brady";
   dotfilesRepoDir = "${config.home.homeDirectory}/dotfiles";
 in
 {

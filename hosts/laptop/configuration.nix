@@ -5,7 +5,7 @@
 
 {
 
-  system.primaryUser = "bradybhalla";
+  system.primaryUser = "brady";
 
   networking = {
     computerName = "Brady's MacBook Pro";
