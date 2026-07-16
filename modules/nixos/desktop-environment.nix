@@ -31,13 +31,14 @@
     enable = true;
     theme = "default";
     backgrounds = {
-      "background.jpeg" = ../../assets/wallpapers/sunrise1.jpeg;
+      "sunrise1.jpg" = ../../assets/wallpapers/sunrise1.jpg;
     };
     settings = {
       "LockScreen" = {
         display = true;
-        background = "background.jpeg";
-        blur = 64;
+        background = "sunrise1.jpg";
+        saturation = -0.7;
+        blur = 60;
       };
       # Font sizes below are scaled ~1.4x over the default theme to make
       # everything on the lock/login screens larger.
@@ -52,7 +53,8 @@
         font-size = 17;
       };
       "LoginScreen" = {
-        background = "background.jpeg";
+        background = "sunrise1.jpg";
+        blur = 20;
       };
       "LoginScreen.LoginArea.Username" = {
         font-size = 22;
