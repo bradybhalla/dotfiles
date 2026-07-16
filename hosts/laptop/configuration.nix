@@ -1,10 +1,11 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
 
 {
-
   system.primaryUser = "brady";
 
   networking = {
@@ -59,6 +60,41 @@
       "ghcup"
     ];
   };
+
+  system.defaults = {
+    dock = {
+      tilesize = 84;
+      autohide = true;
+      mru-spaces = false;
+    };
+
+    finder = {
+      ShowPathbar = true;
+    };
+
+    NSGlobalDomain = {
+      AppleInterfaceStyle = "Dark";
+      AppleShowAllExtensions = true;
+      ApplePressAndHoldEnabled = false;
+      KeyRepeat = 2;
+      InitialKeyRepeat = 25;
+    };
+
+    WindowManager.EnableStandardClickToShowDesktop = false;
+  };
+
+  system.activationScripts.postActivation.text =
+    let
+      wallpaper = ../../assets/ocean-background.jpg;
+    in
+    lib.mkAfter ''
+      echo "setting desktop wallpaper..." >&2
+      sudo -u ${config.system.primaryUser} osascript -e '
+        tell application "System Events"
+          tell every desktop to set picture to "${wallpaper}"
+        end tell
+      ' || true
+    '';
 
   system.stateVersion = 7;
 }
