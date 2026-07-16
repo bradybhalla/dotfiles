@@ -2,7 +2,7 @@
 {
   users.users."sydney" = {
     isNormalUser = true;
-    description = "Sydney";
+    description = "Sydney Wang";
     extraGroups = [  ];
   };
 

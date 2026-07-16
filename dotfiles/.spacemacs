@@ -689,12 +689,32 @@ before packages are loaded."
 
   (spacemacs/toggle-highlight-current-line-globally-off)
 
+  ;; Make icons use the same font as everything else
+  (with-eval-after-load 'nerd-icons
+    (setq nerd-icons-font-family "MesloLGS Nerd Font"))
+
   (custom-set-faces
    '(org-level-1 ((t (:height 1.1))))
    '(org-level-2 ((t (:height 1.1))))
    '(org-document-title ((t (:height 1.25))))
    )
 
+  ;; Keep the random emacs files away from important things
+  (let ((backup-dir    (concat spacemacs-cache-directory "backups/"))
+        (auto-save-dir (concat spacemacs-cache-directory "auto-save/"))
+        (lock-dir      (concat spacemacs-cache-directory "lock-files/")))
+
+    (dolist (dir (list backup-dir auto-save-dir lock-dir))
+      (unless (file-directory-p dir)
+        (make-directory dir t)))
+
+    ;; file~, #file#, .#file
+    (setq backup-directory-alist `(("." . ,backup-dir)))
+    (setq auto-save-file-name-transforms `((".*" ,auto-save-dir t))
+          auto-save-list-file-prefix (concat auto-save-dir ".saves-"))
+    (when (boundp 'lock-file-name-transforms)
+      (setq lock-file-name-transforms `((".*" ,lock-dir t))))
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
