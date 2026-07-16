@@ -2,7 +2,10 @@
 
 My configuration for 90% of everything I do on a computer.
 
-<img width="3840" height="2160" alt="2026-07-15-201457_hyprshot" src="https://github.com/user-attachments/assets/a3edc078-a684-4172-8542-a20797c642e3" />
+<img width="3840" height="2160" alt="2026-07-15-203834_hyprshot" src="https://github.com/user-attachments/assets/eb30a737-ab72-49c5-a189-d9868b07f304" />
+<img width="3840" height="2160" alt="2026-07-15-204556_hyprshot" src="https://github.com/user-attachments/assets/5b3887be-82c6-4c5b-95c3-d6d788ab3386" />
+<img width="3840" height="2160" alt="2026-07-15-204045_hyprshot" src="https://github.com/user-attachments/assets/a011828d-47d3-4c34-9b55-7b3aa4e078c3" />
+
 
 
 ## Some tools I use
