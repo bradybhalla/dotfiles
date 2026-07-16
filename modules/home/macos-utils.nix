@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     pngpaste
     skhd
+    defaultbrowser
   ];
 
   home.file = {
@@ -27,4 +28,21 @@
     ".config/skhd/skhdrc".source = linkHere ".config/skhd/skhdrc";
     ".config/karabiner/karabiner.json".source = linkHere ".config/karabiner/karabiner.json";
   };
+
+  home.activation.setDefaultBrowser = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run ${pkgs.defaultbrowser}/bin/defaultbrowser firefoxdeveloperedition
+  '';
+
+  home.activation.setWallpaper =
+    let
+      wallpaper = ../../assets/wallpapers/sunset1.jpg;
+    in
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run echo "setting desktop wallpaper..." >&2
+      run /usr/bin/osascript -e '
+        tell application "System Events"
+          tell every desktop to set picture to "${wallpaper}"
+        end tell
+      '
+    '';
 }

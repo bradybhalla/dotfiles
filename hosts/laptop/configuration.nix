@@ -66,6 +66,16 @@
       tilesize = 84;
       autohide = true;
       mru-spaces = false;
+
+      wvous-br-corner = 1; # 1 = disabled — kills the default Quick Note corner
+
+      # Finder is always pinned leftmost by macOS, so it's not listed here.
+      persistent-apps = [
+        "/Applications/Firefox Developer Edition.app"
+        "/Applications/Alacritty.app"
+        "/Applications/Spotify.app"
+        "/System/Applications/Messages.app"
+      ];
     };
 
     finder = {
@@ -82,19 +92,6 @@
 
     WindowManager.EnableStandardClickToShowDesktop = false;
   };
-
-  system.activationScripts.postActivation.text =
-    let
-      wallpaper = ../../assets/wallpapers/sunset1.jpg;
-    in
-    lib.mkAfter ''
-      echo "setting desktop wallpaper..." >&2
-      sudo -u ${config.system.primaryUser} osascript -e '
-        tell application "System Events"
-          tell every desktop to set picture to "${wallpaper}"
-        end tell
-      ' || true
-    '';
 
   system.stateVersion = 7;
 }
