@@ -40,7 +40,6 @@
       wallpaper = ../../assets/wallpapers/sunset1.jpg;
     in
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      run echo "setting desktop wallpaper..." >&2
       run /usr/bin/osascript -e '
         tell application "System Events"
           tell every desktop to set picture to "${wallpaper}"
