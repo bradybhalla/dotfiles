@@ -2,6 +2,9 @@
 
 My configuration for 90% of everything I do on a computer.
 
+<img width="3840" height="2160" alt="2026-07-15-201457_hyprshot" src="https://github.com/user-attachments/assets/a3edc078-a684-4172-8542-a20797c642e3" />
+
+
 ## Some tools I use
 
 - [Neovim](https://neovim.io): main text editor
