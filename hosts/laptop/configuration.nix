@@ -63,34 +63,38 @@
 
   system.defaults = {
     dock = {
-      tilesize = 84;
-      autohide = true;
-      mru-spaces = false;
+      tilesize = 84; # dock icon size in pixels
+      autohide = true; # hide the dock until hovered
+      mru-spaces = false; # don't auto-reorder Spaces by recent use
+      show-recents = false; # hide the recent apps section of the dock
 
-      wvous-br-corner = 1; # 1 = disabled — kills the default Quick Note corner
+      wvous-br-corner = 1; # don't make quick note when mouse is in corner
 
-      # Finder is always pinned leftmost by macOS, so it's not listed here.
+      # apps in the dock
       persistent-apps = [
         "/Applications/Firefox Developer Edition.app"
-        "/Applications/Alacritty.app"
         "/Applications/Spotify.app"
         "/System/Applications/Messages.app"
+        "/System/Applications/Calendar.app"
+        "/System/Applications/System Settings.app"
       ];
     };
 
     finder = {
-      ShowPathbar = true;
+      ShowPathbar = true; # show the path breadcrumbs at the bottom of the finder window
+      AppleShowAllFiles = true; # show hidden files by default
+      QuitMenuItem = true; # allow quitting Finder with CMD-Q
     };
 
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-      AppleShowAllExtensions = true;
-      ApplePressAndHoldEnabled = false;
-      KeyRepeat = 2;
-      InitialKeyRepeat = 25;
+      AppleInterfaceStyle = "Dark"; # dark mode
+      AppleShowAllExtensions = true; # always show file extensions
+      ApplePressAndHoldEnabled = false; # holding a key repeats it instead of accent popup
+      KeyRepeat = 2; # faster key repeat rate (lower is faster)
+      InitialKeyRepeat = 25; # shorter delay before repeat starts (lower is shorter)
     };
 
-    WindowManager.EnableStandardClickToShowDesktop = false;
+    WindowManager.EnableStandardClickToShowDesktop = false; # don't reveal desktop on click of empty area
   };
 
   system.stateVersion = 7;
