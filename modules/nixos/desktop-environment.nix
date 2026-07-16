@@ -31,7 +31,7 @@
     enable = true;
     theme = "default";
     backgrounds = {
-      "background.jpeg" = ../../assets/wallpapers/sunrise1.jpg;
+      "background.jpeg" = ../../assets/wallpapers/sunrise1.jpeg;
     };
     settings = {
       "LockScreen" = {
