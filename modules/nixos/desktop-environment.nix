@@ -1,4 +1,5 @@
 # Hyprland session enablement plus the SDDM (silentSDDM) login greeter
+# TODO: clean up comments
 
 {
   inputs,
@@ -30,12 +31,12 @@
     enable = true;
     theme = "default";
     backgrounds = {
-      "mountain-background.jpg" = ../../assets/mountain-background.jpg;
+      "background.jpeg" = ../../assets/wallpapers/sunrise1.jpg;
     };
     settings = {
       "LockScreen" = {
         display = true;
-        background = "mountain-background.jpg";
+        background = "background.jpeg";
         blur = 64;
       };
       # Font sizes below are scaled ~1.4x over the default theme to make
@@ -51,7 +52,7 @@
         font-size = 17;
       };
       "LoginScreen" = {
-        background = "mountain-background.jpg";
+        background = "background.jpeg";
       };
       "LoginScreen.LoginArea.Username" = {
         font-size = 22;

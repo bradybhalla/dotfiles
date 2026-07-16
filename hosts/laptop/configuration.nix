@@ -85,7 +85,7 @@
 
   system.activationScripts.postActivation.text =
     let
-      wallpaper = ../../assets/ocean-background.jpg;
+      wallpaper = ../../assets/wallpapers/sunset1.jpeg;
     in
     lib.mkAfter ''
       echo "setting desktop wallpaper..." >&2
