@@ -17,6 +17,7 @@
     glibtool
     glfw
     clang-tools
+    gdb
 
     uv
     nodejs

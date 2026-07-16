@@ -13,6 +13,7 @@
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/vm-host.nix
+    ../../modules/nixos/sydney.nix
   ];
 
   networking.hostName = "brady-desktop";

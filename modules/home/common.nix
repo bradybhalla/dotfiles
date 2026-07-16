@@ -43,6 +43,7 @@ in
     tree-sitter
 
     gcc
+    gnumake
     wget
     zip
     unzip
