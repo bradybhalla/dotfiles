@@ -53,6 +53,7 @@ local binds          = {
 
     -- Screenshots (copied to clipboard and saved)
     { "S",                    "hyprshot -m region " .. screenshotArgs },
+    { "SHIFT + S",            "hyprshot -m output -m active " .. screenshotArgs,       { locked = true } },
 
     -- Window focus and moving
     { "H",                    hl.dsp.focus({ direction = "left" }) },
