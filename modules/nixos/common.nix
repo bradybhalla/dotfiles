@@ -44,13 +44,18 @@
     shell = pkgs.zsh;
   };
 
-
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
   services.openssh = {
     enable = true;
     openFirewall = true;
+    # require public key authentication
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
   };
+  users.users."brady".openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4V4YF2edOtQEMfL7kC3Zvkro8wwSUPjiKz5F8wOrfy brady@brady-macbook-pro"
+  ];
 
   services.printing.enable = true;
   services.udisks2.enable = true;
