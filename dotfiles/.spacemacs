@@ -47,9 +47,7 @@ This function should only modify configuration layer settings."
 
      markdown
      emacs-lisp
-     ocaml
      python
-     haskell
 
      (org :variables
           org-directory "~/Dropbox/org"
