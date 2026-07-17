@@ -33,8 +33,6 @@
     gdu
   ];
 
-  programs.opam.enable = true;
-
   programs.claude-code = {
     enable = true;
     settings = {
