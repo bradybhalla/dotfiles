@@ -32,21 +32,14 @@ in
     fzf
     ripgrep
     fd
-    htop
     lazygit
-    tree
-    wget
-    curl
-    # croc # TODO broken: broken right now but enable later
-    rlwrap
-    jq
     tree-sitter
 
-    gcc
-    gnumake
+    curl
     wget
     zip
     unzip
+    htop
 
     nerd-fonts.meslo-lg
   ];

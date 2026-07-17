@@ -3,7 +3,14 @@
 { pkgs, linkHere, ... }:
 {
   home.packages = with pkgs; [
+    gcc
+    # croc # TODO broken: broken right now but enable later
+    rlwrap
+    jq
+    tree
     sqlite
+    gnumake
+    cmake
 
     imagemagick
     pandoc
@@ -11,22 +18,13 @@
 
     texliveFull
     typst
-    hugo
-
-    cmake
-    glibtool
-    glfw
-    clang-tools
-    gdb
 
     uv
     nodejs
     rustup
     ghc
-    haskell-language-server
+    ocamlPackages.utop
     nixfmt
-
-    ansible
 
     ispell
     pciutils
