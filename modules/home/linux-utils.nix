@@ -30,7 +30,5 @@
         wrapProgram $out/bin/sioyek --set QT_QPA_PLATFORM xcb
       '';
     })
-
-    pinentry-all
   ];
 }

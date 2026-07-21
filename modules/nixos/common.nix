@@ -61,6 +61,7 @@
   services.udisks2.enable = true;
   programs.zsh.enable = true;
   programs.firefox.enable = true;
+  programs.gnupg.agent.enable = true;
   environment.systemPackages = with pkgs; [
     vim
     wget
