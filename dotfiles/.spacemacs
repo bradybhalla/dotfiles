@@ -74,6 +74,17 @@ This function should only modify configuration layer settings."
              "* TODO %?\nSCHEDULED: %t\n%i")
             )
 
+          org-roam-capture-templates
+          '(("d" "default" plain "%?"
+             :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n")
+             :unnarrowed t)
+            ("q" "quick" plain "* TODO [#C] stub\nSCHEDULED: %t\n%?"
+             :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n")
+             :immediate-finish t
+             :unnarrowed t))
+
           org-refile-targets '((nil :maxlevel . 9)
                                (org-agenda-files :maxlevel . 9))
           org-outline-path-complete-in-steps nil
@@ -609,6 +620,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance '("crypt"))
+  (setq org-crypt-key "Brady Bhalla Org Mode")
 
   ;; custom keymaps
   (defun my/org-paste-image-from-clipboard (name)

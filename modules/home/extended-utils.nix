@@ -31,6 +31,8 @@
 
     fastfetch
     gdu
+
+    gnupg
   ];
 
   programs.claude-code = {

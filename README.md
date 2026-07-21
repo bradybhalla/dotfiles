@@ -36,7 +36,7 @@ My configuration for 90% of everything I do on a computer.
   ```
 - Set up home manager
   ```sh
-  home-manager switch --flake .#<user>@<host>`
+  home-manager switch --flake .#<user>@<host>
   ```
 
 ### MacOS
@@ -52,7 +52,7 @@ My configuration for 90% of everything I do on a computer.
   ```
 - Set up home manager
   ```sh
-  home-manager switch --flake .#<user>@<host>`
+  home-manager switch --flake .#<user>@<host>
   ```
 
 ### Without Nix

@@ -39,7 +39,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 
     alt-f = 'fullscreen' # toggle zoom
     alt-shift-f = 'layout floating tiling' # toggle floating window
-    alt-q = 'close'
+    # alt-q = 'close'
 
     alt-h = 'focus left'
     alt-j = 'focus down'
