@@ -66,6 +66,10 @@ This function should only modify configuration layer settings."
 
           org-babel-python-command "python3"
 
+          org-crypt-key "Brady Bhalla Org Mode"
+          org-crypt-disable-auto-save t
+          org-tags-exclude-from-inheritance '("crypt")
+
           org-capture-templates
           '(("q" "Quick todo" entry (file "~/Dropbox/org/inbox.org")
              "* TODO %^{Title}\nSCHEDULED: %t\n%i"
@@ -90,15 +94,6 @@ This function should only modify configuration layer settings."
           org-outline-path-complete-in-steps nil
           org-refile-use-outline-path 'file ; select from file.org/heading1/heading2
           org-reverse-note-order t ; refiling adds to the top
-
-          org-publish-project-alist
-          `(("org"
-             :base-directory ,org-directory
-             :publishing-directory "~/Dropbox/org-html-mirror"
-             :publishing-function org-html-publish-to-html
-             :with-planning t
-             :html-validation-link nil
-             ))
           )
      )
 
@@ -620,9 +615,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ;; encrypt on auto save
   (org-crypt-use-before-save-magic)
-  (setq org-tags-exclude-from-inheritance '("crypt"))
-  (setq org-crypt-key "Brady Bhalla Org Mode")
 
   ;; custom keymaps
   (defun my/org-paste-image-from-clipboard (name)
