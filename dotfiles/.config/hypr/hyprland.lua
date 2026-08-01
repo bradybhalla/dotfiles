@@ -135,9 +135,6 @@ hl.config({
     },
     decoration = {
         rounding = 10,
-        blur = {
-            passes = 3,
-        },
     },
     misc = {
         disable_hyprland_logo = true,
@@ -174,14 +171,6 @@ hl.window_rule({
         pin        = false,
     },
     no_focus = true,
-})
-
-
--- needed because blur is enabled for waybar but I don't want it anywhere else
-hl.window_rule({
-    name    = "no-blur-by-default",
-    match   = { class = ".*" },
-    no_blur = true,
 })
 
 hl.window_rule({
@@ -226,12 +215,6 @@ end
 for _, w in ipairs(float_windows) do
     add_float_rule(w.match, w.enforce_size)
 end
-
-
-hl.layer_rule({
-    match = { namespace = "waybar" },
-    blur = true,
-})
 
 
 ---------------------------

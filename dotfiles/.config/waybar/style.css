@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-  background: @base;
+  background: transparent;
   border-radius: 0px;
 }
 
@@ -18,7 +18,7 @@ tooltip {
   border: 2px solid @overlay0;
 }
 
-/* -- Module spacing (flat, no background) -- */
+/* -- Module pills (rounded background per element) -- */
 #custom-night-mode,
 #custom-notifications,
 #custom-nixos,
@@ -28,20 +28,17 @@ tooltip {
 #memory,
 #clock,
 #tray widget>image,
-#window {
-  margin: 0.2em 0.3em;
-  padding: 0 0;
+#workspaces {
+  background: @base;
+  border-radius: 10px;
+  margin: 0.2em 0.2em;
+  padding: 0.1em 0.3em;
   min-width: 25px;
-  /* background: @red; */
-}
-
-#window {
-  color: @subtext0;
 }
 
 #clock {
   color: @lavender;
-  margin-right: 0.6em;
+  margin-right: 0.4em;
 }
 
 #mpris {
@@ -56,8 +53,6 @@ tooltip {
   color: @blue;
 }
 
-/* TODO: review new styles below (notifications, dropdown menu) */
-
 #custom-notifications {
   color: @subtext0;
 }
@@ -70,7 +65,7 @@ tooltip {
   color: @flamingo;
 }
 
-/* -- Dropdown menu (nixos icon) -- */
+/* -- Dropdown menu -- */
 menu {
   background: @base;
   border: 2px solid @overlay0;
@@ -109,9 +104,8 @@ menu separator {
   color: @mauve;
 }
 
-/* -- NixOS logo: bare icon, no pill -- */
 #custom-nixos {
-  margin-left: 0.6em;
+  margin-left: 0.4em;
   color: @blue;
   font-size: 18px; /* TODO: review (smaller than global 22px) */
 }

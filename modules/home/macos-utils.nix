@@ -37,7 +37,7 @@
 
   home.activation.setWallpaper =
     let
-      wallpaper = ../../assets/wallpapers/sunset1.jpg;
+      wallpaper = ../../assets/wallpapers/wallpaper3.jpg;
     in
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       run /usr/bin/osascript -e '

@@ -10,8 +10,8 @@
   "modules-left": [
     "custom/nixos",
     "memory",
-    "cpu",
-    "hyprland/window"
+    "cpu"
+    // "hyprland/window"
   ],
   "modules-center": [
     "hyprland/workspaces",
