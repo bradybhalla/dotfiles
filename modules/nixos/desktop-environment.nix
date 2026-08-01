@@ -58,15 +58,20 @@
       };
       "LoginScreen.LoginArea.Username" = {
         font-size = 22;
+        color = "#000000";
       };
       "LoginScreen.LoginArea.PasswordInput" = {
         font-size = 17;
+        content-color = "#000000";
       };
       "LoginScreen.LoginArea.LoginButton" = {
         font-size = 17;
+        content-color = "#000000";
+        active-content-color = "#000000";
       };
       "LoginScreen.LoginArea.Spinner" = {
         font-size = 20;
+        color = "#000000";
       };
       "LoginScreen.LoginArea.WarningMessage" = {
         font-size = 15;
