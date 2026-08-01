@@ -8,7 +8,7 @@
   "gtk-layer-shell": true,
 
   "modules-left": [
-    "custom/nixos",
+    "custom/system",
     "memory",
     "cpu"
     // "hyprland/window"
@@ -53,14 +53,12 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
   },
-  "custom/nixos": {
-    "format": "{}<span font-size='9pt'> </span>",
-
-    "exec": "$HOME/.config/waybar/scripts/nixos-tooltip.sh",
+  "custom/system": {
+    "exec": "jq -cn --arg text \"$USER\" --arg tooltip \"$USER@$HOSTNAME\" '{text: $text, tooltip: $tooltip}'",
     "return-type": "json",
-    "interval": 60,
+    "interval": "once",
     "menu": "on-click",
-    "menu-file": "~/.config/waybar/menu.ui",
+    "menu-file": "~/.config/waybar/system-menu.ui",
     "menu-actions": {
       "about": "hyprsysteminfo",
       "lock": "loginctl lock-session",

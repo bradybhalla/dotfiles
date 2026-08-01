@@ -30,7 +30,7 @@ local logout         = "hyprshutdown -p 'uwsm stop'"
 
 local mainMod        = "SUPER"
 
-local screenshotArgs = "-o ~/Screenshots"
+local screenshotArgs = "-o ~/Pictures/Screenshots"
 
 -- every keybind, as { key, action, opts? }. a string action is run as a shell
 -- command; a dispatcher/function is bound directly. see bind() above for how

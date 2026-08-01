@@ -31,12 +31,12 @@
     enable = true;
     theme = "default";
     backgrounds = {
-      "wallpaper2.jpg" = ../../assets/wallpapers/wallpaper2.jpg;
+      "wallpaper4.jpg" = ../../assets/wallpapers/wallpaper4.jpg;
     };
     settings = {
       "LockScreen" = {
         display = true;
-        background = "wallpaper2.jpg";
+        background = "wallpaper4.jpg";
         saturation = -0.7;
         blur = 60;
       };
@@ -53,7 +53,7 @@
         font-size = 17;
       };
       "LoginScreen" = {
-        background = "wallpaper2.jpg";
+        background = "wallpaper4.jpg";
         blur = 20;
       };
       "LoginScreen.LoginArea.Username" = {

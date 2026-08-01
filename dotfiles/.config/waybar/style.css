@@ -21,7 +21,7 @@ tooltip {
 /* -- Module pills (rounded background per element) -- */
 #custom-night-mode,
 #custom-notifications,
-#custom-nixos,
+#custom-system,
 #mpris,
 #pulseaudio,
 #cpu,
@@ -104,10 +104,10 @@ menu separator {
   color: @mauve;
 }
 
-#custom-nixos {
+#custom-system {
   margin-left: 0.4em;
   color: @blue;
-  font-size: 18px; /* TODO: review (smaller than global 22px) */
+  /* font-size: 18px; * TODO: review (smaller than global 22px) */
 }
 
 #workspaces button {
