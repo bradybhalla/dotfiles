@@ -132,6 +132,13 @@ menu separator {
   font-weight: bold;
 }
 
+/* hyprland/window module (empty format) applies the .fullscreen class to the bar */
+#window {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
 window#waybar.fullscreen #workspaces button.active {
   color: @teal;
 }

@@ -10,8 +10,8 @@
   "modules-left": [
     "custom/system",
     "memory",
-    "cpu"
-    // "hyprland/window"
+    "cpu",
+    "hyprland/window"
   ],
   "modules-center": [
     "hyprland/workspaces",
@@ -71,11 +71,9 @@
     "format": "{id}",
   },
   "hyprland/window": {
-    "format": "{title}",
-    "icon": true,
-    "tooltip": false,
-    "separate-outputs": true,
-    "max-length": 40
+    // hidden, but needed for fullscreen css styling
+    "format": "",
+    "separate-outputs": true
   },
   "mpris": {
     "format": "{status_icon}",
@@ -89,9 +87,11 @@
   },
   "cpu": {
     "format": " {usage}%",
+    "interval": 1,
   },
   "memory": {
     "format": " {percentage}%",
+    "interval": 1,
   },
   "clock": {
     "format": "{:%a %b %d %I:%M %p}",
