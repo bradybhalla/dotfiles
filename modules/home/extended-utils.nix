@@ -33,6 +33,8 @@
     gdu
 
     gnupg
+
+    ansible
   ];
 
   programs.claude-code = {

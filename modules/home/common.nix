@@ -52,6 +52,7 @@ in
       name = "Brady Bhalla";
       email = "34150846+bradybhalla@users.noreply.github.com";
     };
+    settings.init.defaultBranch = "main";
   };
 
   programs.zsh = {

@@ -12,8 +12,8 @@
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
-    ../../modules/nixos/vm-host.nix
-    ../../modules/nixos/sydney.nix
+    ../../modules/nixos/virtualization.nix
+    # ../../modules/nixos/sydney.nix
   ];
 
   networking.hostName = "brady-desktop";

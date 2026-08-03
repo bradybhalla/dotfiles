@@ -1,7 +1,8 @@
-# NOTE: imported into common.nix so probably don't need to manually import
+# NOTE: imported into hyprland-desktop.nix so probably don't need to manually import.
 # general theming of GUIs
 # - catppuccin themes for gtk and qt
 # - sets things to dark mode where possible
+# TODO: clean this up and move back into hyprland-desktop
 
 {
   pkgs,
