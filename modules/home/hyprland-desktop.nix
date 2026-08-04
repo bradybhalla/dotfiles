@@ -20,7 +20,6 @@
     hyprshot # screenshots
     swaynotificationcenter # notification daemon + control center
     libnotify # notify-send command
-    swayosd # on-screen display for volume/media/brightness
     rofi # drun
     wl-clipboard # wl-copy / wl-paste clipboard
     pamixer # volume cli
@@ -31,6 +30,7 @@
     pavucontrol # audio device setttings
   ];
 
+  services.swayosd.enable = true; # on-screen display for volume/media/brightness (systemd user service, started after compositor)
   services.playerctld.enable = true;
   services.network-manager-applet.enable = true;
   services.udiskie.enable = true; # automount removable media (needs services.udisks2)

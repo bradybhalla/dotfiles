@@ -7,8 +7,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")         -- status bar
     hl.exec_cmd("hyprpaper")      -- wallpaper
     hl.exec_cmd("swaync")         -- notifications
-    hl.exec_cmd("swayosd-server") -- on-screen display for volume/media
     hl.exec_cmd("eww daemon")     -- widgets
+    -- swayosd-server started as a system service
 
     -- start other processes
     hl.exec_cmd("hyprsunset")  -- allows night mode
