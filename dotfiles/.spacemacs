@@ -722,6 +722,9 @@ before packages are loaded."
     (when (boundp 'lock-file-name-transforms)
       (setq lock-file-name-transforms `((".*" ,lock-dir t))))
     )
+
+  ;; handle inline images better (needs newer emacs versions)
+  (pixel-scroll-precision-mode 1)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

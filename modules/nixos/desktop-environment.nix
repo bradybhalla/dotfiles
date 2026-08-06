@@ -27,69 +27,68 @@
     bibata-cursors # cursor theme for the SDDM greeter (see below)
   ];
 
-  programs.silentSDDM = {
-    enable = true;
-    theme = "default";
-    backgrounds = {
-      "wallpaper4.jpg" = ../../assets/wallpapers/wallpaper4.jpg;
+  programs.silentSDDM =
+    let
+      wallpaper = "wallpaper5-catppuccin.jpg";
+    in
+    {
+      enable = true;
+      theme = "default";
+      backgrounds = {
+        "${wallpaper}" = ../../assets/wallpapers/${wallpaper};
+      };
+      settings = {
+        "LockScreen" = {
+          display = true;
+          background = wallpaper;
+          saturation = -0.7;
+          blur = 60;
+        };
+        # Font sizes below are scaled ~1.4x over the default theme to make
+        # everything on the lock/login screens larger.
+        "LockScreen.Clock" = {
+          font-size = 96;
+        };
+        "LockScreen.Date" = {
+          font-size = 20;
+        };
+        "LockScreen.Message" = {
+          display-icon = false;
+          font-size = 17;
+        };
+        "LoginScreen" = {
+          background = wallpaper;
+          blur = 60;
+        };
+        "LoginScreen.LoginArea.Username" = {
+          font-size = 22;
+        };
+        "LoginScreen.LoginArea.PasswordInput" = {
+          font-size = 17;
+        };
+        "LoginScreen.LoginArea.LoginButton" = {
+          font-size = 17;
+        };
+        "LoginScreen.LoginArea.Spinner" = {
+          font-size = 20;
+        };
+        "LoginScreen.LoginArea.WarningMessage" = {
+          font-size = 15;
+        };
+        "LoginScreen.MenuArea.Popups" = {
+          font-size = 15;
+        };
+        "LoginScreen.MenuArea.Session" = {
+          font-size = 14;
+        };
+        "LoginScreen.MenuArea.Layout" = {
+          font-size = 14;
+        };
+        "Tooltips" = {
+          font-size = 15;
+        };
+      };
     };
-    settings = {
-      "LockScreen" = {
-        display = true;
-        background = "wallpaper4.jpg";
-        saturation = -0.7;
-        blur = 60;
-      };
-      # Font sizes below are scaled ~1.4x over the default theme to make
-      # everything on the lock/login screens larger.
-      "LockScreen.Clock" = {
-        font-size = 96;
-      };
-      "LockScreen.Date" = {
-        font-size = 20;
-      };
-      "LockScreen.Message" = {
-        display-icon = false;
-        font-size = 17;
-      };
-      "LoginScreen" = {
-        background = "wallpaper4.jpg";
-        blur = 20;
-      };
-      "LoginScreen.LoginArea.Username" = {
-        font-size = 22;
-        color = "#000000";
-      };
-      "LoginScreen.LoginArea.PasswordInput" = {
-        font-size = 17;
-        content-color = "#000000";
-      };
-      "LoginScreen.LoginArea.LoginButton" = {
-        font-size = 17;
-        content-color = "#000000";
-        active-content-color = "#000000";
-      };
-      "LoginScreen.LoginArea.Spinner" = {
-        font-size = 20;
-        color = "#000000";
-      };
-      "LoginScreen.LoginArea.WarningMessage" = {
-        font-size = 15;
-      };
-      "LoginScreen.MenuArea.Popups" = {
-        font-size = 15;
-      };
-      "LoginScreen.MenuArea.Session" = {
-        font-size = 14;
-      };
-      "LoginScreen.MenuArea.Layout" = {
-        font-size = 14;
-      };
-      "Tooltips" = {
-        font-size = 15;
-      };
-    };
-  };
   # The greeter runs on X11 (silentSDDM only uses Wayland when
   # services.xserver.enable is off) where nothing scales automatically, so
   # hardcode the monitor's Hyprland scale of 1.5: Qt 6 reads its scale factor

@@ -24,7 +24,9 @@
     rustup
     ghc
     ocamlPackages.utop
+
     nixfmt
+    lua-language-server
 
     ispell
     pciutils

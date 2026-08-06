@@ -40,6 +40,13 @@ in
     zip
     unzip
     htop
+    (python3.withPackages (
+      ps: with ps; [
+        requests
+        numpy
+        matplotlib
+      ]
+    ))
 
     nerd-fonts.meslo-lg
   ];

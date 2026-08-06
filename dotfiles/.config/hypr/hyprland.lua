@@ -4,10 +4,10 @@
 
 hl.on("hyprland.start", function()
     -- start desktop components
-    hl.exec_cmd("waybar")         -- status bar
-    hl.exec_cmd("hyprpaper")      -- wallpaper
-    hl.exec_cmd("swaync")         -- notifications
-    hl.exec_cmd("eww daemon")     -- widgets
+    hl.exec_cmd("waybar")     -- status bar
+    hl.exec_cmd("hyprpaper")  -- wallpaper
+    hl.exec_cmd("swaync")     -- notifications
+    hl.exec_cmd("eww daemon") -- widgets
     -- swayosd-server started as a system service
 
     -- start other processes
@@ -21,13 +21,6 @@ end)
 ---- KEYBINDINGS ----
 ---------------------
 
--- TODO: get rid of these
-local terminal       = "alacritty"
-local menu           = "rofi -show drun"
-local browser        = "firefox"
-local locker         = "hyprlock"
-local logout         = "hyprshutdown -p 'uwsm stop'"
-
 local mainMod        = "SUPER"
 
 local screenshotArgs = "-o ~/Pictures/Screenshots"
@@ -38,18 +31,18 @@ local screenshotArgs = "-o ~/Pictures/Screenshots"
 -- TODO: rework binds
 local binds          = {
     -- apps and window actions
-    { "Return",               terminal },
-    { "Space",                menu },
-    { "B",                    browser },
-    { "E",                    "emacsclient -c -a ''" },
+    { "Return",               "alacritty" },            -- terminal
+    { "Space",                "rofi -show drun" },      -- app opener menu
+    { "B",                    "firefox" },              -- browser
+    { "E",                    "emacsclient -c -a ''" }, -- emacs
     { "F",                    hl.dsp.window.fullscreen({ mode = 1 }) },
     { "SHIFT + F",            hl.dsp.window.float({ action = "toggle" }) },
-    { "N",                    "swaync-client -t -sw" },
+    { "N",                    "swaync-client -t -sw" },     -- notifications panel
+    { "SHIFT + N",            "swaync-client -d -sw" },     -- do not disturb
     { "Q",                    hl.dsp.window.close() },
-    { "SHIFT + Q",            locker },
-    { "CTRL + SHIFT + Q",     logout },
-    { "M",                    "eww open --toggle music" },
-    { "P",                    "1password --quick-access" },
+    { "SHIFT + Q",            "hyprlock" },                 -- lock
+    { "M",                    "eww open --toggle music" },  -- music popup
+    { "P",                    "1password --quick-access" }, -- 1password
 
     -- Screenshots (copied to clipboard and saved)
     { "S",                    "hyprshot -m region " .. screenshotArgs },
@@ -192,18 +185,18 @@ hl.window_rule({
     pin              = true,
     no_initial_focus = true,
     move             = "monitor_w-window_w-9 monitor_h-window_h-9",
-    -- opacity 20% while focused
+    -- opacity 20% while focused to see behind it
     opacity          = "0.2 1.0",
 })
 
 -- make windows float
 local float_windows = {
-    { match = { class = "^\\.blueman-manager-wrapped$" } },                                                   -- blueman (bluetooth tray)
-    { match = { class = "^org\\.pulseaudio\\.pavucontrol$" }, enforce_size = "1100 800" },                    -- pavucontrol (volume control)
-    { match = { class = "^1password$" } },                                                                    -- 1Password
-    { match = { class = "^python3$", title = "^Maestral.*" } },                                               -- maestral
-    { match = { class = "^qimgv$" } },                                                                        -- qimgv (image viewer)
-    { match = { class = "^dev\\.deedles\\.Trayscale$" },      enforce_size = "1100 800" }                     -- trayscale (tailscale tray)
+    { match = { class = "^\\.blueman-manager-wrapped$" } },                                -- blueman (bluetooth tray)
+    { match = { class = "^org\\.pulseaudio\\.pavucontrol$" }, enforce_size = "1100 800" }, -- pavucontrol (volume control)
+    { match = { class = "^1password$" } },                                                 -- 1Password
+    { match = { class = "^python3$", title = "^Maestral.*" } },                            -- maestral
+    { match = { class = "^qimgv$" } },                                                     -- qimgv (image viewer)
+    { match = { class = "^dev\\.deedles\\.Trayscale$" },      enforce_size = "1100 800" }  -- trayscale (tailscale tray)
 }
 local function add_float_rule(match, enforce_size)
     hl.window_rule({
