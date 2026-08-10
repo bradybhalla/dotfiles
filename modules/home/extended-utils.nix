@@ -4,7 +4,7 @@
 {
   home.packages = with pkgs; [
     gcc
-    # croc # TODO broken: broken right now but enable later
+    croc
     rlwrap
     jq
     tree
