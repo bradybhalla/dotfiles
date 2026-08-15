@@ -28,8 +28,6 @@ in
     neovim
     tmux
     zsh-powerlevel10k
-    zoxide
-    fzf
     ripgrep
     fd
     lazygit
@@ -99,6 +97,17 @@ in
       "--cmd"
       "cd"
     ];
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    shellWrapperName = "y"; # y runs yazi and cd's to the final directory
+    settings.mgr = {
+      show_hidden = true;
+      sort_by = "mtime";
+      sort_reverse = true;
+    };
   };
 
   home.file = {
