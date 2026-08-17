@@ -55,6 +55,7 @@
   };
   users.users."brady".openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4V4YF2edOtQEMfL7kC3Zvkro8wwSUPjiKz5F8wOrfy brady@brady-macbook-pro"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII21DtDnHno8HhQBgEcIe4Wjyy5NYfQirICEbgV6CNEF Termius"
   ];
 
   services.printing.enable = true;
