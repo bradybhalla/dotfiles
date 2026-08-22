@@ -1,10 +1,9 @@
-# extra dev/build tooling plus Claude Code setup
+# extra dev/build tooling
 
 { pkgs, linkHere, ... }:
 {
   home.packages = with pkgs; [
     gcc
-    croc
     rlwrap
     jq
     tree
@@ -37,6 +36,8 @@
     gnupg
 
     ansible
+
+    rclone
   ];
 
   programs.claude-code = {

@@ -1,5 +1,4 @@
-# base home-manager config shared across all hosts: shell, git, core CLI
-# tools
+# base home-manager config shared across all hosts. enough for a comfortable shell environment.
 
 {
   config,
@@ -45,6 +44,7 @@ in
         matplotlib
       ]
     ))
+    croc
 
     nerd-fonts.meslo-lg
   ];

@@ -20,7 +20,6 @@
   home.packages = with pkgs; [
     pngpaste # paste images
     skhd # hotkeys
-    defaultbrowser # set default browser
 
     gnutar # spacemacs sometimes doesn't install correctly on mac without this
   ];

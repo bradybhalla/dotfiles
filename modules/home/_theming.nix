@@ -1,4 +1,5 @@
-# NOTE: imported into hyprland-desktop.nix so probably don't need to manually import.
+# NOTE: the _ prefix means this is imported by another module (hyprland-desktop.nix),
+# not directly by the main config.
 # general theming of GUIs
 # - catppuccin themes for gtk and qt
 # - sets things to dark mode where possible

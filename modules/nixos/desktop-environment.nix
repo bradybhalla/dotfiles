@@ -22,8 +22,8 @@
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # electron apps should use wayland
 
-  # SDDM greeter (silentSDDM)
   environment.systemPackages = with pkgs; [
+    kitty # so there is a terminal with the default hyprland config
     bibata-cursors # cursor theme for the SDDM greeter (see below)
   ];
 

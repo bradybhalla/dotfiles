@@ -1,4 +1,4 @@
-# Steam/Proton gaming setup: gamemode, mangohud, protonup-qt
+# Steam/Proton gaming
 
 {
   config,

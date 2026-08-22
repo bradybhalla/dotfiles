@@ -1,5 +1,4 @@
-# base NixOS system config shared across all hosts: boot, locale, users,
-# networking, audio, and other core services
+# base NixOS system config shared across all hosts: boot, locale, users, networking, audio, and other core services
 
 {
   config,
@@ -54,6 +53,7 @@
     settings.KbdInteractiveAuthentication = false;
   };
   users.users."brady".openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAjYqtizzNgQk7LC90LlNQrrIes0SGvpVe4qsDsctMnz brady@brady-desktop"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4V4YF2edOtQEMfL7kC3Zvkro8wwSUPjiKz5F8wOrfy brady@brady-macbook-pro"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII21DtDnHno8HhQBgEcIe4Wjyy5NYfQirICEbgV6CNEF Termius"
   ];
@@ -68,7 +68,6 @@
     wget
     git
     python3
-    kitty # so there is a terminal with the default hyprland config
   ];
 
   # Audio

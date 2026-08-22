@@ -6,7 +6,7 @@
   ...
 }:
 {
-  imports = [ ./theming.nix ];
+  imports = [ ./_theming.nix ];
 
   home.packages = with pkgs; [
     waybar # status bar

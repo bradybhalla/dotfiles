@@ -32,12 +32,6 @@
     polkitPolicyOwners = [ "brady" ];
   };
 
-  # Ollama with CUDA
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-  };
-
   # Sunshine
   services.sunshine = {
     enable = true;

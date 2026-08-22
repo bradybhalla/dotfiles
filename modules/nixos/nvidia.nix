@@ -1,4 +1,4 @@
-# NVIDIA GPU driver (open kernel modules) and CUDA setup
+# NVIDIA GPU driver (open kernel modules), CUDA setup, and CUDA-accelerated ollama
 
 {
   pkgs,
@@ -24,4 +24,10 @@
   environment.systemPackages = with pkgs; [
     cudatoolkit
   ];
+
+  # Ollama with CUDA
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+  };
 }
