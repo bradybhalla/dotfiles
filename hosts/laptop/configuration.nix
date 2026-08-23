@@ -33,6 +33,7 @@
       "nikitabobko/tap/aerospace"
       "tailscale-app"
       "dropbox"
+      "kopiaui"
 
       "docker-desktop"
       "skim"

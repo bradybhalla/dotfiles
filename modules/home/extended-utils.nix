@@ -38,6 +38,7 @@
     ansible
 
     rclone
+    kopia
   ];
 
   programs.claude-code = {
