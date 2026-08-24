@@ -1,5 +1,5 @@
-# Kopia backups to run on the desktop host. Backs up local files and self-hosted services
-# TODO: could keep doing this or could switch to running a server like I do on mac and configuring everything in kopia
+# Kopia backups to run on the desktop host. Assumes the repository is already connected
+# for ${user} (~/.config/kopia) and that the snapshot sources are configured in kopia itself.
 
 {
   config,
@@ -10,31 +10,16 @@
 
 let
   user = "brady";
-  home = "/home/${user}";
-  dumpDirName = "kopia-backup";
+  dumpDirName = "self-hosting-db-backup";
   dumpDir = "/var/lib/${dumpDirName}";
-  forgejoData = "/var/self-hosting/forgejo";
+  forgejoData = "/var/lib/self-hosting/forgejo";
   minifluxDbContainer = "miniflux-db-1";
 
-  sources = [
-    # local files
-    "${home}/Desktop"
-    "${home}/Documents"
-    "${home}/Downloads"
-    "${home}/Pictures"
-
-    # self-hosting data
-    forgejoData
-    dumpDir
-  ];
-
-  backupScript = pkgs.writeShellApplication {
-    name = "kopia-backup";
+  # Dumps the self-hosted databases into ${dumpDir}, which is one of the sources
+  # kopia snapshots
+  dumpScript = pkgs.writeShellApplication {
+    name = "dump-dbs-before-kopia-backup";
     runtimeInputs = [
-      pkgs.kopia
-      # kopia's rclone backend spawns `rclone serve webdav`, and the one from
-      # home-manager is not on a system unit's PATH
-      pkgs.rclone
       pkgs.sqlite
       config.virtualisation.docker.package
     ];
@@ -45,9 +30,6 @@ let
       # Miniflux database
       docker exec ${minifluxDbContainer} sh -c 'pg_dumpall -U "$POSTGRES_USER"' \
         > "${dumpDir}/miniflux.sql"
-
-      # Take snapshot
-      kopia snapshot create ${lib.escapeShellArgs sources}
     '';
   };
 in
@@ -61,12 +43,16 @@ in
     wants = [ "network-online.target" ];
     requires = [ "docker.service" ];
 
+    # TODO: if you stop using rclone then this isn't needed
+    path = [ pkgs.rclone ];
+
     serviceConfig = {
       Type = "oneshot";
       User = user;
       StateDirectory = dumpDirName;
       StateDirectoryMode = "0700";
-      ExecStart = lib.getExe backupScript;
+      ExecStartPre = lib.getExe dumpScript;
+      ExecStart = "${lib.getExe pkgs.kopia} snapshot create --all";
     };
   };
 
@@ -75,7 +61,6 @@ in
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*-*-* 04:00:00";
-      # catch up after the machine was off at the scheduled time
       Persistent = true;
       RandomizedDelaySec = "15m";
     };

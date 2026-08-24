@@ -6,6 +6,10 @@
 }:
 
 {
+  imports = [
+    ../../modules/darwin/kopia-backup-on-laptop.nix
+  ];
+
   system.primaryUser = "brady";
 
   networking = {

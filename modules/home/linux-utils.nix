@@ -8,6 +8,7 @@
     emacs-pgtk # pgtk makes it look normal on wayland
     spotify # TODO: only works on x86
     maestral # for cli
+    kopia-ui
 
     # non-global tray icons
     trayscale
