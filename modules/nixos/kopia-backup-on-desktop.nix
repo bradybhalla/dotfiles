@@ -1,4 +1,5 @@
 # Kopia backups to run on the desktop host. Backs up local files and self-hosted services
+# TODO: could keep doing this or could switch to running a server like I do on mac and configuring everything in kopia
 
 {
   config,
@@ -31,6 +32,9 @@ let
     name = "kopia-backup";
     runtimeInputs = [
       pkgs.kopia
+      # kopia's rclone backend spawns `rclone serve webdav`, and the one from
+      # home-manager is not on a system unit's PATH
+      pkgs.rclone
       pkgs.sqlite
       config.virtualisation.docker.package
     ];
