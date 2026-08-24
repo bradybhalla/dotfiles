@@ -13,6 +13,7 @@
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/virtualization.nix
+    ../../modules/nixos/kopia-backup-on-desktop.nix
     # ../../modules/nixos/sydney.nix
   ];
 
