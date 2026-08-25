@@ -56,8 +56,8 @@
     "retention": {},
     "files": {
       "ignore": [
-        "/Dropbox",
-        "/.ollama/models"
+        "/Dropbox/",
+        "/.ollama/models/"
       ]
     },
     "errorHandling": {},
@@ -100,7 +100,7 @@
         "/gitea/forgejo.db",
         "/gitea/forgejo.db-wal",
         "/gitea/forgejo.db-shm",
-        "/ssh"
+        "/ssh/"
       ]
     },
     "errorHandling": {},
@@ -122,9 +122,9 @@
     "retention": {},
     "files": {
       "ignore": [
-        "/.Trash",
-        "/Library",
-        "/Pictures/Photos Library.photoslibrary"
+        "/.Trash/",
+        "/Library/",
+        "/Pictures/Photos Library.photoslibrary/"
       ]
     },
     "errorHandling": {},
@@ -146,10 +146,10 @@
     "retention": {},
     "files": {
       "ignore": [
-        "/Messages",
-        "/Caches",
-        "/CloudStorage",
-        "/Mobile Documents"
+        "/Messages/",
+        "/Caches/",
+        "/CloudStorage/",
+        "/Mobile Documents/"
       ]
     },
     "errorHandling": {
