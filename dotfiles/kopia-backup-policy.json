@@ -147,9 +147,9 @@
     "files": {
       "ignore": [
         "/Messages",
-        "Caches",
-        "CloudStorage",
-        "Mobile Documents"
+        "/Caches",
+        "/CloudStorage",
+        "/Mobile Documents"
       ]
     },
     "errorHandling": {
