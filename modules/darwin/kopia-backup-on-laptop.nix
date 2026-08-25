@@ -1,4 +1,6 @@
-# Kopia backups to run on my laptop. Assumes the repository is already connected for ${user} (with the --no-use-keychain flag) and that the snapshot sources are configured in kopia itself. See your org-roam notes on kopia setup for macOS to fix any permission or password issues.
+# Kopia backups to run on the laptop, to the same rclone repository the desktop
+# backs up to. Assumes the repository is already connected for ${user} and that the
+# snapshot sources are configured in kopia itself.
 
 {
   pkgs,

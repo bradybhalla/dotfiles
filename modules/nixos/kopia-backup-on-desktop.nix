@@ -9,7 +9,7 @@
 
 let
   user = "brady";
-  dumpDirName = "self-hosting-db-backup";
+  dumpDirName = "self-hosting-db-dumps";
   dumpDir = "/var/lib/${dumpDirName}";
   forgejoData = "/var/lib/self-hosting/forgejo";
   minifluxDbContainer = "miniflux-db-1";
