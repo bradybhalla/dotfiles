@@ -122,8 +122,9 @@
     "retention": {},
     "files": {
       "ignore": [
+        "/.Trash",
         "/Library",
-        "/.Trash"
+        "/Pictures/Photos Library.photoslibrary"
       ]
     },
     "errorHandling": {},
@@ -145,6 +146,7 @@
     "retention": {},
     "files": {
       "ignore": [
+        "/Messages",
         "Caches",
         "CloudStorage",
         "Mobile Documents"

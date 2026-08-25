@@ -11,6 +11,13 @@
 let
   user = "brady";
   home = "/Users/${user}";
+
+  snapshotPaths = [
+    home
+    "${home}/Library"
+    "${home}/Library/Messages"
+    "${home}/Pictures/Photos Library.photoslibrary"
+  ];
 in
 {
   # make launchd daemon so it runs when nobody is logged in
@@ -20,8 +27,8 @@ in
         (lib.getExe pkgs.kopia)
         "snapshot"
         "create"
-        "--all"
-      ];
+      ]
+      ++ snapshotPaths;
 
       UserName = user;
 

@@ -14,6 +14,12 @@ let
   forgejoData = "/var/lib/self-hosting/forgejo";
   minifluxDbContainer = "miniflux-db-1";
 
+  snapshotPaths = [
+    "/home/${user}"
+    dumpDir
+    forgejoData
+  ];
+
   # Dumps the self-hosted databases into ${dumpDir}, which is one of the sources
   # kopia snapshots
   dumpScript = pkgs.writeShellApplication {
@@ -51,7 +57,7 @@ in
       StateDirectory = dumpDirName;
       StateDirectoryMode = "0700";
       ExecStartPre = lib.getExe dumpScript;
-      ExecStart = "${lib.getExe pkgs.kopia} snapshot create --all";
+      ExecStart = "${lib.getExe pkgs.kopia} snapshot create ${lib.escapeShellArgs snapshotPaths}";
     };
   };
 
