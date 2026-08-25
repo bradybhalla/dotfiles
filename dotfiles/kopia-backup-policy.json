@@ -1,0 +1,170 @@
+{
+  "(global)": {
+    "retention": {
+      "keepLatest": 10,
+      "keepHourly": 48,
+      "keepDaily": 7,
+      "keepWeekly": 4,
+      "keepMonthly": 24,
+      "keepAnnual": 3,
+      "ignoreIdenticalSnapshots": false
+    },
+    "files": {
+      "ignoreDotFiles": [
+        ".kopiaignore"
+      ]
+    },
+    "errorHandling": {
+      "ignoreFileErrors": false,
+      "ignoreDirectoryErrors": false,
+      "ignoreUnknownTypes": true
+    },
+    "scheduling": {
+      "runMissed": true
+    },
+    "compression": {
+      "compressorName": "none"
+    },
+    "metadataCompression": {
+      "compressorName": "zstd-fastest"
+    },
+    "splitter": {},
+    "actions": {},
+    "osSnapshots": {
+      "volumeShadowCopy": {
+        "enable": 0
+      }
+    },
+    "logging": {
+      "directories": {
+        "snapshotted": 5,
+        "ignored": 5
+      },
+      "entries": {
+        "snapshotted": 0,
+        "ignored": 5,
+        "cacheHit": 0,
+        "cacheMiss": 0
+      }
+    },
+    "upload": {
+      "maxParallelSnapshots": 1,
+      "parallelUploadAboveSize": 2147483648
+    }
+  },
+  "brady@brady-desktop:/home/brady": {
+    "retention": {},
+    "files": {
+      "ignore": [
+        "/Dropbox",
+        "/.ollama/models"
+      ]
+    },
+    "errorHandling": {},
+    "scheduling": {},
+    "compression": {},
+    "metadataCompression": {},
+    "splitter": {},
+    "actions": {},
+    "osSnapshots": {
+      "volumeShadowCopy": {}
+    },
+    "logging": {
+      "directories": {},
+      "entries": {}
+    },
+    "upload": {}
+  },
+  "brady@brady-desktop:/var/lib/self-hosting-db-dumps": {
+    "retention": {},
+    "files": {},
+    "errorHandling": {},
+    "scheduling": {},
+    "compression": {},
+    "metadataCompression": {},
+    "splitter": {},
+    "actions": {},
+    "osSnapshots": {
+      "volumeShadowCopy": {}
+    },
+    "logging": {
+      "directories": {},
+      "entries": {}
+    },
+    "upload": {}
+  },
+  "brady@brady-desktop:/var/lib/self-hosting/forgejo": {
+    "retention": {},
+    "files": {
+      "ignore": [
+        "/gitea/forgejo.db",
+        "/gitea/forgejo.db-wal",
+        "/gitea/forgejo.db-shm",
+        "/ssh"
+      ]
+    },
+    "errorHandling": {},
+    "scheduling": {},
+    "compression": {},
+    "metadataCompression": {},
+    "splitter": {},
+    "actions": {},
+    "osSnapshots": {
+      "volumeShadowCopy": {}
+    },
+    "logging": {
+      "directories": {},
+      "entries": {}
+    },
+    "upload": {}
+  },
+  "brady@brady-macbook-pro:/Users/brady": {
+    "retention": {},
+    "files": {
+      "ignore": [
+        "/Library",
+        "/.Trash"
+      ]
+    },
+    "errorHandling": {},
+    "scheduling": {},
+    "compression": {},
+    "metadataCompression": {},
+    "splitter": {},
+    "actions": {},
+    "osSnapshots": {
+      "volumeShadowCopy": {}
+    },
+    "logging": {
+      "directories": {},
+      "entries": {}
+    },
+    "upload": {}
+  },
+  "brady@brady-macbook-pro:/Users/brady/Library": {
+    "retention": {},
+    "files": {
+      "ignore": [
+        "Caches",
+        "CloudStorage",
+        "Mobile Documents"
+      ]
+    },
+    "errorHandling": {
+      "ignoreFileErrors": true
+    },
+    "scheduling": {},
+    "compression": {},
+    "metadataCompression": {},
+    "splitter": {},
+    "actions": {},
+    "osSnapshots": {
+      "volumeShadowCopy": {}
+    },
+    "logging": {
+      "directories": {},
+      "entries": {}
+    },
+    "upload": {}
+  }
+}

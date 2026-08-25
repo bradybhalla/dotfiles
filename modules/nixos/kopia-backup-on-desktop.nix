@@ -1,5 +1,4 @@
-# Kopia backups to run on the desktop host. Assumes the repository is already connected
-# for ${user} (~/.config/kopia) and that the snapshot sources are configured in kopia itself.
+# Kopia backups to run on my desktop (including self-hosted services). Assumes the repository is already connected for ${user} and that the snapshot sources are configured in kopia itself.
 
 {
   config,

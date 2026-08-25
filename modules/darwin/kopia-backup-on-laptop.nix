@@ -1,6 +1,4 @@
-# Kopia backups to run on the laptop host, to the same rclone repository the desktop
-# backs up to. Assumes the repository is already connected for ${user} and that the
-# snapshot sources are configured in kopia itself.
+# Kopia backups to run on my laptop. Assumes the repository is already connected for ${user} (with the --no-use-keychain flag) and that the snapshot sources are configured in kopia itself. See your org-roam notes on kopia setup for macOS to fix any permission or password issues.
 
 {
   pkgs,
@@ -13,7 +11,7 @@ let
   home = "/Users/${user}";
 in
 {
-  # a daemon rather than a user agent, so it runs when nobody is logged in
+  # make launchd daemon so it runs when nobody is logged in
   launchd.daemons.kopia-backup = {
     serviceConfig = {
       ProgramArguments = [
@@ -25,16 +23,13 @@ in
 
       UserName = user;
 
-      # launchd daemons get a bare environment: kopia needs HOME to find its config,
-      # and its rclone backend spawns `rclone serve webdav` off PATH
       EnvironmentVariables = {
         HOME = home;
+        # TODO: rclone can be removed if I ever switch to a different storage than Dropbox
         PATH = "${pkgs.rclone}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
       };
 
-      # launchd cannot wake a sleeping Mac: if it is asleep at 04:00 the backup runs at
-      # the next wake instead. Sleep behaviour is configured by hand in System Settings,
-      # not from here.
+      # it seems like I need to restart for this to take effect?
       StartCalendarInterval = [
         {
           Hour = 4;
@@ -42,8 +37,8 @@ in
         }
       ];
 
-      StandardOutPath = "/var/log/kopia-backup.log";
-      StandardErrorPath = "/var/log/kopia-backup.log";
+      StandardOutPath = "${home}/Library/Logs/kopia-backup.log";
+      StandardErrorPath = "${home}/Library/Logs/kopia-backup.log";
     };
   };
 }
