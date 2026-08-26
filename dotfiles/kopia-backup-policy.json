@@ -57,7 +57,10 @@
     "files": {
       "ignore": [
         "/Dropbox/",
-        "/.ollama/models/"
+        "/.ollama/models/",
+        "/.local/share/Steam/steamapps/common/",
+        "/.local/share/Steam/steamapps/downloading/",
+        "/.local/share/Steam/steamapps/shadercache/"
       ]
     },
     "errorHandling": {},
@@ -149,7 +152,10 @@
         "/Messages/",
         "/Caches/",
         "/CloudStorage/",
-        "/Mobile Documents/"
+        "/Mobile Documents/",
+        "/Application Support/Steam/steamapps/common/",
+        "/Application Support/Steam/steamapps/downloading/",
+        "/Application Support/Steam/steamapps/shadercache/"
       ]
     },
     "errorHandling": {
