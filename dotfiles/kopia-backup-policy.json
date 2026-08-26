@@ -54,15 +54,7 @@
   },
   "brady@brady-desktop:/home/brady": {
     "retention": {},
-    "files": {
-      "ignore": [
-        "/Dropbox/",
-        "/.ollama/models/",
-        "/.local/share/Steam/steamapps/common/",
-        "/.local/share/Steam/steamapps/downloading/",
-        "/.local/share/Steam/steamapps/shadercache/"
-      ]
-    },
+    "files": {},
     "errorHandling": {},
     "scheduling": {},
     "compression": {},
@@ -98,14 +90,7 @@
   },
   "brady@brady-desktop:/var/lib/self-hosting/forgejo": {
     "retention": {},
-    "files": {
-      "ignore": [
-        "/gitea/forgejo.db",
-        "/gitea/forgejo.db-wal",
-        "/gitea/forgejo.db-shm",
-        "/ssh/"
-      ]
-    },
+    "files": {},
     "errorHandling": {},
     "scheduling": {},
     "compression": {},
@@ -123,13 +108,7 @@
   },
   "brady@brady-macbook-pro:/Users/brady": {
     "retention": {},
-    "files": {
-      "ignore": [
-        "/.Trash/",
-        "/Library/",
-        "/Pictures/Photos Library.photoslibrary/"
-      ]
-    },
+    "files": {},
     "errorHandling": {},
     "scheduling": {},
     "compression": {},
@@ -147,17 +126,7 @@
   },
   "brady@brady-macbook-pro:/Users/brady/Library": {
     "retention": {},
-    "files": {
-      "ignore": [
-        "/Messages/",
-        "/Caches/",
-        "/CloudStorage/",
-        "/Mobile Documents/",
-        "/Application Support/Steam/steamapps/common/",
-        "/Application Support/Steam/steamapps/downloading/",
-        "/Application Support/Steam/steamapps/shadercache/"
-      ]
-    },
+    "files": {},
     "errorHandling": {
       "ignoreFileErrors": true
     },

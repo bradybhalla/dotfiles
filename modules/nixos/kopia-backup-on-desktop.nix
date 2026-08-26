@@ -14,11 +14,43 @@ let
   forgejoData = "/var/lib/self-hosting/forgejo";
   minifluxDbContainer = "miniflux-db-1";
 
-  snapshotPaths = [
-    "/home/${user}"
-    dumpDir
-    forgejoData
-  ];
+  # Each snapshot source and the .kopiaignore installed at its root. An empty
+  # string means nothing is excluded, so no file is written.
+  snapshots = {
+    "/home/${user}".kopiaignore = ''
+      /Dropbox/
+      /.ollama/models/
+      /.local/share/Steam/steamapps/common/
+      /.local/share/Steam/steamapps/downloading/
+      /.local/share/Steam/steamapps/shadercache/
+    '';
+
+    "${dumpDir}".kopiaignore = "";
+
+    # the live database is excluded because the dump below is snapshotted instead
+    "${forgejoData}".kopiaignore = ''
+      /gitea/forgejo.db
+      /gitea/forgejo.db-wal
+      /gitea/forgejo.db-shm
+      /ssh/
+    '';
+  };
+
+  snapshotPaths = builtins.attrNames snapshots;
+
+  # Runs at rebuild and again right before each backup, so a .kopiaignore that
+  # goes missing in between can't leak into a snapshot
+  installIgnoreFiles = pkgs.writeShellApplication {
+    name = "install-kopiaignore-files";
+    text = lib.concatLines (
+      lib.mapAttrsToList (
+        path: snapshot:
+        "${pkgs.coreutils}/bin/install -D -m 0644 -o ${user} "
+        + "${pkgs.writeText "kopiaignore" snapshot.kopiaignore} "
+        + lib.escapeShellArg "${path}/.kopiaignore"
+      ) (lib.filterAttrs (_: snapshot: snapshot.kopiaignore != "") snapshots)
+    );
+  };
 
   # Dumps the self-hosted databases into ${dumpDir}, which is one of the sources
   # kopia snapshots
@@ -39,6 +71,8 @@ let
   };
 in
 {
+  system.activationScripts.kopiaIgnoreFiles.text = lib.getExe installIgnoreFiles;
+
   systemd.services.kopia-backup = {
     description = "Kopia backup";
     after = [
@@ -56,7 +90,11 @@ in
       User = user;
       StateDirectory = dumpDirName;
       StateDirectoryMode = "0700";
-      ExecStartPre = lib.getExe dumpScript;
+      ExecStartPre = [
+        # "+" runs this as root, which is needed to write outside ${user}'s home
+        "+${lib.getExe installIgnoreFiles}"
+        (lib.getExe dumpScript)
+      ];
       ExecStart = "${lib.getExe pkgs.kopia} snapshot create ${lib.escapeShellArgs snapshotPaths}";
     };
   };

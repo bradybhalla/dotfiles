@@ -191,7 +191,7 @@ hl.window_rule({
 
 -- make windows float
 local float_windows = {
-    { match = { class = "^\\.blueman-manager-wrapped$" } },                                -- blueman (bluetooth tray)
+    { match = { class = "^blueman-manager$" } },                                -- blueman (bluetooth tray)
     { match = { class = "^org\\.pulseaudio\\.pavucontrol$" }, enforce_size = "1100 800" }, -- pavucontrol (volume control)
     { match = { class = "^1password$" } },                                                 -- 1Password
     { match = { class = "^python3$", title = "^Maestral.*" } },                            -- maestral
