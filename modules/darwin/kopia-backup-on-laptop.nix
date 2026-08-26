@@ -1,4 +1,4 @@
-# Kopia backups to run on the laptop, to the same rclone repository the desktop
+# Kopia backups to run on the laptop, to the same repository the desktop
 # backs up to. Assumes the repository is already connected for ${user} and that the
 # snapshot sources are configured in kopia itself.
 
@@ -20,24 +20,17 @@ let
     "${home}/Library/Messages"
     "${home}/Pictures/Photos Library.photoslibrary"
   ];
-
-  backupScript = pkgs.writeShellApplication {
-    name = "kopia-backup";
-    runtimeInputs = [
-      pkgs.kopia
-      # TODO: rclone can be removed if I ever switch to a different storage than Dropbox
-      pkgs.rclone
-    ];
-    text = ''
-      kopia snapshot create ${lib.escapeShellArgs snapshotPaths}
-    '';
-  };
 in
 {
   # make launchd daemon so it runs when nobody is logged in
   launchd.daemons.kopia-backup = {
     serviceConfig = {
-      ProgramArguments = [ (lib.getExe backupScript) ];
+      ProgramArguments = [
+        (lib.getExe pkgs.kopia)
+        "snapshot"
+        "create"
+      ]
+      ++ snapshotPaths;
 
       UserName = user;
 

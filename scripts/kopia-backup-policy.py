@@ -69,6 +69,7 @@ POLICY = {
         ignore=[
             "/Dropbox/", # already in the cloud
             "/.ollama/models/", # can redownload ollama models
+            "/.cache/",
 
             # can redownload Steam games
             "/.local/share/Steam/steamapps/common/",

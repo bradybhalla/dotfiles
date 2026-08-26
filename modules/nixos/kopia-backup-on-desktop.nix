@@ -50,9 +50,6 @@ in
     wants = [ "network-online.target" ];
     requires = [ "docker.service" ];
 
-    # TODO: if you stop using rclone then this isn't needed
-    path = [ pkgs.rclone ];
-
     serviceConfig = {
       Type = "oneshot";
       User = user;
