@@ -48,7 +48,7 @@ in
       # it seems like I need to restart for this to take effect?
       StartCalendarInterval = [
         {
-          Hour = 4;
+          Hour = 3;
           Minute = 0;
         }
       ];
