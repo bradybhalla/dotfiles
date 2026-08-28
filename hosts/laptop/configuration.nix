@@ -7,7 +7,7 @@
 
 {
   imports = [
-    ../../modules/darwin/kopia-backup-on-laptop.nix
+    ../../modules/darwin/backup-for-laptop.nix
   ];
 
   system.primaryUser = "brady";
