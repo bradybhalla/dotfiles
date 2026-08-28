@@ -105,6 +105,9 @@ POLICY = {
             "/Application Support/Steam/steamapps/common/",
             "/Application Support/Steam/steamapps/downloading/",
             "/Application Support/Steam/steamapps/shadercache/",
+
+            # can redownload Spotify music
+            "/Application Support/Spotify/PersistentCache/",
         ],
         ignore_file_errors=True, # Library has lots of files that can't be read, so errors are okay
     ),
