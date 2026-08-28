@@ -2,6 +2,10 @@
 # backs up to. Assumes the repository is already connected for ${user} and that the
 # snapshot sources are configured in kopia itself.
 
+# NOTE: after making changes either reboot or run the following command
+#   launchctl unload ~/Library/LaunchAgents/org.nixos.kopia-backup.plist
+#   launchctl load ~/Library/LaunchAgents/org.nixos.kopia-backup.plist
+
 {
   pkgs,
   lib,
@@ -9,11 +13,9 @@
 }:
 
 let
-  user = "brady";
-  home = "/Users/${user}";
+  home = "/Users/brady";
 
-  # What each source excludes lives in the kopia policy itself, see
-  # dotfiles/kopia-backup-policy.py
+  # What each source excludes lives in the kopia policy (see scripts/kopia-backup-policy.py)
   snapshotPaths = [
     home
     "${home}/Library"
@@ -22,8 +24,8 @@ let
   ];
 in
 {
-  # make launchd daemon so it runs when nobody is logged in
-  launchd.daemons.kopia-backup = {
+  # note that the launchd agent is added for the nix darwin primaryUser and only runs when they are logged in
+  launchd.user.agents.kopia-backup = {
     serviceConfig = {
       ProgramArguments = [
         (lib.getExe pkgs.kopia)
@@ -32,16 +34,13 @@ in
       ]
       ++ snapshotPaths;
 
-      UserName = user;
-
       EnvironmentVariables = {
         HOME = home;
       };
 
-      # it seems like I need to restart for this to take effect?
       StartCalendarInterval = [
         {
-          Hour = 3;
+          Hour = 2;
           Minute = 0;
         }
       ];

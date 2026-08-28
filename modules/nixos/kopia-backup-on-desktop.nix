@@ -64,7 +64,7 @@ in
     description = "Daily Kopia backup";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "*-*-* 03:00:00";
+      OnCalendar = "*-*-* 02:00:00";
       Persistent = true;
       RandomizedDelaySec = "15m";
     };
