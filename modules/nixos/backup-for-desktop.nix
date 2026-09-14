@@ -9,17 +9,15 @@
 
 let
   user = "brady";
-  dumpDirName = "self-hosting-db-dumps";
-  dumpDir = "/var/lib/${dumpDirName}";
-  forgejoData = "/var/lib/self-hosting/forgejo";
-  minifluxDbContainer = "miniflux-db-1";
+  dumpDir = "/var/lib/self-hosting-dumps";
 
   # What each source excludes lives in the kopia policy itself, see
   # dotfiles/kopia-backup-policy.py
   snapshotPaths = [
     "/home/${user}"
-    dumpDir
-    forgejoData
+    dumpDir # safe database dumps
+    "/var/lib/self-hosting" # live app states
+    "/var/lib/self-hosting-media" # larger media / assets
   ];
 
   # Dumps the self-hosted databases into ${dumpDir}, which is one of the sources
@@ -30,13 +28,17 @@ let
       pkgs.sqlite
       config.virtualisation.docker.package
     ];
+    # TODO: notify on failure
     text = ''
       # Forgejo database
-      sqlite3 "${forgejoData}/gitea/forgejo.db" ".backup '${dumpDir}/forgejo.db'"
+      sqlite3 "/var/lib/self-hosting/forgejo/gitea/forgejo.db" ".backup '${dumpDir}/forgejo.db'"
 
       # Miniflux database
-      docker exec ${minifluxDbContainer} sh -c 'pg_dumpall -U "$POSTGRES_USER"' \
+      docker exec miniflux-db-1 sh -c 'pg_dumpall -U "$POSTGRES_USER"' \
         > "${dumpDir}/miniflux.sql"
+
+      # Kavita database
+      sqlite3 "/var/lib/self-hosting/kavita/kavita.db" ".backup '${dumpDir}/kavita.db'"
     '';
   };
 in
@@ -53,8 +55,6 @@ in
     serviceConfig = {
       Type = "oneshot";
       User = user;
-      StateDirectory = dumpDirName;
-      StateDirectoryMode = "0700";
       ExecStartPre = lib.getExe dumpScript;
       ExecStart = "${lib.getExe pkgs.kopia} snapshot create ${lib.escapeShellArgs snapshotPaths}";
     };

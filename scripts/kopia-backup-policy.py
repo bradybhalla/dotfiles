@@ -77,14 +77,22 @@ POLICY = {
             "/.local/share/Steam/steamapps/shadercache/",
         ]
     ),
-    f"{DESKTOP}:/var/lib/self-hosting/forgejo": source(
+    f"{DESKTOP}:/var/lib/self-hosting": source(
         ignore=[
-            # a dump is already snapshotted so don't need the live database
-            "/gitea/forgejo.db",
-            "/gitea/forgejo.db-wal",
-            "/gitea/forgejo.db-shm",
+            # db dump is snapshotted
+            "/forgejo/gitea/forgejo.db",
+            "/forgejo/gitea/forgejo.db-wal",
+            "/forgejo/gitea/forgejo.db-shm",
+            "/forgejo/ssh/", # can't read these files but they are okay to lose
 
-            "/ssh/", # can't read these files but they are okay to lose
+            "/miniflux", # db dump is snapshotted, no other necessary data
+
+            "/org_quartz", # everything can be regenerated from original sources
+
+            # db dump is snapshotted
+            "/kavita/kavita.db",
+            "/kavita/kavita.db-wal",
+            "/kavita/kavita.db-shm",
         ]
     ),
     f"{LAPTOP}:/Users/brady": source(
