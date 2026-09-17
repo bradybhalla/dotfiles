@@ -217,3 +217,12 @@ end
 -- Monitor configuration for VMs
 hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
 hl.monitor({ output = "Unknown-1", disabled = true })
+
+
+---------------------------
+---- INPUT ----------------
+---------------------------
+
+hl.config({
+    ["input.touchpad.natural_scroll"] = true,
+})

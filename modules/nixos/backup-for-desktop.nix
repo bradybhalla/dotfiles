@@ -17,7 +17,8 @@ let
     "/home/${user}"
     dumpDir # safe database dumps
     "/var/lib/self-hosting" # live app states
-    "/var/lib/self-hosting-media" # larger media / assets
+    # TODO: enable later
+    # "/var/lib/self-hosting-media" # larger media / assets
   ];
 
   # Dumps the self-hosted databases into ${dumpDir}, which is one of the sources

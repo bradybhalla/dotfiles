@@ -19,6 +19,16 @@
 
   networking.hostName = "brady-desktop";
 
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main = {
+        capslock = "overload(control, esc)";
+      };
+    };
+  };
+
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
