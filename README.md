@@ -1,6 +1,6 @@
 # dotfiles
 
-My configuration for 90% of everything I do on a computer.
+My NixOS and macOS configurations. This includes both system-level configs and a (mostly) shared Home Manager config for my shell and development environment.
 
 ![screenshot of terminal](assets/screenshots/screenshot1.png)
 ![screenshot of rofi, notifications, osd](assets/screenshots/screenshot2.png)
