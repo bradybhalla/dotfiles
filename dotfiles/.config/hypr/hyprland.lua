@@ -8,7 +8,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")  -- wallpaper
     hl.exec_cmd("swaync")     -- notifications
     hl.exec_cmd("eww daemon") -- widgets
-    -- swayosd-server started as a system service
+    -- swayosd-server started as a systemd user service
 
     -- start other processes
     hl.exec_cmd("hyprsunset")  -- allows night mode
@@ -26,7 +26,7 @@ local mainMod        = "SUPER"
 local screenshotArgs = "-o ~/Pictures/Screenshots"
 
 -- every keybind, as { key, action, opts? }. a string action is run as a shell
--- command; a dispatcher/function is bound directly. see bind() above for how
+-- command; a dispatcher/function is bound directly. see bind() below for how
 -- opts (including withMod) is handled. registered by the loop at the end.
 -- TODO: rework binds
 local binds          = {
@@ -46,7 +46,7 @@ local binds          = {
 
     -- Screenshots (copied to clipboard and saved)
     { "S",                    "hyprshot -m region " .. screenshotArgs },
-    { "SHIFT + S",            "hyprshot -m output -m active " .. screenshotArgs,       { locked = true } },
+    { "SHIFT + S",            "hyprshot -m output -m active " .. screenshotArgs },
 
     -- Window focus and moving
     { "H",                    hl.dsp.focus({ direction = "left" }) },
@@ -89,8 +89,8 @@ local binds          = {
     -- Volume and audio control
     { "XF86AudioRaiseVolume", "swayosd-client --output-volume raise --max-volume 100", { locked = true, repeating = true, withMod = false } },
     { "XF86AudioLowerVolume", "swayosd-client --output-volume lower",                  { locked = true, repeating = true, withMod = false } },
-    { "XF86AudioMute",        "swayosd-client --output-volume mute-toggle",            { locked = true, repeating = true, withMod = false } },
-    { "XF86AudioMicMute",     "swayosd-client --input-volume mute-toggle",             { locked = true, repeating = true, withMod = false } },
+    { "XF86AudioMute",        "swayosd-client --output-volume mute-toggle",            { locked = true, withMod = false } },
+    { "XF86AudioMicMute",     "swayosd-client --input-volume mute-toggle",             { locked = true, withMod = false } },
     { "XF86AudioNext",        "swayosd-client --playerctl next",                       { locked = true, withMod = false } },
     { "XF86AudioPause",       "swayosd-client --playerctl play-pause",                 { locked = true, withMod = false } },
     { "XF86AudioPlay",        "swayosd-client --playerctl play-pause",                 { locked = true, withMod = false } },
@@ -189,24 +189,21 @@ hl.window_rule({
     opacity          = "0.2 1.0",
 })
 
--- make windows float
+-- make windows float. size is optional; nil leaves the window at its own size
 local float_windows = {
-    { match = { class = "^blueman-manager$" } },                                -- blueman (bluetooth tray)
-    { match = { class = "^org\\.pulseaudio\\.pavucontrol$" }, enforce_size = "1100 800" }, -- pavucontrol (volume control)
-    { match = { class = "^1password$" } },                                                 -- 1Password
-    { match = { class = "^python3$", title = "^Maestral.*" } },                            -- maestral
-    { match = { class = "^qimgv$" } },                                                     -- qimgv (image viewer)
-    { match = { class = "^dev\\.deedles\\.Trayscale$" },      enforce_size = "1100 800" }  -- trayscale (tailscale tray)
+    { class = "^blueman-manager$" },                                   -- blueman (bluetooth tray)
+    { class = "^org\\.pulseaudio\\.pavucontrol$", size = "1100 800" }, -- pavucontrol (volume control)
+    { class = "^1password$" },                                         -- 1Password
+    { class = "^python3$", title = "^Maestral.*" },                    -- maestral
+    { class = "^qimgv$" },                                             -- qimgv (image viewer)
+    { class = "^dev\\.deedles\\.Trayscale$", size = "1100 800" },      -- trayscale (tailscale tray)
 }
-local function add_float_rule(match, enforce_size)
-    hl.window_rule({
-        match = match,
-        float = true,
-        size  = enforce_size,
-    })
-end
 for _, w in ipairs(float_windows) do
-    add_float_rule(w.match, w.enforce_size)
+    hl.window_rule({
+        match = { class = w.class, title = w.title },
+        float = true,
+        size  = w.size,
+    })
 end
 
 
@@ -214,10 +211,15 @@ end
 ---- MONITORS -------------
 ---------------------------
 
--- Monitor configuration for VMs
-hl.monitor({ output = "Virtual-1", mode = "1920x1200@59.88", position = "0x0", scale = 1.0 })
-hl.monitor({ output = "Unknown-1", disabled = true })
+local monitor_left   = "desc:Dell Inc. DELL U2725QE 83Q3KJ4"
+local monitor_right  = "desc:Dell Inc. DELL U2725QE 279ZFJ4"
 
+hl.monitor({ output = monitor_left,  mode = "3840x2160@59.997", position = "0x0",    scale = 1.5 })
+hl.monitor({ output = monitor_right, mode = "3840x2160@59.997", position = "2560x0", scale = 1.5 })
+
+for ws = 1, 10 do
+    hl.workspace_rule({ workspace = tostring(ws), monitor = ws <= 5 and monitor_right or monitor_left })
+end
 
 ---------------------------
 ---- INPUT ----------------

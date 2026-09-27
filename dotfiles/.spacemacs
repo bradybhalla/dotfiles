@@ -58,6 +58,7 @@ This function should only modify configuration layer settings."
           org-enable-hugo-support t
 
           org-startup-indented t
+          org-startup-folded 'nofold
 
           org-agenda-files (list org-directory org-roam-directory)
 

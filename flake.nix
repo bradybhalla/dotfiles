@@ -11,12 +11,6 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    silentSDDM = {
-      url = "github:uiriansan/SilentSDDM";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
@@ -32,12 +26,6 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/desktop/configuration.nix ];
-        };
-
-        "vm-on-laptop" = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/vm-on-laptop/configuration.nix ];
         };
       };
 
@@ -75,14 +63,6 @@
               ./modules/home/common.nix
               ./modules/home/extended-utils.nix
               ./modules/home/macos-utils.nix
-            ];
-          };
-
-          "brady@vm-on-laptop" = mkHome {
-            system = "aarch64-linux";
-            homeModules = [
-              ./modules/home/common.nix
-              ./modules/home/hyprland-desktop.nix
             ];
           };
         };
