@@ -622,17 +622,25 @@ before packages are loaded."
 
   ;; custom keymaps
   (defun my/org-paste-image-from-clipboard (name)
-    "Paste images into org-roam (images directory must exist)"
+    "Paste clipboard image into org-roam as a resized JPG (images directory must exist).
+Pastes the clipboard PNG, converts it to JPG with ImageMagick, and
+shrinks it so the larger dimension is at most 100px."
     (interactive "sImage name: ")
-    (let* ((filename (format-time-string
-                      (concat "images/" "%Y-%m-%d-%H%M%S-" name ".png"))))
-      (shell-command (concat "pngpaste " filename))
-      (insert (concat "[[file:" filename "]]"))
-      (message (concat "Saved: " filename))))
+    (let* ((base (format-time-string
+                  (concat "%Y-%m-%d-%H%M%S-" name)))
+           (png (concat "images/" base ".png"))
+           (jpg (concat "images/" base ".jpg")))
+      (shell-command (concat "pngpaste " (shell-quote-argument png)))
+      (shell-command (concat "convert " (shell-quote-argument png)
+                             " -resize " (shell-quote-argument "2000x2000>")
+                             " " (shell-quote-argument jpg)))
+      (delete-file png)
+      (insert (concat "[[file:" jpg "]]"))
+      (message (concat "Saved: " jpg))))
   (defun my/org-file-find ()
     "search through normal org files (not org roam)"
     (interactive)
-    (counsel-fzf nil org-directory "Org file: "))
+    (counsel-fzf ".org " org-directory "Org file: "))
   (evil-define-key '(normal insert) org-mode-map
     (kbd "C-c P") #'my/org-paste-image-from-clipboard
     (kbd "C-c n i") #'org-roam-node-insert)
