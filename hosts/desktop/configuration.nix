@@ -14,22 +14,28 @@
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/virtualization.nix
     ../../modules/nixos/backup-for-desktop.nix
-    # ../../modules/nixos/sydney.nix
+    ../../modules/nixos/sydney.nix
   ];
 
   networking.hostName = "brady-desktop";
 
   time.timeZone = "America/New_York";
 
-  services.keyd = {
-    enable = true;
-    keyboards.default = {
-      ids = [ "*" ];
-      settings.main = {
-        capslock = "overload(control, esc)";
-      };
-    };
+  # Never suspend/hibernate (e.g. Plasma's idle suspend)
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+    AllowHybridSleep = "no";
+    AllowSuspendThenHibernate = "no";
   };
+
+  users.users."brady".packages = with pkgs; [
+    emacs-pgtk # pgtk makes it look normal on wayland
+    maestral # for cli
+    maestral-gui # tray and daemon
+    trayscale # tailscale gui
+    spotify
+  ];
 
   # Bluetooth
   hardware.bluetooth = {
@@ -48,7 +54,7 @@
   # Sunshine
   services.sunshine = {
     enable = true;
-    autoStart = true;
+    autoStart = false;
     openFirewall = true;
   };
 

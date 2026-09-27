@@ -1,4 +1,4 @@
-# Kopia backups to run on my desktop (including self-hosted services). Assumes the repository is already connected for ${user} and that the snapshot sources are configured in kopia itself.
+# Kopia backups to run on my desktop (including self-hosted services). Runs as root but with ${user}'s kopia config. Assumes the repository is already connected for ${user} and that the snapshot sources are configured in kopia itself.
 
 {
   config,
@@ -52,10 +52,10 @@ in
     ];
     wants = [ "network-online.target" ];
     requires = [ "docker.service" ];
+    environment.HOME = "/home/${user}"; # use ${user}'s kopia config
 
     serviceConfig = {
       Type = "oneshot";
-      User = user;
       ExecStartPre = lib.getExe dumpScript;
       ExecStart = "${lib.getExe pkgs.kopia} snapshot create ${lib.escapeShellArgs snapshotPaths}";
     };

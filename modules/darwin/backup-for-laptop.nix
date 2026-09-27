@@ -1,10 +1,11 @@
 # Kopia backups to run on the laptop, to the same repository the desktop
-# backs up to. Assumes the repository is already connected for ${user} and that the
-# snapshot sources are configured in kopia itself.
+# backs up to. Runs as root but with the kopia config in ${home}. Assumes the
+# repository is already connected there and that the snapshot sources are configured
+# in kopia itself.
 
 # NOTE: after making changes either reboot or run the following command
-#   launchctl unload ~/Library/LaunchAgents/org.nixos.kopia-backup.plist
-#   launchctl load ~/Library/LaunchAgents/org.nixos.kopia-backup.plist
+#   sudo launchctl unload /Library/LaunchDaemons/org.nixos.kopia-backup.plist
+#   sudo launchctl load /Library/LaunchDaemons/org.nixos.kopia-backup.plist
 
 {
   pkgs,
@@ -24,8 +25,8 @@ let
   ];
 in
 {
-  # note that the launchd agent is added for the nix darwin primaryUser and only runs when they are logged in
-  launchd.user.agents.kopia-backup = {
+  # a daemon runs as root, even when no one is logged in
+  launchd.daemons.kopia-backup = {
     serviceConfig = {
       ProgramArguments = [
         (lib.getExe pkgs.kopia)
@@ -35,7 +36,7 @@ in
       ++ snapshotPaths;
 
       EnvironmentVariables = {
-        HOME = home;
+        HOME = home; # use the kopia config in home
       };
 
       StartCalendarInterval = [
