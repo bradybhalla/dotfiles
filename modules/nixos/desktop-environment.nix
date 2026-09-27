@@ -30,7 +30,6 @@
     settings.default_session.command = lib.concatStringsSep " " [
       (lib.getExe pkgs.tuigreet)
       "--time"
-      "--user-menu"
       "--remember"
       "--remember-user-session"
       "--asterisks"
