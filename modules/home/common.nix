@@ -13,7 +13,7 @@ let
 in
 {
   home.username = username;
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.05";
 
   # Shared helpers, injected into every home module via the module system's
