@@ -7,33 +7,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
     {
       nixpkgs,
       home-manager,
-      nix-darwin,
       ...
-    }@inputs:
+    }:
     {
-      nixosConfigurations = {
-        "desktop" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/desktop/configuration.nix ];
-        };
-      };
-
-      darwinConfigurations."laptop" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [ ./hosts/laptop/configuration.nix ];
-      };
-
       homeConfigurations =
         let
           mkHome =
