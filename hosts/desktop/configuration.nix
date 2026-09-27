@@ -19,6 +19,8 @@
 
   networking.hostName = "brady-desktop";
 
+  time.timeZone = "America/New_York";
+
   services.keyd = {
     enable = true;
     keyboards.default = {
