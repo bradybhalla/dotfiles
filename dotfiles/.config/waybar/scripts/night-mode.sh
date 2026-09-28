@@ -6,7 +6,7 @@
 on_icon="󰖔<span font-size='5pt'> </span>"
 off_icon="<span font-size='9pt'> </span>"
 
-# hyprsunset.conf schedules 6500 (day) / 3600 (night), so treat anything
+# hyprsunset.conf schedules 6000 (day) / 3600 (night), so treat anything
 # below 5000 as night regardless of which side set it
 is_night() {
   temp="$(hyprctl hyprsunset temperature 2>/dev/null)"
