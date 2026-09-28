@@ -193,7 +193,6 @@ hl.window_rule({
 local float_windows = {
     { class = "^blueman-manager$" },                                   -- blueman (bluetooth tray)
     { class = "^org\\.pulseaudio\\.pavucontrol$", size = "1100 800" }, -- pavucontrol (volume control)
-    { class = "^1password$" },                                         -- 1Password
     { class = "^python3$", title = "^Maestral.*" },                    -- maestral
     { class = "^qimgv$" },                                             -- qimgv (image viewer)
     { class = "^dev\\.deedles\\.Trayscale$", size = "1100 800" },      -- trayscale (tailscale tray)
