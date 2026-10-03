@@ -41,6 +41,7 @@ local binds          = {
     { "SHIFT + N",            "swaync-client -d -sw" },     -- do not disturb
     { "Q",                    hl.dsp.window.close() },
     { "SHIFT + Q",            "hyprlock" },                 -- lock
+    { "SHIFT + CTRL + Q",     "hyprshutdown -p 'uwsm stop'" }, -- logout
     { "M",                    "eww open --toggle music" },  -- music popup
     { "P",                    "1password --quick-access" }, -- 1password
 
