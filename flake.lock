@@ -39,7 +39,28 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "streamdeck": "streamdeck"
+      }
+    },
+    "streamdeck": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791053201,
+        "narHash": "sha256-kEYMV1n+z6UVvDzAJk3m1Wd4bBpztDvJN7OVX4wIfV4=",
+        "ref": "refs/heads/main",
+        "rev": "d9a5dd3a2c24c5b3cfba800a4872f310477180f2",
+        "revCount": 8,
+        "type": "git",
+        "url": "ssh://git@100.121.252.21:2204/brady/streamdeck.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@100.121.252.21:2204/brady/streamdeck.git"
       }
     }
   },

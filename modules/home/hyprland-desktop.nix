@@ -34,6 +34,7 @@
   services.playerctld.enable = true;
   services.network-manager-applet.enable = true;
   services.udiskie.enable = true; # automount removable media (needs services.udisks2)
+  services.streamdeck.enable = true; # stream deck daemon, idles until one is plugged in (flake input)
 
   home.pointerCursor = {
     enable = true;

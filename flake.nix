@@ -7,12 +7,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    streamdeck = {
+      url = "git+ssh://git@100.121.252.21:2204/brady/streamdeck.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       nixpkgs,
       home-manager,
+      streamdeck,
       ...
     }:
     {
@@ -36,6 +41,7 @@
               ./modules/home/extended-utils.nix
               ./modules/home/hyprland-desktop.nix
               ./modules/home/linux-utils.nix
+              streamdeck.homeManagerModules.default
             ];
           };
 
