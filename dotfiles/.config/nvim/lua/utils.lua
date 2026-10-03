@@ -1,12 +1,7 @@
 local M = {}
 
-function M.open_file_in_finder()
-    local file_path = vim.fn.expand("%")
-    if file_path ~= "" then
-        _, _ = pcall(vim.system, { "open", "-R", file_path }, {})
-    else
-        _, _ = pcall(vim.system, { "open", vim.fn.expand("%:p:h") }, {})
-    end
+function M.open_file_folder()
+    vim.ui.open(vim.fn.expand("%:p:h"))
 end
 
 function M.lazygit()

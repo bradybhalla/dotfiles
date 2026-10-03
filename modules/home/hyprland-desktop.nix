@@ -1,13 +1,12 @@
 # Hyprland desktop environment: bar, launcher, notifications, and themes
 
 {
+  config,
   pkgs,
   linkHere,
   ...
 }:
 {
-  imports = [ ./_theming.nix ];
-
   home.packages = with pkgs; [
     waybar # status bar
     hyprland # window manager, installed globally but I need cli tools
@@ -26,7 +25,7 @@
     playerctl # control playing audio
     cava # visualize live audio
     eww # desktop widgets
-    procps # needed a different 'uptime'
+    jq # json parsing for waybar and eww scripts
     pavucontrol # audio device setttings
   ];
 
@@ -51,5 +50,46 @@
     ".config/rofi".source = linkHere ".config/rofi";
     ".config/swaync".source = linkHere ".config/swaync";
     ".config/swayosd".source = linkHere ".config/swayosd";
+  };
+
+  # theming: catppuccin frappe for gtk and qt, dark mode where possible
+  dconf.settings = {
+    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "catppuccin-frappe-blue-standard";
+      package = pkgs.catppuccin-gtk.override {
+        variant = "frappe";
+        accents = [ "blue" ];
+        size = "standard";
+      };
+    };
+
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4.theme = config.gtk.theme;
+  };
+
+  qt = {
+    enable = true;
+    style.name = "kvantum";
+    kvantum = {
+      enable = true;
+      themes = [
+        (pkgs.catppuccin-kvantum.override {
+          variant = "frappe";
+          accent = "blue";
+        })
+      ];
+      settings.General.theme = "catppuccin-frappe-blue";
+    };
   };
 }

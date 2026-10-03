@@ -1,109 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: review new file (dropdown menu for the waybar system icon) -->
-<!-- TODO: icon-name values below are placeholders (Adwaita symbolic names) - swap for preferred icons -->
 <interface>
   <object class="GtkMenu" id="menu">
     <child>
       <object class="GtkMenuItem" id="about">
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">8</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">help-about-symbolic</property>
-                <property name="pixel-size">16</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="label">About</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="label">󰋽  About</property>
       </object>
     </child>
     <child>
-      <object class="GtkSeparatorMenuItem" id="sep2"/>
+      <object class="GtkSeparatorMenuItem" id="separator"/>
     </child>
     <child>
       <object class="GtkMenuItem" id="lock">
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">8</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">system-lock-screen-symbolic</property>
-                <property name="pixel-size">16</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="label">Lock</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="label">󰌾  Lock</property>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="logout">
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">8</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">system-log-out-symbolic</property>
-                <property name="pixel-size">16</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="label">Log Out</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="label">󰍃  Log Out</property>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="reboot">
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">8</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">system-reboot-symbolic</property>
-                <property name="pixel-size">16</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="label">Reboot</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="label">󰜉  Reboot</property>
       </object>
     </child>
     <child>
       <object class="GtkMenuItem" id="shutdown">
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">8</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">system-shutdown-symbolic</property>
-                <property name="pixel-size">16</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="label">Shut Down</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="label">󰐥  Shut Down</property>
       </object>
     </child>
   </object>

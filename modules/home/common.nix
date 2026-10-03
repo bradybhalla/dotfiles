@@ -13,15 +13,14 @@ let
 in
 {
   home.username = username;
-  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
+  home.homeDirectory =
+    if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "25.05";
 
   # Shared helpers, injected into every home module via the module system's
   # fixpoint so they can depend on config.home.homeDirectory.
   _module.args.linkHere =
     path: config.lib.file.mkOutOfStoreSymlink "${dotfilesRepoDir}/dotfiles/${path}";
-
-  home.sessionPath = [ ];
 
   home.packages = with pkgs; [
     neovim
@@ -72,7 +71,7 @@ in
     };
     initContent = lib.mkBefore ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      source ~/.p10k.zsh
     '';
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;

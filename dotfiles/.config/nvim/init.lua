@@ -2,7 +2,7 @@
 -- Install plugins -
 --------------------
 
--- to delete manually, remove from ~/.local/share/nvim/site/pack/core/opt
+-- to delete a plugin, remove it here and run :lua vim.pack.del({ "name" })
 vim.pack.add({
     -- interface
     "https://github.com/catppuccin/nvim",
@@ -20,13 +20,11 @@ vim.pack.add({
 
     -- language tools
     "https://github.com/nvim-treesitter/nvim-treesitter",
-    "https://github.com/williamboman/mason.nvim",
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/stevearc/conform.nvim",
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/mfussenegger/nvim-jdtls",
     "https://github.com/tarides/ocaml.nvim",
-    "https://github.com/phelipetls/vim-hugo",
 
     -- misc
     "https://github.com/akinsho/toggleterm.nvim",
@@ -79,7 +77,7 @@ require("which-key").add({
     { "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>",                desc = "find file" },
     { "<leader>fh", "<CMD>Telescope find_files hidden=true no_ignore=true<CR>", desc = "find hidden file" },
     { "<leader>fs", "<CMD>write<CR>",                                           desc = "save file" },
-    { "<leader>fo", utils.open_file_in_finder,                                  desc = "open file in Finder" },
+    { "<leader>fo", utils.open_file_folder,                                     desc = "open file's folder" },
 
     { "<leader>b",  group = "buffer" },
     { "<leader>bb", "<CMD>Telescope buffers<CR>",                               desc = "find buffer" },
@@ -135,7 +133,9 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("custom.typst", {}),
     pattern = "typst",
     callback = function(args)
-        vim.keymap.set("n", "<leader>b", "<CMD>silent !open -a Skim %:r.pdf<CR>", { buffer = args.buf })
+        vim.keymap.set("n", "<leader>b", function()
+            vim.ui.open(vim.fn.expand("%:r") .. ".pdf")
+        end, { buffer = args.buf })
     end
 })
 

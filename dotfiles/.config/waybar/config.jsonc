@@ -1,11 +1,5 @@
 {
   "layer": "top",
-  "position": "top",
-  "autohide": false,
-  "autohide-blocked": false,
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
 
   "modules-left": [
     "custom/system",
@@ -24,14 +18,11 @@
     "custom/notifications",
     "clock",
   ],
-  "margin-left": 0,
-  "margin-right": 0,
-  "margin-top": 0,
   "custom/night-mode": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/night-mode.sh watch",
+    "exec": "$HOME/.config/waybar/scripts/night-mode.sh",
     "return-type": "json",
-    "exec-on-event": false,
+    "interval": 60,
+    "signal": 8,
     "on-click": "$HOME/.config/waybar/scripts/night-mode.sh toggle",
   },
   "custom/notifications": {
@@ -54,8 +45,7 @@
     "escape": true,
   },
   "custom/system": {
-    "exec": "jq -cn --arg text \"$USER\" --arg tooltip \"$USER@$HOSTNAME\" '{text: $text, tooltip: $tooltip}'",
-    "return-type": "json",
+    "exec": "echo $USER; echo $USER@$HOSTNAME",
     "interval": "once",
     "menu": "on-click",
     "menu-file": "~/.config/waybar/system-menu.ui",

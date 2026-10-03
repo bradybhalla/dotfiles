@@ -32,17 +32,11 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
-     (auto-completion :variables
+   '((auto-completion :variables
                       auto-completion-return-key-behavior nil)
      (ivy :variables
           ivy-initial-inputs-alist nil)
-     (shell :variables
-            shell-default-shell 'vterm)
      spell-checking
-     syntax-checking
-     treemacs
-     lsp
      git
 
      markdown

@@ -2,19 +2,22 @@
 
 input=$(cat)
 
-# Parse fields from JSON input
-cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // empty')
-model=$(echo "$input" | jq -r '.model.display_name // empty')
-used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
-plan=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
-plan_resets_at=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
-week=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // .rate_limits.weekly.used_percentage // empty')
-week_resets_at=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // .rate_limits.weekly.resets_at // empty')
+# Parse fields from JSON input (\x1f-delimited so empty fields survive read)
+IFS=$'\x1f' read -r cwd model used plan plan_reset_time week week_reset_date < <(echo "$input" | jq -r '
+  [
+    .workspace.current_dir,
+    .model.display_name,
+    .context_window.used_percentage,
+    .rate_limits.five_hour.used_percentage,
+    (.rate_limits.five_hour.resets_at | if . then strflocaltime("%-I:%M%p") | ascii_downcase else . end),
+    .rate_limits.seven_day.used_percentage,
+    (.rate_limits.seven_day.resets_at | if . then strflocaltime("%-m/%-d") else . end)
+  ] | map(. // "") | join("\u001f")')
 
 # Git branch (skip optional locks to avoid interference)
 git_branch=""
 if git -C "$cwd" rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-  git_branch=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+  git_branch=$(git -C "$cwd" symbolic-ref --short -q HEAD || git -C "$cwd" rev-parse --short HEAD)
 fi
 
 # Build the status line
@@ -33,9 +36,9 @@ fi
 # Context usage
 if [ -n "$used" ]; then
   used_int=${used%.*}
-  if [ "$used_int" -ge 80 ] 2>/dev/null; then
+  if [ "$used_int" -ge 80 ]; then
     color='\033[31m'  # red
-  elif [ "$used_int" -ge 50 ] 2>/dev/null; then
+  elif [ "$used_int" -ge 50 ]; then
     color='\033[33m'  # yellow
   else
     color='\033[32m'  # green
@@ -46,14 +49,12 @@ fi
 # Plan 5-hour usage
 if [ -n "$plan" ]; then
   plan_int=$(printf '%.0f' "$plan")
-  plan_reset_time=$(perl -e 'my @t=localtime($ARGV[0]); my $h=$t[2]%12; $h=12 if $h==0; printf("%d:%02d%s", $h, $t[1], $t[2]<12?"am":"pm")' "$plan_resets_at" 2>/dev/null)
   parts+=("$(printf '\033[90m[%s%% until %s]\033[0m' "$plan_int" "$plan_reset_time")")
 fi
 
 # Plan 7-day usage
 if [ -n "$week" ]; then
   week_int=$(printf '%.0f' "$week")
-  week_reset_date=$(perl -e 'my @t=localtime($ARGV[0]); printf("%d/%d", $t[4]+1, $t[3])' "$week_resets_at" 2>/dev/null)
   parts+=("$(printf '\033[90m[%s%% until %s]\033[0m' "$week_int" "$week_reset_date")")
 fi
 

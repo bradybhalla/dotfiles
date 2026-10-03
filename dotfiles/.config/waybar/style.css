@@ -83,11 +83,6 @@ menuitem:hover {
   background: @surface0;
 }
 
-menuitem:disabled {
-  color: @blue;
-  font-weight: bold;
-}
-
 menu separator {
   background: @overlay0;
   min-height: 2px;
@@ -99,7 +94,6 @@ menu separator {
   color: @flamingo;
 }
 
-/* -- Pulseaudio: green -- */
 #pulseaudio {
   color: @mauve;
 }
@@ -107,7 +101,6 @@ menu separator {
 #custom-system {
   margin-left: 0.4em;
   color: @blue;
-  /* font-size: 18px; * TODO: review (smaller than global 22px) */
 }
 
 #workspaces button {
@@ -133,12 +126,6 @@ menu separator {
 }
 
 /* hyprland/window module (empty format) applies the .fullscreen class to the bar */
-#window {
-  padding: 0;
-  margin: 0;
-  background: transparent;
-}
-
 window#waybar.fullscreen #workspaces button.active {
   color: @teal;
 }

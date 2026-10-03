@@ -1,7 +1,6 @@
 # macOS-specific tools and dotfiles (aerospace, skhd, karabiner)
 
 {
-  config,
   pkgs,
   linkHere,
   lib,

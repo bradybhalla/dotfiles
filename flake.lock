@@ -50,11 +50,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791053201,
-        "narHash": "sha256-kEYMV1n+z6UVvDzAJk3m1Wd4bBpztDvJN7OVX4wIfV4=",
+        "lastModified": 1791059387,
+        "narHash": "sha256-Avo7XozeGRPkv6uUfJ7O6szHy19jZ3Wsgr+CCxi7liM=",
         "ref": "refs/heads/main",
-        "rev": "d9a5dd3a2c24c5b3cfba800a4872f310477180f2",
-        "revCount": 8,
+        "rev": "909184e1361476ead8ed95b7d361553501abb2fb",
+        "revCount": 11,
         "type": "git",
         "url": "ssh://git@100.121.252.21:2204/brady/streamdeck.git"
       },

@@ -1,5 +1,4 @@
 require("catppuccin").setup({
-    integrations = { mason = true },
     custom_highlights = function(colors)
         return {
             SpellBad = { fg = colors.red },

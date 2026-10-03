@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function() pcall(vim.treesitter.start) end
 })
 
-require("mason").setup()
 require("conform").setup({
     formatters_by_ft = {
         ocaml = { "ocamlformat" },
