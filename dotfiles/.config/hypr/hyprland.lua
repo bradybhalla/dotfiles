@@ -150,11 +150,6 @@ hl.animation({ leaf = "global", enabled = true, speed = 2, bezier = "default" })
 
 -- TODO: got from suggested config, are these actually helpful?
 hl.window_rule({
-    name           = "suppress-maximize-events",
-    match          = { class = ".*" },
-    suppress_event = "maximize",
-})
-hl.window_rule({
     name     = "fix-xwayland-drags",
     match    = {
         class      = "^$",
@@ -213,13 +208,16 @@ end
 
 local monitor_left   = "desc:Dell Inc. DELL U2725QE 83Q3KJ4"
 local monitor_right  = "desc:Dell Inc. DELL U2725QE 279ZFJ4"
+local monitor_tv     = "desc:TCL Corporation TCL SMART TV 0x00000001"
 
 hl.monitor({ output = monitor_left,  mode = "3840x2160@59.997", position = "0x0",    scale = 1.5 })
 hl.monitor({ output = monitor_right, mode = "3840x2160@59.997", position = "2560x0", scale = 1.5 })
+hl.monitor({ output = monitor_tv,    mode = "3840x2160@60",     position = "5120x0", scale = 1 })
 
-for ws = 1, 10 do
+for ws = 1, 9 do
     hl.workspace_rule({ workspace = tostring(ws), monitor = ws <= 5 and monitor_right or monitor_left })
 end
+hl.workspace_rule({ workspace = "10", monitor = monitor_tv })
 
 ---------------------------
 ---- INPUT ----------------
