@@ -44,8 +44,8 @@ This function should only modify configuration layer settings."
      python
 
      (org :variables
-          org-directory "~/Dropbox/org"
-          org-roam-directory (file-truename "~/Dropbox/org-roam")
+          org-directory "~/Documents/org"
+          org-roam-directory (file-truename "~/Documents/org-roam")
 
           org-enable-roam-support t
           org-enable-roam-ui t
@@ -66,10 +66,10 @@ This function should only modify configuration layer settings."
           org-tags-exclude-from-inheritance '("crypt")
 
           org-capture-templates
-          '(("q" "Quick todo" entry (file "~/Dropbox/org/inbox.org")
+          '(("q" "Quick todo" entry (file "~/Documents/org/inbox.org")
              "* TODO %^{Title}\nSCHEDULED: %t\n%i"
              :immediate-finish t)
-            ("t" "Todo" entry (file "~/Dropbox/org/inbox.org")
+            ("t" "Todo" entry (file "~/Documents/org/inbox.org")
              "* TODO %?\nSCHEDULED: %t\n%i")
             )
 
@@ -667,6 +667,21 @@ shrinks it so the larger dimension is at most 100px."
      (shell . t)))
   (with-eval-after-load 'org-roam ;; collapse org-roam buffer sections by default
     (add-to-list 'org-roam-buffer-postrender-functions #'magit-section-show-level-2-all))
+
+  ;; save org buffers changed in the background (agenda edits, refiles,
+  ;; captures, clocking, IDs added by links) so syncthing picks them up. Skips
+  ;; the buffer you're editing and waits for any capture in progress to finish.
+  (run-with-idle-timer
+   5 t
+   (lambda ()
+     (unless (seq-some (lambda (b) (string-prefix-p "CAPTURE-" (buffer-name b)))
+                       (buffer-list))
+       (let ((current (window-buffer (selected-window))))
+         (dolist (b (buffer-list))
+           (with-current-buffer b
+             (when (and (derived-mode-p 'org-mode) buffer-file-name
+                        (buffer-modified-p) (not (eq b current)))
+               (save-buffer))))))))
 
 
   (org-super-agenda-mode 1)
