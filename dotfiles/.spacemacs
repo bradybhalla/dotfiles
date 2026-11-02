@@ -101,7 +101,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '( org-super-agenda )
+   dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -684,33 +684,205 @@ shrinks it so the larger dimension is at most 100px."
                (save-buffer))))))))
 
 
-  (org-super-agenda-mode 1)
-  ;; org agenda view (C-c a d or SPC a o o d)
-  (setq org-agenda-custom-commands
-        '(("d" "Daily View"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-agenda-start-day nil)
-                        (org-agenda-overriding-header "")
-                        (org-super-agenda-groups
-                         '((:name "Schedule"
-                                  :time-grid t
-                                  :order 1)
-                           (:name "Completed"
-                                  :todo "DONE"
-                                  :order 99)
-                           (:name "Lower priority"
-                                  :priority "C"
-                                  :order 98)
-                           (:name "Today"
-                                  :deadline today
-                                  :deadline past
-                                  :scheduled today
-                                  :scheduled past
-                                  :order 2)
-                           (:name "Upcoming Deadlines"
-                                  :deadline future
-                                  :order 3))))))
-           nil)))
+  ;; org agenda view (SPC a o a): today's timed items in order, then items
+  ;; grouped by file, inbox first, all org-roam items in one section at the bottom
+  (defface my/agenda-now '((t :foreground "yellow" :weight bold))
+    "Face for the time and heading of agenda items happening now.")
+  (defvar-local my/agenda-by-file-p nil
+    "Non-nil in agenda buffers built by `my/agenda-by-file'.")
+
+  (defun my/agenda--days (prop)
+    "Days from today until the PROP (SCHEDULED/DEADLINE) timestamp at point."
+    (let ((ts (org-entry-get nil prop)))
+      (and ts (- (org-time-string-to-absolute ts) (org-today)))))
+
+  (defun my/agenda--item (entry roam)
+    "Turn agenda ENTRY into a plist describing its heading.
+When ROAM, also record the file's title as the source."
+    (org-with-point-at (get-text-property 0 'org-hd-marker entry)
+      (let ((kw (org-get-todo-state))
+            (cookie (progn (org-back-to-heading t)
+                           (looking-at org-complex-heading-regexp)
+                           (match-string-no-properties 3))))
+        (list :entry entry
+              :kw kw
+              :kw-face (and kw (org-get-todo-face kw))
+              :done (member kw org-done-keywords)
+              :heading (org-get-heading t t t t)
+              :source (when roam (org-get-title))
+              :tags (org-get-tags nil t)
+              :sched (my/agenda--days "SCHEDULED")
+              :deadline (my/agenda--days "DEADLINE")
+              :cookie cookie
+              :priority (org-get-priority (or cookie ""))))))
+
+  (defun my/agenda--line (item)
+    "Format ITEM: `[10:00] TODO heading :tags:' with `+3d  due -2d' right-aligned."
+    (let* ((kw (plist-get item :kw))
+           (done (plist-get item :done))
+           (sched (plist-get item :sched))
+           (deadline (plist-get item :deadline))
+           (tags (plist-get item :tags))
+           (suffix
+            (unless done
+              (string-join
+               (delq nil
+                     (list (when (and sched (< sched 0))
+                             (propertize (format "+%dd" (- sched)) 'face 'shadow))
+                           (when deadline
+                             (cond ((> deadline 0)
+                                    (propertize (format "due -%dd" deadline) 'face 'shadow))
+                                   ((= deadline 0)
+                                    (propertize "due today" 'face 'warning))
+                                   (t (propertize (format "due +%dd" (- deadline))
+                                                  'face 'error))))))
+               "  ")))
+           (now-face (when (plist-get item :now) 'my/agenda-now))
+           (line (concat
+                  (when (plist-get item :time)
+                    (propertize (format "%02d:%02d " (/ (plist-get item :time) 60)
+                                        (% (plist-get item :time) 60))
+                                'face now-face))
+                  ;; pad to TODO/DONE width so headings line up
+                  (string-pad (if kw (propertize kw 'face (plist-get item :kw-face)) "")
+                              4)
+                  (when (plist-get item :cookie)
+                    (concat " " (propertize (plist-get item :cookie) 'face 'shadow)))
+                  " " (propertize (plist-get item :heading) 'face now-face)
+                  (when (plist-get item :source)
+                    (concat " " (propertize (truncate-string-to-width
+                                             (plist-get item :source) 40 nil nil "…")
+                                            'face 'shadow)))
+                  (when tags
+                    (concat " " (propertize (concat ":" (string-join tags ":") ":")
+                                            'face 'org-tag)))
+                  (when (org-string-nw-p suffix)
+                    (concat (propertize " " 'display
+                                        `(space :align-to (- right ,(1+ (string-width suffix)))))
+                            suffix))))
+           (props (org-plist-delete
+                   (org-plist-delete (copy-sequence
+                                      (text-properties-at 0 (plist-get item :entry)))
+                                     'face)
+                   'display)))
+      (add-text-properties 0 (length line) props line)
+      (when done (add-face-text-property 0 (length line) 'shadow t line))
+      line))
+
+  (defun my/agenda--sort (a b)
+    "Priority, then open before done, by deadline, most overdue schedule."
+    (let ((da (plist-get a :deadline)) (db (plist-get b :deadline))
+          (sa (or (plist-get a :sched) 0)) (sb (or (plist-get b :sched) 0))
+          (pa (plist-get a :priority)) (pb (plist-get b :priority)))
+      (cond ((/= pa pb) (> pa pb))
+            ((not (eq (not (plist-get a :done)) (not (plist-get b :done))))
+             (not (plist-get a :done)))
+            ((and da db (/= da db)) (< da db))
+            ((not (eq (not da) (not db))) (and da t))
+            (t (< sa sb)))))
+
+  (defun my/agenda--fetch (files)
+    "Today's scheduled, deadline, timestamp and closed-today entries in FILES."
+    (defvar org-agenda-show-log-scoped)
+    (let ((org-agenda-show-log-scoped '(closed))
+          (date (calendar-gregorian-from-absolute (org-today))))
+      (seq-filter
+       (lambda (e)
+         (and (get-text-property 0 'org-hd-marker e)
+              (not (equal (get-text-property 0 'type e) "clock"))))
+       (mapcan (lambda (f) (org-agenda-get-day-entries
+                            f date :deadline :scheduled :closed :timestamp))
+               files))))
+
+  (defun my/agenda--items (entries roam)
+    "One sorted item per heading in ENTRIES, ignoring plain timestamps."
+    (let ((items (mapcar (lambda (e) (my/agenda--item e roam))
+                         (seq-uniq
+                          (seq-remove (lambda (e) (member (get-text-property 0 'type e)
+                                                          '("timestamp" "block")))
+                                      entries)
+                          (lambda (a b)
+                            (equal (get-text-property 0 'org-hd-marker a)
+                                   (get-text-property 0 'org-hd-marker b)))))))
+      (sort (seq-remove (lambda (i) (and (equal (get-text-property
+                                                 0 'type (plist-get i :entry))
+                                                "closed")
+                                         (not (plist-get i :done))))
+                        items)
+            #'my/agenda--sort)))
+
+  (defun my/agenda--timed (entries roam source)
+    "Items for ENTRIES with a time today, labelled with SOURCE unless ROAM.
+Items happening now (1h long unless the timestamp is a range) get :now."
+    (let* ((time (decode-time))
+           (now (+ (* 60 (decoded-time-hour time)) (decoded-time-minute time))))
+      (mapcar
+       (lambda (e)
+         (let* ((tod (get-text-property 0 'time-of-day e))
+                (start (+ (* 60 (/ tod 100)) (% tod 100)))
+                (end (+ start (or (get-text-property 0 'duration e) 60)))
+                (item (my/agenda--item e roam)))
+           (append (list :time start
+                         :now (and (not (plist-get item :done))
+                                   (<= start now) (< now end)))
+                   (if roam item (plist-put item :source source)))))
+       (seq-filter (lambda (e)
+                     (and (get-text-property 0 'time-of-day e)
+                          (member (get-text-property 0 'type e)
+                                  '("scheduled" "deadline" "timestamp" "block"))))
+                   entries))))
+
+  (defun my/agenda-by-file (&rest _)
+    "Agenda block: today's timed items, then items by file, inbox first, roam last."
+    (setq my/agenda-by-file-p t)
+    (let* ((inbox (expand-file-name "inbox.org" org-directory))
+           (org-files (cons inbox (remove inbox (directory-files org-directory t "\\.org\\'"))))
+           ;; (name roam entries) per section
+           (sources
+            (append
+             (mapcar (lambda (f)
+                       (list (or (org-get-title (org-get-agenda-file-buffer f))
+                                 (file-name-base f))
+                             nil
+                             (my/agenda--fetch (list f))))
+                     org-files)
+             (list (list "Roam" t (my/agenda--fetch
+                                   (directory-files org-roam-directory t "\\.org\\'"))))))
+           (sections
+            (cons (cons "Schedule"
+                        (sort (mapcan (lambda (s) (my/agenda--timed (nth 2 s) (nth 1 s) (nth 0 s)))
+                                      sources)
+                              (lambda (a b) (< (plist-get a :time) (plist-get b :time)))))
+                  (mapcar (lambda (s) (cons (nth 0 s) (my/agenda--items (nth 2 s) (nth 1 s))))
+                          sources)))
+           (inhibit-read-only t)
+           (start (point)))
+      (dolist (s sections)
+        (when (cdr s)
+          (unless (bobp) (insert "\n"))
+          (insert (propertize (car s) 'face 'org-agenda-structure) "\n")
+          (dolist (item (cdr s))
+            (insert (my/agenda--line item) "\n"))))
+      (add-text-properties start (point) '(org-agenda-type agenda))))
+
+  ;; agenda edits rewrite the line in org's default format, so rebuild instead
+  (dolist (fn '(org-agenda-todo org-agenda-schedule org-agenda-deadline
+                org-agenda-priority org-agenda-set-tags))
+    (advice-add fn :after (lambda (&rest _)
+                            (when my/agenda-by-file-p (org-agenda-redo)))
+                '((name . my/agenda-by-file-redo))))
+
+  (defun my/agenda-daily ()
+    "Open the by-file daily agenda."
+    (interactive)
+    (require 'org-agenda)
+    (org-agenda-run-series "Daily View"
+                           '(((my/agenda-by-file ""))
+                             ((org-agenda-remove-tags t)
+                              (org-agenda-fontify-priorities nil)
+                              (org-agenda-show-inherited-tags 'always)))))
+  (spacemacs/set-leader-keys
+    "a o a" #'my/agenda-daily)
 
   (spacemacs/toggle-highlight-current-line-globally-off)
 
