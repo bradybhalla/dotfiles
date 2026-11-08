@@ -766,20 +766,24 @@ When ROAM, also record the file's title as the source."
                                      'face)
                    'display)))
       (add-text-properties 0 (length line) props line)
+      ;; org-indent's prefixes come along with the heading text; drop them
+      (remove-text-properties 0 (length line) '(line-prefix nil wrap-prefix nil) line)
       (when done (add-face-text-property 0 (length line) 'shadow t line))
       line))
 
   (defun my/agenda--sort (a b)
-    "Priority, then open before done, by deadline, most overdue schedule."
+    "Priority, then open before done, then deadlines before schedules:
+deadlines oldest first, schedules newest first (today before +50d)."
     (let ((da (plist-get a :deadline)) (db (plist-get b :deadline))
-          (sa (or (plist-get a :sched) 0)) (sb (or (plist-get b :sched) 0))
+          (sa (or (plist-get a :sched) most-negative-fixnum))
+          (sb (or (plist-get b :sched) most-negative-fixnum))
           (pa (plist-get a :priority)) (pb (plist-get b :priority)))
       (cond ((/= pa pb) (> pa pb))
             ((not (eq (not (plist-get a :done)) (not (plist-get b :done))))
              (not (plist-get a :done)))
-            ((and da db (/= da db)) (< da db))
             ((not (eq (not da) (not db))) (and da t))
-            (t (< sa sb)))))
+            ((and da db (/= da db)) (< da db))
+            (t (> sa sb)))))
 
   (defun my/agenda--fetch (files)
     "Today's scheduled, deadline, timestamp and closed-today entries in FILES."
