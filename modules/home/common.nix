@@ -112,7 +112,7 @@ in
   home.file = {
     ".config/nvim".source = linkHere ".config/nvim";
     ".tmux.conf".source = linkHere ".tmux.conf";
-    ".config/alacritty".source = linkHere ".config/alacritty";
+    ".config/kitty".source = linkHere ".config/kitty";
     ".p10k.zsh".source = linkHere ".p10k.zsh";
     ".spacemacs".source = linkHere ".spacemacs";
   };

@@ -4,7 +4,7 @@
 {
   home.packages = with pkgs; [
     # apps and tools I use
-    alacritty
+    kitty
 
     # utility apps
     nemo # file manager

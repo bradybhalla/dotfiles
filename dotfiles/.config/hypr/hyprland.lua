@@ -31,7 +31,7 @@ local screenshotArgs = "-o ~/Pictures/Screenshots"
 -- TODO: rework binds
 local binds          = {
     -- apps and window actions
-    { "Return",               "alacritty" },            -- terminal
+    { "Return",               "kitty -1" },             -- terminal
     { "Space",                "rofi -show drun" },      -- app opener menu
     { "B",                    "firefox" },              -- browser
     { "E",                    "emacsclient -c -a ''" }, -- emacs

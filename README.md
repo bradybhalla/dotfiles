@@ -11,7 +11,7 @@ My dotfiles for Linux and macOS.
 - [Neovim](https://neovim.io): main text editor
 - [Spacemacs](https://www.spacemacs.org/): for Org mode
 - [Hyprland](https://hypr.land/) or [Aerospace](https://github.com/nikitabobko/AeroSpace): tiling window manager
-- [Alacritty](https://alacritty.org/): terminal emulator
+- [kitty](https://sw.kovidgoyal.net/kitty/): terminal emulator
 - [lazygit](https://github.com/jesseduffield/lazygit): git ui
 - [zoxide](https://github.com/ajeetdsouza/zoxide): `cd` alternative
 - [fzf](https://github.com/junegunn/fzf): fuzzy finder

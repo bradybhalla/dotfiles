@@ -30,7 +30,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
     outer.right =      0
 
 [mode.main.binding]
-    alt-enter = 'exec-and-forget alacritty'
+    alt-enter = 'exec-and-forget kitty -1'
     alt-b = 'exec-and-forget open -a "Firefox Developer Edition" -n'
     alt-e = 'exec-and-forget zsh -ic "emacsclient -a \"\" -nc"'
 
