@@ -6,9 +6,9 @@ hl.on("hyprland.start", function()
     -- start desktop components
     hl.exec_cmd("waybar")     -- status bar
     hl.exec_cmd("hyprpaper")  -- wallpaper
-    hl.exec_cmd("swaync")     -- notifications
     hl.exec_cmd("eww daemon") -- widgets
     -- swayosd-server started as a systemd user service
+    -- swaync started by systemd via D-Bus activation
 
     -- start other processes
     hl.exec_cmd("hyprsunset")  -- allows night mode
@@ -212,7 +212,7 @@ local monitor_tv     = "desc:TCL Corporation TCL SMART TV 0x00000001"
 
 hl.monitor({ output = monitor_left,  mode = "3840x2160@59.997", position = "0x0",    scale = 1.5 })
 hl.monitor({ output = monitor_right, mode = "3840x2160@59.997", position = "2560x0", scale = 1.5 })
-hl.monitor({ output = monitor_tv,    mode = "3840x2160@60",     position = "5120x0", scale = 1 })
+hl.monitor({ output = monitor_tv,    mode = "3840x2160@60",     position = "-3840x0", scale = 1 })
 
 for ws = 1, 9 do
     hl.workspace_rule({ workspace = tostring(ws), monitor = ws <= 5 and monitor_right or monitor_left })

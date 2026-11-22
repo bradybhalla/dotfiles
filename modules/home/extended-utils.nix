@@ -23,6 +23,7 @@
     rustup
     ghc
     ocamlPackages.utop
+    elan
 
     nixfmt
     lua-language-server

@@ -668,8 +668,26 @@ shrinks it so the larger dimension is at most 100px."
   (with-eval-after-load 'org-roam ;; collapse org-roam buffer sections by default
     (add-to-list 'org-roam-buffer-postrender-functions #'magit-section-show-level-2-all))
 
-  ;; save org buffers changed in the background (agenda edits, refiles,
-  ;; captures, clocking, IDs added by links) so syncthing picks them up. Skips
+  ;; save both the source and destination files right after a refile (also
+  ;; covers refiling from the agenda, which calls `org-refile' in the source)
+  (defvar my/org-refile-dest nil
+    "Buffer the last refile inserted into, set by `org-after-refile-insert-hook'.")
+  (add-hook 'org-after-refile-insert-hook
+            (lambda () (setq my/org-refile-dest (current-buffer))))
+  (advice-add 'org-refile :around
+              (lambda (orig &rest args)
+                (setq my/org-refile-dest nil)
+                (let ((src (current-buffer)))
+                  (apply orig args)
+                  (dolist (b (delete-dups (delq nil (list src my/org-refile-dest))))
+                    (with-current-buffer b
+                      ;; capture buffers have no file; org-capture saves them
+                      (when (and buffer-file-name (buffer-modified-p))
+                        (save-buffer))))))
+              '((name . my/org-refile-save)))
+
+  ;; save org buffers changed in the background (agenda edits, captures,
+  ;; clocking, IDs added by links) so syncthing picks them up. Skips
   ;; the buffer you're editing and waits for any capture in progress to finish.
   (run-with-idle-timer
    5 t

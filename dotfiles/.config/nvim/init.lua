@@ -25,6 +25,7 @@ vim.pack.add({
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/mfussenegger/nvim-jdtls",
     "https://github.com/tarides/ocaml.nvim",
+    "https://github.com/Julian/lean.nvim",
 
     -- misc
     "https://github.com/akinsho/toggleterm.nvim",

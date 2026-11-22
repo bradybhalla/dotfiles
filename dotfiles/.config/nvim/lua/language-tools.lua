@@ -21,6 +21,7 @@ require("ocaml").setup({
     params = { client = "ocamllsp" },
     keymaps = {}
 })
+vim.g.lean_config = { mappings = true } -- lean.nvim also starts the Lean LSP
 
 -----------------
 -- LSP settings -
